@@ -1,8 +1,8 @@
 
 # ignore
-images/*
-presentation/*.log
-presentation/*.out
+**/images/*
+**/presentation/*.log
+**/presentation/*.out
 *.pdf
 *.aux
 *.nav
