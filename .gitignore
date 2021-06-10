@@ -1,0 +1,15 @@
+
+# ignore
+images/*
+presentation/*.log
+presentation/*.out
+*.pdf
+*.aux
+*.nav
+*.snm
+*.toc
+*.vrb
+
+
+# include
+!*.tex
