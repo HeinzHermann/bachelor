@@ -76,10 +76,15 @@
 %\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 }
 
+
+\logo{\includegraphics[height=1cm]{./images/logo.png}}
+
+
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{caption}
 \usepackage{subcaption}
+%\usepackage{tcolorbox}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -102,6 +107,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 %----------------------------------------------------------------------------------------
 %	PRESENTATION SLIDES
 %----------------------------------------------------------------------------------------
+
 
 \begin{frame}
 \titlepage % Print the title page as the first slide
@@ -134,56 +140,41 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \section{Theory I}
 
 \subsection{Situation}
-\begin{frame}
-	\frametitle{Situation}
-	\begin{enumerate}
-		\item diseases are not nice\\\vspace{0.1cm}
-	         			
-
-		\item  infectious diseases are doubly not nice \\\vspace{0.1cm}
-	       	
-                \item infectious diseases in todays interconnected world are horrible	\\\vspace{0.1cm}
-         		
-	\end{enumerate}
-\end{frame}
 
 \begin{frame}
 	\frametitle{Situation}
 	\begin{enumerate}
-		\item diseases are not nice\\\vspace{0.1cm}
+		\item Diseases are not nice\\\vspace{0.1cm}
 	         			
-		\item  infectious diseases are doubly not nice \\\vspace{0.1cm}
+		\item Infectious diseases are doubly not nice \\\vspace{0.1cm}
 	       	
-                \item infectious diseases in todays interconnected world are horrible	\\\vspace{0.1cm}
+                \item Infectious diseases in todays interconnected world are horrible	\\\vspace{0.1cm}
 	\end{enumerate}
 
-\textbf{Question:} Are we able to broadly understand their behavior?
+	\onslide<2>{\textbf{Question:} Are we able to broadly understand their behavior?}
 
 \end{frame}
 
 \begin{frame}
 	\frametitle{Situation}
-	\begin{itemize}
+	\begin{enumerate}[$\bullet$]
 		\item Infectious disease models can give quantitative answers\\\vspace{0.1cm}
 	         			
-		\item  Although not perfect, results can guide policy \\\vspace{0.1cm}
+		\item Although not perfect, results can guide policy \\\vspace{0.1cm}
 	       	
                 \item Won't yield insights into disease itself but its effect on society	\\\vspace{0.1cm}
-	\end{itemize}
-
+	\end{enumerate}
 \end{frame}
 
 \subsection{Simulator}
 \begin{frame}
 	\frametitle{}
-	\begin{itemize}
+	\begin{enumerate}[$\bullet$]
 		\item The \textbf{EpidemicsRunner} developed by the G-CSC allows the user to test various scenarios and relate these models to the real world
 	         			
-		\item  The user can define scenarios... \\\vspace{0.1cm}
-	       	
-                \item ...and fit the models to real life data	\\\vspace{0.1cm}
+		\item  The user can define scenarios...\onslide<2>{and fit the models to real life data}	\\\vspace{0.1cm}
 
-	\end{itemize}
+	\end{enumerate}
 
 \end{frame}
 
@@ -196,45 +187,45 @@ simulate various epidemics scenarios based on real data.
 
 \begin{frame}
 	\frametitle{SEIRD Model}
-	\begin{itemize}
+	\begin{enumerate}[$\bullet$]
 		\item The (S)usceptible (E)xposed (I)nfected (R)ecovered (D)eaths model is a well known framework to model the spread of infectious diseases		
-		\item  It is the simplest model found in EpidemicsRunner \\\vspace{0.1cm}
+		\item It is the simplest model found in EpidemicsRunner \\\vspace{0.1cm}
 	       	
                 \item Is a robust basis for other more specialized models	\\\vspace{0.3cm}
 
-	\end{itemize}
-	%\begin{center}
-	%	\includegraphics[width=0.7\textwidth]{./images/SEIRD_flow.png}
-	%\end{center}
+	\end{enumerate}
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{./images/SEIRD_flow.png}
+	\end{center}
 \end{frame}
 
-\begin{frame}
-	\frametitle{SEIRD Classes}
-	\begin{description}
-		\item[Susceptibles]
-	        These are people that have never had the disease
+%\begin{frame}
+%	\frametitle{SEIRD Classes}
+%	\begin{description}
+%		\item[Susceptibles]
+%	        These are people that have never had the disease
  			
-		\item[Exposed]
-	       	These are people that have been exposed to the disease, are able to transmit it
-                but have no yet been quarantined (i.e. show no symptoms yet)
+%		\item[Exposed]
+%	       	These are people that have been exposed to the disease, are able to transmit it
+%                but have no yet been quarantined (i.e. show no symptoms yet)
 
-                \item[Infected]
-                These are people that have previously been exposed and are now sick with the disease.
-                They are also quarantined and cannot infect any other person
+%                \item[Infected]
+%                These are people that have previously been exposed and are now sick with the disease.
+%                They are also quarantined and cannot infect any other person
 
-               \item[Recovered]
-                These are people that have previously been exposed or infected and are now  considered disease-free (recovered). 
+%               \item[Recovered]
+%                These are people that have previously been exposed or infected and are now  considered disease-free (recovered). 
 
-               \item[Deaths]
-                These are people that have previously been infected and are now dead
+%               \item[Deaths]
+%                These are people that have previously been infected and are now dead
 
-	\end{description}
+%	\end{description}
 
-\end{frame}
+%\end{frame}
 
 \begin{frame}
 	\frametitle{SEIRD Model (ODE)}
-\begin{equation} \label{eq1}
+\begin{equation*} \label{eq1}
 \begin{split}
 \frac{dS}{dt} & = -\alpha SE \\
 \frac{dE}{dt} & = \alpha SE-\frac{1}{qq}E\\
@@ -242,7 +233,7 @@ simulate various epidemics scenarios based on real data.
 \frac{dR}{dt} & = \frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I\\
 \frac{dD}{dt} & = \frac{\theta}{pp} I\\
 \end{split}
-\end{equation}	
+\end{equation*}	
 
 \end{frame}
 
@@ -293,18 +284,43 @@ simulate various epidemics scenarios based on real data.
 
 \section{Theory II}
 
-\subsection{Solvers}
-\begin{frame}
-\frametitle{Solvers} 
-	stuff about sovers
-\end{frame}
-
 \subsection{Partial differential equations}
 \begin{frame}
 	\frametitle{Partial differential Equations (PDE)} 
-	basic info about PDE model
+		\vspace{-0.5cm}
+		\onslide<1->{Limits of the \textbf{ODE} model:
+			\begin{enumerate}[$\bullet$]
+				\item Only dependent on time\\
+					$\rightarrow$ no "pacial or structural "awareness" of the model
+				\item Different regions need to either be modeled individually or clustered together\\
+			\end{enumerate}
+		}
+		\vspace{0.5cm}
+		\onslide<2>{
+			Advantages of the \textbf{PDE} model:
+			\begin{enumerate}[$\bullet$]
+				\item Other parameters can be factored into the modelling process (space, democgraphic, etc.)
+				\item Multiple regions can be modelled at the same time with different parameters\\ 
+			\end{enumerate}
+		}
+	% bullet points:
+	%- limits ODE\\
+	%- nutzen fuer raeumliche Aufloesung
+	%- Gleichungen PDE
 \end{frame}
 
+\begin{frame}
+	\frametitle{Partial differential Equations (PDE)} 
+	\begin{equation*} \label{eq1}
+		\begin{split}
+			\frac{d\rho S}{dt} + \nabla[-\rho D \nabla G] & = -\rho \alpha SE \\
+			\frac{d\rho E}{dt} + \nabla[-\rho D \nabla A] & = \rho(\alpha SE-\frac{1}{qq}E)\\
+			\frac{d\rho I}{dt} & = \rho(\frac{\kappa}{qq} E-\frac{1}{qq}I)\\
+			\frac{d\rho R}{dt} + \nabla[-\rho D \nabla R] & = \rho(\frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I)\\
+			\frac{d\rho D}{dt} & = \rho \frac{\theta}{pp} I\\
+		\end{split}
+	\end{equation*}	
+\end{frame}
 %----------------------------------------------------------------------------------------
 
 \section{Practical II}
@@ -325,9 +341,10 @@ simulate various epidemics scenarios based on real data.
 
 \begin{frame}
 \frametitle{Live "modelling" seesion 2} 
-	show of very small stepsize for effect?\\
-	with/without diffusion?\\
-	show of movie of small stepsize
+	\begin{enumerate}[$\bullet$]
+		\item Let us simulate a small scenario
+		\item And then look at a longer simulation with a finer grid
+	\end{enumerate}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
@@ -447,8 +464,16 @@ simulate various epidemics scenarios based on real data.
 \begin{frame}
 \frametitle{Questions, Answers and Discussions} 
 	\centering{
+		%\begin{tcolorbox}[width=\textwidth, colorback={blue}]
+		%	test text
+		%\end{tcolorbox}
+	%\title[test1]{test2}
 	\textbf{Thank you for your attention and for hosting this event!}
-}
+
+%	\begin{enumerate}[$\bullet$]
+%		\item thing	
+%	\end{enumerate}
+	}
 \end{frame}
 %------------------------------------------------
 
