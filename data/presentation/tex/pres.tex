@@ -92,7 +92,7 @@
 
 \title[Epidemics Wokrshop]{G-CSC Epidemics group\newline An introduction to disease modelling via SEIRD}
 
-\author{\textcolor{blue}{Yannick Rosam, Tristan Scheidemann, Marvin Glaser\\}
+\author{\textcolor{blue}{Yannick Rosam, Tristan Scheidemann, Marvin Glaser, David Lian\\}
 \vspace{2mm}\footnotesize{Special Thanks: Devansh Rastogi}} % Your name
 \institute[G-CSC] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
@@ -188,7 +188,7 @@ simulate various epidemics scenarios based on real data.
 \begin{frame}
 	\frametitle{SEIRD Model}
 	\begin{enumerate}[$\bullet$]
-		\item The (S)usceptible (E)xposed (I)nfected (R)ecovered (D)eaths model is a well known framework to model the spread of infectious diseases		
+		\item The (S)usceptible (E)xposed (I)nfected (R)ecovered (D)eceased model is a well known framework to model the spread of infectious diseases		
 		\item It is the simplest model found in EpidemicsRunner \\\vspace{0.1cm}
 	       	
                 \item Is a robust basis for other more specialized models	\\\vspace{0.3cm}
@@ -216,7 +216,7 @@ simulate various epidemics scenarios based on real data.
 %               \item[Recovered]
 %                These are people that have previously been exposed or infected and are now  considered disease-free (recovered). 
 
-%               \item[Deaths]
+%               \item[Deceased]
 %                These are people that have previously been infected and are now dead
 
 %	\end{description}
@@ -229,7 +229,7 @@ simulate various epidemics scenarios based on real data.
 \begin{split}
 \frac{dS}{dt} & = -\alpha SE \\
 \frac{dE}{dt} & = \alpha SE-\frac{1}{qq}E\\
-\frac{dI}{dt} & = \frac{\kappa}{qq} E-\frac{1}{qq}I\\
+\frac{dI}{dt} & = \frac{\kappa}{qq} E-\frac{1}{pp}I\\
 \frac{dR}{dt} & = \frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I\\
 \frac{dD}{dt} & = \frac{\theta}{pp} I\\
 \end{split}
@@ -260,7 +260,7 @@ simulate various epidemics scenarios based on real data.
 		\item Bellcurve:\\\vspace{0.1cm}
 			\begin{tabular}{| c | c |}
 				\hline
-				Infected & 82000 \\
+				Infected & 820000 \\
 				\hline
 				Exposed & 8147 \\
 				\hline
@@ -271,7 +271,7 @@ simulate various epidemics scenarios based on real data.
 		\item Rapid growth:\\\vspace{0.1cm}
 			\begin{tabular}{| c | c |}
 				\hline
-				Infected & 82000 \\
+				Infected & 820000 \\
 				\hline
 				Exposed & 1755 \\
 				\hline
@@ -291,15 +291,15 @@ simulate various epidemics scenarios based on real data.
 		\onslide<1->{Limits of the \textbf{ODE} model:
 			\begin{enumerate}[$\bullet$]
 				\item Only dependent on time\\
-					$\rightarrow$ no "pacial or structural "awareness" of the model
-				\item Different regions need to either be modeled individually or clustered together\\
+					$\rightarrow$ no spatial or structural "awareness" of the model
+				\item Different regions need to either be modelled individually or clustered together\\
 			\end{enumerate}
 		}
 		\vspace{0.5cm}
 		\onslide<2>{
 			Advantages of the \textbf{PDE} model:
 			\begin{enumerate}[$\bullet$]
-				\item Other parameters can be factored into the modelling process (space, democgraphic, etc.)
+				\item Other parameters can be factored into the modelling process (space, demographic, etc.)
 				\item Multiple regions can be modelled at the same time with different parameters\\ 
 			\end{enumerate}
 		}
@@ -313,11 +313,11 @@ simulate various epidemics scenarios based on real data.
 	\frametitle{Partial differential Equations (PDE)} 
 	\begin{equation*} \label{eq1}
 		\begin{split}
-			\frac{d\rho S}{dt} + \nabla[-\rho D \nabla G] & = -\rho \alpha SE \\
-			\frac{d\rho E}{dt} + \nabla[-\rho D \nabla A] & = \rho(\alpha SE-\frac{1}{qq}E)\\
-			\frac{d\rho I}{dt} & = \rho(\frac{\kappa}{qq} E-\frac{1}{qq}I)\\
-			\frac{d\rho R}{dt} + \nabla[-\rho D \nabla R] & = \rho(\frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I)\\
-			\frac{d\rho D}{dt} & = \rho \frac{\theta}{pp} I\\
+			\frac{d S}{dt} + \nabla[- \text{\textbf{D}} \nabla G] & = - \alpha SE \\
+			\frac{d E}{dt} + \nabla[- \text{\textbf{D}} \nabla A] & = (\alpha SE-\frac{1}{qq}E)\\
+			\frac{d I}{dt} & = (\frac{\kappa}{qq} E-\frac{1}{pp}I)\\
+			\frac{d R}{dt} + \nabla[- \text{\textbf{D}} \nabla R] & = (\frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I)\\
+			\frac{d D}{dt} & =  \frac{\theta}{pp} I\\
 		\end{split}
 	\end{equation*}	
 \end{frame}
@@ -340,10 +340,10 @@ simulate various epidemics scenarios based on real data.
 \end{frame}
 
 \begin{frame}
-\frametitle{Live "modelling" seesion 2} 
+\frametitle{Live "modelling" session 2} 
 	\begin{enumerate}[$\bullet$]
-		\item Let us simulate a small scenario
-		\item And then look at a longer simulation with a finer grid
+		\item Let us start to simulate a small scenario
+		\item And meanwhile look at the result of a longer simulation, with a finer grid
 	\end{enumerate}
 \end{frame}
 
@@ -362,8 +362,11 @@ simulate various epidemics scenarios based on real data.
 			\end{enumerate}
 		\end{column}
 		\begin{column}{0.45\textwidth}
+			%\begin{figure}[width=\textwidth]
 			\centering
 			\includegraphics<2->[width=\textwidth]{./images/ger.png}
+			%\caption{Images from Parameter estimaton in 
+			%\end{figure}
 		\end{column}
 	\end{columns}
 \end{frame}
@@ -454,7 +457,7 @@ simulate various epidemics scenarios based on real data.
 		Current applications:
 		\begin{enumerate}[$\bullet$]
 			\item Public health management (easy modelling of scenarios)
-			\item Use SEIRD to  prepare for future Epidemics/Pandemics (Supplies, Beds, Employees)
+			\item Use SEIRD to  prepare for future epidemics/pandemics (Supplies, Beds, Employees)
 			\item Study and understand the mechanics of disease spreading
 		\end{enumerate}
 	}
