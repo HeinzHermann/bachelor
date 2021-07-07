@@ -28,7 +28,6 @@
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 -- GNU Lesser General Public License for more details.
 
-
 local myPath = os.getenv("UG4_ROOT").."/apps/epidemics_app"
 package.path = package.path..";".. myPath.."/config/?.lua;".. myPath.."/?.lua;"..myPath.."/geometry/?.lua"
 
@@ -55,7 +54,6 @@ local ARGS = {
    debugLevel    = util.GetParamNumber("--debug-level", 0, "problem id"),
    limexNumStages =  util.GetParamNumber("--limex-num-stages", 2, "Number of stages"),
    withBlocks =  util.HasParamOption("--with-blocks", true),
-   withPeriodicIdentification = util.HasParamOption("--with-periodic-identification", true, "adaptiveTimeStepping"),
 }
 
 -- initialize ug with the world dimension dim=2 and the algebra type
@@ -75,10 +73,10 @@ print("refining...")
 util.refinement.CreateRegularHierarchy(dom, ARGS.numRefs, true)
 -- PrintIdentification( dom:grid() )
 -----------------------------------------
--- A) Model parameters -- NOW IN PROBLEM ID FILE
+-- A) Model parameters 
 -----------------------------------------
 
-local 	v_alpha = 0.115636434534508      -- Ansteckunsrate    -- 4.0 (per day and fraction)
+local v_alpha = 0.115636434534508      -- Ansteckunsrate    
 local v_kappa = 0.0704398577231772       -- 0 <=  Ausbruchsrate <= 1
 local v_theta = 0.148483204923682        -- 0 <=  Sterberate <= 1
 local v_qq = 10.3349950413764            -- Inkubationszeit (in days)
@@ -106,14 +104,14 @@ approxSpace:print_statistic()
 
 -- Define reaction terms (GLOBALLY!)
 -- r_gg := - alpha * gg *aa -- Ansteckungsrate == alpha
-function ReactionG(g,a) return v_alpha*g*a end --problem.reactionParams.alphaa*g*a
+function ReactionG(g,a) return v_alpha*g*a end 
 function ReactionG_dg(g,a) return v_alpha*a end
 function ReactionG_da(g,a) return v_alpha*g end
 
 -- r_aa := + (alpha*gg - 1/qq) * aa -- inkubationzeit == qq
 function ReactionA(g,a) return (-1.0) * (v_alpha*g - 1.0/v_qq)*a end
---function ReactionA_dg(g,a) return (-1.0) * (problem.reactionParams.alpha*a)  end
---function ReactionA_da(g,a) return (-1.0) * (problem.reactionParams.alpha*g - 1.0/problem.reactionParams.qq)  end
+--function ReactionA_dg(g,a) return (-1.0) * (alpha*a)  end
+--function ReactionA_da(g,a) return (-1.0) * alpha*g - 1.0/qq)  end
 -- Vereinfachte Jacobi-Matrix => Stabileres Verfahren!
 function ReactionA_dg(g,a) return (-1.0) * (0.0*v_alpha*a)  end
 function ReactionA_da(g,a) return (-1.0) * (0.0*v_alpha*g - 1.0/v_qq)  end
@@ -136,10 +134,10 @@ local function create_elem_discs(subdom, diffusion, rho)
 -- Create
 local type = "fv1"
 local elemDisc = {}
-elemDisc["g"] = ConvectionDiffusion("g", subdom, type)  -- cell conc.
-elemDisc["a"] = ConvectionDiffusion("a", subdom, type)  -- potential
-elemDisc["k"] = ConvectionDiffusion("k", subdom, type)  -- 
-elemDisc["r"] = ConvectionDiffusion("r", subdom, type)  -- 
+elemDisc["g"] = ConvectionDiffusion("g", subdom, type)  --
+elemDisc["a"] = ConvectionDiffusion("a", subdom, type)  --
+elemDisc["k"] = ConvectionDiffusion("k", subdom, type)  --
+elemDisc["r"] = ConvectionDiffusion("r", subdom, type)  --
 elemDisc["v"] = ConvectionDiffusion("v", subdom, type)  -- 
 
 -- Mass scale
@@ -188,9 +186,9 @@ elemDisc["g"]:set_reaction(rho*nonlinearGrowth["g"])
 elemDisc["a"]:set_reaction(rho*nonlinearGrowth["a"])  
 elemDisc["k"]:set_reaction(rho*nonlinearGrowth["k"])  
 elemDisc["r"]:set_reaction(rho*nonlinearGrowth["r"])  
--- -- elemDisc["r"]:set_source(rho* ((1.0-problem.reactionParams.theta) + (1-problem.reactionParams.kappa)/problem.reactionParams.qq) * elemDisc["k"]:value())  
+-- elemDisc["r"]:set_source(rho* ((1.0-problem.reactionParams.theta) + (1-problem.reactionParams.kappa)/problem.reactionParams.qq) * elemDisc["k"]:value())  
 
--- r_vv := problem.reactionParams.theta/pp * kk   
+-- r_vv := theta/pp * kk   
 elemDisc["v"]:set_source(rho*(v_theta/v_pp)*elemDisc["k"]:value())   
 
 return elemDisc
@@ -259,9 +257,7 @@ local solverDesc = {
 		  smoother	= "sgs",
 		  baseSolver	= "lu"
 	 },
-	
   },--]]
-	
 }
 
 -----------------------------------------
@@ -289,7 +285,6 @@ vtk:print("InitialData", u)
 SaveVectorCSV(u,"initail_distribution.csv")
 
 vtk:select_element(problem.myCompositeDensity, "density");
---density = vtk:select_element(problem.myCompositeDensity, "pop_den");
 
 -- Output Density Table for each subset: 
 
@@ -320,177 +315,45 @@ if (ARGS.limexNumStages<2) then
    ]]
 
 
--- create time disc [Implicit Euler]
-local timeDisc = util.CreateTimeDisc(domainDisc, "ImplEuler", 1)
+  -- create time disc [Implicit Euler]
+  local timeDisc = util.CreateTimeDisc(domainDisc, "ImplEuler", 1)
 
-local time = startTime
-local step = 0
-local nlsteps = 0;
-local maxStepSize = dt
-local minStepSize = dt*0.001
-local reductionFactor = 0.5
+  local time = startTime
+  local step = 0
+  local nlsteps = 0;
+  local maxStepSize = dt
+  local minStepSize = dt*0.001
+  local reductionFactor = 0.5
 
-vtk: print("Solution", u, step, time)
+  vtk: print("Solution", u, step, time)
 
 
---writing intial step 0 in csv 
-output_file = "simdata_step_"..step ..".csv"
-output_density = "density_step_"..step..".csv"
-SaveVectorCSV(u, output_file) -- creates csv 
-  -- to add: in each csv file add time, for each row.
-local file = io.open(output_file, 'r')
-local fileContent = {}
-for line in file:lines() do 
-   table.insert(fileContent, line)
-end
-io.close(file)
-for i=1 , #fileContent do 
-  if ( i == 1 ) then 
-  else 
-    fileContent[i] = time .. ", ".. fileContent[i]
-  end
-end
-local file = io.open(output_file, 'w')
-for index, line in ipairs(fileContent) do
-  file:write(line.."\n")
-end
-io.close(file)
-
-file = io.open(output_density, 'w')
-result= ""
-result = result .. "Time,Density,Index \n"
-for index, val in pairs(problem.regions) do
-   local si = dom:subset_handler():get_subset_index(val.subset)
-   local name = val.subset
-   result = result..time..",".. val.density .. ","..si.. "\n"
-
-end
-file:write(result)
-file:close()
-
--- store grid function in vector of  old solutions
-local solTimeSeries = SolutionTimeSeries()
-solTimeSeries:push(u:clone(), time)
-
--- update newtonSolver	
-nlsolver:init(AssembledOperator(timeDisc, u:grid_level()))
-
--- store old solution (used for reinit in multistep)
-local uOld
-if minStepSize <= maxStepSize * reductionFactor or newtonLineSearchFallbacks ~= nil then
-  uOld = u:clone()
-end
-
-local relPrecisionBound = 1e-12
-
-while (endTime == nil or ((time < endTime) and ((endTime-time)/maxStepSize > relPrecisionBound))) do
-  step = step+1
-  print("++++++ TIMESTEP " .. step .. " BEGIN (current time: " .. time .. ") ++++++");
-  
-  local solver_call = 0;
-  
-  -- initial t-step size
-  local currdt = maxStepSize
-  if endTime ~= nil then
-    -- adjust in case of over-estimation
-    if time+currdt > endTime then currdt = endTime-time end
-    -- adjust if size of remaining t-domain (relative to `maxStepSize`) lies below `relPrecisionBound`
-    if ((endTime-(time+currdt))/maxStepSize < relPrecisionBound) then currdt = endTime-time end
-  end
-  
-  -- try time step
-  local bSuccess = false;	
-  while bSuccess == false do
-    TerminateAbortedRun()
-
-    print("++++++ Time step size: "..currdt);
-
-    local newtonSuccess = false
-    local newtonTry = 1
-    --nlsolver:set_line_search(defaultLineSearch)
-
-    -- try to solve the non-linear problem with different line-search strategies
-    while newtonSuccess == false do
-      -- get old solution if the restart with a smaller time step is possible
-      if uOld ~= nil then
-        VecAssign(u, uOld)
-      end
-
-      				-- setup time Disc for old solutions and timestep size
-			timeDisc:prepare_step(solTimeSeries, currdt)
-			
-					-- prepare newton solver
-      if nlsolver:prepare(u) == false then
-        						print ("\n++++++ Newton solver failed."); exit();
-      end 
-      
-      --print(u)
-			-- apply newton solver
-			newtonSuccess = nlsolver:apply(u)
-						
-			-- start over again if failed
-      if newtonSuccess == false then break end
-
-    	-- push oldest solutions with new values to front, oldest sol pointer is poped from end	
-			local oldestSol = solTimeSeries:oldest()
-			VecAssign(oldestSol, u)
-			solTimeSeries:push_discard_oldest(oldestSol, timeDisc:future_time())          
-
-    end
-
-    if newtonSuccess == false then
-      currdt = currdt * reductionFactor;
-      write("\n++++++ Newton method failed. ");
-      write("Trying decreased stepsize " .. currdt .. ".\n");					
-      if(bSuccess == false and currdt < minStepSize) then
-        write("++++++ Time Step size "..currdt.." below minimal step ")
-        write("size "..minStepSize..". Cannot solve problem. Aborting.");
-        test.require(false, "Time Solver failed.")
-      end
-      bSuccess = false
-    else
-      -- update new time
-      time = timeDisc:future_time()
-      nlsteps = nlsteps + nlsolver:num_newton_steps() 	 
-      bSuccess = true
-    end
-  
-  end -- while bSuccess == false
-
-  -- save this solution if the restarted with a smaller time step is possible
-  if uOld ~= nil then
-    VecAssign (uOld, u)
-  end			
-
-  output_file_new = "simdata_step_"..step ..".csv"
-  output_density_new = "density_step_"..step..".csv"
-
-  SaveVectorCSV(u, output_file_new) -- creates csv 
-
-  local file = io.open(output_file_new, 'r')
+  --writing intial step 0 in csv 
+  output_file = "simdata_step_"..step ..".csv"
+  output_density = "density_step_"..step..".csv"
+  SaveVectorCSV(u, output_file) -- creates csv 
+    -- to add: in each csv file add time, for each row.
+  local file = io.open(output_file, 'r')
   local fileContent = {}
   for line in file:lines() do 
     table.insert(fileContent, line)
   end
   io.close(file)
-
   for i=1 , #fileContent do 
-
     if ( i == 1 ) then 
     else 
       fileContent[i] = time .. ", ".. fileContent[i]
     end
-
   end
+  local file = io.open(output_file, 'w')
   
-  local file = io.open(output_file_new, 'w')
   for index, line in ipairs(fileContent) do
     file:write(line.."\n")
   end
   io.close(file)
 
-  file = io.open(output_density_new, 'w')
-  result = ""
+  file = io.open(output_density, 'w')
+  result= ""
   result = result .. "Time,Density,Index \n"
   for index, val in pairs(problem.regions) do
     local si = dom:subset_handler():get_subset_index(val.subset)
@@ -498,16 +361,149 @@ while (endTime == nil or ((time < endTime) and ((endTime-time)/maxStepSize > rel
     result = result..time..",".. val.density .. ","..si.. "\n"
 
   end
-
   file:write(result)
   file:close()
-  vtk: print("Solution", u, step, time)
-  --##############################################################################################################
-  print("++++++ TIMESTEP "..step.." END   (current time: " .. time .. ") ++++++");
-end
 
-vtk:write_time_pvd("Sol_PVD", u)
-ug_load_script(common_scripts.."convert_values_7cities.lua")
+  -- store grid function in vector of  old solutions
+  local solTimeSeries = SolutionTimeSeries()
+  solTimeSeries:push(u:clone(), time)
+
+  -- update newtonSolver	
+  nlsolver:init(AssembledOperator(timeDisc, u:grid_level()))
+
+  -- store old solution (used for reinit in multistep)
+  local uOld
+  if minStepSize <= maxStepSize * reductionFactor or newtonLineSearchFallbacks ~= nil then
+    uOld = u:clone()
+  end
+
+  local relPrecisionBound = 1e-12
+
+  while (endTime == nil or ((time < endTime) and ((endTime-time)/maxStepSize > relPrecisionBound))) do
+    step = step+1
+    print("++++++ TIMESTEP " .. step .. " BEGIN (current time: " .. time .. ") ++++++");
+    
+    local solver_call = 0;
+    
+    -- initial t-step size
+    local currdt = maxStepSize
+    if endTime ~= nil then
+      -- adjust in case of over-estimation
+      if time+currdt > endTime then currdt = endTime-time end
+      -- adjust if size of remaining t-domain (relative to `maxStepSize`) lies below `relPrecisionBound`
+      if ((endTime-(time+currdt))/maxStepSize < relPrecisionBound) then currdt = endTime-time end
+    end
+    
+    -- try time step
+    local bSuccess = false;	
+    while bSuccess == false do
+      TerminateAbortedRun()
+
+      print("++++++ Time step size: "..currdt);
+
+      local newtonSuccess = false
+      local newtonTry = 1
+      --nlsolver:set_line_search(defaultLineSearch)
+
+      -- try to solve the non-linear problem with different line-search strategies
+      while newtonSuccess == false do
+        -- get old solution if the restart with a smaller time step is possible
+        if uOld ~= nil then
+          VecAssign(u, uOld)
+        end
+
+                -- setup time Disc for old solutions and timestep size
+        timeDisc:prepare_step(solTimeSeries, currdt)
+        
+            -- prepare newton solver
+        if nlsolver:prepare(u) == false then
+                      print ("\n++++++ Newton solver failed."); exit();
+        end 
+        
+        --print(u)
+        -- apply newton solver
+        newtonSuccess = nlsolver:apply(u)
+              
+        -- start over again if failed
+        if newtonSuccess == false then break end
+
+        -- push oldest solutions with new values to front, oldest sol pointer is poped from end	
+        local oldestSol = solTimeSeries:oldest()
+        VecAssign(oldestSol, u)
+        solTimeSeries:push_discard_oldest(oldestSol, timeDisc:future_time())          
+
+      end
+
+      if newtonSuccess == false then
+        currdt = currdt * reductionFactor;
+        write("\n++++++ Newton method failed. ");
+        write("Trying decreased stepsize " .. currdt .. ".\n");					
+        if(bSuccess == false and currdt < minStepSize) then
+          write("++++++ Time Step size "..currdt.." below minimal step ")
+          write("size "..minStepSize..". Cannot solve problem. Aborting.");
+          test.require(false, "Time Solver failed.")
+        end
+        bSuccess = false
+      else
+        -- update new time
+        time = timeDisc:future_time()
+        nlsteps = nlsteps + nlsolver:num_newton_steps() 	 
+        bSuccess = true
+      end
+    
+    end -- while bSuccess == false
+
+    -- save this solution if the restarted with a smaller time step is possible
+    if uOld ~= nil then
+      VecAssign (uOld, u)
+    end			
+
+    output_file_new = "simdata_step_"..step ..".csv"
+    output_density_new = "density_step_"..step..".csv"
+
+    SaveVectorCSV(u, output_file_new) -- creates csv 
+
+    local file = io.open(output_file_new, 'r')
+    local fileContent = {}
+    for line in file:lines() do 
+      table.insert(fileContent, line)
+    end
+    io.close(file)
+
+    for i=1 , #fileContent do 
+
+      if ( i == 1 ) then 
+      else 
+        fileContent[i] = time .. ", ".. fileContent[i]
+      end
+
+    end
+    
+    local file = io.open(output_file_new, 'w')
+    for index, line in ipairs(fileContent) do
+      file:write(line.."\n")
+    end
+    io.close(file)
+
+    file = io.open(output_density_new, 'w')
+    result = ""
+    result = result .. "Time,Density,Index \n"
+    for index, val in pairs(problem.regions) do
+      local si = dom:subset_handler():get_subset_index(val.subset)
+      local name = val.subset
+      result = result..time..",".. val.density .. ","..si.. "\n"
+
+    end
+
+    file:write(result)
+    file:close()
+    vtk: print("Solution", u, step, time)
+    --##############################################################################################################
+    print("++++++ TIMESTEP "..step.." END   (current time: " .. time .. ") ++++++");
+  end
+
+  vtk:write_time_pvd("Sol_PVD", u)
+  ug_load_script(common_scripts.."convert_values_7cities.lua")
 
 else
 

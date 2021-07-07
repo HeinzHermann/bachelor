@@ -1,5 +1,6 @@
+--[[ Problem Configueration file for initalization in 16 cities. This files was used to test the stability of the model. 
+]]
 local corona_DE_multiple ={}
-
 
 -- Some GLOBALs
 local MyDefaultDiffusion = 1e+0 -- km^2 /day

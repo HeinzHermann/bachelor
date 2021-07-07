@@ -9,7 +9,7 @@ local MyDefaultDiffusion = 1e+0 -- km^2 /day
 -----------------------------------------
 
 -- r^2 = 1000 km^2 <=> r = 32 km 
-local Heinsberg = { x0= -337.283, y0 =-150.598 } -- km
+local Heinsberg = { x0= -382.283, y0 =-168.598 } -- km
 function HeinsbergInitialG(x, y)
    local r2 = (x-Heinsberg.x0)*(x-Heinsberg.x0)+(y-Heinsberg.y0)*(y-Heinsberg.y0)
    if (r2< 1000) then return 0.99
@@ -26,7 +26,7 @@ end
   
 corona_DE = {
   grid = {
-    filename = "data/DE-ALL_STATES_F_corrected_scaled.ugx",
+    filename = "data/DE-ALL_STATES_F.ugx",
     mandatory = {"SH","HH","NI","HB",
                  "NW","HE","RP","BW",
                  "BY","SL","BE","BB",
