@@ -1,0 +1,21 @@
+Data eplanation:
+
+- avg. time till symptome development 6d
+- avg. duration of infectiousness after symptome onset 10d
+- avg. time till hospitalization after symptome onset 4d
+- avg. time till dehospitalization after hospitalization 9d
+
+assumptions:
+exposed susceptibles start having symptoms at their sixth day of infection (x+5)
+all exposed flow into infected class. Optional: split path between infected and recovered to simulate asymptomatic cases [kappa] (may not be possible, should split from susceptibles?)
+
+calcualations:
+RKI Infected at t = i(t)
+RKI Dead at t = d(t)
+kappa = split between I and R from outflow of E cases [currently 1 -> total flow to I]
+
+Susceptibles	S(t) = pop - i(t+6)				// Remove sum of all people that are currently exposed or where exposed in the past. Future date needed, since exposed are not registered
+Exposed 		E(t) = i(t+5) - i(t)			// Everyone that develops symptoms in the coming 5 days is currently exposed (remove todays symptomatics, they are infected -> E(t) exclusive removed)
+Infected		I(t) = i(t) - i(t-10) * kappa	// Count todays symptomatics and symptomatics of previous 9 days -> exclude E(t-10)
+Recovered		R(t) = i(t-10) - d(t)			// Sum of all that are no longer infected minus all that have died so far
+Dead			D(t) = d(t)						// data from RKI
