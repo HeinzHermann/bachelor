@@ -1,4 +1,4 @@
-Data eplanation:
+Data explanation:
 
 - avg. time till symptome development 6d
 - avg. duration of infectiousness after symptome onset 10d
@@ -13,6 +13,11 @@ calcualations:
 RKI Infected at t = i(t)
 RKI Dead at t = d(t)
 kappa = split between I and R from outflow of E cases [currently 1 -> total flow to I]
+
+qq=6
+pp=10
+kappa = 1
+theta = 0.005
 
 Susceptibles	S(t) = pop - i(t+6)				// Remove sum of all people that are currently exposed or where exposed in the past. Future date needed, since exposed are not registered
 Exposed 		E(t) = i(t+5) - i(t)			// Everyone that develops symptoms in the coming 5 days is currently exposed (remove todays symptomatics, they are infected -> E(t) exclusive removed)
