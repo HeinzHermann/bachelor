@@ -131,8 +131,8 @@ function ReactionR_di(e,i) return (-1.0) * ((1.0-v_theta)/v_pp)  end
 
 -- r_vv := /pp * kk  
 -- added functions for deceased
-function ReactionD(i) return (-1.0) * ((vtheta/v_pp)*i) end
-function ReactionD_di(i) return (-1.0) * (vtheta/v_pp) end
+function ReactionD(i) return (-1.0) * ((v_theta/v_pp)*i) end
+function ReactionD_di(i) return (-1.0) * (v_theta/v_pp) end
 
  
 
