@@ -11,6 +11,7 @@
 
 --loads timesteps. Assumes the timesteps are the first column
 --path: path to file, filename: name of the file, comment: how comments in the file are prefixed
+-- ERROR?! inter is never iterated
 function load_single_file(path,filename,comment)
 	file=io.open(path..filename)
 	timesteps={}
@@ -30,6 +31,7 @@ function load_single_file(path,filename,comment)
 	return timesteps
 end
 
+-- prints numbers in input table
 function print_timesteps(steps)
 	result=""
 	for i=1,#steps do
@@ -88,7 +90,8 @@ function get_data(path, filename,filetype,comment,startindex)
 end
 
 
---parses the data from all .csvs into a single file. The time column will be omitted (assumed to be first column in each file), so that only the "data" will be saved
+--parses the data from all .csvs into a single file. The time column will be omitted
+--(assumed to be first column in each file), so that only the "data" will be saved
 --[[ format updated:
          time,posx,posy,g
          time,posx,posy,a
@@ -101,26 +104,28 @@ end
 function get_data_sim(path, filename,filetype,comment,startindex)
 	local timevals={}
 	local keep_iterating=true
-	local data={}
-	local iter=1
+	local data={} -- contains the data of all files
+	local iter=1 -- number of the document from which is read
 	while keep_iterating do
 		file=io.open(path..filename.."_"..tostring(startindex+iter-1)..filetype)
 		if file==nil then
 			keep_iterating=false
 		else
-			local row=0
+			local row=0 -- represents a single vertex
 			local omit_time=false
 			data[iter]={}
 			local linenumber= 0
 			local omit_line = false
 			local counter=1
-			for line in file:lines() do
-				if string.match(line,comment) then
+			for line in file:lines() do -- line is the line of the document
+				if string.match(line,comment) then -- if line is not a comment
 				else				 
-					if linenumber%5==0 then
+					if linenumber%5==0 then -- if document row multiple of 5 (read SEIRD data as a package)
 						counter=1
 						row=row+1
 						data[iter][row]={}
+
+						-- write time of line into timevals[iter]
 						if omit_time==false then
 							local temp=line:match("[^,]+")
 							timevals[iter]=tonumber(temp)
@@ -128,6 +133,7 @@ function get_data_sim(path, filename,filetype,comment,startindex)
 						end
 						local omit_column=true
 					
+						-- write posx, posy, S into data
 						for number in line:gmatch("[^,]+") do
 							if omit_column==false then
 								data[iter][row][counter]={}
@@ -139,6 +145,7 @@ function get_data_sim(path, filename,filetype,comment,startindex)
 							end
 						 end 
 						 
+					-- ignore time, posx, posy from following rows and only add EIRD values
 					else
 						local omits=3
 						for number in line:gmatch("[^,]+") do
@@ -151,9 +158,9 @@ function get_data_sim(path, filename,filetype,comment,startindex)
 						 end 
 					end
 				 linenumber = linenumber+1
-				end --end if
-			end -- for line end
-			iter=iter+1
+				end --end if (check for comment line)
+			end -- for line end (end of document)
+			iter=iter+1 -- next document
 		end --end if file==nil
 	end --end while keep_iterating
 	if (data==nil) then
@@ -440,9 +447,9 @@ function tailor_data(timesteps,data,col,posx,posy,areafunctions,densities)
 end
 
 
-local timesteps,data=get_data_sim("./","simdata_step",".csv","#",0)
+local timesteps,data=get_data_sim("./","output/simdata_step",".csv","#",0)
 
-local temp,densities=get_data("./","density_step",".csv","T",0)
+local temp,densities=get_data("./","output/density_step",".csv","T",0)
 
 
 areas={}

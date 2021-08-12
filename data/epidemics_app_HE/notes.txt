@@ -1,0 +1,2 @@
+ugshell -ex ../epidemics.lua --limex-num-stages 1
+

@@ -9,7 +9,7 @@ local MyDefaultDiffusion = 1e+0 -- km^2 /day
 
 -- set initial values for grid points
 -- values are normalized densities of starting values for each bundesland
-function InitialinSubsetsS(t,si)
+function InitialinSubsetsS(posx, posy, t,si)
 	value = 1.0
 	if (si == 1) then value = 0.997511144873358 end
 	if (si == 2) then value = 0.997378644157162 end
@@ -41,7 +41,7 @@ function InitialinSubsetsS(t,si)
 	return value
 end
 
-function InitialinSubsetsE(t,si)
+function InitialinSubsetsE(posx, posy, t,si)
 	value = 1.0
 	if (si == 1) then value = 0.000029986206345 end
 	if (si == 2) then value = 0.000039792878070 end
@@ -73,7 +73,7 @@ function InitialinSubsetsE(t,si)
 	return value
 end
 
-function InitialinSubsetsI(t,si)
+function InitialinSubsetsI(posx, posy, t,si)
 	value = 1.0
 	if (si == 1) then value = 0.000029986206345 end
 	if (si == 2) then value = 0.000104456304933 end
@@ -105,7 +105,7 @@ function InitialinSubsetsI(t,si)
 	return value
 end
 
-function InitialinSubsetsR(t,si)
+function InitialinSubsetsR(posx, posy, t,si)
 	value = 1.0
 	if (si == 1) then value = 0.002268956280111 end
 	if (si == 2) then value = 0.002432339672007 end
@@ -137,7 +137,7 @@ function InitialinSubsetsR(t,si)
 	return value
 end
 
-function InitialinSubsetsD(t,si)
+function InitialinSubsetsD(posx, posy, t,si)
 	value = 1.0
 	if (si == 1) then value = 0.000159926433840 end
 	if (si == 2) then value = 0.000044766987828 end

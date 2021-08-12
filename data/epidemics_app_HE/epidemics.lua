@@ -349,8 +349,8 @@ if (ARGS.limexNumStages<2) then
 
 	-- writing intial step 0 in csv 
     -- to add: in each csv file add time, for each row
-	output_file = "simdata_step_"..step ..".csv"
-	output_density = "density_step_"..step..".csv"
+	output_file = "output/simdata_step_"..step ..".csv"
+	output_density = "output/density_step_"..step..".csv"
 	SaveVectorCSV(u, output_file) -- creates csv 
 	
 	-- open file
@@ -494,8 +494,8 @@ if (ARGS.limexNumStages<2) then
 			VecAssign (uOld, u)
 		end			
 
-		output_file_new = "simdata_step_"..step ..".csv"
-		output_density_new = "density_step_"..step..".csv"
+		output_file_new = "output/simdata_step_"..step ..".csv"
+		output_density_new = "output/density_step_"..step..".csv"
 
 		SaveVectorCSV(u, output_file_new) -- creates csv 
 
@@ -544,14 +544,15 @@ if (ARGS.limexNumStages<2) then
 	end
 
 	vtk:write_time_pvd("Sol_PVD", u)
-	ug_load_script(common_scripts.."convert_values_7cities.lua")
+	print("load convert_values_HE 548")
+	ug_load_script(common_scripts.."convert_values_HE.lua")
 
 	else
 		local step = 0
 		local time = 0
 		--writing intial step 0 in csv 
-		output_file = "simdata_step_"..step ..".csv"
-		output_density = "density_step_"..step..".csv"
+		output_file = "output/simdata_step_"..step ..".csv"
+		output_density = "output/density_step_"..step..".csv"
 		SaveVectorCSV(u, output_file) -- creates csv 
 		-- to add: in each csv file add time, for each row.
 		-- open file
@@ -646,8 +647,8 @@ if (ARGS.limexNumStages<2) then
 		--post processing after each step
 		function postProcess(u, step, time, currdt)
 
-			output_file_new = "simdata_step_"..step ..".csv"
-			output_density_new = "density_step_"..step..".csv"
+			output_file_new = "output/simdata_step_"..step ..".csv"
+			output_density_new = "output/density_step_"..step..".csv"
 
 			SaveVectorCSV(u, output_file_new) -- creates csv 
 
@@ -705,6 +706,7 @@ if (ARGS.limexNumStages<2) then
 		limex:apply(u,endTime, u,startTime)
 		
 		-- adjusted code
+		print("load convert_values_HE 710")
 		ug_load_script(common_scripts.."convert_values_HE.lua")
 	end
 	
