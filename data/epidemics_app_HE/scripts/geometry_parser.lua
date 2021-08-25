@@ -1,19 +1,21 @@
 --[[
-
-Creator: Marvin Glaser
+Author: Marvin Glaser
 Purpose: Parse Vetrex information from .ugx files to correlate vetex position and vertex subset
-
 ]]
 
 --[[ rewrite name list of grid subsets to search condition ]] 
 function prep_names(name_list)
 	local string_list = {}
 	local magic_char = {"(", ")", ".", "%", "+", "-", "*", "?", "[", "^", "$"}
+
+	-- check if name list is empty
 	if next(name_list)==nil then
 		print("Error, empty name list provided")
 		return
 	end
+
 	for i=1, #name_list do
+		-- reformat name list
 		local target = "name=".."\""..name_list[i].."\""
 		-- escape magic characters for search
 		for j=1, #magic_char do
@@ -69,7 +71,6 @@ end
 
 
 --[[ parse vertex-subset association ]]
--- work in progress
 function get_association(file, comment, targets)
 
 	local associations = {}
@@ -142,7 +143,6 @@ end
 
 
 --[[ parse .ugx file for coodinates and vertex-subset association ]]
--- work in progress
 function parse_data(path, filename, filetype, comment, name_list)
 
 	local target_strings = prep_names(name_list)
@@ -187,42 +187,8 @@ function parse_data(path, filename, filetype, comment, name_list)
 end
 
 
-function testing()
-	-- testing grounds
-	print("===============================================")
-	print("Testing:")
-	--[[
-	print(string.find("xx#test", "#"))
-	if next({})==nil then
-		print("works as bool")
-		else
-		print("does not work as bool")
-	end
 
-	print(next({}))
-	print(next({4,5,6}))
-	print(next({4,5,6}, 1))
-	print(next({4,5,6}, 2))
-	print(next({4,5,6}, 3))
-
-	print(string.match("0</vertex>", "-?%d+[^\"<]?%.?%d*"))
-
-	local table={}
-	table[2] = 4
-	print(table[2])
-	print(table[1])
-	table[1] = 3
-	print(table[1])
-	]]
-
-	print(string.find("<vertices>3", "<vertices>"))
-
-	print("===============================================")
-end
-
-
-
--- main
+--[[ main function ]]
 local test_list={"Werra-Meissner-Kreis"
 		 ,"Kassel-City"
 		 ,"Kassel"
@@ -256,6 +222,4 @@ local comment = "#"
 
 parse_data(path, file, ftype, comment, test_list)
 
-
---testing()
 
