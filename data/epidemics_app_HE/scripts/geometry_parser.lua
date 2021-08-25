@@ -10,8 +10,7 @@ function prep_names(name_list)
 
 	-- check if name list is empty
 	if next(name_list)==nil then
-		print("Error, empty name list provided")
-		return
+		error("Error, empty name list provided", 2)
 	end
 
 	for i=1, #name_list do
@@ -70,7 +69,10 @@ function get_positions(file, comment)
 end
 
 
---[[ parse vertex-subset association ]]
+--[[
+parse vertex-subset association
+output structure: {Number_Subsets, {x1,y1,z1,Subset_No}, {x2,y2,z2,Subset_No}, ... }
+--]]
 function get_association(file, comment, targets)
 
 	local associations = {}
@@ -129,28 +131,26 @@ function get_association(file, comment, targets)
 	end
 
 	if err then
-		print("Error, one or more of the targets could not be parsed")
 		print("Unparsed targets are:")
 		for i=1, #err_list do
 			print(err_list[i])
 		end
-		return nil
+		error("Error, one or more of the targets could not be parsed")
 	else
-	print("returning associations")
 	return associations
 	end
 end
 
 
 --[[ parse .ugx file for coodinates and vertex-subset association ]]
-function parse_data(path, filename, filetype, comment, name_list)
+function parse_ugx(path, filename, comment, name_list)
 
 	local target_strings = prep_names(name_list)
 
 	-- open file and verify success
-	file = io.open(path.."/"..filename.."."..filetype, "r")
+	file = io.open(path.."/"..filename, "r")
 	if file==nil then
-		print("Error, no .ugx file to parse")
+		error("Error, invalid path of filename", 2)
 		return nil
 	end
 
@@ -160,7 +160,6 @@ function parse_data(path, filename, filetype, comment, name_list)
 	-- add subset association to position data
 	for i=1, #associations do
 		for j=1, #associations[i] do
-			print(associations[i][j])
 			table.insert(positions[associations[i][j]], i)
 		end
 	end
@@ -187,39 +186,67 @@ function parse_data(path, filename, filetype, comment, name_list)
 end
 
 
+--[[ Read config file and extract information ]]
+function read_config(path, filename, comment)
+	
+	file = io.open(path.."/"..filename, "r")
+	-- check for false input
+	if file==nil then
+		error("Error, invalid path or filename", 2)
+	end
+
+
+	local parameters = {}
+
+	-- initiallize subset names
+	parameters[4] = {}
+	local subset_reading = false
+
+	-- todo: path, name, comment, f
+	for line in file:lines() do
+		local comment_line = (string.find(line, comment)==1)
+		if not(comment_line) then 
+			if string.find(line, "path=") then
+				parameters[1] = string.gsub(line, "path=", "", 1)
+			elseif string.find(line, "filename=") then
+				parameters[2] = string.gsub(line, "filename=", "", 1)
+			elseif string.find(line, "comment=") then
+				parameters[3] = string.gsub(line, "comment=", "", 1)
+			elseif string.find(line, "!subset_names") then
+				subset_reading = true
+			elseif string.find(line, "!subset_end") then
+				subset_reading = false
+			-- if non of the above AND subset reading
+			elseif subset_reading then
+				table.insert(parameters[4], line)
+			end
+		end
+	end
+	file:close()
+
+	if parameters[1]==nil or parameters[2]==nil or parameters[3]==nil or next(parameters[4])==nil then
+		error("Error, one or more necessary parameters could not be parsed from config file")
+	end
+	return parameters
+end
+
+
+--[[ main function, starts process ]]
+function main(path_config, filename_config, comment_config)
+	
+	-- set defaults
+	path_config = path_config or "../config" 
+	filename_config = filename_config or "geometry_parser.config"
+	comment_config = comment_config or "#"
+
+	-- read config file and initiallize ugx parsing
+	local parameters = read_config(path_config, filename_config, comment_config)
+	parse_ugx(parameters[1], parameters[2], parameters[3], parameters[4])
+	
+end
+
 
 --[[ main function ]]
-local test_list={"Werra-Meissner-Kreis"
-		 ,"Kassel-City"
-		 ,"Kassel"
-		 ,"Waldeck-Frankenberg"
-		 ,"Hersfeld-Rotenburg"
-		 ,"Schwalm-Eder-Kreis"
-		 ,"Fulda"
-		 ,"Marburg-Biedenkopf"
-		 ,"Lahn-Dill-Kreis"
-		 ,"Limburg-Weilburg"
-		 ,"Giessen"
-		 ,"Vogelsbergkreis"
-		 ,"Main-Kinzig-Kreis"
-		 ,"Wetteraukreis"
-		 ,"Rheingau-Taunus-Kreis"
-		 ,"Hochtaunuskreis"
-		 ,"Wiesbaden"
-		 ,"Main-Taunus-Kreis"
-		 ,"Frankfurt-am-Main"
-		 ,"Offenbach-am-Main"
-		 ,"Offenbach"
-		 ,"Gross-Gerau"
-		 ,"Darmstadt"
-		 ,"Darmstadt-Dieburg"
-		 ,"Odenwaldkreis"
-		 ,"Bergstrasse"}
-local path = "../geometry"
-local file = "DE-HE"
-local ftype = "ugx"
-local comment = "#"
-
-parse_data(path, file, ftype, comment, test_list)
+main("../config", "geometry_parser.config", "#")
 
 
