@@ -147,14 +147,14 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 		\item Covid-19 as example disease\\
 	\end{enumerate}
 	\textit{ }\newline
-	\textbf{Goal:} Establish model to predict future infection spreading using present day data\newline
+	Goal is to establish a model that predicts \textbf{future} infection spreading using \textbf{present} day data\newline
 	
 	\textbf{Challanges:}
 	\begin{enumerate}[$\bullet$]
 		\item Data acquisition and preparation
 		\item Definition of accurate assumptions\\
-			(real life infection spreading and documentations is messy. So are gov. reactions)
-		\item Finding parameters that accuratly predict the behaviour of the disease
+			(real life infection spreading and documentations is messy)
+		\item Finding parameters that accuratly predict disease behaviour
 	\end{enumerate}
 
 \end{frame}
@@ -166,31 +166,32 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 		\item Most basic model: SIR (\textcolor{red}{S}usceptible, \textcolor{red}{I}nfected, \textcolor{red}{R}emoved)\\
 	\end{enumerate}
 	
-	\textbf{add SIR image between bulletpoints}
 	\begin{center}
 		\includegraphics[width=0.6\textwidth]{./images/SIRv2.png} %add SIR model image
 	\end{center}
 	\begin{enumerate}[$\bullet$]
 		\item A given population "flows" from state to state
 		\item This process can be used to describe a Pandemic/Epidemic 
-		\item Questions involve:\\
-			- How long does the Pandemic/Epidemic lasts?\\
-			- How many people are infected at peak times?\\
-			- What percentage of the population need to be immune for the spreading to stop?
+		\item Questions involve:
+			\begin{enumerate}[\textendash]
+				\item How long does a Pandemic/Epidemic last?\\
+				\item How many people are infected at peak times?\\
+				\item What percentage of the population need to be immune for the spreading to stop?
+			\end{enumerate}
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Modelling}
-		Many different types of model exist, we are working on SEIRD\newline
-	\begin{enumerate}
-		\item[\textcolor{red}{S}] Suceptible: At risk of contracting the disease
-		\item[\textcolor{red}{E}] Exposed: Infected, but currently no symptoms
-		\item[\textcolor{red}{I}] Infected: Fully infected, with symptoms
-		\item[\textcolor{red}{R}] Recovered: Recovered from disease and immune to infection
-		\item[\textcolor{red}{D}] Diceased: Died during the infection
-	\end{enumerate}
-	\vspace{0.1cm}
+		Many different types of models exist, we are working on SEIRD\newline
+
+	\begin{tabular}{ l l l}
+		\textcolor{red}{S} & \textcolor<2>{blue}{Suceptible:} & \textcolor<2>{blue}{At risk of contracting the disease}\\
+		\textcolor{red}{E} & \textcolor<3>{blue}{Exposed:} & \textcolor<3>{blue}{Infected, but currently no symptoms}\\
+		\textcolor{red}{I} & \textcolor<4>{blue}{Infected:} & \textcolor<4>{blue}{Fully infected, with symptoms}\\
+		\textcolor{red}{R} & \textcolor<5>{blue}{Recovered:} & \textcolor<5>{blue}{Recovered from disease and immune to infection}\\
+		\textcolor{red}{D} & \textcolor<6>{blue}{Deceased:} & \textcolor<6>{blue}{Died during the infection}
+	\end{tabular}
 		\only<1>{\includegraphics[height=0.3\textwidth]{./images/SEIRDv20.png}}
 		\only<2>{\includegraphics[height=0.3\textwidth]{./images/SEIRDv21S.png}}
 		\only<3>{\includegraphics[height=0.3\textwidth]{./images/SEIRDv22E.png}}
@@ -209,8 +210,8 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\textit{ }\newline
 	In the context of Epidemics:
 	\begin{enumerate}[$\bullet$]
-		\item ODE: Simulate disease spreading for a single location (time dependency)
-		\item PDE: Simulate disease dependent of time and other variables (location, demographic, etc.) 
+		\item ODE: Simulate disease spreading for a single location\\(time dependency)
+		\item PDE: Simulate disease dependent of time and other variables\\(location, demographic, etc.) 
 	\end{enumerate}
 	\textit{ }\newline
 	We currently focus on PDE simulation using grids of germany (time, location dependent)
@@ -221,7 +222,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \subsection{Project state}
 
 \begin{frame}
-\frametitle{Accomplishments}
+\frametitle{Previous Milestones}
 	\begin{enumerate}[$\bullet$]
 		\item Tristan and Devansh build a code base for the project
 		\item Devansh tested and optimized the PDE model for seven big cities in germany
@@ -240,7 +241,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 		\item ODE and PDE simulation
 		\item Parameter optimization using different algorithms and ConstrainedOptimization (\textit{Scheidemann et al.})
 	\end{enumerate}
-
+	\textit{ }\newline
 	\textbf{Upcoming:}
 	\begin{enumerate}[$\bullet$]
 		\item User gets to choose between implicit and explicit solver
@@ -274,7 +275,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 
 \begin{frame}
 \frametitle{Hessen model} 
-	\textbf{Simulation:}\\(with a way to high infection rate)\\
+	\textbf{Simulation example:}\\(infection rate currently to high)\\
 	\hspace{3cm}
 	\centering
 	\begin{tabular}{c c c c c c }
@@ -318,7 +319,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 		\text{Exposed: }& \frac{dE}{dt} & = & \alpha SE-\frac{1}{qq}E\\ \\
 		\text{Infected: }& \frac{dI}{dt} & = & \frac{\kappa}{qq} E-\frac{1}{pp}I\\ \\
 		\text{Recovered: }& \frac{dR}{dt} & = & \frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I\\ \\
-		\text{Diceased: }& \frac{dD}{dt} & = & \frac{\theta}{pp} I \\ \\
+		\text{Deceased: }& \frac{dD}{dt} & = & \frac{\theta}{pp} I \\ \\
 	\end{array}	
 	\]
 \end{frame}
@@ -332,7 +333,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 		\text{Infected: }& \frac{d I}{dt} & = & (\frac{\kappa}{qq} E-\frac{1}{pp}I)\\ \\
 		\text{Recovered: }& \frac{d R}{dt} + \nabla[- \text{\textbf{D}} \nabla R]
 			& = & (\frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I)\\ \\
-		\text{Diceased: }& \frac{d D}{dt} & = & \frac{\theta}{pp} I
+		\text{Deceased: }& \frac{d D}{dt} & = & \frac{\theta}{pp} I
 	\end{array}	
 	\]
 \end{frame}
