@@ -1,5 +1,6 @@
 --[[
 	Authors: Devansh Rastogi & Tristan Schneidemann
+	Modified: Marvin Glaser
 ]]
 
 
@@ -7,58 +8,37 @@
 
 
 
+--[[
+reads data from files, creates timestamp table and data table
+Output format:
+timedata_table, simdata_table
 
-
---loads timesteps. Assumes the timesteps are the first column
---path: path to file, filename: name of the file, comment: how comments in the file are prefixed
--- ERROR?! inter is never iterated
-function load_single_file(path,filename,comment)
-	file=io.open(path..filename)
-	timesteps={}
-	if file then
-		iter=1
-		for line in file:lines() do
-			if string.match(line,comment) then
-			else
-				--numbers=line:gmatch("%S+")
-				local number =line:match("%S+")
-				--table.insert(timesteps,tonumber(number))
-				timesteps[iter]=tonumber(number)
-				--print(number)
-			end	
-		end
-	end
-	return timesteps
-end
-
--- prints numbers in input table
-function print_timesteps(steps)
-	result=""
-	for i=1,#steps do
-		result=result..tonumber(steps[i]).."\t"		
-	end
-	result=result.."\n"
-	print(result)
-end
-
-
-function get_data(path, filename,filetype,comment,startindex)
+time table structure = {t1, t2, t3...}
+data table structure = table, contains table for every file, contains table for every row in file
+{{{row1_density,row1_index}{row2_density,row2_index}...}{{row1_density,row1_index}{row2_density,row2_index}...}...}
+]]
+function get_densities(path, filename,filetype,comment,startindex)
 	local timevals={}
 	local keep_iterating=true
 	local data={}
 	local iter=1
+
+	-- iterate through data files until none are left
 	while keep_iterating do
 		file=io.open(path..filename.."_"..tostring(startindex+iter-1)..filetype)
 		if file==nil then
+			-- all files processed
 			keep_iterating=false
 		else
 			local row=1
 			local omit_time=false
 			data[iter]={}
 			for line in file:lines() do
+				-- ignore comment lines
 				if string.match(line,comment) then
 				else
-				data[iter][row]={}
+					data[iter][row]={}
+					-- record time value for every new file
 					if omit_time==false then
 						local temp=line:match("[^,]+")
 						timevals[iter]=tonumber(temp)
@@ -67,9 +47,8 @@ function get_data(path, filename,filetype,comment,startindex)
 					local omit_column=true
 					local counter=1
 					for number in line:gmatch("[^,]+") do
+						-- omit_comlum --> ignore first match (time)
 						if omit_column==false then
-							
-							data[iter][row][counter]={}
 							data[iter][row][counter]=tonumber(number)
 							counter=counter+1
 						else
@@ -83,44 +62,52 @@ function get_data(path, filename,filetype,comment,startindex)
 		end
 	end
 	if (data==nil) then
-		print("Error in get_data: Data is nil")
+		error("Error in get_data: Data is nil")
 	end
 
 	return timevals,data
 end
 
 
---parses the data from all .csvs into a single file. The time column will be omitted
---(assumed to be first column in each file), so that only the "data" will be saved
---[[ format updated:
-         time,posx,posy,g
-         time,posx,posy,a
-         time,posx,posy,k
-         time,posx,posy,r
-         time,posx,posy,v 
-         
-         time, a, g, k,r,v,x,y,z
-         ]]
-function get_data_sim(path, filename,filetype,comment,startindex)
+--[[
+Parses the data from all .csvs into a single file. The time column will be omitted
+(assumed to be first column in each file), so that only the "data" will be saved
+Output format
+timedata_table, simdata_table
+
+time_table structure = {t1, t2, t3...}
+simdata_table structure = table, containing table for every file, containing table for every vertex, containing data
+{{{vert1_posx,vert1_posy,s, e, i,r,d}{vert2_posx,vert2_posy,s,e,i,r,d}...}{{ver1...}...}...}
+]]
+function get_simdata(path, filename,filetype,comment,startindex)
 	local timevals={}
 	local keep_iterating=true
-	local data={} -- contains the data of all files
-	local iter=1 -- number of the document from which is read
+	
+	-- contains the data of all files
+	local data={} 
+
+	-- number of the document from which is read
+	local iter=1 
+
 	while keep_iterating do
 		file=io.open(path..filename.."_"..tostring(startindex+iter-1)..filetype)
 		if file==nil then
 			keep_iterating=false
 		else
-			local row=0 -- represents a single vertex
+			-- row represents a single vertex
+			local row=0 
+
 			local omit_time=false
 			data[iter]={}
 			local linenumber= 0
 			local omit_line = false
 			local counter=1
-			for line in file:lines() do -- line is the line of the document
-				if string.match(line,comment) then -- if line is not a comment
+			for line in file:lines() do 
+				-- if line is not a comment
+				if string.match(line,comment) then 
 				else				 
-					if linenumber%5==0 then -- if document row multiple of 5 (read SEIRD data as a package)
+					-- if document row multiple of 5 (read SEIRD data as a package)
+					if linenumber%5==0 then 
 						counter=1
 						row=row+1
 						data[iter][row]={}
@@ -135,12 +122,12 @@ function get_data_sim(path, filename,filetype,comment,startindex)
 					
 						-- write posx, posy, S into data
 						for number in line:gmatch("[^,]+") do
+
+							-- omit_column --> ignore first match (time), then process rest
 							if omit_column==false then
-								data[iter][row][counter]={}
 								data[iter][row][counter]=tonumber(number)
-								counter=counter+1 --
+								counter=counter+1
 							else
-								--here time is ignored, on 1st run, then omit_col set to false
 								omit_column=false
 							end
 						 end 
@@ -149,6 +136,8 @@ function get_data_sim(path, filename,filetype,comment,startindex)
 					else
 						local omits=3
 						for number in line:gmatch("[^,]+") do
+
+							-- ignore time, xpos, ypos, then insert value
 							if omits ~= 0 then
 								omits= omits-1
 							else
@@ -157,7 +146,7 @@ function get_data_sim(path, filename,filetype,comment,startindex)
 							end
 						 end 
 					end
-				 linenumber = linenumber+1
+				linenumber = linenumber+1
 				end --end if (check for comment line)
 			end -- for line end (end of document)
 			iter=iter+1 -- next document
@@ -430,26 +419,111 @@ end
 
 ----------- CITIES end ---------------
 
+--[[
+associates simdata with ist sepecific subset data
+association is realized as a table
+output = table of tables, containing vertex numbers of a subset
+output = {
+		{			-- first subset
+		1, 3, 4, 8, 9, ...	-- vertex index associated with first subset
+		}
+		,{			-- second subset
+		...			-- vertex index associated with second subset
+		}
+		...
+	}
+]]
+function associate_pos(simdata, associations)
+	local vertex_subset_ass = {}	
+	local vertex_count = #simdata
+	local associations_count = (#associations - 1) -- first value is number of subsets
+	
+	-- if nubmer of vertices differ between simdata and associations
+	if not(vertex_count == associations_count) then
+		error("unequal number of vertices in simdata and associaions table")
+	end
+
+	-- for every vertex
+	for vertex=1, vertex_count do
+		local search_association = true
+		local counter = 1
+		-- look trough all associations (check=2 --> first value is number of subsets)
+		for check=2, #associations do
+			-- until you find a matching pair of x and y  positions
+			if simdata[vertex][1] == associations[check][1] and simdata[vertex][2] == associations[check][2] then
+				-- write vertex index into subset table
+				table.insert(vertex_subset_ass[associations[check][4]], vertex)
+			end
+		end
+		-- if association failed
+		if vertex_subset_ass[vertex] == nil then
+			error("Error, simdata (pos x="..simdata[vertex][1]..", y="..simdata[vertex][1]
+					..") could not be associated with a subset")
+		end
+	end
+	-- return ass
+	return vertex_subset_ass 
+end
+
 
 --#timesteps: timesteps of the simulation #data: contains sim data only #col which column of the data table to focus on (e.g. ngesteckte) #posx index of x position in the data array (without time column) #areafunction: table containing functions of area #densities: contains densities at various times
-function tailor_data(timesteps,data,col,posx,posy,areafunctions,densities)
+--[[ OLD CODE
+function tailor_data(timesteps,simdata,col,posx,posy,areafunctions,densities)
 	nSteps=#timesteps
 	nVariables=#areafunctions
 	output={}
+
+	-- for evey timestesp do
 	for i=1, nSteps do
 		output[i]={}
 		for j=1, nVariables do
-			local value=areafunctions[j](data[i],col,posx,posy,densities[i]) -- using denstiy for time step 0 as others wont load 
+			-- data[i] is data of one simdata file
+			local value=areafunctions[j](simdata[i],col,posx,posy,densities[i]) -- using denstiy for time step 0 as others wont load 
 			output[i][j]=value
 		end	
 	end
 	return output
 end
+]]
 
+--[[
+Tailors data from timesteps, simdata and densities together
+Output format
+output =
+{{}}
 
-local timesteps,data=get_data_sim("./","output/simdata_step",".csv","#",0)
+]]
+-- Get areas of subsets somehow, needed to calculate
+-- WORK IN PROGRESS
+function tailor_data_new(timesteps,simdata,densities,association,posx,posy,cols)
+	local output={}
 
-local temp,densities=get_data("./","output/density_step",".csv","T",0)
+	local vertex_subset_ass = associate_pos(simdata[1], association)
+
+	-- for every class (requested entry in cols)
+	for col=1, #cols do
+		-- calculate for every timestep
+		for time=1, timesteps do
+			output[time]={}
+			 -- and every subset
+			for subset=1, #vertex_subset_ass do
+				local grid_sum = 0
+				-- the average population of all gridpoints (in the respective subset)
+				for vertex=1, #vertex_subset_ass[subset] do
+					grid_sum = grid_sum + simdata[time][vertex][col]
+					-- data[i] is data of one simdata file
+				end	
+			-- average fraction of total population for class and time (sum_vertex/num_vertex)
+			output[time][subset] = grid_sum / #vertex_subset_ass[j]
+			end	
+		end
+	end
+	return output
+end
+
+-- read data from documents
+local timesteps,simdata=get_simdata("./","output/simdata_step",".csv","#",0)
+local temp,densities=get_densities("./","output/density_step",".csv","T",0)
 
 
 areas={}
@@ -462,17 +536,21 @@ areas[6]=Munich
 areas[7]=Berlin
 
 
---dont forget: Tables in Lua often start with index 1 instead 0
-data_a=tailor_data(timesteps,data,4,1,2,areas,densities)
-data_v=tailor_data(timesteps,data,7,1,2,areas,densities)
+
+data_e=tailor_data(#timesteps,simdata,densities,1,2,4)
+--data_v=tailor_data(timesteps,simdata,7,1,2,areas,densities)
 
 
---[[print("Parsed timesteps")
+--[[ does not appear to be in use
+
+print("Parsed timesteps")
 print_timesteps(timesteps)
 print("Parsed data")
 print_data(data[2]) --prints data at time 0 (don't forget: Lua indices by convention start at 1)
 print("Parsed densities")
-print_data(densities[1]) --prints density at time 0 (don't forget: Lua indices start at 1)]]
+print_data(densities[1]) --prints density at time 0 (don't forget: Lua indices start at 1)
+
+]]
 
 print("Writing integrated Data to file..")
 write_data("./","output_v",".csv","#",timesteps,data_v,{"Hannover","Heinsberg","Frankfurt","Wiesbaden", "Stuttgart","Munich","Berlin"})

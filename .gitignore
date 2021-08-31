@@ -10,6 +10,8 @@
 *.toc
 *.vrb
 *.swp
+*.vtu
+*.pvd
 
 # include
 !*.tex

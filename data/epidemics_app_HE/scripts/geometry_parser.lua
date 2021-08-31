@@ -3,8 +3,61 @@ Author: Marvin Glaser
 Purpose: Parse Vetrex information from .ugx files to correlate vetex position and vertex subset
 ]]
 
+-- for compatiblity to require function
+local ugx_parser = {}
+
+
+function ugx_parser.foo()
+	return 2
+end
+
+--[[ Read config file and extract information ]]
+function ugx_parser.read_config(path, filename, comment)
+	
+	file = io.open(path.."/"..filename, "r")
+	-- check for false input
+	if file==nil then
+		error("Error, invalid path or filename", 2)
+	end
+
+
+	local parameters = {}
+
+	-- initiallize subset names
+	parameters[4] = {}
+	local subset_reading = false
+
+	-- todo: path, name, comment, f
+	for line in file:lines() do
+		local comment_line = (string.find(line, comment)==1)
+		if not(comment_line) then 
+			if string.find(line, "path=") then
+				parameters[1] = string.gsub(line, "path=", "", 1)
+			elseif string.find(line, "filename=") then
+				parameters[2] = string.gsub(line, "filename=", "", 1)
+			elseif string.find(line, "comment=") then
+				parameters[3] = string.gsub(line, "comment=", "", 1)
+			elseif string.find(line, "!subset_names") then
+				subset_reading = true
+			elseif string.find(line, "!subset_end") then
+				subset_reading = false
+			-- if non of the above AND subset reading
+			elseif subset_reading then
+				table.insert(parameters[4], line)
+			end
+		end
+	end
+	file:close()
+
+	if parameters[1]==nil or parameters[2]==nil or parameters[3]==nil or next(parameters[4])==nil then
+		error("Error, one or more necessary parameters could not be parsed from config file")
+	end
+	return parameters
+end
+
+
 --[[ rewrite name list of grid subsets to search condition ]] 
-function prep_names(name_list)
+function ugx_parser.prep_names(name_list)
 	local string_list = {}
 	local magic_char = {"(", ")", ".", "%", "+", "-", "*", "?", "[", "^", "$"}
 
@@ -27,7 +80,7 @@ function prep_names(name_list)
 end
 
 --[[ parse position data from file ]]
-function get_positions(file, comment)
+function ugx_parser.get_positions(file, comment)
 
 	local positions={}
 	local target_string = "<vertices coords=\"3\">"
@@ -71,9 +124,9 @@ end
 
 --[[
 parse vertex-subset association
-output structure: {Number_Subsets, {x1,y1,z1,Subset_No}, {x2,y2,z2,Subset_No}, ... }
+output structure: {Subset_count, {x1,y1,z1,Subset_No}, {x2,y2,z2,Subset_No}, ... }
 --]]
-function get_association(file, comment, targets)
+function ugx_parser.get_association(file, comment, targets)
 
 	local associations = {}
 	local parse_next = false
@@ -143,9 +196,9 @@ end
 
 
 --[[ parse .ugx file for coodinates and vertex-subset association ]]
-function parse_ugx(path, filename, comment, name_list)
+function ugx_parser.parse_ugx(path, filename, comment, name_list)
 
-	local target_strings = prep_names(name_list)
+	local target_strings = ugx_parser.prep_names(name_list)
 
 	-- open file and verify success
 	file = io.open(path.."/"..filename, "r")
@@ -154,8 +207,8 @@ function parse_ugx(path, filename, comment, name_list)
 		return nil
 	end
 
-	positions = get_positions(file, comment)	
-	associations = get_association(file, comment, target_strings)
+	positions = ugx_parser.get_positions(file, comment)	
+	associations = ugx_parser.get_association(file, comment, target_strings)
 	
 	-- add subset association to position data
 	for i=1, #associations do
@@ -168,7 +221,6 @@ function parse_ugx(path, filename, comment, name_list)
 	table.insert(positions, 1, #associations)
 
 
-	--[[
 	-- evaluate final output
 	print("[")
 	print(positions[1])
@@ -180,59 +232,14 @@ function parse_ugx(path, filename, comment, name_list)
 		print("]")
 	end
 	print("]")
-	]]
 	
 	return positions
 end
 
 
---[[ Read config file and extract information ]]
-function read_config(path, filename, comment)
-	
-	file = io.open(path.."/"..filename, "r")
-	-- check for false input
-	if file==nil then
-		error("Error, invalid path or filename", 2)
-	end
 
-
-	local parameters = {}
-
-	-- initiallize subset names
-	parameters[4] = {}
-	local subset_reading = false
-
-	-- todo: path, name, comment, f
-	for line in file:lines() do
-		local comment_line = (string.find(line, comment)==1)
-		if not(comment_line) then 
-			if string.find(line, "path=") then
-				parameters[1] = string.gsub(line, "path=", "", 1)
-			elseif string.find(line, "filename=") then
-				parameters[2] = string.gsub(line, "filename=", "", 1)
-			elseif string.find(line, "comment=") then
-				parameters[3] = string.gsub(line, "comment=", "", 1)
-			elseif string.find(line, "!subset_names") then
-				subset_reading = true
-			elseif string.find(line, "!subset_end") then
-				subset_reading = false
-			-- if non of the above AND subset reading
-			elseif subset_reading then
-				table.insert(parameters[4], line)
-			end
-		end
-	end
-	file:close()
-
-	if parameters[1]==nil or parameters[2]==nil or parameters[3]==nil or next(parameters[4])==nil then
-		error("Error, one or more necessary parameters could not be parsed from config file")
-	end
-	return parameters
-end
-
-
---[[ main function, starts process ]]
-function main(path_config, filename_config, comment_config)
+--[[ main equivalent, starts process ]]
+function ugx_parser.run_parser(path_config, filename_config, comment_config)
 	
 	-- set defaults
 	path_config = path_config or "../config" 
@@ -240,13 +247,18 @@ function main(path_config, filename_config, comment_config)
 	comment_config = comment_config or "#"
 
 	-- read config file and initiallize ugx parsing
-	local parameters = read_config(path_config, filename_config, comment_config)
-	parse_ugx(parameters[1], parameters[2], parameters[3], parameters[4])
-	
+	local parameters = ugx_parser.read_config(path_config, filename_config, comment_config)
+	local output = ugx_parser.parse_ugx(parameters[1], parameters[2], parameters[3], parameters[4])
+	return output
 end
 
+-- test
+--ugx_parser.run_parser("../config", "geometry_parser.config", "#")
 
---[[ main function ]]
-main("../config", "geometry_parser.config", "#")
+--ugx_parser.foo()
+
+return ugx_parser
+
+
 
 
