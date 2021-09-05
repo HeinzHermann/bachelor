@@ -70,19 +70,23 @@ local dom = problem:create_domain()
 
 
 -- Refine the domain (redistribution is handled internally for parallel runs)
+
+
 print("refining...")
 util.refinement.CreateRegularHierarchy(dom, ARGS.numRefs, true)
+
+
 -- PrintIdentification( dom:grid() )
 -----------------------------------------
 -- A) Model parameters 
 -----------------------------------------
 
 print("setting variables...")
-local 	v_alpha = 0.115636434534508      -- rate of infection
+local v_alpha = 0.115636434534508   	 -- rate of infection
 local v_kappa = 1.0000000000000000       -- 0 <=  split sympthomatic/asympthomatic <= 1
 local v_theta = 0.005000000000000        -- 0 <=  mortality <= 1
-local v_qq = 6				             -- incubation time/ time till symptom development (in days)
-local v_pp = 10 			             -- duration of sickness after development of first symptoms (in days)
+local v_qq = 6				 -- incubation time/ time till symptom development (in days)
+local v_pp = 10 			 -- duration of sickness after development of first symptoms (in days)
 
 -----------------------------------------
 -- B) Ansatz spaces
@@ -96,10 +100,11 @@ approxSpace:add_fct("d", "Lagrange", 1)
 approxSpace:init_levels()
 approxSpace:init_top_surface()
 
-print("approximation space:")
 approxSpace:print_statistic()
 
 
+--print("test sucessfull!")
+--return nil
 -----------------------------------------
 -- C) Finite volume element discretization
 -----------------------------------------
@@ -544,8 +549,48 @@ if (ARGS.limexNumStages<2) then
 	end
 
 	vtk:write_time_pvd("Sol_PVD", u)
-	print("load convert_values_HE 548")
-	ug_load_script(common_scripts.."convert_values_HE.lua")
+
+	--[[ TODO
+		explicitly call function in convert_values.lua
+		get area data and convert to single table {area1, area2, ...}
+			- needed for tailor_data func
+		find way to get subset names or code them explicitly for write_data function
+
+	--]]
+	io.write("loading geometry_parser..")
+	ug_load_script(common_scripts.."geometry_parser.lua")
+	local associations = run_parser("./config", "geometry_parser.config", "#")
+	print("finished parsing grid geometry")
+	print("loading convert_values")
+	ug_load_script(common_scripts.."convert_values.lua")
+	io.write("creating timesteps, simdata and densities...")
+	local timesteps,simdata = get_simdata("./","output/simdata_step",".csv","#",0)
+	local temp,densities = get_densities("./","output/density_step",".csv","T",0)
+	print("done")
+
+	local columns = {3,4,5,6,7} -- S E I R D columns
+
+	local subset_names = {}
+	local subset_areas = {}
+	-- fetch subset names and areas as tables
+	for key, values in pairs(corona_HE.regions) do
+		table.insert(subset_names, values.subset)
+		table.insert(subset_areas, values.area)
+	end
+
+	local pop_data = tailor_data(#timesteps,simdata,densities,subset_areas,associations,1,2,columns)
+	local subset_names = corona_HE.grid.mandatory
+
+	local file_names = {"output_s", "output_e", "output_i", "output_r", "output_d"}
+	local file_paths = {}
+	local file_comment = "#"
+
+	-- create target paths
+	for files=1, 6 do
+		table.insert(file_paths,"./")	
+	end
+
+	write_data(file_paths,file_names,file_comment,timesteps,pop_data,subset_names)
 
 	else
 		local step = 0
@@ -709,6 +754,6 @@ if (ARGS.limexNumStages<2) then
 		print("load convert_values_HE 710")
 		ug_load_script(common_scripts.."convert_values_HE.lua")
 	end
-	
+--end
 print("done")
 
