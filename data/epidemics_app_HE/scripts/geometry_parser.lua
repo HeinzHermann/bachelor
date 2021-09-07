@@ -220,18 +220,16 @@ function parse_ugx(path, filename, comment, name_list)
 
 
 	-- evaluate final output
-	--[[
 	print("[")
 	print(positions[1])
 	for i=2, #positions do
-		io.write("["..positions[i][2])
+		io.write("["..math.floor(positions[i][1]*100 + 0.5)/100)
 		for j=2, #positions[i] do
-			io.write(","..positions[i][j])
+			io.write(","..math.floor(positions[i][j]*100 + 0.5)/100)
 		end
 		print("]")
 	end
 	print("]")
-	]]
 	--print("finished parse_ugx")
 	return positions
 end

@@ -200,11 +200,11 @@ function write_data(paths,filenames,comment,timesteps,data,names)
 
 	-- for every class create a file
 	for class=1, #data do
-		file = io.open(path[class]..filename[class], "w")
+		file = io.open(paths[class]..filenames[class], "w")
 
 
 		-- sanity check for array dimensions, assumes that columns per file are identical in data
-		if (#names ~= data[class][1]) then
+		if (#names ~= #data[class][1]) then
 			error("number of column names different from number of columns in class number "..class, 2)
 		end
 		-- check for correct number of timesteps
@@ -221,13 +221,13 @@ function write_data(paths,filenames,comment,timesteps,data,names)
 		result = result.."\n"
 
 		-- for every timestep in the class
-		for timestep=1, #data[class] do
+		for time=1, #data[class] do
 			-- write the current timestep
-			result = result..timestep[timestep]
+			result = result..timesteps[time]
 
 			-- and write every population count into the following rows
-			for subset=1, #data[class][timestep] do
-				result = result..","..data[class][timestep][subset]		
+			for subset=1, #data[class][time] do
+				result = result..","..data[class][time][subset]		
 			end
 			result = result.."\n"
 
@@ -263,21 +263,38 @@ function associate_pos(simdata, associations)
 	end
 
 	-- for every vertex
+	local no_match = true
 	for vertex=1, vertex_count do
-		local search_association = true
+		no_match = true
 		local counter = 1
 		-- look trough all associations (check=2 --> first value is number of subsets)
 		for check=2, #associations do
 			-- until you find a matching pair of x and y  positions
-			if simdata[vertex][1] == associations[check][1] and simdata[vertex][2] == associations[check][2] then
+			-- note: round to second digit and compare values
+			--if ((math.floor(simdata[vertex][1]*10 + 0.5)/10) == (math.floor(associations[check][1]*10 + 0.5)/10))
+			--   and ((math.floor(simdata[vertex][2]*10 + 0.5)/10) == (math.floor(associations[check][2]*10 + 0.5)/10)) then
+			if (math.abs(simdata[vertex][1] - associations[check][1]) <= 0.1
+			   and (math.abs(simdata[vertex][2] - associations[check][2]) <= 0.1)) then
+
+			   	-- if no entry exists for this subset yet, create one
+				if vertex_subset_ass[associations[check][4]] == nil then
+					vertex_subset_ass[associations[check][4]] = {}
+				end
+
 				-- write vertex index into subset table
 				table.insert(vertex_subset_ass[associations[check][4]], vertex)
+				no_match = false
+				break
 			end
 		end
 		-- if association failed
-		if vertex_subset_ass[vertex] == nil then
-			error("Error, simdata (pos x="..simdata[vertex][1]..", y="..simdata[vertex][1]
-					..") could not be associated with a subset")
+		if no_match then
+			print("error at vertex "..vertex)
+			print("pos x simdata="..simdata[vertex][1])
+			print("pos x simdata_round="..(math.floor(simdata[vertex][1]*10 + 0.5)/10))
+			print("pos y simdata="..simdata[vertex][2])
+			print("pos y simdata_round="..(math.floor(simdata[vertex][2]*10 + 0.5)/10))
+			error("Error, simdata vertex could not be associated with a subset")
 		end
 	end
 	-- return ass
@@ -302,7 +319,7 @@ output = table containing a table for each column(class), containing a table for
 	}
 }
 ]]
-function tailor_data_new(timesteps,simdata,densities,area_sizes,association,posx,posy,cols)
+function tailor_data(timesteps,simdata,densities,area_sizes,association,posx,posy,cols)
 	local output={}
 
 	local vertex_subset_ass = associate_pos(simdata[1], association)
@@ -322,32 +339,12 @@ function tailor_data_new(timesteps,simdata,densities,area_sizes,association,posx
 					-- data[i] is data of one simdata file
 				end	
 				-- average normalized fractionof total population for class and time (sum_vertex/num_vertex)
-				output[col][time][subset] = grid_sum / #vertex_subset_ass[j]
+				output[col][time][subset] = grid_sum / #vertex_subset_ass[subset]
 				-- calculate total population = normalized_fraction * area [km^2] * density [1/km^2]
-				output[col][time][subset] = output[time][subset] * area_sizes[subset] * densities[time][subset][1]
+				output[col][time][subset] = output[col][time][subset] * area_sizes[subset] * densities[time][subset][1]
 			end	
 		end
 	end
 	return output
 end
 
--- read data from documents
---[[
-local timesteps,simdata = get_simdata("./","output/simdata_step",".csv","#",0)
-local temp,densities = get_densities("./","output/density_step",".csv","T",0)
-
-local makeshift = {}
-local associations -- from other file
-local columns = {3,4,5,6,7}
-local pop_data = tailor_data(#timesteps,simdata,densities,makeshift,associations,1,2,columns)
-]]
--- implement for loop to iterate through pop_data (got one extra layer now)
-
-print("Writing integrated Data to file..")
-
--- TODO
--- update write_data input!!
--- HAS BEEN HEAVILY REWRITTEN
-write_data("./","output_v",".csv","#",timesteps,pop_data,{"Hannover","Heinsberg","Frankfurt","Wiesbaden", "Stuttgart","Munich","Berlin"})
-
-print("Data has been written to file") 

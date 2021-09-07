@@ -573,20 +573,20 @@ if (ARGS.limexNumStages<2) then
 	local subset_names = {}
 	local subset_areas = {}
 	-- fetch subset names and areas as tables
-	for key, values in pairs(corona_HE.regions) do
+	for key, values in pairs(problem.regions) do
 		table.insert(subset_names, values.subset)
 		table.insert(subset_areas, values.area)
 	end
 
 	local pop_data = tailor_data(#timesteps,simdata,densities,subset_areas,associations,1,2,columns)
-	local subset_names = corona_HE.grid.mandatory
+	local subset_names = problem.grid.mandatory
 
 	local file_names = {"output_s", "output_e", "output_i", "output_r", "output_d"}
 	local file_paths = {}
 	local file_comment = "#"
 
 	-- create target paths
-	for files=1, 6 do
+	for files=1, 5 do
 		table.insert(file_paths,"./")	
 	end
 
