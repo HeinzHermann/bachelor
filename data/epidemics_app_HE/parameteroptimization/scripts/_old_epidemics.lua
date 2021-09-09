@@ -70,23 +70,19 @@ local dom = problem:create_domain()
 
 
 -- Refine the domain (redistribution is handled internally for parallel runs)
-
-
 print("refining...")
 util.refinement.CreateRegularHierarchy(dom, ARGS.numRefs, true)
-
-
 -- PrintIdentification( dom:grid() )
 -----------------------------------------
 -- A) Model parameters 
 -----------------------------------------
 
 print("setting variables...")
-local v_alpha = 0.200000000000000   	 -- rate of infection
+local 	v_alpha = 0.115636434534508      -- rate of infection
 local v_kappa = 1.0000000000000000       -- 0 <=  split sympthomatic/asympthomatic <= 1
 local v_theta = 0.005000000000000        -- 0 <=  mortality <= 1
-local v_qq = 6				 -- incubation time/ time till symptom development (in days)
-local v_pp = 10 			 -- duration of sickness after development of first symptoms (in days)
+local v_qq = 6				             -- incubation time/ time till symptom development (in days)
+local v_pp = 10 			             -- duration of sickness after development of first symptoms (in days)
 
 -----------------------------------------
 -- B) Ansatz spaces
@@ -100,11 +96,10 @@ approxSpace:add_fct("d", "Lagrange", 1)
 approxSpace:init_levels()
 approxSpace:init_top_surface()
 
+print("approximation space:")
 approxSpace:print_statistic()
 
 
---print("test sucessfull!")
---return nil
 -----------------------------------------
 -- C) Finite volume element discretization
 -----------------------------------------
@@ -354,8 +349,8 @@ if (ARGS.limexNumStages<2) then
 
 	-- writing intial step 0 in csv 
     -- to add: in each csv file add time, for each row
-	output_file = "output/simdata/simdata_step_"..step ..".csv"
-	output_density = "output/density/density_step_"..step..".csv"
+	output_file = "simdata_step_"..step ..".csv"
+	output_density = "density_step_"..step..".csv"
 	SaveVectorCSV(u, output_file) -- creates csv 
 	
 	-- open file
@@ -499,8 +494,8 @@ if (ARGS.limexNumStages<2) then
 			VecAssign (uOld, u)
 		end			
 
-		output_file_new = "output/simdata/simdata_step_"..step ..".csv"
-		output_density_new = "output/density/density_step_"..step..".csv"
+		output_file_new = "simdata_step_"..step ..".csv"
+		output_density_new = "density_step_"..step..".csv"
 
 		SaveVectorCSV(u, output_file_new) -- creates csv 
 
@@ -549,79 +544,14 @@ if (ARGS.limexNumStages<2) then
 	end
 
 	vtk:write_time_pvd("Sol_PVD", u)
-
-	--[[
-	move output files to correct folder
-	--]]
-	local keep_moving = true
-	local out_i = 0
-	-- while at least one solution file remained
-	while keep_moving do
-		-- check, if there is still a file that needs to be moved
-		local file_ending = string.format("%04d",out_i)
-		local file = io.open("./Solution_t"..file_ending..".vtu", "r")
-		if file == nil then
-			-- if not, stop moving
-			keep_moving = false
-		else
-			-- else, move the file
-			os.rename("./Solution_t"..file_ending..".vtu", "./output/solution/Solution_t"..file_ending..".vtu")
-			out_i = out_i + 1
-		io.close(file)
-		end
-	end
-
-
-
-
-	--[[ TODO
-		find way to get subset names or code them explicitly for write_data function
-	--]]
-	io.write("loading geometry_parser..")
-	ug_load_script(common_scripts.."geometry_parser.lua")
-	local associations = run_parser("./config", "geometry_parser.config", "#")
-	print("finished parsing grid geometry")
-	print("loading convert_values")
-	ug_load_script(common_scripts.."convert_values.lua")
-	io.write("creating timesteps, simdata and densities...")
-	local timesteps,simdata = get_simdata("./output/simdata/","simdata_step",".csv","#",0)
-	local temp,densities = get_densities("./output/density/","density_step",".csv","T",0)
-	print("done")
-
-	local columns = {3,4,5,6,7} -- S E I R D columns
-
-	local subset_names = {}
-	local subset_areas = {}
-	-- fetch subset names and areas as tables
-	for key, values in pairs(problem.regions) do
-		table.insert(subset_names, values.subset)
-		table.insert(subset_areas, values.area)
-	end
-
-	print("tailoring data...")
-	local pop_data = tailor_data(#timesteps,simdata,densities,subset_areas,associations,1,2,columns)
-	print("done")
-	local subset_names = problem.grid.mandatory
-
-	local file_names = {"output_s.csv", "output_e.csv", "output_i.csv", "output_r.csv", "output_d.csv"}
-	local file_paths = {}
-	local file_comment = "#"
-
-	-- create target paths
-	for files=1, 5 do
-		table.insert(file_paths,"./output/solution/")	
-	end
-
-	io.write("writing data...")
-	write_data(file_paths,file_names,file_comment,timesteps,pop_data,subset_names)
-	print("done")
+	ug_load_script(common_scripts.."convert_values_7cities.lua")
 
 	else
 		local step = 0
 		local time = 0
 		--writing intial step 0 in csv 
-		output_file = "output/simdata_step_"..step ..".csv"
-		output_density = "output/density_step_"..step..".csv"
+		output_file = "simdata_step_"..step ..".csv"
+		output_density = "density_step_"..step..".csv"
 		SaveVectorCSV(u, output_file) -- creates csv 
 		-- to add: in each csv file add time, for each row.
 		-- open file
@@ -716,8 +646,8 @@ if (ARGS.limexNumStages<2) then
 		--post processing after each step
 		function postProcess(u, step, time, currdt)
 
-			output_file_new = "output/simdata_step_"..step ..".csv"
-			output_density_new = "output/density_step_"..step..".csv"
+			output_file_new = "simdata_step_"..step ..".csv"
+			output_density_new = "density_step_"..step..".csv"
 
 			SaveVectorCSV(u, output_file_new) -- creates csv 
 
@@ -775,9 +705,8 @@ if (ARGS.limexNumStages<2) then
 		limex:apply(u,endTime, u,startTime)
 		
 		-- adjusted code
-		print("load convert_values_HE 710")
 		ug_load_script(common_scripts.."convert_values_HE.lua")
 	end
---end
+	
 print("done")
 
