@@ -3,6 +3,18 @@ local corona_HE ={}
 -- Some GLOBALs
 local MyDefaultDiffusion = 1e+0 -- km^2 /day
 
+
+-----------------------------------------------------------------
+-- define Home-Directories
+----------------------------------------------------------------
+ug4_home        = ug_get_root_path().."/"
+app_home        = ug4_home.."apps/epidemics_app_HE/parameteroptimization/"
+common_scripts  = app_home.."scripts/"
+geom_home       = app_home.."geometry/"
+
+-----------------------------------------------------------------
+
+
 -----------------------------------------
 -- D) Initial values ("Anfangswerte")
 -----------------------------------------
@@ -173,7 +185,7 @@ end
 -- set up grid information
 corona_HE = {
 	grid = {
-		filename = "geometry/DE-HE.ugx",
+		filename = "/home/marvin/Documents/ug4/apps/epidemics_app_HE/parameteroptimization/geometry/DE-HE.ugx",
 		mandatory = {
 				 "Werra-Meissner-Kreis"
 				 ,"Kassel-City"
@@ -235,7 +247,7 @@ corona_HE = {
 
 -- create domain and initialize densities
 function corona_HE.create_domain(self)
-
+    print("self.grid.filename = "..self.grid.filename)
     local domain = util.CreateDomain(self.grid.filename, 0)
     self.myCompositeDensity =  CompositeUserNumber(false) -- discontinuous data
 

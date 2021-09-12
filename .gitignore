@@ -13,6 +13,8 @@
 *.swo
 *.vtu
 *.pvd
+*.csv
+*.csv#
 
 # include
 !*.tex

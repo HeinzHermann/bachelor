@@ -28,14 +28,14 @@
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 -- GNU Lesser General Public License for more details.
 
-local myPath = os.getenv("UG4_ROOT").."/apps/epidemics_app_HE"
+local myPath = os.getenv("UG4_ROOT").."/apps/epidemics_app_HE/parameteroptimization"
 package.path = package.path..";".. myPath.."/config/?.lua;".. myPath.."/?.lua;"..myPath.."/geometry/?.lua"
 
 -----------------------------------------------------------------
 -- define Home-Directories
 ----------------------------------------------------------------
 ug4_home        = ug_get_root_path().."/"
-app_home        = ug4_home.."apps/epidemics_app_HE/"
+app_home        = ug4_home.."apps/epidemics_app_HE/parameteroptimization/"
 common_scripts  = app_home.."scripts/"
 geom_home       = app_home.."geometry/"
 
@@ -80,14 +80,14 @@ util.refinement.CreateRegularHierarchy(dom, ARGS.numRefs, true)
 -----------------------------------------
 -- A) Model parameters 
 -----------------------------------------
-
+--[[
 print("setting variables...")
 local v_alpha = 0.200000000000000   	 -- rate of infection
 local v_kappa = 1.0000000000000000       -- 0 <=  split sympthomatic/asympthomatic <= 1
 local v_theta = 0.005000000000000        -- 0 <=  mortality <= 1
 local v_qq = 6				 -- incubation time/ time till symptom development (in days)
 local v_pp = 10 			 -- duration of sickness after development of first symptoms (in days)
-
+--]]
 -----------------------------------------
 -- B) Ansatz spaces
 -----------------------------------------
@@ -574,54 +574,14 @@ if (ARGS.limexNumStages<2) then
 
 
 
-	--[[ TODO
-		find way to get subset names or code them explicitly for write_data function
-	--]]
-	io.write("loading geometry_parser..")
-	ug_load_script(common_scripts.."geometry_parser.lua")
-	local associations = run_parser("./config", "geometry_parser.config", "#")
-	print("finished parsing grid geometry")
-	print("loading convert_values")
-	ug_load_script(common_scripts.."convert_values.lua")
-	io.write("creating timesteps, simdata and densities...")
-	local timesteps,simdata = get_simdata("./output/simdata/","simdata_step",".csv","#",0)
-	local temp,densities = get_densities("./output/density/","density_step",".csv","T",0)
-	print("done")
-
-	local columns = {3,4,5,6,7} -- S E I R D columns
-
-	local subset_names = {}
-	local subset_areas = {}
-	-- fetch subset names and areas as tables
-	for key, values in pairs(problem.regions) do
-		table.insert(subset_names, values.subset)
-		table.insert(subset_areas, values.area)
-	end
-
-	print("tailoring data...")
-	local pop_data = tailor_data(#timesteps,simdata,densities,subset_areas,associations,1,2,columns)
-	print("done")
-	local subset_names = problem.grid.mandatory
-
-	local file_names = {"output_s.csv", "output_e.csv", "output_i.csv", "output_r.csv", "output_d.csv"}
-	local file_paths = {}
-	local file_comment = "#"
-
-	-- create target paths
-	for files=1, 5 do
-		table.insert(file_paths,"./output/solution/")	
-	end
-
-	io.write("writing data...")
-	write_data(file_paths,file_names,file_comment,timesteps,pop_data,subset_names)
-	print("done")
+	
 
 	else
 		local step = 0
 		local time = 0
 		--writing intial step 0 in csv 
-		output_file = "output/simdata_step_"..step ..".csv"
-		output_density = "output/density_step_"..step..".csv"
+		output_file = "simdata_step_"..step ..".csv"
+		output_density = "density_step_"..step..".csv"
 		SaveVectorCSV(u, output_file) -- creates csv 
 		-- to add: in each csv file add time, for each row.
 		-- open file
@@ -716,8 +676,8 @@ if (ARGS.limexNumStages<2) then
 		--post processing after each step
 		function postProcess(u, step, time, currdt)
 
-			output_file_new = "output/simdata_step_"..step ..".csv"
-			output_density_new = "output/density_step_"..step..".csv"
+			output_file_new = "simdata_step_"..step ..".csv"
+			output_density_new = "density_step_"..step..".csv"
 
 			SaveVectorCSV(u, output_file_new) -- creates csv 
 
@@ -773,11 +733,49 @@ if (ARGS.limexNumStages<2) then
 
 		-- Start des Verfahrens
 		limex:apply(u,endTime, u,startTime)
-		
-		-- adjusted code
-		print("load convert_values_HE 710")
-		ug_load_script(common_scripts.."convert_values_HE.lua")
+
 	end
+	--[[ TODO
+		find way to get subset names or code them explicitly for write_data function
+	--]]
+	io.write("loading geometry_parser..")
+	ug_load_script(common_scripts.."geometry_parser.lua")
+	local associations = run_parser(app_home.."config", "geometry_parser.config", "#")
+	print("finished parsing grid geometry")
+	print("loading convert_values")
+	ug_load_script(common_scripts.."convert_values.lua")
+	io.write("creating timesteps, simdata and densities...")
+	local timesteps,simdata = get_simdata("./","simdata_step",".csv","#",0)
+	local temp,densities = get_densities("./","density_step",".csv","T",0)
+	print("done")
+
+	local columns = {3,4,5,6,7} -- S E I R D columns
+
+	local subset_names = {}
+	local subset_areas = {}
+	-- fetch subset names and areas as tables
+	for key, values in pairs(problem.regions) do
+		table.insert(subset_names, values.subset)
+		table.insert(subset_areas, values.area)
+	end
+
+	print("tailoring data...")
+	local pop_data = tailor_data(#timesteps,simdata,densities,subset_areas,associations,1,2,columns)
+	print("done")
+	local subset_names = problem.grid.mandatory
+
+	local file_names = {"output_s.csv", "output_e.csv", "output_i.csv", "output_r.csv", "output_d.csv"}
+	local file_paths = {}
+	local file_comment = "#"
+
+	-- create target paths
+	for files=1, 5 do
+		table.insert(file_paths,"./")	
+	end
+
+	io.write("writing data...")
+	write_data(file_paths,file_names,file_comment,timesteps,pop_data,subset_names)
+	print("done")
 --end
 print("done")
 

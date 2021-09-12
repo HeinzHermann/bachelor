@@ -12,7 +12,7 @@ end
 -- define Home-Directories
 ----------------------------------------------------------------
 ug4_home        = ug_get_root_path().."/"
-app_home        = ug4_home.."apps/epidemics_app/parameteroptimization/"
+app_home        = ug4_home.."apps/epidemics_app_HE/parameteroptimization/"
 common_scripts  = app_home.."scripts/"
 geom_home       = app_home.."geometry/"
 
@@ -32,7 +32,7 @@ pp=  duration of desease
 --Adding the parameters into the Parameter Manager
 -- set the lower bounds and upper bounds for the parameters #PSO requires no initial value
 manager=VarDescriptor64()
-manager:add("alpha",EFloat64(2),EFloat64(4))
+manager:add("alpha",EFloat64(0.1),EFloat64(0.5))
 manager:add("kappa",EFloat64(0),EFloat64(1))
 manager:add("theta",EFloat64(0),EFloat64(1))
 manager:add("pp",EFloat64(5),EFloat64(16))
@@ -45,7 +45,7 @@ estimated_parameters=EVar64Manager()
 n_particles=12
 n_groups=2
 max_iterations=20 --maximum iterations of the PSO algorithm if no convergence is reached beforehand
-RunPSO_BiogasEval("YOUR PATH TO/apps/epidemics_app/parameteroptimization/",manager,estimated_parameters,n_particles,n_groups,max_iterations)
+RunPSO_BiogasEval(app_home,manager,estimated_parameters,n_particles,n_groups,max_iterations) -- calls eval.lua
 
 
 --[[Generate a lua table with the parameters.

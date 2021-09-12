@@ -241,6 +241,7 @@ end
 
 --[[ main equivalent, starts process ]]
 function run_parser(path_config, filename_config, comment_config)
+	print("\nstarting parser with config path: "..path_config)
 	
 	-- test print
 	--[[
@@ -253,7 +254,8 @@ function run_parser(path_config, filename_config, comment_config)
 	path_config = path_config or "../config" 
 	filename_config = filename_config or "geometry_parser.config"
 	comment_config = comment_config or "#"
-
+	
+	print("config path after defaults "..path_config)
 	-- read config file and initiallize ugx parsing
 	local parameters = read_config(path_config, filename_config, comment_config)
 	local output = parse_ugx(parameters[1], parameters[2], parameters[3], parameters[4])
