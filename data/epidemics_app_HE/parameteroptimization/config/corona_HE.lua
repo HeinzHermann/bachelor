@@ -185,7 +185,7 @@ end
 -- set up grid information
 corona_HE = {
 	grid = {
-		filename = "/home/marvin/Documents/ug4/apps/epidemics_app_HE/parameteroptimization/geometry/DE-HE.ugx",
+		filename = geom_home.."DE-HE.ugx",
 		mandatory = {
 				 "Werra-Meissner-Kreis"
 				 ,"Kassel-City"
