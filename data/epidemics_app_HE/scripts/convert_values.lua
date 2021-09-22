@@ -29,7 +29,8 @@ function get_densities(path, filename,filetype,comment,startindex)
 
 	-- iterate through data files until none are left
 	while keep_iterating do
-		file=io.open(path..filename.."_"..tostring(startindex+iter-1)..filetype)
+		local filepath = path..filename.."_"..tostring(startindex+iter-1)..filetype
+		file=io.open(filepath)
 		if file==nil then
 			-- all files processed
 			keep_iterating=false
@@ -62,6 +63,8 @@ function get_densities(path, filename,filetype,comment,startindex)
 					row=row+1
 				end
 			end
+			io.close(file)
+			os.remove(filepath)
 			iter=iter+1
 		end
 	end
@@ -105,7 +108,8 @@ function get_simdata(path, filename,filetype,comment,startindex)
 	local iter=1 
 
 	while keep_iterating do
-		file=io.open(path..filename.."_"..tostring(startindex+iter-1)..filetype)
+		local filepath = path..filename.."_"..tostring(startindex+iter-1)..filetype
+		file=io.open(filepath)
 		if file==nil then
 			keep_iterating=false
 		else
@@ -164,6 +168,8 @@ function get_simdata(path, filename,filetype,comment,startindex)
 				linenumber = linenumber+1
 				end --end if (check for comment line)
 			end -- for line end (end of document)
+			io.close(file)
+			os.remove(filepath)
 			iter=iter+1 -- next document
 		end --end if file==nil
 	end --end while keep_iterating

@@ -33,10 +33,12 @@ pp=  duration of desease
 -- set the lower bounds and upper bounds for the parameters #PSO requires no initial value
 manager=VarDescriptor64()
 manager:add("alpha",EFloat64(0.1),EFloat64(0.5))
+--[[
 manager:add("kappa",EFloat64(0),EFloat64(1))
 manager:add("theta",EFloat64(0),EFloat64(1))
 manager:add("pp",EFloat64(5),EFloat64(16))
 manager:add("pp",EFloat64(4),EFloat64(15))
+]]
 
 --Defining storage place for the the estimated paramteers
 estimated_parameters=EVar64Manager()
