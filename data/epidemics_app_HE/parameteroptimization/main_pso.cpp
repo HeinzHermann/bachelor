@@ -1,6 +1,6 @@
 #include<iostream>
-#include "YOUR PATH TO/plugins/ConstrainedOptimization/core/parameter_estimation.h"
-#include "YOUR PATH TO/plugins/ConstrainedOptimization/core/parameters.h"
+#include "/home/tscheidemann/ug4/plugins/ConstrainedOptimization/core/parameter_estimation.h"
+#include "/home/tscheidemann/ug4/plugins/ConstrainedOptimization/core/parameters.h"
 #include <string>
 
 int main(){

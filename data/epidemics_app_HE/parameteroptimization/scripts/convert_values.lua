@@ -63,9 +63,9 @@ function get_densities(path, filename,filetype,comment,startindex)
 					row=row+1
 				end
 			end
+			iter=iter+1
 			io.close(file)
 			os.remove(filepath)
-			iter=iter+1
 		end
 	end
 	if (data==nil) then
@@ -168,9 +168,9 @@ function get_simdata(path, filename,filetype,comment,startindex)
 				linenumber = linenumber+1
 				end --end if (check for comment line)
 			end -- for line end (end of document)
-			io.close(file)
-			os.remove(filepath) -- remove raw data files to save space
 			iter=iter+1 -- next document
+			io.close(file)
+			os.remove(filepath)
 		end --end if file==nil
 	end --end while keep_iterating
 	if (data==nil) then

@@ -1,12 +1,12 @@
 #include<iostream>
-#include "YOUR PATH TO /plugins/ConstrainedOptimization/core/parameter_estimation.h"
-#include "YOUR PATH TO/plugins/ConstrainedOptimization/core/parameters.h"
+#include "/home/tscheidemann/ug4/plugins/ConstrainedOptimization/core/parameter_estimation.h"
+#include "/home/tscheidemann/ug4/plugins/ConstrainedOptimization/core/parameters.h"
 #include <string>
 
 
 int main(){
 	//Define evaluation type
-	std::string dir ="YOUR PATH TO/apps/epidemics_app/parameteroptimization/"";
+	std::string dir ="/home/tscheidemann/ug4/apps/epidemics_app/parameteroptimization/";
 	co::BiogasEvaluation<co::EFloat64,co::ConfigComputation::Local,co::ConfigOutput::File> evaluator(dir, "subset_target.lua","subset_sim.lua");
 	
 	//Set parameter names
