@@ -32,7 +32,7 @@ pp=  duration of desease
 --Adding the parameters into the Parameter Manager
 -- set the lower bounds and upper bounds for the parameters #PSO requires no initial value
 manager=VarDescriptor64()
-manager:add("alpha",EFloat64(0.2),EFloat64(0.3))
+manager:add("alpha",EFloat64(0.2),EFloat64(0.4))
 --[[
 manager:add("kappa",EFloat64(1),EFloat64(1))
 manager:add("theta",EFloat64(0.5),EFloat64(0.5))
