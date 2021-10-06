@@ -29,7 +29,7 @@ function InitialinSubsetsS(posx, posy, t,si)
 	if (si == 4) then value = 0.998536965577164 end
 	if (si == 5) then value = 0.997099015826573 end
 	if (si == 6) then value = 0.996396837223785 end
-	if (si == 7) then value = 0.997373643919836 end
+	if (si == 7) then value = 0.997632435631844 end
 	if (si == 8) then value = 0.998666135289668 end
 	if (si == 9) then value = 0.998235739884119 end
 	if (si == 10) then value = 0.997597088646534 end
@@ -61,7 +61,7 @@ function InitialinSubsetsE(posx, posy, t,si)
 	if (si == 4) then value = 0.000025555186425085 end
 	if (si == 5) then value = 0.0000166245511371193 end
 	if (si == 6) then value = 0.0000222417455321894 end
-	if (si == 7) then value = 0.00004974159242734 end
+	if (si == 7) then value = 0.0000448402342453837 end
 	if (si == 8) then value = 0.0000813332140446194 end
 	if (si == 9) then value = 0.0000394689063955416 end
 	if (si == 10) then value = 0.0000696496044482881 end
@@ -93,7 +93,7 @@ function InitialinSubsetsI(posx, posy, t,si)
 	if (si == 4) then value = 0.0000447215762438987 end
 	if (si == 5) then value = 0.0000249368267056789 end
 	if (si == 6) then value = 0.0000556043638304734 end
-	if (si == 7) then value = 0.00014922477728202 end
+	if (si == 7) then value = 0.000134520702736151 end
 	if (si == 8) then value = 0.000101666517555774 end
 	if (si == 9) then value = 0.0000670971408724207 end
 	if (si == 10) then value = 0.0000986702729684081 end
@@ -125,7 +125,7 @@ function InitialinSubsetsR(posx, posy, t,si)
 	if (si == 4) then value = 0.00136081367713577 end
 	if (si == 5) then value = 0.00266824045750765 end
 	if (si == 6) then value = 0.00330845964791317 end
-	if (si == 7) then value = 0.00235277732181318 end
+	if (si == 7) then value = 0.00212094307980665 end
 	if (si == 8) then value = 0.00113459833592244 end
 	if (si == 9) then value = 0.00157875625582166 end
 	if (si == 10) then value = 0.00219396254012107 end
@@ -157,7 +157,7 @@ function InitialinSubsetsD(posx, posy, t,si)
 	if (si == 4) then value = 0.0000319439830313562 end
 	if (si == 5) then value = 0.000191182338076872 end
 	if (si == 6) then value = 0.000216857018938846 end
-	if (si == 7) then value = 0.00007461238864101 end
+	if (si == 7) then value = 0.0000672603513680753 end
 	if (si == 8) then value = 0.0000162666428089239 end
 	if (si == 9) then value = 0.0000789378127910832 end
 	if (si == 10) then value = 0.000040628935928168 end
