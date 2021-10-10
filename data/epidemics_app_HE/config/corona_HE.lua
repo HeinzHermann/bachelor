@@ -23,160 +23,160 @@ geom_home       = app_home.."geometry/"
 -- values are normalized densities of starting values for each bundesland
 function InitialinSubsetsS(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.997511144873358 end
-	if (si == 2) then value = 0.997378644157162 end
-	if (si == 3) then value = 0.997810108102178 end
-	if (si == 4) then value = 0.998536965577164 end
-	if (si == 5) then value = 0.997099015826573 end
-	if (si == 6) then value = 0.996396837223785 end
-	if (si == 7) then value = 0.997632435631844 end
-	if (si == 8) then value = 0.998666135289668 end
-	if (si == 9) then value = 0.998235739884119 end
-	if (si == 10) then value = 0.997597088646534 end
-	if (si == 11) then value = 0.998549689692490 end
-	if (si == 12) then value = 0.998407688589383 end
-	if (si == 13) then value = 0.997156692562344 end
-	if (si == 14) then value = 0.998282556509691 end
-	if (si == 15) then value = 0.997631166170492 end
-	if (si == 16) then value = 0.998326857104325 end
-	if (si == 17) then value = 0.995072991392964 end
-	if (si == 18) then value = 0.997425255071119 end
-	if (si == 19) then value = 0.996270111948991 end
-	if (si == 20) then value = 0.996309709360961 end
-	if (si == 21) then value = 0.996982029613133 end
-	if (si == 22) then value = 0.996859997969514 end
-	if (si == 23) then value = 0.997480775996381 end
-	if (si == 24) then value = 0.997914049431318 end
-	if (si == 25) then value = 0.995173326167394 end
-	if (si == 26) then value = 0.997955787446173 end
+	if (si == 1) then value = 0.9799327657056 end
+	if (si == 2) then value = 0.997675653836333 end
+	if (si == 3) then value = 0.978038701559653 end
+	if (si == 4) then value = 0.979245690628622 end
+	if (si == 5) then value = 0.974859858010988 end
+	if (si == 6) then value = 0.957303197704704 end
+	if (si == 7) then value = 0.975660502843533 end
+	if (si == 8) then value = 0.988054791722735 end
+	if (si == 9) then value = 0.985575415126761 end
+	if (si == 10) then value = 0.986479943758998 end
+	if (si == 11) then value = 0.990966374990725 end
+	if (si == 12) then value = 0.982124146456906 end
+	if (si == 13) then value = 0.971555027285171 end
+	if (si == 14) then value = 0.985819595913111 end
+	if (si == 15) then value = 0.98536528316914 end
+	if (si == 16) then value = 0.993948505568538 end
+	if (si == 17) then value = 0.994929356236327 end
+	if (si == 18) then value = 0.995629763606336 end
+	if (si == 19) then value = 0.992931094955199 end
+	if (si == 20) then value = 0.990026608950932 end
+	if (si == 21) then value = 0.991781701014518 end
+	if (si == 22) then value = 0.989384250817282 end
+	if (si == 23) then value = 0.99749330920879 end
+	if (si == 24) then value = 0.99021317474571 end
+	if (si == 25) then value = 0.975995385617508 end
+	if (si == 26) then value = 0.989433059082379 end
 	
 	return value
 end
 
 function InitialinSubsetsE(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.0000299862063450813 end
-	if (si == 2) then value = 0.0000397928780696475 end
-	if (si == 3) then value = 0.0000210972244491515 end
-	if (si == 4) then value = 0.000025555186425085 end
-	if (si == 5) then value = 0.0000166245511371193 end
-	if (si == 6) then value = 0.0000222417455321894 end
-	if (si == 7) then value = 0.0000448402342453837 end
-	if (si == 8) then value = 0.0000813332140446194 end
-	if (si == 9) then value = 0.0000394689063955416 end
-	if (si == 10) then value = 0.0000696496044482881 end
-	if (si == 11) then value = 0.0000773008031921551 end
-	if (si == 12) then value = 0.0000189560882216346 end
-	if (si == 13) then value = 0.0000711419709171623 end
-	if (si == 14) then value = 0.0000386666451851971 end
-	if (si == 15) then value = 0.0000426816906217655 end
-	if (si == 16) then value = 0.0000547880545183287 end
-	if (si == 17) then value = 0.000121831485555802 end
-	if (si == 18) then value = 0.000100314737488871 end
-	if (si == 19) then value = 0.000175370175029905 end
-	if (si == 20) then value = 0.000129886005928914 end
-	if (si == 21) then value = 0.0000476816882683413 end
-	if (si == 22) then value = 0.0000978984466779794 end
-	if (si == 23) then value = 0.0000879529577323214 end
-	if (si == 24) then value = 0.0000974115402444022 end
-	if (si == 25) then value = 0.0000103354900055812 end
-	if (si == 26) then value = 0.0000147596574283511 end
+	if (si == 1) then value = 0.0000294577822691744 end
+	if (si == 2) then value = 0.0000398039339644853 end
+	if (si == 3) then value = 0.0000206784876454023 end
+	if (si == 4) then value = 0.0000250614719761636 end
+	if (si == 5) then value = 0.0000162537594599806 end
+	if (si == 6) then value = 0.0000213690904317043 end
+	if (si == 7) then value = 0.0000438505014828754 end
+	if (si == 8) then value = 0.0000804686789553282 end
+	if (si == 9) then value = 0.0000389683340829901 end
+	if (si == 10) then value = 0.0000688734346370252 end
+	if (si == 11) then value = 0.0000767131898921578 end
+	if (si == 12) then value = 0.000018646923674174 end
+	if (si == 13) then value = 0.0000693137761646294 end
+	if (si == 14) then value = 0.0000381829292846083 end
+	if (si == 15) then value = 0.0000421566934523754 end
+	if (si == 16) then value = 0.0000545463895122611 end
+	if (si == 17) then value = 0.000121812583676153 end
+	if (si == 18) then value = 0.000100125766607104 end
+	if (si == 19) then value = 0.000174780352396098 end
+	if (si == 20) then value = 0.000129063927120072 end
+	if (si == 21) then value = 0.0000474309756582744 end
+	if (si == 22) then value = 0.000097158269674034 end
+	if (si == 23) then value = 0.0000879540628494603 end
+	if (si == 24) then value = 0.0000966591674076132 end
+	if (si == 25) then value = 0.0000101363152410762 end
+	if (si == 26) then value = 0.0000146331743577847 end
 	
 	return value
 end
 
 function InitialinSubsetsI(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.0000299862063450813 end
-	if (si == 2) then value = 0.000104456304932825 end
-	if (si == 3) then value = 0.0000590722284576241 end
-	if (si == 4) then value = 0.0000447215762438987 end
-	if (si == 5) then value = 0.0000249368267056789 end
-	if (si == 6) then value = 0.0000556043638304734 end
-	if (si == 7) then value = 0.000134520702736151 end
-	if (si == 8) then value = 0.000101666517555774 end
-	if (si == 9) then value = 0.0000670971408724207 end
-	if (si == 10) then value = 0.0000986702729684081 end
-	if (si == 11) then value = 0.0000957057563331444 end
-	if (si == 12) then value = 0.0000568682646649038 end
-	if (si == 13) then value = 0.000244254100148924 end
-	if (si == 14) then value = 0.0000998888333950926 end
-	if (si == 15) then value = 0.000117374649209855 end
-	if (si == 16) then value = 0.000118005040501016 end
-	if (si == 17) then value = 0.000408493804510632 end
-	if (si == 18) then value = 0.000259146405179584 end
-	if (si == 19) then value = 0.000291847380833349 end
-	if (si == 20) then value = 0.000267412365147764 end
-	if (si == 21) then value = 0.000227189220572685 end
-	if (si == 22) then value = 0.000242933182497208 end
-	if (si == 23) then value = 0.000169623561340906 end
-	if (si == 24) then value = 0.000211618173634391 end
-	if (si == 25) then value = 0.0000310064700167435 end
-	if (si == 26) then value = 0.00026567383371032 end
+	if (si == 1) then value = 0.0000294577822691744 end
+	if (si == 2) then value = 0.000119411801893456 end
+	if (si == 3) then value = 0.000062035462936207 end
+	if (si == 4) then value = 0.0000689190479344499 end
+	if (si == 5) then value = 0.0000243806391899709 end
+	if (si == 6) then value = 0.0000427381808634086 end
+	if (si == 7) then value = 0.000122781404152051 end
+	if (si == 8) then value = 0.00010058584869416 end
+	if (si == 9) then value = 0.000101317668615774 end
+	if (si == 10) then value = 0.000097570699069119 end
+	if (si == 11) then value = 0.0000913252260620926 end
+	if (si == 12) then value = 0.0000466173091854349 end
+	if (si == 13) then value = 0.000207941328493888 end
+	if (si == 14) then value = 0.000098639233985238 end
+	if (si == 15) then value = 0.000105391733630938 end
+	if (si == 16) then value = 0.000104896902908194 end
+	if (si == 17) then value = 0.000404847704570745 end
+	if (si == 18) then value = 0.000246142509575798 end
+	if (si == 19) then value = 0.000286952817366729 end
+	if (si == 20) then value = 0.000303679828517816 end
+	if (si == 21) then value = 0.000214834419158067 end
+	if (si == 22) then value = 0.000219505720374669 end
+	if (si == 23) then value = 0.000157060826516893 end
+	if (si == 24) then value = 0.000186652185338839 end
+	if (si == 25) then value = 0.0000304089457232287 end
+	if (si == 26) then value = 0.000256080551261232 end
 	
 	return value
 end
 
 function InitialinSubsetsR(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.00226895628011115 end
-	if (si == 2) then value = 0.0024323396720072 end
-	if (si == 3) then value = 0.00197891965333041 end
-	if (si == 4) then value = 0.00136081367713577 end
-	if (si == 5) then value = 0.00266824045750765 end
-	if (si == 6) then value = 0.00330845964791317 end
-	if (si == 7) then value = 0.00212094307980665 end
-	if (si == 8) then value = 0.00113459833592244 end
-	if (si == 9) then value = 0.00157875625582166 end
-	if (si == 10) then value = 0.00219396254012107 end
-	if (si == 11) then value = 0.00126257978547187 end
-	if (si == 12) then value = 0.00145961879306586 end
-	if (si == 13) then value = 0.00240222721796951 end
-	if (si == 14) then value = 0.00153699914611159 end
-	if (si == 15) then value = 0.0021660957990546 end
-	if (si == 16) then value = 0.0014750630062627 end
-	if (si == 17) then value = 0.0026444598923583 end
-	if (si == 18) then value = 0.00214840729455333 end
-	if (si == 19) then value = 0.00316844174438357 end
-	if (si == 20) then value = 0.00321658873506311 end
-	if (si == 21) then value = 0.00261688324437426 end
-	if (si == 22) then value = 0.0027447823753789 end
-	if (si == 23) then value = 0.00214856511031814 end
-	if (si == 24) then value = 0.0017063814635916 end
-	if (si == 25) then value = 0.00413419600223247 end
-	if (si == 26) then value = 0.00175270931961669 end
+	if (si == 1) then value = 0.0186908985665784 end
+	if (si == 2) then value = 0.00212600156465616 end
+	if (si == 3) then value = 0.0205221122514002 end
+	if (si == 4) then value = 0.0201864680979931 end
+	if (si == 5) then value = 0.0234213428386808 end
+	if (si == 6) then value = 0.0400101790840383 end
+	if (si == 7) then value = 0.0234298468517288 end
+	if (si == 8) then value = 0.011597875958101 end
+	if (si == 9) then value = 0.0136040941624192 end
+	if (si == 10) then value = 0.0131108191598906 end
+	if (si == 11) then value = 0.00876338962970921 end
+	if (si == 12) then value = 0.0171426922111006 end
+	if (si == 13) then value = 0.0267672588546926 end
+	if (si == 14) then value = 0.0136709970970741 end
+	if (si == 15) then value = 0.0142072231206115 end
+	if (si == 16) then value = 0.00579274690636097 end
+	if (si == 17) then value = 0.0044124471116635 end
+	if (si == 18) then value = 0.00390248983468955 end
+	if (si == 19) then value = 0.00641635102666182 end
+	if (si == 20) then value = 0.00931928656736456 end
+	if (si == 21) then value = 0.0075899584254507 end
+	if (si == 22) then value = 0.0100989734337441 end
+	if (si == 23) then value = 0.0021485921067511 end
+	if (si == 24) then value = 0.00912624775422327 end
+	if (si == 25) then value = 0.0207032994570434 end
+	if (si == 26) then value = 0.0102316065192487 end
 	
 	return value
 end
 
 function InitialinSubsetsD(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.000159926433840433 end
-	if (si == 2) then value = 0.0000447669878283534 end
-	if (si == 3) then value = 0.000130802791584739 end
-	if (si == 4) then value = 0.0000319439830313562 end
-	if (si == 5) then value = 0.000191182338076872 end
-	if (si == 6) then value = 0.000216857018938846 end
-	if (si == 7) then value = 0.0000672603513680753 end
-	if (si == 8) then value = 0.0000162666428089239 end
-	if (si == 9) then value = 0.0000789378127910832 end
-	if (si == 10) then value = 0.000040628935928168 end
-	if (si == 11) then value = 0.0000147239625127914 end
-	if (si == 12) then value = 0.0000568682646649038 end
-	if (si == 13) then value = 0.00012568414862032 end
-	if (si == 14) then value = 0.0000418888656172969 end
-	if (si == 15) then value = 0.0000426816906217655 end
-	if (si == 16) then value = 0.0000252867943930748 end
-	if (si == 17) then value = 0.00175222342461139 end
-	if (si == 18) then value = 0.0000668764916592476 end
-	if (si == 19) then value = 0.0000942287507623368 end
-	if (si == 20) then value = 0.0000764035328993613 end
-	if (si == 21) then value = 0.000126216233651492 end
-	if (si == 22) then value = 0.0000543880259322108 end
-	if (si == 23) then value = 0.00011308237422727 end
-	if (si == 24) then value = 0.0000705393912114637 end
-	if (si == 25) then value = 0.000651135870351613 end
-	if (si == 26) then value = 0.0000110697430712633 end
+	if (si == 1) then value = 0.00131742016328306 end
+	if (si == 2) then value = 0.0000391288631531809 end
+	if (si == 3) then value = 0.00135647223836547 end
+	if (si == 4) then value = 0.000473860753474016 end
+	if (si == 5) then value = 0.00167816475168118 end
+	if (si == 6) then value = 0.00262251593996218 end
+	if (si == 7) then value = 0.000743018399103452 end
+	if (si == 8) then value = 0.000166277791513993 end
+	if (si == 9) then value = 0.000680204708120959 end
+	if (si == 10) then value = 0.000242792947405382 end
+	if (si == 11) then value = 0.000102196963611769 end
+	if (si == 12) then value = 0.000667897099133791 end
+	if (si == 13) then value = 0.0014004587554775 end
+	if (si == 14) then value = 0.000372584826544995 end
+	if (si == 15) then value = 0.000279945283164759 end
+	if (si == 16) then value = 0.0000993042326804737 end
+	if (si == 17) then value = 0.000131536363762327 end
+	if (si == 18) then value = 0.000121478282791893 end
+	if (si == 19) then value = 0.00019082084837656 end
+	if (si == 20) then value = 0.000221360726065667 end
+	if (si == 21) then value = 0.000366075165214664 end
+	if (si == 22) then value = 0.000200111758924915 end
+	if (si == 23) then value = 0.000113083795092163 end
+	if (si == 24) then value = 0.000377266147320253 end
+	if (si == 25) then value = 0.00326076966448433 end
+	if (si == 26) then value = 0.0000646206727531499 end
 	
 	return value
 end
