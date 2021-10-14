@@ -340,7 +340,7 @@ function tailor_data(timesteps,simdata,densities,area_sizes,association,posx,pos
 				local grid_sum = 0
 				-- the average population of all gridpoints (in the respective subset)
 				for vertex=1, #vertex_subset_ass[subset] do
-					grid_sum = grid_sum + simdata[time][vertex][cols[cols_i]]
+					grid_sum = grid_sum + simdata[time][vertex_subset_ass[subset][vertex]][cols[cols_i]]
 					-- data[i] is data of one simdata file
 				end	
 				-- average normalized fractionof total population for class and time (sum_vertex/num_vertex)

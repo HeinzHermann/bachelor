@@ -29,7 +29,8 @@ function get_densities(path, filename,filetype,comment,startindex)
 
 	-- iterate through data files until none are left
 	while keep_iterating do
-		file=io.open(path..filename.."_"..tostring(startindex+iter-1)..filetype)
+		local filepath = path..filename.."_"..tostring(startindex+iter-1)..filetype
+		file=io.open(filepath)
 		if file==nil then
 			-- all files processed
 			keep_iterating=false
@@ -63,6 +64,8 @@ function get_densities(path, filename,filetype,comment,startindex)
 				end
 			end
 			iter=iter+1
+			io.close(file)
+			os.remove(filepath)
 		end
 	end
 	if (data==nil) then
@@ -105,7 +108,8 @@ function get_simdata(path, filename,filetype,comment,startindex)
 	local iter=1 
 
 	while keep_iterating do
-		file=io.open(path..filename.."_"..tostring(startindex+iter-1)..filetype)
+		local filepath = path..filename.."_"..tostring(startindex+iter-1)..filetype
+		file=io.open(filepath)
 		if file==nil then
 			keep_iterating=false
 		else
@@ -165,6 +169,8 @@ function get_simdata(path, filename,filetype,comment,startindex)
 				end --end if (check for comment line)
 			end -- for line end (end of document)
 			iter=iter+1 -- next document
+			io.close(file)
+			os.remove(filepath)
 		end --end if file==nil
 	end --end while keep_iterating
 	if (data==nil) then
@@ -334,7 +340,7 @@ function tailor_data(timesteps,simdata,densities,area_sizes,association,posx,pos
 				local grid_sum = 0
 				-- the average population of all gridpoints (in the respective subset)
 				for vertex=1, #vertex_subset_ass[subset] do
-					grid_sum = grid_sum + simdata[time][vertex][cols[cols_i]]
+					grid_sum = grid_sum + simdata[time][vertex_subset_ass[subset][vertex]][cols[cols_i]]
 					-- data[i] is data of one simdata file
 				end	
 				-- average normalized fractionof total population for class and time (sum_vertex/num_vertex)

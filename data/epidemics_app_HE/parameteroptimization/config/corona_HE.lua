@@ -23,160 +23,161 @@ geom_home       = app_home.."geometry/"
 -- values are normalized densities of starting values for each bundesland
 function InitialinSubsetsS(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.9799327657056 end
-	if (si == 2) then value = 0.997675653836333 end
-	if (si == 3) then value = 0.978038701559653 end
-	if (si == 4) then value = 0.979245690628622 end
-	if (si == 5) then value = 0.974859858010988 end
-	if (si == 6) then value = 0.957303197704704 end
-	if (si == 7) then value = 0.975660502843533 end
-	if (si == 8) then value = 0.988054791722735 end
-	if (si == 9) then value = 0.985575415126761 end
-	if (si == 10) then value = 0.986479943758998 end
-	if (si == 11) then value = 0.990966374990725 end
-	if (si == 12) then value = 0.982124146456906 end
-	if (si == 13) then value = 0.971555027285171 end
-	if (si == 14) then value = 0.985819595913111 end
-	if (si == 15) then value = 0.98536528316914 end
-	if (si == 16) then value = 0.993948505568538 end
-	if (si == 17) then value = 0.994929356236327 end
-	if (si == 18) then value = 0.995629763606336 end
-	if (si == 19) then value = 0.992931094955199 end
-	if (si == 20) then value = 0.990026608950932 end
-	if (si == 21) then value = 0.991781701014518 end
-	if (si == 22) then value = 0.989384250817282 end
+	if (si == 1) then value = 0.997511144873358 end
+	if (si == 2) then value = 0.997363813616649 end
+	if (si == 3) then value = 0.997805971975511 end
+	if (si == 4) then value = 0.998511448430952 end
+	if (si == 5) then value = 0.997099015826573 end
+	if (si == 6) then value = 0.996407918149466 end
+	if (si == 7) then value = 0.997641498858862 end
+	if (si == 8) then value = 0.998666140714021 end
+	if (si == 9) then value = 0.998200281797982 end
+	if (si == 10) then value = 0.997597088646534 end
+	if (si == 11) then value = 0.998553376008127 end
+	if (si == 12) then value = 0.998417151631187 end
+	if (si == 13) then value = 0.997187500741067 end
+	if (si == 14) then value = 0.998282600780402 end
+
+	if (si == 15) then value = 0.99764182401178 end
+	if (si == 16) then value = 0.998339521495611 end
+	if (si == 17) then value = 0.996744541633615 end
+	if (si == 18) then value = 0.997437976461148 end
+	if (si == 19) then value = 0.996274067404437 end
+	if (si == 20) then value = 0.996271735476576 end
+	if (si == 21) then value = 0.996993341597904 end
+	if (si == 22) then value = 0.996881877544805 end
 	if (si == 23) then value = 0.99749330920879 end
-	if (si == 24) then value = 0.99021317474571 end
-	if (si == 25) then value = 0.975995385617508 end
-	if (si == 26) then value = 0.989433059082379 end
+	if (si == 24) then value = 0.997937527922311 end
+	if (si == 25) then value = 0.995173326167394 end
+	if (si == 26) then value = 0.997963212368319 end
 	
 	return value
 end
 
 function InitialinSubsetsE(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.0000294577822691744 end
-	if (si == 2) then value = 0.0000398039339644853 end
-	if (si == 3) then value = 0.0000206784876454023 end
-	if (si == 4) then value = 0.0000250614719761636 end
-	if (si == 5) then value = 0.0000162537594599806 end
-	if (si == 6) then value = 0.0000213690904317043 end
-	if (si == 7) then value = 0.0000438505014828754 end
-	if (si == 8) then value = 0.0000804686789553282 end
-	if (si == 9) then value = 0.0000389683340829901 end
-	if (si == 10) then value = 0.0000688734346370252 end
-	if (si == 11) then value = 0.0000767131898921578 end
-	if (si == 12) then value = 0.000018646923674174 end
-	if (si == 13) then value = 0.0000693137761646294 end
-	if (si == 14) then value = 0.0000381829292846083 end
-	if (si == 15) then value = 0.0000421566934523754 end
-	if (si == 16) then value = 0.0000545463895122611 end
-	if (si == 17) then value = 0.000121812583676153 end
-	if (si == 18) then value = 0.000100125766607104 end
-	if (si == 19) then value = 0.000174780352396098 end
-	if (si == 20) then value = 0.000129063927120072 end
-	if (si == 21) then value = 0.0000474309756582744 end
-	if (si == 22) then value = 0.000097158269674034 end
+	if (si == 1) then value = 0.0000299862063450813 end
+	if (si == 2) then value = 0.0000397914925788866 end
+	if (si == 3) then value = 0.0000210964233123916 end
+	if (si == 4) then value = 0.0000255545333742206 end
+	if (si == 5) then value = 0.0000166245511371193 end
+	if (si == 6) then value = 0.0000222419928825623 end
+	if (si == 7) then value = 0.0000448384247364622 end
+	if (si == 8) then value = 0.0000813328832913791 end
+	if (si == 9) then value = 0.0000394675044302274 end
+	if (si == 10) then value = 0.0000696496044482881 end
+	if (si == 11) then value = 0.0000773005186496704 end
+	if (si == 12) then value = 0.0000189562678899778 end
+	if (si == 13) then value = 0.0000711424770387655 end
+	if (si == 14) then value = 0.0000386656484712569 end
+	if (si == 15) then value = 0.0000426819183388197 end
+	if (si == 16) then value = 0.0000547873618199519 end
+	if (si == 17) then value = 0.000122034822995668 end
+	if (si == 18) then value = 0.000100307610004012 end
+	if (si == 19) then value = 0.000175368797964675 end
+	if (si == 20) then value = 0.000129878067414357 end
+	if (si == 21) then value = 0.0000476802171974129 end
+	if (si == 22) then value = 0.0000978945421979863 end
 	if (si == 23) then value = 0.0000879540628494603 end
-	if (si == 24) then value = 0.0000966591674076132 end
-	if (si == 25) then value = 0.0000101363152410762 end
-	if (si == 26) then value = 0.0000146331743577847 end
+	if (si == 24) then value = 0.0000974131763077719 end
+	if (si == 25) then value = 0.0000103354900055812 end
+	if (si == 26) then value = 0.0000147593306643544 end
 	
 	return value
 end
 
 function InitialinSubsetsI(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.0000294577822691744 end
-	if (si == 2) then value = 0.000119411801893456 end
-	if (si == 3) then value = 0.000062035462936207 end
-	if (si == 4) then value = 0.0000689190479344499 end
-	if (si == 5) then value = 0.0000243806391899709 end
-	if (si == 6) then value = 0.0000427381808634086 end
-	if (si == 7) then value = 0.000122781404152051 end
-	if (si == 8) then value = 0.00010058584869416 end
-	if (si == 9) then value = 0.000101317668615774 end
-	if (si == 10) then value = 0.000097570699069119 end
-	if (si == 11) then value = 0.0000913252260620926 end
-	if (si == 12) then value = 0.0000466173091854349 end
-	if (si == 13) then value = 0.000207941328493888 end
-	if (si == 14) then value = 0.000098639233985238 end
-	if (si == 15) then value = 0.000105391733630938 end
-	if (si == 16) then value = 0.000104896902908194 end
-	if (si == 17) then value = 0.000404847704570745 end
-	if (si == 18) then value = 0.000246142509575798 end
-	if (si == 19) then value = 0.000286952817366729 end
-	if (si == 20) then value = 0.000303679828517816 end
-	if (si == 21) then value = 0.000214834419158067 end
-	if (si == 22) then value = 0.000219505720374669 end
+	if (si == 1) then value = 0.0000299862063450813 end
+	if (si == 2) then value = 0.00011937447773666 end
+	if (si == 3) then value = 0.0000632892699371748 end
+	if (si == 4) then value = 0.0000702749667791066 end
+	if (si == 5) then value = 0.0000249368267056789 end
+	if (si == 6) then value = 0.0000444839857651246 end
+	if (si == 7) then value = 0.000125547589262094 end
+	if (si == 8) then value = 0.000101666104114224 end
+	if (si == 9) then value = 0.000102615511518591 end
+	if (si == 10) then value = 0.0000986702729684081 end
+	if (si == 11) then value = 0.0000920244269638933 end
+	if (si == 12) then value = 0.0000473906697249446 end
+	if (si == 13) then value = 0.000213427431116297 end
+	if (si == 14) then value = 0.0000998862585507471 end
+	if (si == 15) then value = 0.000106704795847049 end
+	if (si == 16) then value = 0.000105360311192215 end
+	if (si == 17) then value = 0.000405586323485602 end
+	if (si == 18) then value = 0.000246589541259864 end
+	if (si == 19) then value = 0.000287918922031556 end
+	if (si == 20) then value = 0.000305595452739663 end
+	if (si == 21) then value = 0.000215963336717694 end
+	if (si == 22) then value = 0.000221169150891747 end
 	if (si == 23) then value = 0.000157060826516893 end
-	if (si == 24) then value = 0.000186652185338839 end
-	if (si == 25) then value = 0.0000304089457232287 end
-	if (si == 26) then value = 0.000256080551261232 end
+	if (si == 24) then value = 0.000188108202525353 end
+	if (si == 25) then value = 0.0000310064700167435 end
+	if (si == 26) then value = 0.000258288286626202 end
 	
 	return value
 end
 
 function InitialinSubsetsR(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.0186908985665784 end
-	if (si == 2) then value = 0.00212600156465616 end
-	if (si == 3) then value = 0.0205221122514002 end
-	if (si == 4) then value = 0.0201864680979931 end
-	if (si == 5) then value = 0.0234213428386808 end
-	if (si == 6) then value = 0.0400101790840383 end
-	if (si == 7) then value = 0.0234298468517288 end
-	if (si == 8) then value = 0.011597875958101 end
-	if (si == 9) then value = 0.0136040941624192 end
-	if (si == 10) then value = 0.0131108191598906 end
-	if (si == 11) then value = 0.00876338962970921 end
-	if (si == 12) then value = 0.0171426922111006 end
-	if (si == 13) then value = 0.0267672588546926 end
-	if (si == 14) then value = 0.0136709970970741 end
-	if (si == 15) then value = 0.0142072231206115 end
-	if (si == 16) then value = 0.00579274690636097 end
-	if (si == 17) then value = 0.0044124471116635 end
-	if (si == 18) then value = 0.00390248983468955 end
-	if (si == 19) then value = 0.00641635102666182 end
-	if (si == 20) then value = 0.00931928656736456 end
-	if (si == 21) then value = 0.0075899584254507 end
-	if (si == 22) then value = 0.0100989734337441 end
+	if (si == 1) then value = 0.00226895628011115 end
+	if (si == 2) then value = 0.00243225498388445 end
+	if (si == 3) then value = 0.00197884450670233 end
+	if (si == 4) then value = 0.00136077890217725 end
+	if (si == 5) then value = 0.00266824045750765 end
+	if (si == 6) then value = 0.00330849644128114 end
+	if (si == 7) then value = 0.00212085749003466 end
+	if (si == 8) then value = 0.00113459372191474 end
+	if (si == 9) then value = 0.0015787001772091 end
+	if (si == 10) then value = 0.00219396254012107 end
+	if (si == 11) then value = 0.00126257513794462 end
+	if (si == 12) then value = 0.00145963262752829 end
+	if (si == 13) then value = 0.00240224430800898 end
+	if (si == 14) then value = 0.00153695952673246 end
+	if (si == 15) then value = 0.0021661073556951 end
+	if (si == 16) then value = 0.00147504435669101 end
+	if (si == 17) then value = 0.00264887351090597 end
+	if (si == 18) then value = 0.00214825464758593 end
+	if (si == 19) then value = 0.00316841686471999 end
+	if (si == 20) then value = 0.00321639214008496 end
+	if (si == 21) then value = 0.00261680250854037 end
+	if (si == 22) then value = 0.00274467290532873 end
 	if (si == 23) then value = 0.0021485921067511 end
-	if (si == 24) then value = 0.00912624775422327 end
-	if (si == 25) then value = 0.0207032994570434 end
-	if (si == 26) then value = 0.0102316065192487 end
+	if (si == 24) then value = 0.00170641012290856 end
+	if (si == 25) then value = 0.00413419600223247 end
+	if (si == 26) then value = 0.00175267051639208 end
 	
 	return value
 end
 
 function InitialinSubsetsD(posx, posy, t,si)
 	value = 1.0
-	if (si == 1) then value = 0.00131742016328306 end
-	if (si == 2) then value = 0.0000391288631531809 end
-	if (si == 3) then value = 0.00135647223836547 end
-	if (si == 4) then value = 0.000473860753474016 end
-	if (si == 5) then value = 0.00167816475168118 end
-	if (si == 6) then value = 0.00262251593996218 end
-	if (si == 7) then value = 0.000743018399103452 end
-	if (si == 8) then value = 0.000166277791513993 end
-	if (si == 9) then value = 0.000680204708120959 end
-	if (si == 10) then value = 0.000242792947405382 end
-	if (si == 11) then value = 0.000102196963611769 end
-	if (si == 12) then value = 0.000667897099133791 end
-	if (si == 13) then value = 0.0014004587554775 end
-	if (si == 14) then value = 0.000372584826544995 end
-	if (si == 15) then value = 0.000279945283164759 end
-	if (si == 16) then value = 0.0000993042326804737 end
-	if (si == 17) then value = 0.000131536363762327 end
-	if (si == 18) then value = 0.000121478282791893 end
-	if (si == 19) then value = 0.00019082084837656 end
-	if (si == 20) then value = 0.000221360726065667 end
-	if (si == 21) then value = 0.000366075165214664 end
-	if (si == 22) then value = 0.000200111758924915 end
+	if (si == 1) then value = 0.000159926433840433 end
+	if (si == 2) then value = 0.0000447654291512475 end
+	if (si == 3) then value = 0.000130797824536828 end
+	if (si == 4) then value = 0.0000319431667177757 end
+	if (si == 5) then value = 0.000191182338076872 end
+	if (si == 6) then value = 0.000216859430604982 end
+	if (si == 7) then value = 0.0000672576371046932 end
+	if (si == 8) then value = 0.0000162665766582758 end
+	if (si == 9) then value = 0.0000789350088604547 end
+	if (si == 10) then value = 0.000040628935928168 end
+	if (si == 11) then value = 0.0000147239083142229 end
+	if (si == 12) then value = 0.0000568688036699335 end
+	if (si == 13) then value = 0.000125685042768486 end
+	if (si == 14) then value = 0.0000418877858438617 end
+	if (si == 15) then value = 0.0000426819183388197 end
+	if (si == 16) then value = 0.0000252864746861316 end
+	if (si == 17) then value = 0.0000789637089971968 end
+	if (si == 18) then value = 0.0000668717400026749 end
+	if (si == 19) then value = 0.000094228010846691 end
+	if (si == 20) then value = 0.0000763988631849158 end
+	if (si == 21) then value = 0.000126212339640211 end
+	if (si == 22) then value = 0.000054385856776659 end
 	if (si == 23) then value = 0.000113083795092163 end
-	if (si == 24) then value = 0.000377266147320253 end
-	if (si == 25) then value = 0.00326076966448433 end
-	if (si == 26) then value = 0.0000646206727531499 end
+	if (si == 24) then value = 0.0000705405759470072 end
+	if (si == 25) then value = 0.000651135870351613 end
+	if (si == 26) then value = 0.0000110694979982658 end
 	
 	return value
 end
@@ -216,32 +217,32 @@ corona_HE = {
 				 },
 	},
 	regions = {
-		 {subset = "Werra-Meissner-Kreis",	area = 1024.7,		density = 97.39,	diffusion = MyDefaultDiffusion}
-		,{subset = "Kassel-City",		area = 106.78,		density = 1877.94,	diffusion = MyDefaultDiffusion}
-		,{subset = "Kassel",			area = 1292.92,		density = 183.31,	diffusion = MyDefaultDiffusion}
-		,{subset = "Waldeck-Frankenberg",	area = 1848,		density = 84.56,	diffusion = MyDefaultDiffusion}
-		,{subset = "Hersfeld-Rotenburg",	area = 1097.12,		density = 109.19,	diffusion = MyDefaultDiffusion}
-		,{subset = "Schwalm-Eder-Kreis",	area = 1538.51,		density = 116.50,	diffusion = MyDefaultDiffusion}
-		,{subset = "Fulda",			area = 1380.4,		density = 161.56,	diffusion = MyDefaultDiffusion}
-		,{subset = "Marburg-Biedenkopf",	area = 1262.55,		density = 194.52,	diffusion = MyDefaultDiffusion}
-		,{subset = "Lahn-Dill-Kreis",		area = 1066.52,		density = 237.15,	diffusion = MyDefaultDiffusion}
-		,{subset = "Limburg-Weilburg",		area = 738.48,		density = 232.76,	diffusion = MyDefaultDiffusion}
-		,{subset = "Giessen",			area = 854.67,		density = 317.43,	diffusion = MyDefaultDiffusion}
-		,{subset = "Vogelsbergkreis",		area = 1458.99,		density = 72.20,	diffusion = MyDefaultDiffusion}
-		,{subset = "Main-Kinzig-Kreis",		area = 1397.55,		density = 300.91,	diffusion = MyDefaultDiffusion}
-		,{subset = "Wetteraukreis",		area = 1100.69,		density = 281.69,	diffusion = MyDefaultDiffusion}
-		,{subset = "Rheingau-Taunus-Kreis",	area = 811.48,		density = 230.44,	diffusion = MyDefaultDiffusion}
-		,{subset = "Hochtaunuskreis",		area = 482.02,		density = 491.47,	diffusion = MyDefaultDiffusion}
-		,{subset = "Wiesbaden",			area = 203.93,		density = 1366.19,	diffusion = MyDefaultDiffusion}
-		,{subset = "Main-Taunus-Kreis",		area = 222.39,		density = 1073.23,	diffusion = MyDefaultDiffusion}
-		,{subset = "Frankfurt-am-Main",		area = 248.3,		density = 3066.42,	diffusion = MyDefaultDiffusion}
-		,{subset = "Offenbach-am-Main",		area = 44.89,		density = 2905.35,	diffusion = MyDefaultDiffusion}
-		,{subset = "Offenbach",			area = 356.3,		density = 997.71,	diffusion = MyDefaultDiffusion}
-		,{subset = "Gross-Gerau",		area = 453.04,		density = 606.95,	diffusion = MyDefaultDiffusion}
-		,{subset = "Darmstadt",			area = 122.2,		density = 1299.42,	diffusion = MyDefaultDiffusion}
-		,{subset = "Darmstadt-Dieburg",		area = 658.65,		density = 451.10,	diffusion = MyDefaultDiffusion}
-		,{subset = "Odenwaldkreis",		area = 623.98,		density = 154.31,	diffusion = MyDefaultDiffusion}
-		,{subset = "Bergstrasse",		area = 719.52,		density = 375.90,	diffusion = MyDefaultDiffusion}
+		 {subset = "Werra-Meissner-Kreis",	area = 1024.7,		density = 97.6344295891481,	diffusion = MyDefaultDiffusion}
+		,{subset = "Kassel-City",		area = 106.78,		density = 1882.82449896984,	diffusion = MyDefaultDiffusion}
+		,{subset = "Kassel",			area = 1292.92,		density = 183.311419113325,	diffusion = MyDefaultDiffusion}
+		,{subset = "Waldeck-Frankenberg",	area = 1848.44,		density = 84.6811365259354,	diffusion = MyDefaultDiffusion}
+		,{subset = "Hersfeld-Rotenburg",	area = 1097.12,		density = 109.654367799329,	diffusion = MyDefaultDiffusion}
+		,{subset = "Schwalm-Eder-Kreis",	area = 1538.15,		density = 116.919676234437,	diffusion = MyDefaultDiffusion}
+		,{subset = "Fulda",			area = 1380.4,		density = 161.564039408867,	diffusion = MyDefaultDiffusion}
+		,{subset = "Marburg-Biedenkopf",	area = 1262.55,		density = 194.766939923171,	diffusion = MyDefaultDiffusion}
+		,{subset = "Lahn-Dill-Kreis",		area = 1066.52,		density = 237.569853354836,	diffusion = MyDefaultDiffusion}
+		,{subset = "Limburg-Weilburg",		area = 738.48,		density = 233.304896544253,	diffusion = MyDefaultDiffusion}
+		,{subset = "Giessen",			area = 854.67,		density = 317.86186481332,	diffusion = MyDefaultDiffusion}
+		,{subset = "Vogelsbergkreis",		area = 1458.99,		density = 72.3144092831342,	diffusion = MyDefaultDiffusion}
+		,{subset = "Main-Kinzig-Kreis",		area = 1397.55,		density = 301.734463883224,	diffusion = MyDefaultDiffusion}
+		,{subset = "Wetteraukreis",		area = 1100.69,		density = 281.962223696045,	diffusion = MyDefaultDiffusion}
+		,{subset = "Rheingau-Taunus-Kreis",	area = 811.48,		density = 230.97673386898,	diffusion = MyDefaultDiffusion}
+		,{subset = "Hochtaunuskreis",		area = 482.02,		density = 492.263806481059,	diffusion = MyDefaultDiffusion}
+		,{subset = "Wiesbaden",			area = 203.93,		density = 1366.19918599519,	diffusion = MyDefaultDiffusion}
+		,{subset = "Main-Taunus-Kreis",		area = 222.39,		density = 1075.87571383605,	diffusion = MyDefaultDiffusion}
+		,{subset = "Frankfurt-am-Main",		area = 248.3,		density = 3077.34192509062,	diffusion = MyDefaultDiffusion}
+		,{subset = "Offenbach-am-Main",		area = 44.89,		density = 2915.83871686344,	diffusion = MyDefaultDiffusion}
+		,{subset = "Offenbach",			area = 356.3,		density = 1000.67920291889,	diffusion = MyDefaultDiffusion}
+		,{subset = "Gross-Gerau",		area = 453.04,		density = 608.791718170581,	diffusion = MyDefaultDiffusion}
+		,{subset = "Darmstadt",			area = 122.2,		density = 1302.569558101472,	diffusion = MyDefaultDiffusion}
+		,{subset = "Darmstadt-Dieburg",		area = 658.65,		density = 451.98663933804,	diffusion = MyDefaultDiffusion}
+		,{subset = "Odenwaldkreis",		area = 623.98,		density = 155.059457033879,	diffusion = MyDefaultDiffusion}
+		,{subset = "Bergstrasse",		area = 719.52,		density = 376.66082944185,	diffusion = MyDefaultDiffusion}
   }
 }
 
