@@ -354,8 +354,8 @@ if (ARGS.limexNumStages<2) then
 
 	-- writing intial step 0 in csv 
     -- to add: in each csv file add time, for each row
-	output_file = "output/simdata/simdata_step_"..step ..".csv"
-	output_density = "output/density/density_step_"..step..".csv"
+	output_file = "simdata_step_"..step ..".csv"
+	output_density = "density_step_"..step..".csv"
 	SaveVectorCSV(u, output_file) -- creates csv 
 	
 	-- open file
@@ -499,8 +499,8 @@ if (ARGS.limexNumStages<2) then
 			VecAssign (uOld, u)
 		end			
 
-		output_file_new = "output/simdata/simdata_step_"..step ..".csv"
-		output_density_new = "output/density/density_step_"..step..".csv"
+		output_file_new = "simdata_step_"..step ..".csv"
+		output_density_new = "density_step_"..step..".csv"
 
 		SaveVectorCSV(u, output_file_new) -- creates csv 
 

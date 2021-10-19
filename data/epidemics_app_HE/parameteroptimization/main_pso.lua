@@ -43,9 +43,9 @@ manager:add("pp",EFloat64(10),EFloat64(10))
 estimated_parameters=EVar64Manager()
 
 --Running the Particle Swarm Optimization Algorithm
-n_particles=360
-n_groups=60
-max_iterations=20 --maximum iterations of the PSO algorithm if no convergence is reached beforehand
+n_particles=120
+n_groups=20
+max_iterations=2 --maximum iterations of the PSO algorithm if no convergence is reached beforehand
 RunPSO_BiogasEval(app_home,manager,estimated_parameters,n_particles,n_groups,max_iterations) -- calls eval.lua
 
 
