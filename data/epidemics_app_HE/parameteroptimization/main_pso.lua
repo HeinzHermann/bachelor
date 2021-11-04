@@ -32,20 +32,20 @@ pp=  duration of desease
 --Adding the parameters into the Parameter Manager
 -- set the lower bounds and upper bounds for the parameters #PSO requires no initial value
 manager=VarDescriptor64()
-manager:add("alpha",EFloat64(0.2),EFloat64(0.4))
+manager:add("alpha",EFloat64(0.18),EFloat64(0.2))
+manager:add("qq",EFloat64(6.5),EFloat64(6.7))
 --[[
 manager:add("kappa",EFloat64(1),EFloat64(1))
 manager:add("theta",EFloat64(0.5),EFloat64(0.5))
-manager:add("qq",EFloat64(6),EFloat64(6))
 manager:add("pp",EFloat64(10),EFloat64(10))
 ]]
 --Defining storage place for the the estimated paramteers
 estimated_parameters=EVar64Manager()
 
 --Running the Particle Swarm Optimization Algorithm
-n_particles=120
-n_groups=20
-max_iterations=2 --maximum iterations of the PSO algorithm if no convergence is reached beforehand
+n_particles=240
+n_groups=40
+max_iterations=5 --maximum iterations of the PSO algorithm if no convergence is reached beforehand
 RunPSO_BiogasEval(app_home,manager,estimated_parameters,n_particles,n_groups,max_iterations) -- calls eval.lua
 
 

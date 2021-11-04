@@ -12,7 +12,7 @@ end
 -- define Home-Directories
 ----------------------------------------------------------------
 ug4_home        = ug_get_root_path().."/"
-app_home        = ug4_home.."apps/epidemics_app/parameteroptimization/"
+app_home        = ug4_home.."apps/epidemics_app_HE/parameteroptimization/"
 common_scripts  = app_home.."scripts/"
 geom_home       = app_home.."geometry/"
 
@@ -30,19 +30,20 @@ pp=  duration of desease
 ]]
 
 -- Set inital value, lower bound, upper bound for each parameter
-v_alpha=EVar64(EFloat64(0.0924629297966215),EFloat64(0.00000001),EFloat64(10))
-v_kappa=EVar64(EFloat64(0.1),EFloat64(0),EFloat64(1))
-v_theta=EVar64(EFloat64(0.02),EFloat64(0),EFloat64(1))
-v_qq=EVar64(EFloat64(14),EFloat64(5),EFloat64(16))
-v_pp=EVar64(EFloat64(7),EFloat64(4),EFloat64(15))
+v_alpha=EVar64(EFloat64(0.28),EFloat64(0.01),EFloat64(3))
+--v_kappa=EVar64(EFloat64(0.1),EFloat64(0),EFloat64(1))
+--v_theta=EVar64(EFloat64(0.02),EFloat64(0),EFloat64(1))
+v_qq=EVar64(EFloat64(6),EFloat64(5),EFloat64(8))
+--v_pp=EVar64(EFloat64(7),EFloat64(4),EFloat64(15))
 
 --Add the parameters into the Parameter Manager 
 --Note: Only the added parameters will be optimized
 manager=EVar64Manager()
 manager:add("alpha",v_alpha)
---[[manager:add("kappa",v_kappa)
-manager:add("theta",v_theta)
 manager:add("qq",v_qq)
+--[[
+manager:add("kappa",v_kappa)
+manager:add("theta",v_theta)
 manager:add("pp",v_pp)
 ]]
 --Defining storage place for the the estimated paramteers
@@ -51,7 +52,7 @@ estimated_parameters=EVar64Manager()
 --Running Newton Gauss
 stepsize_alpha=1.0 --Hyperparameter of the adaptive stepsize calculation. See AdaDelta for details. The second hyperparamater (squared gradient decay rate) can be set by directly interfacing with the C++ code
 print(stepsize_alpha)
-RunNewtonGauss_BiogasEval("YOUR PATH TO/apps/epidemics_app/parameteroptimization/",manager,estimated_parameters,stepsize_alpha) 
+RunNewtonGauss_BiogasEval("/home/marvin/Documents/ug4/apps/epidemics_app_HE/parameteroptimization/",manager,estimated_parameters,stepsize_alpha) 
 
 
 --[[Generate a lua table with the parameters.
