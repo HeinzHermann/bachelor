@@ -102,6 +102,9 @@ districts = ['Werra-Meissner-Kreis','Kassel-City','Kassel','Waldeck-Frankenberg'
 
 if plot == 'scatter':
 	ax = fig.add_subplot(111)
+	#plt.rcParams['text.usetex'] = True
+	#ax.set_xlabel(r'time (days)')
+	#ax.set_ylabel(r'$\fract{x}{y}$')
 
 	set_start = 1
 	#set_end = 5
@@ -136,6 +139,11 @@ if plot == 'scatter':
 
 elif plot == 'plot':
 	ax = fig.add_subplot(111)
+	#plt.rc(usetex = True)
+	plt.rcParams['text.usetex'] = True
+	#ax.set_xlabel(r'time (days)')
+	#ax.set_xlabel(r'time (days)')
+	#ax.set_ylabel(r'$\fract{x}{y}$')
 
 	variable, variable_n = 0, 'alpha'
 	#variable, variable_n = 1, 'qq'

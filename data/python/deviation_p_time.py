@@ -72,7 +72,7 @@ if testprint:
 fig=plt.figure()
 
 # set plot type
-#plot = ''
+plot = ''
 #plot = 'scatter'
 plot = 'plot'
 #plot = 'triang'
