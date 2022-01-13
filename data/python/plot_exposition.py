@@ -74,6 +74,42 @@ for files_i in range(len(file_names)):
 		for table in range(len(sorted_tab[files_i])):
 			print(sorted_tab[files_i][table])
 
+
+# set up extrapolation
+temp = []
+array = []
+fit = []
+functions = []
+extrapolation = []
+
+extra_start = 50
+extra_end = 75
+extrapolation.append(range(extra_start, extra_end+1))
+
+for set_i in range(1, len(sorted_tab[1])):
+	for value_i in range(len(sorted_tab[1][set_i])):
+		temp.append([sorted_tab[1][0][value_i],sorted_tab[1][set_i][value_i]])
+	
+	array = np.array(temp)
+	fit = np.polyfit(array[:,0], array[:,1], 3)
+	functions.append(np.poly1d(fit))
+	temp = []
+	
+	for extra_i in extrapolation[0]:
+		temp.append(functions[set_i-1](extra_i))
+
+	extrapolation.append(temp)
+	temp = []
+
+
+# modify nomiclation
+modifiers = ["_orig","_sim"]
+
+for files_i in range(2):
+	for sets_i in range(len(results[files_i][0])):
+		results[files_i][0][sets_i] = results[files_i][0][sets_i]+modifiers[files_i]
+
+
 # ========================================================================
 # part two, plot results
 
@@ -124,21 +160,22 @@ if plot == 'scatter':
 elif plot == 'plot':
 	ax = fig.add_subplot(111)
 
-	set_start = 1
+	set_start = 13
 	set_end = 27
 	#set_end = len(sorted_tab)
 	set_end = set_start+1 # only show one graph
-	"""
-	print(sorted_tab[0][0])
-	print(sorted_tab[0][26])
-	print(results[0][0][26])
-	"""
 
 	for file_i in range(len(results)):
 		for set_i in range(set_start, set_end):
 			ax.plot(sorted_tab[file_i][0], sorted_tab[file_i][set_i], label=results[file_i][0][set_i])
 
-	plt.legend(loc='upper right')
+	for set_i in range(set_start, set_end):
+		ax.plot(extrapolation[0], extrapolation[set_i], label=results[1][0][set_i][:-3]+"extrapolation")
+
+	plt.axvline(x=50, color='r', linestyle=':')
+	plt.legend(loc='upper left')
+	plt.xlabel("Time t (days)")
+	plt.ylabel("Sum of Exposed")
 	plt.show()
 
 elif plot == 'triang':
