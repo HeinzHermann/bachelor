@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # part one, parse sample data
 
 # set up for data parsing
-file_names = ["./t75_run_orig.txt","./s_pso_all.txt"]
+file_names = ["./t75_run_orig.txt","./t75_run_sim.txt"]
 results = []
 sorted_tab = []
 string = ''
@@ -147,7 +147,7 @@ if plot == 'scatter':
 elif plot == 'plot':
 	ax = fig.add_subplot(111)
 
-	set_start = 17
+	set_start = 26
 	set_end = 27
 	#set_end = len(sorted_tab)
 	set_end = set_start+1 # only show one graph

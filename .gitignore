@@ -15,6 +15,7 @@
 *.pvd
 *.csv
 *.csv#
+*.svg
 
 # include
 !*.tex

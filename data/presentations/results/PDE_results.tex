@@ -77,23 +77,25 @@
 }
 
 
-\logo{\includegraphics[height=1cm]{./images/logo.png}}
+%\logo{\includegraphics[height=1cm]{./images/logo.png}}
 
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{changepage}
+\usepackage{color}
 %\usepackage{tcolorbox}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
 
-\title[Epidemics Wokrshop]{G-CSC Epidemics group\newline An introduction to disease modelling via SEIRD}
+\title[Other thing]{Enter Title}
 
-\author{\textcolor{blue}{Yannick Rosam, Tristan Scheidemann, Marvin Glaser, David Lian\\}
-\vspace{2mm}\footnotesize{Special Thanks: Devansh Rastogi}} % Your name
+\author{\textcolor{blue}{Marvin Glaser\\}
+\vspace{2mm}\footnotesize{Special Thanks: Gabriel Wittum, Arne N\"agel, Tristan Scheidemann, Yannick Rosam, Devansh Rastogi}} % Your name
 \institute[G-CSC] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
 {
 Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institution for the title page
@@ -109,12 +111,11 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 %----------------------------------------------------------------------------------------
 
 
-\begin{frame}
-\titlepage % Print the title page as the first slide
-\end{frame}
+%\begin{frame}
+%	\titlepage % Print the title page as the first slide
+%\end{frame}
 
 %----------------------------------------------------------------------------------------
-
 \begin{frame}
 \frametitle{Overview} 
 \tableofcontents 
@@ -136,351 +137,412 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 %}
 
 %----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 
-\section{Theory I}
 
-\subsection{Situation}
 
+\section{Model}
 \begin{frame}
-	\frametitle{Situation}
-	\begin{enumerate}
-		\item Diseases are not nice\\\vspace{0.1cm}
-	         			
-		\item Infectious diseases are doubly not nice \\\vspace{0.1cm}
-	       	
-                \item Infectious diseases in todays interconnected world are horrible	\\\vspace{0.1cm}
-	\end{enumerate}
-
-	\onslide<2>{\textbf{Question:} Are we able to broadly understand their behavior?}
-
-\end{frame}
-
-\begin{frame}
-	\frametitle{Situation}
+	\frametitle{Model - Background}
 	\begin{enumerate}[$\bullet$]
-		\item Infectious disease models can give quantitative answers\\\vspace{0.1cm}
-	         			
-		\item Although not perfect, results can guide policy \\\vspace{0.1cm}
-	       	
-                \item Won't yield insights into disease itself but its effect on society	\\\vspace{0.1cm}
+		\item SEIRD PDE model, based on Arnes/Devanshs "evaluate.lua" \& Tristans ConstrainedOptimization
+		\item Solvers used: Gauss-Newton / Particle Swarm Optimization
+		\item Loss function $L: (data_{original}(t) - data_{simulated}(t))^2 $
+		\item SEIRD classes derived of RKI case numbers\\(01.09.2020 - 15.11.2020)
+		\item Grid: 2D of Hessen, 26 discricts, 1075 vertices
+		\item In the model $\kappa$ (governs ratio between $E\rightarrow I$ and $E\rightarrow R$ transition) was set to 1
+			$\rightarrow$ no transision between E and R
+			Reasoning given in summary details at the end
+		\item My current interpretation of the results is given in the summary at the end
 	\end{enumerate}
+
 \end{frame}
 
-\subsection{Simulator}
 \begin{frame}
-	\frametitle{}
+	\frametitle{Model - Class definition}
+	(\textcolor{red}{E} and \textcolor{red}{I} have changed definition compared to Devanshs thesis)\newline
 	\begin{enumerate}[$\bullet$]
-		\item The \textbf{EpidemicsRunner} developed by the G-CSC allows the user to test various scenarios and relate these models to the real world
-	         			
-		\item  The user can define scenarios...\onslide<2>{and fit the models to real life data}	\\\vspace{0.1cm}
-
+		\item (S)usceptibles: Population that has not been in contact with the virus
+		\item \textcolor{red}{(E)xposed}: Infected population, has no symptoms yet and is therefor spreading the virus
+		\item \textcolor{red}{(I)nfected}: Infected population with symptoms, in isolation or not infectious anymore
+		\item (R)ecovered: Infected that have overcome the infection. Cannot spread the virus or get infected again
+		\item (D)eceased: Deceased population, does not spread the virus
 	\end{enumerate}
 
 \end{frame}
+%----------------------------------------------------------------------------------------
 
-
+\section{Susceptible simulations}
+\subsection{Background}
 \begin{frame}
-The EpidemicsRunner is quick response guidance tool, that allows a non-expert user to quickly
-simulate various epidemics scenarios based on real data.
-
-\end{frame}
-
-\begin{frame}
-	\frametitle{SEIRD Model}
+	\frametitle{Susceptible simulations- Overview}
 	\begin{enumerate}[$\bullet$]
-		\item The (S)usceptible (E)xposed (I)nfected (R)ecovered (D)eceased model is a well known framework to model the spread of infectious diseases		
-		\item It is the simplest model found in EpidemicsRunner \\\vspace{0.1cm}
-	       	
-                \item Is a robust basis for other more specialized models	\\\vspace{0.3cm}
-
+		\item Results below created using a Gauss-Newton solver
+		\item 76 datapoints (day 0 - 75) were used for the simulation
+		\item Both $\alpha$ (S$\rightarrow$E, infection spreading) and $qq$ (E$\rightarrow$I, time till symptom onset) were optimized in these experiments
+		\item Simulations were repeated with 60 and 50 datapoints\\(days 0 - 60/50) to see if the results are similar
 	\end{enumerate}
+	\vspace{0.5cm}
+	Results of variable optimization day 0 - 75:
 	\begin{center}
-		\includegraphics[width=0.7\textwidth]{./images/SEIRD_flow.png}
+	\begin{tabular}{|c|c|}
+		\hline $\alpha$ & 0.197630304390785 \\
+		\hline $qq$ & 6.67500068384405 \\ \hline
+	\end{tabular}
 	\end{center}
 \end{frame}
 
+\subsection{Results}
+\begin{frame}
+	\frametitle{Susceptible simulations - Presentation style}
+	\begin{enumerate}[$\bullet$]
+		\item x-axis: time t (days) of simulation \newline
+			y-axis: sum of all Exposed up to time t
+		\item "Sum of newly Exposed till t" is shown insead of "decrease of Susceptibles" for easier readability\\
+			(otherwise hard to read, since only a fraction of S is infected)
+		\item For presentation, results are grouped into "fitting" (simulation trend matches original data) and "too low/high" trends
+		\item "too high" and "too low" show a weaker (upper image) and a more extreme (lower image) example
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Susceptible simulation, day 0 - 75}
+	\begin{center}
+		\begin{figure}
+			\begin{adjustwidth}{-0.8cm}{}
+			\begin{tabular}{c|c|c}
+				fitting & too high & too low \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/10_Limburg-Weilburg.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/19_Frankfurt-am-Main.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/20_Offenbach-am-Main.pdf} \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/11_Giessen.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/24_Darmstadt-Dieburg.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/26_Bergstrasse.pdf}
+			\end{tabular}
+			\end{adjustwidth}
+		\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Susceptible simulation}
+	\textbf{Notes and thoughts:}
+	\begin{enumerate}[$\bullet$]
+		\item Using the entire dataset (day 0 - 75) for simulation leads to mixed results
+		\item To give a "feel" for the entire dataset: I would consider\\
+			- 5 regions to have a fitting trend\\
+			- 4 regions to have  a trend that is too high\\
+			- 17 regions to have a trend that is too low
+		\item The slides below show the results of parameter estimation with 60 and 50 days respectively. The same regions as above are shown (for compairibilty)
+		\item Data was extrapolated to visualize the trend. This was done using numpy polyfit (Polynomial fit, degree 3)
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Susceptible trends 60d}
+	\begin{center}
+		\begin{figure}
+			\begin{adjustwidth}{-0.8cm}{}
+			\begin{tabular}{ccc}
+				prev. fitting & prev. high & prev. low \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/10_Limburg-Weilburg.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/19_Frankfurt-am-Main.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/20_Offenbach-am-Main.pdf} \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/11_Giessen.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/24_Darmstadt-Dieburg.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/26_Bergstrasse.pdf}
+			\end{tabular}
+			\end{adjustwidth}
+		\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Susceptible trends 50d}
+	\begin{center}
+		\begin{figure}
+			\begin{adjustwidth}{-0.8cm}{}
+			\begin{tabular}{ccc}
+				prev. fitting & prev. high & prev. low \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/10_Limburg-Weilburg.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/19_Frankfurt-am-Main.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/20_Offenbach-am-Main.pdf} \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/11_Giessen.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/24_Darmstadt-Dieburg.pdf}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/26_Bergstrasse.pdf}
+			\end{tabular}
+			\end{adjustwidth}
+		\end{figure}
+	\end{center}
+\end{frame}
+
+
+%----------------------------------------------------------------------------------------
+
+\section{Sensitivity analysis}
+\subsection{Background}
+\begin{frame}
+	\frametitle{Sensitivity plot $\alpha$ vs. $qq$}
+	\begin{enumerate}[$\bullet$]
+		\item The folling slides show a sensitivity analysis of $\alpha$ vs $qq$
+		\item As above, only the Susceptible group was optimized
+		\item 4000 datapoints with randomly chosen $\alpha$ and $qq$ values are scatter plotet against the total loss
+		\item x/z - axis: $\alpha$ and $qq$\\
+			y - axis: loss ($e^{9}$)
+		\item color code: red = high loss, green = low loss
+		\item The plots may not show all datapoints, since I set constrains for min/max $\alpha$, $qq$ and loss\\
+			This is done to highlight specific areas
+	\end{enumerate}
+\end{frame}
+
+\subsection{Results}
+\begin{frame}
+	\frametitle{Sensitivity plot, region overview}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline & $alpha$ & $qq$ & loss \\
+			\hline range & $0.05-0.35$ & $5.5-8.0$ & $2.5e^{8}-4.5e^{13}$\\
+			\hline
+		\end{tabular}
+		\begin{figure}
+			%\begin{adjustwidth}{-1.8cm}{}
+			%\begin{tabular}{cc}
+				\hspace{-1.3cm}
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/overview/sensitivity0.pdf}\hspace{-1.0cm}% &
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/overview/sensitivity1.pdf}
+			%\end{tabular}
+			%\end{adjustwidth}
+		\end{figure}
+		\textcolor{red}{(carefull, $\alpha$ and $qq$ are fipping between these two images)}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Sensitivity plot, transition area high/low loss}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline & $alpha$ & $qq$ & loss \\
+			\hline range & $0.15-0.245$ & $5.5-8.0$ & $2.5^{8}-1.0e^{10}$\\
+			\hline
+		\end{tabular}
+
+		\begin{figure}[htbp]
+			%\begin{adjustwidth}{-2.0cm}{}
+			%\begin{tabular}{rl}
+				\hspace{-1.4cm}
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss9.9e9/sensitivity1.pdf}\hspace{-1.0cm} %&
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss9.9e9/sensitivity5.pdf}
+			%\end{tabular}
+			%\end{adjustwidth}
+		\end{figure}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Sensitivity plot $\alpha$ vs. $qq$}
+	\textbf{Notes and thoughts:}
+	\begin{enumerate}[$\bullet$]
+		\item The loss function seems sensitivity to both $\alpha$ and $qq$. Generally, a higher $qq$ seems to encurage a higher loss, but this also strongly depends on $\alpha$
+		\item There appears to be a "valley", where both $\alpha$ and $qq$ are in an "equilibrium" to minimize the loss
+		\item The following slides show the same experimental data, but all datapoints with loss $>$ 2.7e9 are removed. This acts like a "zoom in" on the valley part of the image
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Sensitivity plot, highlighting optimal $alpha$/$qq$ ratio}
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+			\hline & $alpha$ & $qq$ & loss \\
+			\hline range & $0.15-0.24$ & $5.5-8.0$ & $2.5^{8}-2.7e^{9}$\\
+			\hline
+		\end{tabular}
+		\begin{figure}
+			%\begin{adjustwidth}{-2.0cm}{}
+			%\begin{tabular}{cc}
+				\hspace{-1.4cm}
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss2.7e9/sensitivity1.pdf}\hspace{-1cm}% &
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss2.7e9/sensitivity2.pdf}
+			%\end{tabular}
+			%\end{adjustwidth}
+		\end{figure}
+		%\includegraphics[width=0.7\textwidth]{./images/}
+	\end{center}
+\end{frame}
+
+
+
+
+%----------------------------------------------------------------------------------------
+
+\section{Summary}
+\subsection{Current state}
+\begin{frame}
+	\frametitle{Current state - Software}
+	\begin{enumerate}[$\bullet$]
+		\item The model itself is in a working state and can reliably produce a somewhat accurate trends on a 76 day timescale
+		\item Given some code adjustments, the time frame can be shifted to simulate a different data set (same region)
+		\item 2D-grids can be changed pretty easy, if a new grid is provided
+		\item While the Gauss-Newton solver works well for optimizing $\alpha$ and $qq$ on the Susceptible dataset, it has issues on others\\
+			Particle Swarm Optimization) can be used instead, but this is much more time consuming
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Current state - Model}
+	\begin{enumerate}[$\bullet$]
+		\item The biggest current modelling issue is the strong difference between different regions\\
+			Reason is probably a lack of factors, that adjust the variables (e.g. an adjustment of $\alpha$ based population density)
+		\item Another factor could be the loss calculation method. Loss calculation based on the squared differnce between sim.
+			and real data, seems to bias towards high population regions (due to greater numbers)
+		\item Changing the definition of exposed and infected was an attempt to better model intitial process of infection (spreading the virus mainly
+			before symptom onset), but made it very difficult to find/approximate real world data for $E\rightarrow R$ transition
+	\end{enumerate}
+\end{frame}
+
+\subsection{Questions}
+
+\begin{frame}
+	\frametitle{Questions}
+	\begin{enumerate}[$\bullet$]
+		\item Teser
+	\end{enumerate}
+
+\end{frame}
+%\section{Appendix}
+%\subsection{Details}
 %\begin{frame}
-%	\frametitle{SEIRD Classes}
-%	\begin{description}
-%		\item[Susceptibles]
-%	        These are people that have never had the disease
- 			
-%		\item[Exposed]
-%	       	These are people that have been exposed to the disease, are able to transmit it
-%                but have no yet been quarantined (i.e. show no symptoms yet)
-
-%                \item[Infected]
-%                These are people that have previously been exposed and are now sick with the disease.
-%                They are also quarantined and cannot infect any other person
-
-%               \item[Recovered]
-%                These are people that have previously been exposed or infected and are now  considered disease-free (recovered). 
-
-%               \item[Deceased]
-%                These are people that have previously been infected and are now dead
-
-%	\end{description}
-
+%	\frametitle{Details}
+%	\begin{enumerate}[$\bullet$]
+%		\item res1
+%	\end{enumerate}
+%
 %\end{frame}
 
-\begin{frame}
-	\frametitle{SEIRD Model (ODE)}
-\begin{equation*} \label{eq1}
-\begin{split}
-\frac{dS}{dt} & = -\alpha SE \\
-\frac{dE}{dt} & = \alpha SE-\frac{1}{qq}E\\
-\frac{dI}{dt} & = \frac{\kappa}{qq} E-\frac{1}{pp}I\\
-\frac{dR}{dt} & = \frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I\\
-\frac{dD}{dt} & = \frac{\theta}{pp} I\\
-\end{split}
-\end{equation*}	
+%\subsection{Data}
+%\begin{frame}
+%	\frametitle{Sensitivity plot, all datapoints shown}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity0.pdf}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Sensitivity plot, all datapoints shown}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity1.pdf}
+%	\end{center}
+%\end{frame}
+%\begin{frame}
+%	\frametitle{Sensitivity plot, all datapoints shown}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity2.pdf}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Sensitivity plot, all datapoints shown}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity3.pdf}
+%	\end{center}
+%\end{frame}
+%\begin{frame}
+%	\frametitle{Sensitivity plot, all datapoints shown}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity4.pdf}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Sensitivity plot, all datapoints shown}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity5.pdf}
+%	\end{center}
+%\end{frame}
+%
+%
+%\begin{frame}
+%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity0.pdf}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity1.pdf}
+%	\end{center}
+%\end{frame}
+%\begin{frame}
+%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity2.pdf}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity3.pdf}
+%	\end{center}
+%\end{frame}
+%\begin{frame}
+%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity4.pdf}
+%	\end{center}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
+%	\begin{center}
+%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity5.pdf}
+%	\end{center}
+%\end{frame}
 
-\end{frame}
 
-%----------------------------------------------------------------------------------------
-
-\section{Practial I}
-
-\begin{frame}
-\frametitle{ODE Widget - Overview}
-	\begin{centering}
-		\vspace{0.79cm}
-		\includegraphics<1>[scale=0.275]{./images/ODE_a0.png}
-		\includegraphics<2>[scale=0.275]{./images/ODE_a1.png}
-		\includegraphics<3>[scale=0.275]{./images/ODE_a2.png}
-		\includegraphics<4>[scale=0.275]{./images/ODE_a3.png}
-		\includegraphics<5>[scale=0.275]{./images/ODE_a4.png}
-	\end{centering}
-\end{frame}
-
-\begin{frame}
-\frametitle{Live "modelling" session 1} 
-	Let us model $\alpha$ for a scenario:\\\vspace{0.3cm}
-	\begin{enumerate}
-
-		\item Rapid spread:\\\vspace{0.1cm}
-			\begin{tabular}{| c | c |}
-				\hline
-				Infected & 820000 \\
-				\hline
-				Exposed & 2018 \\
-				\hline
-				timeframe & 37 days \\
-				\hline
-			\end{tabular}
-			\vspace{0.3cm}
-		
-		\item Infection Wave (optional):\\\vspace{0.1cm}
-			\begin{tabular}{| c | c |}
-				\hline
-				Infected & 820000 \\
-				\hline
-				Exposed & 8147 \\
-				\hline
-				timeframe & 81 days \\
-				\hline
-			\end{tabular} \vspace{0.5cm}
-	\end{enumerate}
-\end{frame}
-%----------------------------------------------------------------------------------------
-
-\section{Theory II}
-
-\subsection{Partial differential equations}
-\begin{frame}
-	\frametitle{Partial differential Equations (PDE)} 
-		\vspace{-0.5cm}
-		\onslide<1->{Limits of the \textbf{ODE} model:
-			\begin{enumerate}[$\bullet$]
-				\item Only dependent on time\\
-					$\rightarrow$ no spatial or structural "awareness" of the model
-				\item Different regions need to either be modelled individually or clustered together\\
-			\end{enumerate}
-		}
-		\vspace{0.5cm}
-		\onslide<2>{
-			Advantages of the \textbf{PDE} model:
-			\begin{enumerate}[$\bullet$]
-				\item Other parameters can be factored into the modelling process (space, demographic, etc.)
-				\item Multiple regions can be modelled at the same time with different parameters\\ 
-			\end{enumerate}
-		}
-	% bullet points:
-	%- limits ODE\\
-	%- nutzen fuer raeumliche Aufloesung
-	%- Gleichungen PDE
-\end{frame}
-
-\begin{frame}
-	\frametitle{Partial differential Equations (PDE)} 
-	\begin{equation*} \label{eq1}
-		\begin{split}
-			\frac{d S}{dt} + \nabla[- \text{\textbf{D}} \nabla G] & = - \alpha SE \\
-			\frac{d E}{dt} + \nabla[- \text{\textbf{D}} \nabla A] & = (\alpha SE-\frac{1}{qq}E)\\
-			\frac{d I}{dt} & = (\frac{\kappa}{qq} E-\frac{1}{pp}I)\\
-			\frac{d R}{dt} + \nabla[- \text{\textbf{D}} \nabla R] & = (\frac{(1-\kappa)}{qq} E+\frac{(1-\theta)}{pp}I)\\
-			\frac{d D}{dt} & =  \frac{\theta}{pp} I\\
-		\end{split}
-	\end{equation*}	
-\end{frame}
-%----------------------------------------------------------------------------------------
-
-\section{Practical II}
-\begin{frame}
-	\frametitle{The PDE widget - Overview} 
-	\begin{centering}
-		\vspace{0.2cm}
-		\includegraphics<1>[scale=0.275]{./images/PDE0.png}
-		%\vspace{-0.1cm}
-		\includegraphics<2>[scale=0.275]{./images/PDE1.png}
-		%\vspace{-0.05cm}
-		\includegraphics<3>[scale=0.275]{./images/PDE2.png}
-		\vspace{-0.19cm}
-		\includegraphics<4>[scale=0.275]{./images/PDE3.png}
-		\includegraphics<5>[scale=0.275]{./images/PDE4.png}
-	\end{centering}
-\end{frame}
-
-\begin{frame}
-\frametitle{Live "modelling" session 2} 
-	\begin{enumerate}[$\bullet$]
-		\item Let us start to simulate a small scenario
-		\item And meanwhile look at the result of a longer simulation, with a finer grid
-	\end{enumerate}
-\end{frame}
 
 %----------------------------------------------------------------------------------------
-\section{Application}
-\subsection{Previous Work}
-\begin{frame}
-\frametitle{Modelling Covid in Germany} 
-	\begin{columns}
-		\begin{column}{0.45\textwidth}
-			\vspace{-4cm}
-			\begin{enumerate}[$\bullet$]
-				\item<2-> We started out with a grid of Germany.
-			\vspace{0.5cm}
-				\item<3> But of course, once you have a gird...
-			\end{enumerate}
-		\end{column}
-		\begin{column}{0.45\textwidth}
-			%\begin{figure}[width=\textwidth]
-			\centering
-			\includegraphics<2->[width=\textwidth]{./images/ger.png}
-			%\caption{Images from Parameter estimaton in 
-			%\end{figure}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{Modelling Covid in Germany} 
-	\centering{
-		\vspace{-0.5cm}
-		\onslide<1->{...you can play with the model}
-		\vspace{0.5cm}
-	}
-	\begin{columns}
-		\begin{column}{0.45\textwidth}
-			\centering
-			\onslide<2->{\includegraphics[width=\textwidth]{./images/d_grid_fw.png}
-			reasonable parameters}
-		\end{column}
-		\begin{column}{0.45\textwidth}
-			\centering
-			\onslide<3>{\includegraphics[width=\textwidth]{./images/d_grid_wave.png}
-			not so reasonable parameters}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{Modelling Covid in Germany} 
-	\begin{columns}
-		\begin{column}{0.45\textwidth}
-			\begin{enumerate}[$\bullet$]
-				\onslide<1->{\item Of course we also did some serious modelling}
-				\onslide<2>{\item PDE model for seven cities in Germany
-					\begin{enumerate}[-]
-						\item Hannover
-						\item Heinsberg
-						\item Frankfurt
-						\item Wiesbaden
-						\item Stuttgart
-						\item M\"unchen
-						\item Berlin
-					\end{enumerate}
-					}
-			\end{enumerate}
-		\end{column}
-		\begin{column}{0.40\textwidth}
-			\centering
-			\includegraphics<1>[width=\textwidth]{./images/d_grid.png}
-			\includegraphics<2>[width=\textwidth]{./images/d_grid2.png}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{Modelling Covid in Germany} 
-	\begin{columns}
-		\hspace{-0.5cm}
-		\begin{column}{0.5\textwidth}
-			\centering
-			\onslide<1->{\includegraphics[width=\textwidth]{./images/city_orig.png}
-			Real world infection cases}
-		\end{column}
-		%\hspace{1cm}
-		\begin{column}{0.5\textwidth}
-			\centering
-			\onslide<2>{\includegraphics[width=\textwidth]{./images/city_model.png}
-			Modelled infection cases}
-		\end{column}
-	\end{columns}
-\end{frame}
+%\begin{frame}
+%	\frametitle{Sensitivity plot $\alpha$ vs. $qq$}
+%	\begin{center}
+%		\begin{figure}
+%			\begin{adjustwidth}{-0.8cm}{}
+%			\begin{tabular}{ccc}
+%				\includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity0.pdf}
+%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity1.pdf}
+%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity2.pdf} \\\hline
+%				\includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity3.pdf}
+%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity4.pdf}
+%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity5.pdf}
+%			\end{tabular}
+%			\end{adjustwidth}
+%		\end{figure}
+%		%\includegraphics[width=0.7\textwidth]{./images/}
+%	\end{center}
+%\end{frame}
+%\begin{frame}
+%	\frametitle{Sensitivity plot $\alpha$ vs. $qq$}
+%	\begin{center}
+%		\begin{figure}
+%			\begin{adjustwidth}{-0.8cm}{}
+%			\begin{tabular}{ccc}
+%				\includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity0.pdf}
+%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity1.pdf}
+%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity2.pdf} \\\hline
+%				\includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity3.pdf}
+%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity4.pdf}
+%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity5.pdf}
+%			\end{tabular}
+%			\end{adjustwidth}
+%		\end{figure}
+%		%\includegraphics[width=0.7\textwidth]{./images/}
+%	\end{center}
+%\end{frame}
 %----------------------------------------------------------------------------------------
 
-\subsection{Outlook}
 
-\begin{frame}
-\frametitle{Big and small ideas for applications} 
-	\vspace{-1cm}
-	\onslide<2->{
-		Future topics:
-		\begin{enumerate}[$\bullet$]
-			\item Modelling of smaller areas with finer grid [in progress]
-			\item Use the model in differenct scenarios (countries, diseases, ...)
-			\item Compare SEIRD with statistical models
-		\end{enumerate}
-	}
-			
-	\vspace{0.3cm}
-	\onslide<3->{
-		Current applications:
-		\begin{enumerate}[$\bullet$]
-			\item Public health management (easy modelling of scenarios)
-			\item Use SEIRD to  prepare for future epidemics/pandemics (Supplies, Beds, Employees)
-			\item Study and understand the mechanics of disease spreading
-		\end{enumerate}
-	}
-\end{frame}
 %----------------------------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{Questions, Answers and Discussions} 
-	\centering{
-		%\begin{tcolorbox}[width=\textwidth, colorback={blue}]
-		%	test text
-		%\end{tcolorbox}
-	%\title[test1]{test2}
-	\textbf{Thank you for your attention and for hosting this event!}
-
-%	\begin{enumerate}[$\bullet$]
-%		\item thing	
-%	\end{enumerate}
-	}
-\end{frame}
-%------------------------------------------------
 
 
 \end{document} 

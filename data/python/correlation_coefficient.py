@@ -84,7 +84,6 @@ for variables_i in range(len(res_sorted)):
 # ========================================================================
 # part two, data analysis
 
-
 # some code for plotting
 fig=plt.figure()
 
@@ -140,14 +139,14 @@ if plot == 'scatter':
 elif plot == 'plot':
 	ax = fig.add_subplot(111)
 	#plt.rc(usetex = True)
-	plt.rcParams['text.usetex'] = True
+	#plt.rcParams['text.usetex'] = True
 	#ax.set_xlabel(r'time (days)')
 	#ax.set_xlabel(r'time (days)')
 	#ax.set_ylabel(r'$\fract{x}{y}$')
 
 	variable, variable_n = 0, 'alpha'
 	#variable, variable_n = 1, 'qq'
-	set_start = 24
+	set_start = 1
 	#set_end = 4
 	set_end = set_start + 4
 	#set_end = len(sorted_tab)
@@ -156,6 +155,8 @@ elif plot == 'plot':
 		#plt.ylim(0, max_values[variable])
 
 	plt.legend(loc='upper left')
+	plt.xlabel('Time t (days)')
+	plt.ylabel()
 	plt.grid()
 	plt.show()
 
