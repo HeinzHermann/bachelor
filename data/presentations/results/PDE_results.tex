@@ -152,9 +152,9 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 		\item Solvers used: Gauss-Newton / Particle Swarm Optimization
 		\item Loss function $L: (data_{original}(t) - data_{simulated}(t))^2 $
 		\item SEIRD classes derived of RKI case numbers\\(01.09.2020 - 15.11.2020)
-		\item Grid: 2D of Hessen, 26 discricts, 1075 vertices
+		\item Grid: 2D of Hessen, 26 districts, 1075 vertices
 		\item In the model $\kappa$ (governs ratio between $E\rightarrow I$ and $E\rightarrow R$ transition) was set to 1
-			$\rightarrow$ no transision between E and R
+			$\rightarrow$ no transition between E and R
 			Reasoning given in \hyperlink{sec:StateModel}{"Current State - Model"} in the summary
 	\end{enumerate}
 
@@ -180,9 +180,9 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\frametitle{Susceptible simulations- Overview}
 	\begin{enumerate}[$\bullet$]
 		\item Results below created using a Gauss-Newton solver
-		\item 76 datapoints (day 0 - 75) were used for the simulation
-		\item Both $\alpha$ (S$\rightarrow$E, infection spreading) and $qq$ (E$\rightarrow$I, time till symptom onset) were optimized in these experiments
-		\item Simulations were repeated with 60 and 50 datapoints\\(days 0 - 60/50) to see if the results are similar (see below)
+		\item 76 data points (day 0 - 75) were used for the simulation
+		\item Both $\alpha$ (S$\rightarrow$E, infection spreading) and $qq$ (E$\rightarrow$I, time until symptom onset) were optimized in these experiments
+		\item Simulations were repeated with 60 and 50 data points\\(days 0 - 60/50) to see if the results are similar (see below)
 	\end{enumerate}
 	\vspace{0.5cm}
 	Results of variable optimization day 0 - 75:
@@ -200,7 +200,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\begin{enumerate}[$\bullet$]
 		\item x-axis: time t (days) of simulation \newline
 			y-axis: sum of newly Exposed up to time t
-		\item "\textcolor{red}{Sum of newly Exposed till t}" is shown \underline{insead} of "\textcolor{red}{decrease of Susceptibles}". Numbers are identical,
+		\item "\textcolor{red}{Sum of newly Exposed until t}" is shown \underline{instead} of "\textcolor{red}{decrease of Susceptibles}". Numbers are identical,
 			but since E are only a small fraction of S, this strongly increases readability
 		\item For presentation, results are grouped into "fitting" (simulation trend matches original data) and "too low/high" trends
 		\item "too high" and "too low" show a weaker (upper image) and a more extreme (lower image) example
@@ -230,12 +230,12 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\frametitle{Susceptible simulation}
 	\textbf{Notes and thoughts:}
 	\begin{enumerate}[$\bullet$]
-		\item Using the entire dataset (day 0 - 75) for simulation leads to mixed results
-		\item To give a "feel" for the entire dataset: I (subjectively) consider\\
+		\item Using the entire data set (day 0 - 75) for simulation leads to mixed results
+		\item To give a "feel" for the data set: I (subjectively) consider\\
 			- 5 regions to have a fitting trend\\
 			- 4 regions to have  a trend that is too high\\
 			- 17 regions to have a trend that is too low
-		\item The slides below show the results of parameter estimation with 60 and 50 days respectively. The same regions as above are shown (for compairibilty)
+		\item The slides below show the results of parameter estimation with 60 and 50 days respectively. The same regions as above are shown (for comparability)
 		\item Data was extrapolated to visualize the trend. This was done using numpy polyfit (Polynomial fit, degree 3)
 	\end{enumerate}
 \end{frame}
@@ -286,15 +286,15 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \begin{frame}
 	\frametitle{Sensitivity plot, $\alpha$ vs. $qq$}
 	\begin{enumerate}[$\bullet$]
-		\item The folling slides show a sensitivity analysis of $\alpha$ vs $qq$
+		\item The following slides show a sensitivity analysis of $\alpha$ vs $qq$
 		\item As above, only the Susceptible group was observed
-		\item 4000 datapoints with randomly chosen $\alpha$ (range 0.05-0.35) and $qq$ (range 5.5-8.0)\\Values are scatter plotted against the total loss
+		\item 4000 data points with randomly chosen $\alpha$ (range 0.05-0.35) and $qq$ (range 5.5-8.0)\\Values are scatter plotted against the total loss
 		\item x/z - axis: $\alpha$ and $qq$\\
 			y - axis: loss
 		\item color code: \textcolor{red}{red = high loss}, \textcolor{darkgreen}{green = low loss}
-		\item The plots may not show all datapoints. I set constrains for min/max $\alpha$, $qq$ and loss.
+		\item The plots may not show all data points. I set constrains for min/max $\alpha$, $qq$ and loss.
 			This "highlights" specific areas
-		\item Pyhton code of 3D-models is provided as seperate files
+		\item Python code of 3D-models is provided as separate files
 	\end{enumerate}
 \end{frame}
 
@@ -368,7 +368,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\begin{enumerate}[$\bullet$]
 		\item The loss function is sensitivity to both $\alpha$ and $qq$. Generally, a higher $\alpha$
 			seems to increase the effect $qq$ has on the model
-		\item This seems resonable, since a small $\alpha$ prevents transition of Susceptibles to the Exposed state. In this scenario
+		\item This seems reasonable, since a small $\alpha$ prevents transition of Susceptibles to the Exposed state. In this scenario
 			sickness/spreading duration would have a limited impact, due to the lack of spreaders
 		\item There appears to be a "valley", where both $\alpha$ and $qq$ are close to optimal, to minimize the loss
 		\item The values for $\alpha$ and $qq$, found by Gauss-Newton in the previous section ($\alpha \approx 0.197$, $qq \approx 6.675$),
@@ -384,12 +384,12 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\frametitle{Current state - Software}
 	\begin{enumerate}[$\bullet$]
 		\item The model is in a working state and can optimize variables, to produce generally accurate trends on a 76 day timescale
-		\item Variable optimizations can be done using either Gauss-Newton or Particle Swarm Optimization (PSO)
-		\item While the Gauss-Newton solver works well for optimizing $\alpha$ and $qq$ on the Susceptible dataset, it has issues on others.\\
-			PSO can be used instead, but has much longer runtimes
-		\item The program now automatically associates datapoints and regions on a 2D-grid
+		\item Variable optimization's can be done using either Gauss-Newton or Particle Swarm Optimization (PSO)
+		\item While the Gauss-Newton solver works well for optimizing $\alpha$ and $qq$ on the Susceptible data set, it has issues on others.\\
+			PSO can be used instead, but has much longer run times
+		\item The program now automatically associates data points and regions on a 2D-grid
 			%\vspace{0.5cm}
-		\item Given some code adjustments, the simulated dataset can be changed. This is not a complex task, but time consuming
+		\item Given some code adjustments, the simulated data set can be changed. This is not a complex task, but time consuming
 		\item 2D-grids can be changed relatively easy and quick
 	\end{enumerate}
 \end{frame}
@@ -399,9 +399,9 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\label{sec:StateModel}
 	\begin{enumerate}[$\bullet$]
 		\item The biggest current issue is the modelling quality between different regions\\
-			Reason is likely a lack of functions, that adjust the variables (e.g. an adjustment of $\alpha$ based on population density)
-		\item The loss calculation method is likely another factor. It is based on the squared differnce between simulated
-			and real wold data. This seems to bias variable optmization towards high population regions (due to greater numbers)
+			Reason is likely a lack of functions that adjust the variables (e.g. an adjustment of $\alpha$ based on population density)
+		\item The loss calculation method is likely another factor. It is based on the squared difference between simulated
+			and real wold data. This seems to bias variable optimization towards high population regions (due to greater numbers)
 		\item Changing the definition of Exposed and Infected was an attempt to better model real world infection process (virus spreading mainly
 			prior to symptom onset), but made it very difficult to find/approximate data for $E\rightarrow R$ transition
 	\end{enumerate}
