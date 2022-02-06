@@ -85,9 +85,12 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{changepage}
-\usepackage{color}
+\usepackage{xcolor}
+\usepackage{hyperref}
 %\usepackage{tcolorbox}
 
+\definecolor{darkgreen}{RGB}{0,130,0}
+\hypersetup{colorlinks=true linkcolor=blue}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -152,19 +155,18 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 		\item Grid: 2D of Hessen, 26 discricts, 1075 vertices
 		\item In the model $\kappa$ (governs ratio between $E\rightarrow I$ and $E\rightarrow R$ transition) was set to 1
 			$\rightarrow$ no transision between E and R
-			Reasoning given in summary details at the end
-		\item My current interpretation of the results is given in the summary at the end
+			Reasoning given in \hyperlink{sec:StateModel}{"Current State - Model"} in the summary
 	\end{enumerate}
 
 \end{frame}
 
 \begin{frame}
 	\frametitle{Model - Class definition}
-	(\textcolor{red}{E} and \textcolor{red}{I} have changed definition compared to Devanshs thesis)\newline
+	(\textcolor{red}{E} and \textcolor{red}{I} have a changed definition compared to Devanshs thesis)\newline
 	\begin{enumerate}[$\bullet$]
 		\item (S)usceptibles: Population that has not been in contact with the virus
-		\item \textcolor{red}{(E)xposed}: Infected population, has no symptoms yet and is therefor spreading the virus
-		\item \textcolor{red}{(I)nfected}: Infected population with symptoms, in isolation or not infectious anymore
+		\item \textcolor{red}{(E)xposed}: Infected population, has no symptoms yet and is spreading the virus
+		\item \textcolor{red}{(I)nfected}: Infected population with symptoms, either in isolation or not infectious anymore
 		\item (R)ecovered: Infected that have overcome the infection. Cannot spread the virus or get infected again
 		\item (D)eceased: Deceased population, does not spread the virus
 	\end{enumerate}
@@ -180,7 +182,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 		\item Results below created using a Gauss-Newton solver
 		\item 76 datapoints (day 0 - 75) were used for the simulation
 		\item Both $\alpha$ (S$\rightarrow$E, infection spreading) and $qq$ (E$\rightarrow$I, time till symptom onset) were optimized in these experiments
-		\item Simulations were repeated with 60 and 50 datapoints\\(days 0 - 60/50) to see if the results are similar
+		\item Simulations were repeated with 60 and 50 datapoints\\(days 0 - 60/50) to see if the results are similar (see below)
 	\end{enumerate}
 	\vspace{0.5cm}
 	Results of variable optimization day 0 - 75:
@@ -194,12 +196,12 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 
 \subsection{Results}
 \begin{frame}
-	\frametitle{Susceptible simulations - Presentation style}
+	\frametitle{Susceptible simulations - Graphs}
 	\begin{enumerate}[$\bullet$]
 		\item x-axis: time t (days) of simulation \newline
-			y-axis: sum of all Exposed up to time t
-		\item "Sum of newly Exposed till t" is shown insead of "decrease of Susceptibles" for easier readability\\
-			(otherwise hard to read, since only a fraction of S is infected)
+			y-axis: sum of newly Exposed up to time t
+		\item "\textcolor{red}{Sum of newly Exposed till t}" is shown \underline{insead} of "\textcolor{red}{decrease of Susceptibles}". Numbers are identical,
+			but since E are only a small fraction of S, this strongly increases readability
 		\item For presentation, results are grouped into "fitting" (simulation trend matches original data) and "too low/high" trends
 		\item "too high" and "too low" show a weaker (upper image) and a more extreme (lower image) example
 	\end{enumerate}
@@ -212,12 +214,12 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 			\begin{adjustwidth}{-0.8cm}{}
 			\begin{tabular}{c|c|c}
 				fitting & too high & too low \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/10_Limburg-Weilburg.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/19_Frankfurt-am-Main.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/20_Offenbach-am-Main.pdf} \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/11_Giessen.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/24_Darmstadt-Dieburg.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/26_Bergstrasse.pdf}
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/10_Limburg-Weilburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/19_Frankfurt-am-Main.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/20_Offenbach-am-Main.png} \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/11_Giessen.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/24_Darmstadt-Dieburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/26_Bergstrasse.png}
 			\end{tabular}
 			\end{adjustwidth}
 		\end{figure}
@@ -229,7 +231,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\textbf{Notes and thoughts:}
 	\begin{enumerate}[$\bullet$]
 		\item Using the entire dataset (day 0 - 75) for simulation leads to mixed results
-		\item To give a "feel" for the entire dataset: I would consider\\
+		\item To give a "feel" for the entire dataset: I (subjectively) consider\\
 			- 5 regions to have a fitting trend\\
 			- 4 regions to have  a trend that is too high\\
 			- 17 regions to have a trend that is too low
@@ -245,12 +247,12 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 			\begin{adjustwidth}{-0.8cm}{}
 			\begin{tabular}{ccc}
 				prev. fitting & prev. high & prev. low \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/10_Limburg-Weilburg.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/19_Frankfurt-am-Main.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/20_Offenbach-am-Main.pdf} \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/11_Giessen.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/24_Darmstadt-Dieburg.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/26_Bergstrasse.pdf}
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/10_Limburg-Weilburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/19_Frankfurt-am-Main.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/20_Offenbach-am-Main.png} \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/11_Giessen.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/24_Darmstadt-Dieburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/26_Bergstrasse.png}
 			\end{tabular}
 			\end{adjustwidth}
 		\end{figure}
@@ -264,12 +266,12 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 			\begin{adjustwidth}{-0.8cm}{}
 			\begin{tabular}{ccc}
 				prev. fitting & prev. high & prev. low \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/10_Limburg-Weilburg.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/19_Frankfurt-am-Main.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/20_Offenbach-am-Main.pdf} \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/11_Giessen.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/24_Darmstadt-Dieburg.pdf}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/26_Bergstrasse.pdf}
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/10_Limburg-Weilburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/19_Frankfurt-am-Main.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/20_Offenbach-am-Main.png} \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/11_Giessen.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/24_Darmstadt-Dieburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/26_Bergstrasse.png}
 			\end{tabular}
 			\end{adjustwidth}
 		\end{figure}
@@ -282,16 +284,17 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \section{Sensitivity analysis}
 \subsection{Background}
 \begin{frame}
-	\frametitle{Sensitivity plot $\alpha$ vs. $qq$}
+	\frametitle{Sensitivity plot, $\alpha$ vs. $qq$}
 	\begin{enumerate}[$\bullet$]
 		\item The folling slides show a sensitivity analysis of $\alpha$ vs $qq$
-		\item As above, only the Susceptible group was optimized
-		\item 4000 datapoints with randomly chosen $\alpha$ and $qq$ values are scatter plotet against the total loss
+		\item As above, only the Susceptible group was observed
+		\item 4000 datapoints with randomly chosen $\alpha$ (range 0.05-0.35) and $qq$ (range 5.5-8.0)\\Values are scatter plotted against the total loss
 		\item x/z - axis: $\alpha$ and $qq$\\
-			y - axis: loss ($e^{9}$)
-		\item color code: red = high loss, green = low loss
-		\item The plots may not show all datapoints, since I set constrains for min/max $\alpha$, $qq$ and loss\\
-			This is done to highlight specific areas
+			y - axis: loss
+		\item color code: \textcolor{red}{red = high loss}, \textcolor{darkgreen}{green = low loss}
+		\item The plots may not show all datapoints. I set constrains for min/max $\alpha$, $qq$ and loss.
+			This "highlights" specific areas
+		\item Pyhton code of 3D-models is provided as seperate files
 	\end{enumerate}
 \end{frame}
 
@@ -301,15 +304,15 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|}
 			\hline & $alpha$ & $qq$ & loss \\
-			\hline range & $0.05-0.35$ & $5.5-8.0$ & $2.5e^{8}-4.5e^{13}$\\
+			\hline range shown & $0.05-0.35$ & $5.5-8.0$ & $2.5e^{8}-4.5e^{13}$\\
 			\hline
 		\end{tabular}
 		\begin{figure}
 			%\begin{adjustwidth}{-1.8cm}{}
 			%\begin{tabular}{cc}
 				\hspace{-1.3cm}
-				\includegraphics[width=0.6\textwidth]{./images/sensitivity/overview/sensitivity0.pdf}\hspace{-1.0cm}% &
-				\includegraphics[width=0.6\textwidth]{./images/sensitivity/overview/sensitivity1.pdf}
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/overview/sensitivity0.png}\hspace{-1.0cm}% &
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/overview/sensitivity1.png}
 			%\end{tabular}
 			%\end{adjustwidth}
 		\end{figure}
@@ -322,7 +325,7 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|}
 			\hline & $alpha$ & $qq$ & loss \\
-			\hline range & $0.15-0.245$ & $5.5-8.0$ & $2.5^{8}-1.0e^{10}$\\
+			\hline range shown & $0.15-0.245$ & $5.5-8.0$ & $2.5^{8}-1.0e^{10}$\\
 			\hline
 		\end{tabular}
 
@@ -330,22 +333,12 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 			%\begin{adjustwidth}{-2.0cm}{}
 			%\begin{tabular}{rl}
 				\hspace{-1.4cm}
-				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss9.9e9/sensitivity1.pdf}\hspace{-1.0cm} %&
-				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss9.9e9/sensitivity5.pdf}
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss9.9e9/sensitivity1.png}\hspace{-1.0cm} %&
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss9.9e9/sensitivity5.png}
 			%\end{tabular}
 			%\end{adjustwidth}
 		\end{figure}
 	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Sensitivity plot $\alpha$ vs. $qq$}
-	\textbf{Notes and thoughts:}
-	\begin{enumerate}[$\bullet$]
-		\item The loss function seems sensitivity to both $\alpha$ and $qq$. Generally, a higher $qq$ seems to encurage a higher loss, but this also strongly depends on $\alpha$
-		\item There appears to be a "valley", where both $\alpha$ and $qq$ are in an "equilibrium" to minimize the loss
-		\item The following slides show the same experimental data, but all datapoints with loss $>$ 2.7e9 are removed. This acts like a "zoom in" on the valley part of the image
-	\end{enumerate}
 \end{frame}
 
 \begin{frame}
@@ -353,15 +346,15 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|}
 			\hline & $alpha$ & $qq$ & loss \\
-			\hline range & $0.15-0.24$ & $5.5-8.0$ & $2.5^{8}-2.7e^{9}$\\
+			\hline range shown & $0.15-0.24$ & $5.5-8.0$ & $2.5^{8}-2.7e^{9}$\\
 			\hline
 		\end{tabular}
 		\begin{figure}
 			%\begin{adjustwidth}{-2.0cm}{}
 			%\begin{tabular}{cc}
 				\hspace{-1.4cm}
-				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss2.7e9/sensitivity1.pdf}\hspace{-1cm}% &
-				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss2.7e9/sensitivity2.pdf}
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss2.7e9/sensitivity1.png}\hspace{-1cm}% &
+				\includegraphics[width=0.6\textwidth]{./images/sensitivity/loss2.7e9/sensitivity2.png}
 			%\end{tabular}
 			%\end{adjustwidth}
 		\end{figure}
@@ -369,8 +362,19 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\end{center}
 \end{frame}
 
-
-
+\begin{frame}
+	\frametitle{Sensitivity plot, $\alpha$ vs. $qq$}
+	\textbf{Notes and thoughts:}
+	\begin{enumerate}[$\bullet$]
+		\item The loss function is sensitivity to both $\alpha$ and $qq$. Generally, a higher $\alpha$
+			seems to increase the effect $qq$ has on the model
+		\item This seems resonable, since a small $\alpha$ prevents transition of Susceptibles to the Exposed state. In this scenario
+			sickness/spreading duration would have a limited impact, due to the lack of spreaders
+		\item There appears to be a "valley", where both $\alpha$ and $qq$ are close to optimal, to minimize the loss
+		\item The values for $\alpha$ and $qq$, found by Gauss-Newton in the previous section ($\alpha \approx 0.197$, $qq \approx 6.675$),
+			are located in this optimal area
+	\end{enumerate}
+\end{frame}
 
 %----------------------------------------------------------------------------------------
 
@@ -379,35 +383,41 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \begin{frame}
 	\frametitle{Current state - Software}
 	\begin{enumerate}[$\bullet$]
-		\item The model itself is in a working state and can reliably produce a somewhat accurate trends on a 76 day timescale
-		\item Given some code adjustments, the time frame can be shifted to simulate a different data set (same region)
-		\item 2D-grids can be changed pretty easy, if a new grid is provided
-		\item While the Gauss-Newton solver works well for optimizing $\alpha$ and $qq$ on the Susceptible dataset, it has issues on others\\
-			Particle Swarm Optimization) can be used instead, but this is much more time consuming
+		\item The model is in a working state and can optimize variables, to produce generally accurate trends on a 76 day timescale
+		\item Variable optimizations can be done using either Gauss-Newton or Particle Swarm Optimization (PSO)
+		\item While the Gauss-Newton solver works well for optimizing $\alpha$ and $qq$ on the Susceptible dataset, it has issues on others.\\
+			PSO can be used instead, but has much longer runtimes
+		\item The program now automatically associates datapoints and regions on a 2D-grid
+			%\vspace{0.5cm}
+		\item Given some code adjustments, the simulated dataset can be changed. This is not a complex task, but time consuming
+		\item 2D-grids can be changed relatively easy and quick
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Current state - Model}
+	\label{sec:StateModel}
 	\begin{enumerate}[$\bullet$]
-		\item The biggest current modelling issue is the strong difference between different regions\\
-			Reason is probably a lack of factors, that adjust the variables (e.g. an adjustment of $\alpha$ based population density)
-		\item Another factor could be the loss calculation method. Loss calculation based on the squared differnce between sim.
-			and real data, seems to bias towards high population regions (due to greater numbers)
-		\item Changing the definition of exposed and infected was an attempt to better model intitial process of infection (spreading the virus mainly
-			before symptom onset), but made it very difficult to find/approximate real world data for $E\rightarrow R$ transition
+		\item The biggest current issue is the modelling quality between different regions\\
+			Reason is likely a lack of functions, that adjust the variables (e.g. an adjustment of $\alpha$ based on population density)
+		\item The loss calculation method is likely another factor. It is based on the squared differnce between simulated
+			and real wold data. This seems to bias variable optmization towards high population regions (due to greater numbers)
+		\item Changing the definition of Exposed and Infected was an attempt to better model real world infection process (virus spreading mainly
+			prior to symptom onset), but made it very difficult to find/approximate data for $E\rightarrow R$ transition
 	\end{enumerate}
 \end{frame}
 
-\subsection{Questions}
+%\subsection{Questions}
 
-\begin{frame}
-	\frametitle{Questions}
-	\begin{enumerate}[$\bullet$]
-		\item Teser
-	\end{enumerate}
+%\begin{frame}
+%	\frametitle{My Questions}
+%	\begin{enumerate}[$\bullet$]
+%		\item In Devanshs thesis, he had a type of sensitivity analysis, where he calculated the derivative of the loss function in respect to his variables (e.g. next slide).
+%			I think i get the concept, but I have a hard time interpreting the meaning of the results. Is this something I sould also do and can you point me to 
+%	\end{enumerate}
+%
+%\end{frame}
 
-\end{frame}
 %\section{Appendix}
 %\subsection{Details}
 %\begin{frame}
@@ -417,130 +427,6 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 %	\end{enumerate}
 %
 %\end{frame}
-
-%\subsection{Data}
-%\begin{frame}
-%	\frametitle{Sensitivity plot, all datapoints shown}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity0.pdf}
-%	\end{center}
-%\end{frame}
-%
-%\begin{frame}
-%	\frametitle{Sensitivity plot, all datapoints shown}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity1.pdf}
-%	\end{center}
-%\end{frame}
-%\begin{frame}
-%	\frametitle{Sensitivity plot, all datapoints shown}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity2.pdf}
-%	\end{center}
-%\end{frame}
-%
-%\begin{frame}
-%	\frametitle{Sensitivity plot, all datapoints shown}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity3.pdf}
-%	\end{center}
-%\end{frame}
-%\begin{frame}
-%	\frametitle{Sensitivity plot, all datapoints shown}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity4.pdf}
-%	\end{center}
-%\end{frame}
-%
-%\begin{frame}
-%	\frametitle{Sensitivity plot, all datapoints shown}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss9.9e9/sensitivity5.pdf}
-%	\end{center}
-%\end{frame}
-%
-%
-%\begin{frame}
-%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity0.pdf}
-%	\end{center}
-%\end{frame}
-%
-%\begin{frame}
-%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity1.pdf}
-%	\end{center}
-%\end{frame}
-%\begin{frame}
-%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity2.pdf}
-%	\end{center}
-%\end{frame}
-%
-%\begin{frame}
-%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity3.pdf}
-%	\end{center}
-%\end{frame}
-%\begin{frame}
-%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity4.pdf}
-%	\end{center}
-%\end{frame}
-%
-%\begin{frame}
-%	\frametitle{Sensitivity plot, loss caped at 2.7e9 ("zoom in")}
-%	\begin{center}
-%		\includegraphics[width=0.95\textwidth]{./images/sensitivity/loss2.7e9/sensitivity5.pdf}
-%	\end{center}
-%\end{frame}
-
-
-
-%----------------------------------------------------------------------------------------
-%\begin{frame}
-%	\frametitle{Sensitivity plot $\alpha$ vs. $qq$}
-%	\begin{center}
-%		\begin{figure}
-%			\begin{adjustwidth}{-0.8cm}{}
-%			\begin{tabular}{ccc}
-%				\includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity0.pdf}
-%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity1.pdf}
-%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity2.pdf} \\\hline
-%				\includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity3.pdf}
-%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity4.pdf}
-%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss9.9e9/sensitivity5.pdf}
-%			\end{tabular}
-%			\end{adjustwidth}
-%		\end{figure}
-%		%\includegraphics[width=0.7\textwidth]{./images/}
-%	\end{center}
-%\end{frame}
-%\begin{frame}
-%	\frametitle{Sensitivity plot $\alpha$ vs. $qq$}
-%	\begin{center}
-%		\begin{figure}
-%			\begin{adjustwidth}{-0.8cm}{}
-%			\begin{tabular}{ccc}
-%				\includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity0.pdf}
-%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity1.pdf}
-%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity2.pdf} \\\hline
-%				\includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity3.pdf}
-%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity4.pdf}
-%					& \includegraphics[width=0.35\textwidth]{./images/sensitivity/loss2.7e9/sensitivity5.pdf}
-%			\end{tabular}
-%			\end{adjustwidth}
-%		\end{figure}
-%		%\includegraphics[width=0.7\textwidth]{./images/}
-%	\end{center}
-%\end{frame}
-%----------------------------------------------------------------------------------------
-
 
 %----------------------------------------------------------------------------------------
 
