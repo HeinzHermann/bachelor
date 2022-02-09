@@ -141,34 +141,42 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
-
+\begin{frame}
+	\frametitle{Main goals I wanted to achieve}
+	\begin{enumerate}[$\bullet$]
+		\item Find/create a suitable data set for the simulation
+		\item Run the Hessen simulation on a 2D grid with vertex/region association based on .ugx file (previously not implemented)
+		\item Streamline the procedure to make the model easier to use with different data sets
+		\item Check how the model performs given a longer time frame than 40 days and find potential issues
+		\item Analyze model sensitivity to variables
+	\end{enumerate}
+\end{frame}
 
 
 \section{Model}
 \begin{frame}
 	\frametitle{Model - Background}
 	\begin{enumerate}[$\bullet$]
-		\item SEIRD PDE model, based on Arnes/Devanshs "evaluate.lua" \& Tristans ConstrainedOptimization
+		\item SEIRD PDE: Based on your model, Arne's/Devansh's ``evaluate.lua'' file and Tristan's ConstrainedOptimization
 		\item Solvers used: Gauss-Newton / Particle Swarm Optimization
-		\item Loss function $L: (data_{original}(t) - data_{simulated}(t))^2 $
-		\item SEIRD classes derived of RKI case numbers\\(01.09.2020 - 15.11.2020)
+		\item Loss function $L$, where $\{T = \text{final data point \textbar \space} t \geq T\}$:$$\sum_{t=0}^{T}(data_{original}(t) - data_{simulated}(t))^2$$ 
+		\item SEIRD classes derived from RKI case numbers\\(01.09.2020 - 15.11.2020)
 		\item Grid: 2D of Hessen, 26 districts, 1075 vertices
-		\item In the model $\kappa$ (governs ratio between $E\rightarrow I$ and $E\rightarrow R$ transition) was set to 1
-			$\rightarrow$ no transition between E and R
-			Reasoning given in \hyperlink{sec:StateModel}{"Current State - Model"} in the summary
+		\item In the model, $\kappa$ (ratio between $E\rightarrow I$ and $E\rightarrow R$ transition) was set to 1
+			$\rightarrow$ no transition between E and R. \hyperlink{sec:StateModel}{\textcolor{blue}{See Summary}} for reasoning
 	\end{enumerate}
 
 \end{frame}
 
 \begin{frame}
-	\frametitle{Model - Class definition}
-	(\textcolor{red}{E} and \textcolor{red}{I} have a changed definition compared to Devanshs thesis)\newline
+	\frametitle{SEIRD model - Class definition}
+	(\textcolor{red}{E} and \textcolor{red}{I} have adjusted definitions compared to Devansh's thesis)\newline
 	\begin{enumerate}[$\bullet$]
-		\item (S)usceptibles: Population that has not been in contact with the virus
-		\item \textcolor{red}{(E)xposed}: Infected population, has no symptoms yet and is spreading the virus
-		\item \textcolor{red}{(I)nfected}: Infected population with symptoms, either in isolation or not infectious anymore
-		\item (R)ecovered: Infected that have overcome the infection. Cannot spread the virus or get infected again
-		\item (D)eceased: Deceased population, does not spread the virus
+		\item (S)usceptibles: Population that has not been in contact with Covid 19
+		\item \textcolor{red}{(E)xposed}: Infected population. Has no symptoms yet and is, therefore, spreading the virus
+		\item \textcolor{red}{(I)nfected}: Infected population with symptoms. Either in isolation or not infectious anymore
+		\item (R)ecovered: Previously infected population. Has overcome the infection. Cannot spread the virus or get infected again
+		\item (D)eceased: Deceased population. Does not spread the virus
 	\end{enumerate}
 
 \end{frame}
@@ -177,19 +185,20 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \section{Susceptible simulations}
 \subsection{Background}
 \begin{frame}
-	\frametitle{Susceptible simulations- Overview}
+	\frametitle{Susceptible simulations - Overview}
 	\begin{enumerate}[$\bullet$]
-		\item Results below created using a Gauss-Newton solver
-		\item 76 data points (day 0 - 75) were used for the simulation
+		\item Results below were created using a Gauss-Newton solver
+		\item 76 data points (day 0 - 75) were simulated and compared to real world data
 		\item Both $\alpha$ (S$\rightarrow$E, infection spreading) and $qq$ (E$\rightarrow$I, time until symptom onset) were optimized in these experiments
-		\item Simulations were repeated with 60 and 50 data points\\(days 0 - 60/50) to see if the results are similar (see below)
+		\item Only the Susceptible data set was taken into account for loss calculation
+		\item Simulations were repeated with 60 and 50 data points\\(days 0 - 60/50) to assess how different the infection trend is to real world data (see below)
 	\end{enumerate}
-	\vspace{0.5cm}
-	Results of variable optimization day 0 - 75:
+	%\vspace{0.5cm}
 	\begin{center}
+	Optimized variables, day 0 - 75:
 	\begin{tabular}{|c|c|}
-		\hline $\alpha$ & 0.197630304390785 \\
-		\hline $qq$ & 6.67500068384405 \\ \hline
+		\hline $\alpha$ & 0.197630304 \\
+		\hline $qq$ & 6.675000684 \\ \hline
 	\end{tabular}
 	\end{center}
 \end{frame}
@@ -198,27 +207,27 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \begin{frame}
 	\frametitle{Susceptible simulations - Graphs}
 	\begin{enumerate}[$\bullet$]
-		\item x-axis: time t (days) of simulation \newline
-			y-axis: sum of newly Exposed up to time t
-		\item "\textcolor{red}{Sum of newly Exposed until t}" is shown \underline{instead} of "\textcolor{red}{decrease of Susceptibles}". Numbers are identical,
-			but since E are only a small fraction of S, this strongly increases readability
-		\item For presentation, results are grouped into "fitting" (simulation trend matches original data) and "too low/high" trends
-		\item "too high" and "too low" show a weaker (upper image) and a more extreme (lower image) example
+		\item ``\textcolor{red}{Sum of Exposed \underline{until} time t}'' is plotted \underline{instead} of\\``\textcolor{red}{Number of Susceptibles \underline{at} time t}''\\
+			Since only a small fraction of the entire susceptible population is transitioning to the exposed state, it can be difficult to see 
+			changes in a plot (e.g. number of susceptibles dropping from 400 000 to 398 000). Numbers and meaning of both styles of representation are identical, but the
+			first one is more readable
+		\item For presentation, results are grouped into ``fitting'' (simulation trend matches original data) and ``too low/high'' trends
+		\item ``too high'' and ``too low'' groups show a weaker\\(upper image) and a more extreme (lower image) example
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Susceptible simulation, day 0 - 75}
+	\frametitle{Simulating the Susceptible population, day 0 - 75}
 	\begin{center}
 		\begin{figure}
 			\begin{adjustwidth}{-0.8cm}{}
 			\begin{tabular}{c|c|c}
-				fitting & too high & too low \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/10_Limburg-Weilburg.png}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/19_Frankfurt-am-Main.png}
+				too high & fitting & too low \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/19_Frankfurt-am-Main.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/10_Limburg-Weilburg.png}
 					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/20_Offenbach-am-Main.png} \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/11_Giessen.png}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/24_Darmstadt-Dieburg.png}
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation75/24_Darmstadt-Dieburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/11_Giessen.png}
 					& \includegraphics[width=0.35\textwidth]{./images/extrapolation75/26_Bergstrasse.png}
 			\end{tabular}
 			\end{adjustwidth}
@@ -227,31 +236,31 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \end{frame}
 
 \begin{frame}
-	\frametitle{Susceptible simulation}
+	\frametitle{Simulating the Susceptible population}
 	\textbf{Notes and thoughts:}
 	\begin{enumerate}[$\bullet$]
 		\item Using the entire data set (day 0 - 75) for simulation leads to mixed results
-		\item To give a "feel" for the data set: I (subjectively) consider\\
-			- 5 regions to have a fitting trend\\
+		\item To give a ``feel'' for the data set: I classified all plots visually, based on how well they seem to fit the original data\\
 			- 4 regions to have  a trend that is too high\\
+			- 5 regions to have a fitting trend\\
 			- 17 regions to have a trend that is too low
-		\item The slides below show the results of parameter estimation with 60 and 50 days respectively. The same regions as above are shown (for comparability)
-		\item Data was extrapolated to visualize the trend. This was done using numpy polyfit (Polynomial fit, degree 3)
+		\item The slides below show the results of parameter estimation with 60 and 50 days, respectively. For comparability purposes, the same regions as above are shown
+		\item Data were extrapolated to visualize the trend. This was done using numpy polyfit (Polynomial fit, degree 3)
 	\end{enumerate}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Susceptible trends 60d}
+	\frametitle{Simulating the Susceptible population, day 0 - 60 + trend}
 	\begin{center}
 		\begin{figure}
 			\begin{adjustwidth}{-0.8cm}{}
 			\begin{tabular}{ccc}
-				prev. fitting & prev. high & prev. low \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/10_Limburg-Weilburg.png}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/19_Frankfurt-am-Main.png}
+				prev. high & prev. fitting & prev. low \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/19_Frankfurt-am-Main.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/10_Limburg-Weilburg.png}
 					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/20_Offenbach-am-Main.png} \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/11_Giessen.png}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/24_Darmstadt-Dieburg.png}
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation60/24_Darmstadt-Dieburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/11_Giessen.png}
 					& \includegraphics[width=0.35\textwidth]{./images/extrapolation60/26_Bergstrasse.png}
 			\end{tabular}
 			\end{adjustwidth}
@@ -260,17 +269,17 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \end{frame}
 
 \begin{frame}
-	\frametitle{Susceptible trends 50d}
+	\frametitle{Simulating the Susceptible population, day 0 - 50 + trend}
 	\begin{center}
 		\begin{figure}
 			\begin{adjustwidth}{-0.8cm}{}
 			\begin{tabular}{ccc}
-				prev. fitting & prev. high & prev. low \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/10_Limburg-Weilburg.png}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/19_Frankfurt-am-Main.png}
+				prev. high & prev. fitting & prev. low \\
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/19_Frankfurt-am-Main.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/10_Limburg-Weilburg.png}
 					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/20_Offenbach-am-Main.png} \\
-				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/11_Giessen.png}
-					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/24_Darmstadt-Dieburg.png}
+				\includegraphics[width=0.35\textwidth]{./images/extrapolation50/24_Darmstadt-Dieburg.png}
+					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/11_Giessen.png}
 					& \includegraphics[width=0.35\textwidth]{./images/extrapolation50/26_Bergstrasse.png}
 			\end{tabular}
 			\end{adjustwidth}
@@ -286,14 +295,13 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \begin{frame}
 	\frametitle{Sensitivity plot, $\alpha$ vs. $qq$}
 	\begin{enumerate}[$\bullet$]
-		\item The following slides show a sensitivity analysis of $\alpha$ vs $qq$
+		\item The following slides show a sensitivity analysis of $\alpha$ vs. $qq$
 		\item As above, only the Susceptible group was observed
-		\item 4000 data points with randomly chosen $\alpha$ (range 0.05-0.35) and $qq$ (range 5.5-8.0)\\Values are scatter plotted against the total loss
-		\item x/z - axis: $\alpha$ and $qq$\\
-			y - axis: loss
+		\item 4000 data sets with randomly chosen $\alpha$ (range 0.05 - 0.35) and $qq$ (range 5.50 - 8.00) values were simulated.\\
+			$\alpha$ and $qq$ are scatter plotted against the total loss of each simulation
 		\item color code: \textcolor{red}{red = high loss}, \textcolor{darkgreen}{green = low loss}
-		\item The plots may not show all data points. I set constrains for min/max $\alpha$, $qq$ and loss.
-			This "highlights" specific areas
+		\item The plots may not show all data points. I set constraints for min/max $\alpha$, $qq$ and loss.
+			This helps to investigate specific areas of the plot
 		\item Python code of 3D-models is provided as separate files
 	\end{enumerate}
 \end{frame}
@@ -303,8 +311,8 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\frametitle{Sensitivity plot, region overview}
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|}
-			\hline & $alpha$ & $qq$ & loss \\
-			\hline range shown & $0.05-0.35$ & $5.5-8.0$ & $2.5e^{8}-4.5e^{13}$\\
+			\hline & $\alpha$ & $qq$ & loss \\
+			\hline range shown & $0.05-0.35$ & $5.50-8.00$ & $2.5e^{8}-4.5e^{13}$\\
 			\hline
 		\end{tabular}
 		\begin{figure}
@@ -324,8 +332,8 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\frametitle{Sensitivity plot, transition area high/low loss}
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|}
-			\hline & $alpha$ & $qq$ & loss \\
-			\hline range shown & $0.15-0.245$ & $5.5-8.0$ & $2.5^{8}-1.0e^{10}$\\
+			\hline & $\alpha$ & $qq$ & loss \\
+			\hline range shown & $0.15-0.245$ & $5.50-8.00$ & $2.5^{8}-1.0e^{10}$\\
 			\hline
 		\end{tabular}
 
@@ -342,10 +350,10 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \end{frame}
 
 \begin{frame}
-	\frametitle{Sensitivity plot, highlighting optimal $alpha$/$qq$ ratio}
+	\frametitle{Sensitivity plot, highlighting optimal $\alpha$/$qq$ ratio}
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|}
-			\hline & $alpha$ & $qq$ & loss \\
+			\hline & $\alpha$ & $qq$ & loss \\
 			\hline range shown & $0.15-0.24$ & $5.5-8.0$ & $2.5^{8}-2.7e^{9}$\\
 			\hline
 		\end{tabular}
@@ -366,11 +374,12 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\frametitle{Sensitivity plot, $\alpha$ vs. $qq$}
 	\textbf{Notes and thoughts:}
 	\begin{enumerate}[$\bullet$]
-		\item The loss function is sensitivity to both $\alpha$ and $qq$. Generally, a higher $\alpha$
-			seems to increase the effect $qq$ has on the model
-		\item This seems reasonable, since a small $\alpha$ prevents transition of Susceptibles to the Exposed state. In this scenario
-			sickness/spreading duration would have a limited impact, due to the lack of spreaders
-		\item There appears to be a "valley", where both $\alpha$ and $qq$ are close to optimal, to minimize the loss
+		\item The loss function is sensitive to changes of both $\alpha$ and $qq$. Generally, a higher $\alpha$
+			seems to increase the sensitivity of the model to changes in $qq$
+		\item This behaviour seems reasonable since a small $\alpha$ prevents transition of Susceptibles to the Exposed state. In such a scenario
+			sickness/spreading duration should have a limited impact, due to the lack of spreaders
+		\item The plots show an area where both $\alpha$ and $qq$ appear to minimize the loss. This does not seem to be a single optimal pair of values,
+			but a number of possible $\alpha$/$qq$ combinations
 		\item The values for $\alpha$ and $qq$, found by Gauss-Newton in the previous section ($\alpha \approx 0.197$, $qq \approx 6.675$),
 			are located in this optimal area
 	\end{enumerate}
@@ -383,13 +392,13 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 \begin{frame}
 	\frametitle{Current state - Software}
 	\begin{enumerate}[$\bullet$]
-		\item The model is in a working state and can optimize variables, to produce generally accurate trends on a 76 day timescale
-		\item Variable optimization's can be done using either Gauss-Newton or Particle Swarm Optimization (PSO)
-		\item While the Gauss-Newton solver works well for optimizing $\alpha$ and $qq$ on the Susceptible data set, it has issues on others.\\
-			PSO can be used instead, but has much longer run times
-		\item The program now automatically associates data points and regions on a 2D-grid
+		\item The model is in a working state and can optimize variables to produce generally accurate trends on a 76 day timescale
+		\item Variable optimization can be done using either Gauss-Newton or Particle Swarm Optimization (PSO) as a solver
+		\item While the Gauss-Newton solver works well for optimizing $\alpha$ and $qq$ on the Susceptible data set, it has issues on others
+			(e.g. optimizing $\alpha$ and $qq$ based on the Exposed data set). PSO can be used instead, but has much longer run times
+		\item The program now automatically associates the simulation results to the vertices and regions of a 2D-grid
 			%\vspace{0.5cm}
-		\item Given some code adjustments, the simulated data set can be changed. This is not a complex task, but time consuming
+		\item Given some code adjustments, the simulated data set can be changed. This is not a complex task, but it is time consuming
 		\item 2D-grids can be changed relatively easy and quick
 	\end{enumerate}
 \end{frame}
@@ -398,12 +407,14 @@ Goethe Universtiy Frankfurt - Center for Scientific Computing \\ % Your institut
 	\frametitle{Current state - Model}
 	\label{sec:StateModel}
 	\begin{enumerate}[$\bullet$]
-		\item The biggest current issue is the modelling quality between different regions\\
-			Reason is likely a lack of functions that adjust the variables (e.g. an adjustment of $\alpha$ based on population density)
+		\item The current model is limited in its capability to reproduce and predict real world data correctly. This is most obvious when looking at
+			different regions, where some simulations calculate too few infections and others too many.\\
+	%	\item The biggest current issue is the modelling quality between different regions\\
+			The reason is likely a lack of factors that adjust the variables (e.g. an adjustment of $\alpha$ based on population density)
 		\item The loss calculation method is likely another factor. It is based on the squared difference between simulated
-			and real wold data. This seems to bias variable optimization towards high population regions (due to greater numbers)
-		\item Changing the definition of Exposed and Infected was an attempt to better model real world infection process (virus spreading mainly
-			prior to symptom onset), but made it very difficult to find/approximate data for $E\rightarrow R$ transition
+			and real world data. This seems to bias variable optimization towards high population regions (simply due to greater numbers)
+		\item Changing the definition of Exposed and Infected was an attempt to better model a real world infection process (virus spreading mainly
+			occurs prior to symptom onset), but made it very difficult to find/approximate data for $E\rightarrow R$ transition
 	\end{enumerate}
 \end{frame}
 
