@@ -1,0 +1,84 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: thesis.aux
+The style file: biblatex.bst
+A level-1 auxiliary file: chapters/chapter1_Introduction.aux
+White space in argument---line 37 of file thesis.aux
+ : \citation{WHO
+ :               site}
+I'm skipping whatever remains of this command
+A level-1 auxiliary file: chapters/chapter2_Theory.aux
+A level-1 auxiliary file: chapters/chapter3_Methods.aux
+A level-1 auxiliary file: chapters/chapter4_Results.aux
+A level-1 auxiliary file: chapters/chapter5_Discussion.aux
+A level-1 auxiliary file: appendices/AppendixA.aux
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: thesis-blx.bib
+Database file #2: thesis.bib
+Warning--I didn't find a database entry for "??"
+Warning--I didn't find a database entry for "note"
+Warning--I didn't find a database entry for "rastogi"
+Warning--I didn't find a database entry for "wittum"
+Warning--I didn't find a database entry for "compartementMod"
+Warning--I didn't find a database entry for "mathSIR"
+Warning--I didn't find a database entry for "Gauss??"
+Warning--I didn't find a database entry for "PSO??"
+Warning--I didn't find a database entry for "knowdel20173d"
+Biblatex version: 3.11
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+You've used 2 entries,
+            6304 wiz_defined-function locations,
+            1209 strings with 9175 characters,
+and the built_in function-call counts, 8115 in all, are:
+= -- 560
+> -- 167
+< -- 29
++ -- 162
+- -- 67
+* -- 618
+:= -- 1011
+add.period$ -- 0
+call.type$ -- 2
+change.case$ -- 11
+chr.to.int$ -- 34
+cite$ -- 2
+duplicate$ -- 596
+empty$ -- 761
+format.name$ -- 67
+if$ -- 1711
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 0
+newline$ -- 51
+num.names$ -- 41
+pop$ -- 384
+preamble$ -- 1
+purify$ -- 16
+quote$ -- 0
+skip$ -- 235
+stack$ -- 0
+substring$ -- 1147
+swap$ -- 161
+text.length$ -- 45
+text.prefix$ -- 1
+top$ -- 1
+type$ -- 56
+warning$ -- 0
+while$ -- 126
+width$ -- 0
+write$ -- 50
+(There was 1 error message)

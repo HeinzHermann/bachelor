@@ -20,16 +20,16 @@ latter model was the focus on this work.
 %-----------------------------------
 \subsection{The SIR model}
 \label{sec:SIR}
-In 1927 Kermack and McKendrick\cite{kermack1991contributions} first introduced their method to mathematically describe  
+In 1927 \cite{kermack1991contributions} first introduced their method to mathematically describe  
 the course  of an infectious disease. The model divides a population into three distinct groups.
 
 \begin{enumerate}[label=$\bullet$]
-	\item \textbf{Susceptibles (S)}: Individuals that are naive to the infection and hence not immune. If in contact with
+	\item \B{Susceptibles (S)}: Individuals that are naive to the infection and hence not immune. If in contact with
 		the virus these individuals can migrate to the\linebreak ``Infected'' group
-	\item \textbf{Infected (I)}: Individuals that are infected with the disease. Infected individuals contribute to the 
+	\item \B{Infected (I)}: Individuals that are infected with the disease. Infected individuals contribute to the 
 		infection of members of the susceptible group. At some point during their infection, these members
 		transition to the ``Removed'' group.
-	\item \textbf{Removed (R)}: Individuals that  have either overcome their infection and are now immune to the disease
+	\item \B{Removed (R)}: Individuals that  have either overcome their infection and are now immune to the disease
 		or have succumb to the disease and are diseased. They do not spread the virus and cannot be infected again.
 \end{enumerate}
 
@@ -37,15 +37,17 @@ the course  of an infectious disease. The model divides a population into three 
 The population changes of all three groups are described by mathematical equations\cite{mathSIR}. Notable variables
 are the number of susceptible members (S), number of infected members (I), number of recovered members (R), $\alpha$
 which is a positive constant that describes the transmission rate of the disease and $\beta$, which is a positive
-constant between 0 and 1 that describes the transition rate (either recovery or death) between infected and recovered.
-$\beta$ can be rewritten as $\frac{1}{D}$, where $D$ is the average duration an infected individual remains infectious,
+constant between 0 and 1 that describes the transition rate (either recovery or death) between \B{I} and \B{R}.
+$\beta$ can be rewritten as $\frac{1}{b}$, where $b$ is the average duration an infected individual remains infectious,
 before it either recovers or dies. The model is illustrated in \hyperref[fig:SIR]{Figure \ref*{fig:SIR}}, the equations
 are expressed as follows:
 
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figures/SIR.png}
-		\caption{Illustration of the population flow in the SIR model}
+		\caption{Illustration of the population flow in the SIR model. S represents the ``Susceptible'', I
+			the ``Infected'' and R the ``Removed'' population. The variable $\beta$ can also redefined
+			as $\frac{1}{b}$, where $D$ is the average duration of infectiousness}
 		\label{fig:SIR}
 	\end{center}
 \end{figure}
@@ -58,6 +60,7 @@ are expressed as follows:
 	\frac{dR}{dt} &= \beta I
 \end{align}
 
+\par
 The model also assumes the total number of individuals in the system $N$ remains constant and that the sum of all transitions
 between all three groups during every time step remains zero. This is expressed in the \hyperref[eq:SIR2]{equations below}.
 $S(t)$, $I(t)$ and $R(t)$ express the number of individuals in each of the groups, at time $t$, respectively.
@@ -68,6 +71,7 @@ $S(t)$, $I(t)$ and $R(t)$ express the number of individuals in each of the group
 	\frac{dS}{dt} + \frac{dI}{dt} + \frac{dR}{dt} = 0
 \end{align}
 
+\par
 Since the model assumes, that the total population remains stable, phenomena like immigration or child birth are not accounted
 for. This does not correctly represent the real world. However it is often assumed, that population fluctuations
 due to these occurrences are minor enough compared to the entirety of a regions population, that they do not alter the results of the
@@ -92,17 +96,68 @@ It introduces two new groups and describes the status for the infected populatio
 model are as follows:
 
 \begin{enumerate}[label=$\bullet$]
-	\item \textbf{Susceptibles (S)}: Individuals that are naive to the infection and hence not immune (identical to SIR).
-	\item \textbf{Exposed (E)}: Individuals that are infected, but show no or very little symptoms. These individuals
+	\item \B{Susceptibles (S)}: Individuals that are naive to the infection and hence not immune (identical to SIR).
+	\item \B{Exposed (E)}: Individuals that are infected, but show no or very little symptoms. These individuals
 		do not quarantine (yet) and are therefor contributing to the spread of the virus.
-	\item \textbf{Infected (I)}: Individuals that have developed such a sever illness, that they need to be hospitalized.
-	\item \textbf{Recovered (R)}: Individuals that  have overcome the infection and are now immune to the disease.
-	\item \textbf{Diseased (D)}: Individuals that have succumb to the infection.
+	\item \B{Infected (I)}: Individuals that have developed such a sever illness, that they need to be hospitalized.
+	\item \B{Recovered (R)}: Individuals that  have overcome the infection and are now immune to the disease.
+	\item \B{Diseased (D)}: Individuals that have succumb to the infection.
 \end{enumerate}
 
-As described in the \hyperref[sec:SIR]{SIR section}, transition between the Individuals of the different groups is an essential
-part of the model. The transition between the susceptible and the exposed population in SEIRD is equivalent to the transition
-between susceptibles and infected in SIR. However, the rest of the 
+\par
+As described in the \hyperref[sec:SIR]{SIR section}, transition between the Individuals of the different groups is a core
+part of the model. The transition between the \B{S} and \B{E} population in SEIRD is equivalent to the transition
+between \B{S} and \B{I} in SIR. However, the population outflow from the \B{E} group is split and can either move
+to the \B{I} or to the \B{R} group. This allows the modeling of infections that result in quick recovery or an infection
+with complications (defined by the hospitalization of the patient). The ratio between the two scenarios is governed by the variable
+$\kappa$. In addition, the variable $q$ was introduced and now represents the average duration until recovery/hospitalization of an
+infected individual. Similarly, the outflow of \B{I} is split between the populations of \B{R} and \B{D}. The ratio is governed
+by the variable $\tau$. The equations for \B{R} and \B{D} were also adjusted to represent these changes. Lastly $D$ was redefined
+as $p$, which now represents the average of a hospitalized individual to either recover or succumb to the infection.
+\hyperref[fig:SEIRD]{Figure \ref*{fig:SEIRD}} illustrates all these changes. The modified equations are as follows:
+
+\begin{align}
+	\label{eq:SEIRD1}
+	\frac{dS}{dt} &= -\alpha S E \\
+	\frac{dE}{dt} &= \alpha S E -\frac{1}{q} E \\
+	\frac{dI}{dt} &= \frac{\kappa}{q} E - \frac{1}{p} I \\
+	\frac{dR}{dt} &= \frac{1-\kappa}{q} E + \frac{1-\tau}{p} I \\
+	\frac{dD}{dt} &= \frac{\tau}{p} I
+\end{align}
+
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figures/SEIRD.png}
+		\caption{Illustration of the population flow in the SEIRD model. S represents the ``Susceptible'', E the ``Exposed'',
+			I the ``Infected'', R the ``Recovered'' and D the ``Diseased'' population. $\beta$ can also be expressed as
+			$\frac{1}{\phi}$, where $\phi$ is the average time to recovery/hospitalization.}
+		\label{fig:SEIRD}
+	\end{center}
+\end{figure}
+
+
+\par
+Like SIR, the SEIRD model assumes that the total number of individuals $N$ in the population remains constant during every step
+of the modeling process. This leads to the equations expressed below. Again, $S(t)$, $E(t)$, $I(t)$, $R(t)$ and $D(t)$ are
+expressing the number of individuals for each group at time $t$, respectively. $N$ remains the total number of individuals in the model.
+
+\begin{align}
+	\label{eq:SEIRD2}
+	S(t) + E(t) + I(t) + R(t) + D(t) &= N \\
+	\frac{dS}{dt} + \frac{dE}{dt}  + \frac{dI}{dt} + \frac{dR}{dt} + \frac{dD}{dt} = 0
+\end{align}
+
+\par
+A model like this expresses the dynamics of an epidemic in much more detail. A weakness of the SIR model is that it does distinct between important
+groups such as sick, but not infected and hospitalized individuals. The SEIRD model is capable of doing so and also allows for predicting
+figures like the number of hospitalized individuals at time $t$.\newline
+
+\par
+This work focused mostly on the modeling capability of SIR in the transition stage between susceptibles and exposed. To better fulfill this
+task, the model was redefined to accommodate for a lack of clear source data and to further refine the modeling of real wold phenomena. The changes
+are described in detail in \hyperref[sec:SEIRDredef]{chapter~\ref*{chap:methods}, section~\ref*{sec:SEIRDredef}}.
+
 
 
 %----------------------------------------------------------------------------------------
@@ -110,6 +165,7 @@ between susceptibles and infected in SIR. However, the rest of the
 %----------------------------------------------------------------------------------------
 
 \section{Variable optimization algorithms}
+In order for mathematical models, that use differential equations, to work properly, it is important to determine the correct 
 Algorithms used to optimize the variables of a set of differential equations are often referred to as ``solvers''.% note
 
 %-----------------------------------

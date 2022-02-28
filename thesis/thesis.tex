@@ -26,16 +26,10 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
-\addbibresource{example.bib} % The filename of the bibliography
+\addbibresource{thesis.bib} % The filename of the bibliography
 
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 
-%custom packages
-\usepackage{hyperref}
-\usepackage{amsmath}
-\usepackage{enumitem}
-\usepackage{graphicx}
-\usepackage[all]{hypcap}
 
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS
@@ -50,6 +44,23 @@ headsepline, % Uncomment to get a line under the header
 	bottom=1.5cm, % Bottom margin
 	%showframe, % Uncomment to show how the type block is set on the page
 }
+
+%----------------------------------------------------------------------------------------
+%	CUSTOM CHANGES
+%----------------------------------------------------------------------------------------
+
+% packages
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[all]{hypcap}
+
+% new commands
+\newcommand{\B}[1]{\textbf{#1}}
+\newcommand{\I}[1]{\textit{#1}}
+\newcommand{\U}[1]{\underline{#1}}
+
 
 %----------------------------------------------------------------------------------------
 %	THESIS INFORMATION
@@ -80,6 +91,9 @@ headsepline, % Uncomment to get a line under the header
 \frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
 
 \pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
+
+
+
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
