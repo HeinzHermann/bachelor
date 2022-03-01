@@ -48,5 +48,64 @@
     \field{journaltitle}{Bulletin of mathematical biology}
     \field{year}{1991}
   \endentry
+
+  \entry{knodel20173d}{article}{}
+    \name{author}{6}{}{%
+      {{hash=KMM}{%
+         family={Knodel},
+         familyi={K\bibinitperiod},
+         given={Markus\bibnamedelima M},
+         giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=RS}{%
+         family={Reiter},
+         familyi={R\bibinitperiod},
+         given={Sebastian},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=TAP}{%
+         family={Targett-Adams},
+         familyi={T\bibinithyphendelim A\bibinitperiod},
+         given={Paul},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=GA}{%
+         family={Grillo},
+         familyi={G\bibinitperiod},
+         given={Alfio},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=HE}{%
+         family={Herrmann},
+         familyi={H\bibinitperiod},
+         given={Eva},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=WG}{%
+         family={Wittum},
+         familyi={W\bibinitperiod},
+         given={Gabriel},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Multidisciplinary Digital Publishing Institute}%
+    }
+    \strng{namehash}{KMM+1}
+    \strng{fullhash}{KMMRSTAPGAHEWG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelyear}{2017}
+    \field{labeldatesource}{year}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{number}{10}
+    \field{pages}{282}
+    \field{title}{3D spatially resolved models of the intracellular dynamics of
+  the hepatitis C genome replication cycle}
+    \field{volume}{9}
+    \field{journaltitle}{Viruses}
+    \field{year}{2017}
+  \endentry
 \enddatalist
 \endinput

@@ -36,49 +36,48 @@ Warning--I didn't find a database entry for "compartementMod"
 Warning--I didn't find a database entry for "mathSIR"
 Warning--I didn't find a database entry for "Gauss??"
 Warning--I didn't find a database entry for "PSO??"
-Warning--I didn't find a database entry for "knowdel20173d"
 Biblatex version: 3.11
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 2 entries,
+You've used 3 entries,
             6304 wiz_defined-function locations,
-            1209 strings with 9175 characters,
-and the built_in function-call counts, 8115 in all, are:
-= -- 560
-> -- 167
-< -- 29
-+ -- 162
-- -- 67
-* -- 618
-:= -- 1011
+            1215 strings with 9454 characters,
+and the built_in function-call counts, 20752 in all, are:
+= -- 1661
+> -- 332
+< -- 99
++ -- 515
+- -- 116
+* -- 1519
+:= -- 2436
 add.period$ -- 0
-call.type$ -- 2
-change.case$ -- 11
+call.type$ -- 3
+change.case$ -- 69
 chr.to.int$ -- 34
-cite$ -- 2
-duplicate$ -- 596
-empty$ -- 761
-format.name$ -- 67
-if$ -- 1711
+cite$ -- 4
+duplicate$ -- 1865
+empty$ -- 1828
+format.name$ -- 170
+if$ -- 4259
 int.to.chr$ -- 0
-int.to.str$ -- 2
+int.to.str$ -- 5
 missing$ -- 0
-newline$ -- 51
-num.names$ -- 41
-pop$ -- 384
+newline$ -- 109
+num.names$ -- 131
+pop$ -- 792
 preamble$ -- 1
-purify$ -- 16
+purify$ -- 86
 quote$ -- 0
-skip$ -- 235
+skip$ -- 533
 stack$ -- 0
-substring$ -- 1147
-swap$ -- 161
-text.length$ -- 45
-text.prefix$ -- 1
+substring$ -- 3174
+swap$ -- 425
+text.length$ -- 74
+text.prefix$ -- 2
 top$ -- 1
-type$ -- 56
+type$ -- 90
 warning$ -- 0
-while$ -- 126
+while$ -- 312
 width$ -- 0
-write$ -- 50
+write$ -- 107
 (There was 1 error message)

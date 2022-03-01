@@ -1,6 +1,10 @@
 % Chapter Template
 
 \chapter{Theory} % Main chapter title
+This chapter focuses on explaining the general theory behind the model and the methods used in this work.
+Details regarding the exact problem definition, model adjustments, programs used and so on are given in
+\hyperref[chap:methods]{Chapter \ref*{chap:methods}}.
+
 
 \label{chap:theory} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
@@ -62,7 +66,7 @@ are expressed as follows:
 
 \par
 The model also assumes the total number of individuals in the system $N$ remains constant and that the sum of all transitions
-between all three groups during every time step remains zero. This is expressed in the \hyperref[eq:SIR2]{equations below}.
+between all three groups during every time step remains zero. This is expressed in the equations below.
 $S(t)$, $I(t)$ and $R(t)$ express the number of individuals in each of the groups, at time $t$, respectively.
 
 \begin{align}
@@ -90,8 +94,8 @@ Different techniques exist to do so. Two of these techniques are the \hyperref[s
 
 \subsection{The SEIRD model}
 \label{sec:SEIRD}
-The SEIRD model is a variant of the simpler SIR model\cite{knowdel20173d}
-\textcolor{red}{double check citation}. % note
+The SEIRD model is a variant of the simpler SIR model\cite{knodel20173d}
+\textcolor{red}{(double check citation)}. % note
 It introduces two new groups and describes the status for the infected population much more precise. The groups of the SEIRD
 model are as follows:
 
@@ -105,7 +109,7 @@ model are as follows:
 \end{enumerate}
 
 \par
-As described in the \hyperref[sec:SIR]{SIR section}, transition between the Individuals of the different groups is a core
+As described in the previous section, transition between the Individuals of different groups is a core
 part of the model. The transition between the \B{S} and \B{E} population in SEIRD is equivalent to the transition
 between \B{S} and \B{I} in SIR. However, the population outflow from the \B{E} group is split and can either move
 to the \B{I} or to the \B{R} group. This allows the modeling of infections that result in quick recovery or an infection
@@ -165,8 +169,12 @@ are described in detail in \hyperref[sec:SEIRDredef]{chapter~\ref*{chap:methods}
 %----------------------------------------------------------------------------------------
 
 \section{Variable optimization algorithms}
-In order for mathematical models, that use differential equations, to work properly, it is important to determine the correct 
-Algorithms used to optimize the variables of a set of differential equations are often referred to as ``solvers''.% note
+In order for the presented models to work properly, it is important to determine the correct value for each unknown variable. There are many
+methods to determine these variables. In the context of differential equations this process is often referred to as ``solving'' the equations.
+Algorithms and methods that try to achieve this are generally referred to as ``solvers''.\newline
+
+\par
+The following sections will explain two methods used in this work. The Gauss-Newton algorithm and the Particle Swarm Optimization algorithm (PSO).
 
 %-----------------------------------
 %	SUBSECTION 1
