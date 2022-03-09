@@ -16,7 +16,89 @@
   {}
 \endgroup
 
-\datalist[entry]{nyt/global//global/global}
+\datalist[entry]{nty/global//global/global}
+  \entry{casey2021presymptomatic}{article}{}
+    \true{moreauthor}
+    \name{author}{10}{}{%
+      {{hash=CBM}{%
+         family={Casey-Bryars},
+         familyi={C\bibinithyphendelim B\bibinitperiod},
+         given={Miriam},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=GJ}{%
+         family={Griffin},
+         familyi={G\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MC}{%
+         family={McAloon},
+         familyi={M\bibinitperiod},
+         given={Conor},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Byrne},
+         familyi={B\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MJ}{%
+         family={Madden},
+         familyi={M\bibinitperiod},
+         given={Jamie},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MED}{%
+         family={Mc\bibnamedelima Evoy},
+         familyi={M\bibinitperiod\bibinitdelim E\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Collins},
+         familyi={C\bibinitperiod},
+         given={{\'A}ine},
+         giveni={{\'A}\bibinitperiod},
+      }}%
+      {{hash=HK}{%
+         family={Hunt},
+         familyi={H\bibinitperiod},
+         given={Kevin},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=BA}{%
+         family={Barber},
+         familyi={B\bibinitperiod},
+         given={Ann},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BF}{%
+         family={Butler},
+         familyi={B\bibinitperiod},
+         given={Francis},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {British Medical Journal Publishing Group}%
+    }
+    \strng{namehash}{CBM+1}
+    \strng{fullhash}{CBMGJMCBAMJMEDCAHKBABF+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{number}{6}
+    \field{pages}{e041240}
+    \field{title}{Presymptomatic transmission of SARS-CoV-2 infection: a
+  secondary analysis using published data}
+    \field{volume}{11}
+    \field{journaltitle}{BMJ open}
+    \field{year}{2021}
+  \endentry
+
   \entry{Gehrcke}{online}{}
     \name{author}{1}{}{%
       {{hash=GDJP}{%
@@ -61,8 +143,6 @@
     \strng{fullhash}{KWOMAG1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{labelyear}{1991}
-    \field{labeldatesource}{year}
     \field{sortinit}{K}
     \field{sortinithash}{K}
     \field{number}{1-2}
@@ -120,8 +200,6 @@
     \strng{fullhash}{KMMRSTAPGAHEWG1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{labelyear}{2017}
-    \field{labeldatesource}{year}
     \field{sortinit}{K}
     \field{sortinithash}{K}
     \field{number}{10}

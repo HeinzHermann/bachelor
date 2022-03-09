@@ -46,11 +46,11 @@ In order to run the SEIRD model, it was necessary to gather real world data for 
 The source for this data was the Github project \cite{Gehrcke}, which provided both the number of COVID-19 infections,
 as well as the number of COVID-19 related deaths per region in Germany. The repository provides data based on the case/death
 numbers published by the RKI (Robert Koch Institute) and the Risklayer GmbH. In this work the data based on the RKI publications
-was used.\newline
+was used. The data format were cumulative case/death numbers per region per day.\newline
 
 \par
 The hospitalization rate of confirmed COVID-19 infected individuals, the average time till symptom onset, the average time till
-hospitalization and the lethality rate case of an infection was taken from \cite{RKIcov}. At the time of acquisition, these
+hospitalization and the lethality rate case of an infection was taken from RKI publications \cite{RKIcov}. At the time of acquisition, these
 numbers were only estimations based on the literature of the current date.\newline
 
 \par
@@ -67,20 +67,12 @@ was taken from \cite{HesseSize}.
 \subsection{SEIRD model adjustments}
 \label{sec:SEIRDredef}
 In order to reach the goals described in \hyperref[sec:problemDef]{section \ref*{sec:problemDef}}, we decided to alter
-the group definitions. We redefined the Exposed (E) and Infected (I) group as such:
-
-\begin{enumerate}[label=$\bullet$]
-	\item \B{Exposed (E)}: Group of individuals that are infected with the virus and will develop symptoms in the upcoming
-		days. Individuals are infectious during this time and contribute to infections of susceptibles.
-	\item \B{Infected (I)}: Group of individuals that has experienced symptoms. Individuals are mostly not infectious anymore
-		and isolate themself/are isolated until recovery or death.
-\end{enumerate}
-
-Furthermore we decided to set the variable $\kappa$ to 1, effectively removing the option of exposed individuals to recover without
-developing symptoms. These changes were done for two major reasons:\newline
+the definitions of the Exposed (E) and Infected (I) groups. Furthermore we decided to set the variable
+$\kappa$ to 1, effectively removing the option of exposed individuals to recover without developing symptoms. These
+changes were done for two major reasons:\newline
 
 \par
-The first issue was data availability. The problem is, that the number of infected in the
+First, data availability proved to be an issue. The problem being, that the number of infected in the
 collected data set only includes individuals that were tested positive with a polymerase chain reaction (PCR) test\cite{??}. However,
 these tests are usually conducted, if an individual is experiencing symptoms of sickness\cite{??}. This means, that individuals, that do
 not experience symptoms are (for the most part) not represented in the collected data. In addition, it is difficult to estimate
@@ -89,12 +81,20 @@ even harder establish realistic assumptions, on which bases the original data co
 
 \par
 The second reason for these changes is a better representation of the actual disease history of COVID-19. Generally individuals that
-are infected with COVID-19 and are going to develop symptoms later, are infectious to others before they develop symptoms and only
-remain infectious for a short time after symptom onset\cite{??}. In the meta-analysis \cite{casey2021presymptomatic}, Casey Bryards et al.
-show that most of COVID-19 transitions are pre-symptomatic (the infection event occurs before symptom onset). Based on this idea, we
-redefined the E and I groups in hopes of better modeling the real world dynamics of the transmission process.
-\textcolor{red}{(needs better reasoning, since paper shows only about half of infections are pre-symptomatic)} %note
+are infected with COVID-19, are contagious to others before they develop symptoms. While sick individuals can infect others many
+days after symptom onset, about halve of all transmissions are pre-symptomatic (the infection event occurs before symptom onset)
+\cite{casey2021presymptomatic} and that symptom onset generally reduces transmission rates due to isolation measures\cite{RKIcov}.
 
+\par
+Based on this findings, we did not allow for direct recovery from the model and redefined redefined the E and I groups as such: 
+\begin{enumerate}[label=$\bullet$]
+	\item \B{Exposed (E)}: Group of individuals that are infected with the virus and will develop symptoms in the upcoming
+		days. Individuals are contagious during this time and contribute to infections of susceptibles.
+	\item \B{Infected (I)}: Group of individuals that has experienced symptoms. Individuals are mostly not contagious anymore
+		and isolate themself/are isolated until recovery or death.
+\end{enumerate}
+
+\textcolor{red}{(might need better reasoning)} %note
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
@@ -109,4 +109,39 @@ the pre-processing of the newly created data.
 %	SUBSECTION 1
 %-----------------------------------
 \subsection{Assumptions}
+Based on the information we gathered, as described in \hyperref[sec:SERIDredef]{section \ref*{sec:SEIRDredef}}, we made a set of assumptions
+in order to derive our experimental data from the raw data. These assumptions are as follows:
 
+\begin{enumerate}
+	\item The average time for an infected individual to develop symptoms is 6 days.
+	\item After symptom development, an individual begins self isolation and does not contribute to new infections.
+	\item The average time for a symptomatic individual to lose most of its contagiousness is about 10 days. This was defined as
+		transition to the recovered (R) state.
+	\item The average time between symptom onset and death was about 11 days during the first infection wave in Germany. This was
+		defined as transition to the diseased (D) state.
+	\item Based on 3. and 4. we estimated a transition time from the exposed (E) state to either R or D of 10 days. Using the
+		average of 10.5 days was not possible, since only one data point per day was available.
+\end{enumerate}
+
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+\subsection{Data pre-processing}
+Since the raw data was cumulative, the number of individuals in each group at time point $t$ were defined as follows:
+
+\begin{align}
+	S(t) &= N - i(t+6)\\
+	E(t) &= i(t+5) - i(t)\\
+	I(t) &= i(t) - i(t-10)\\
+	R(t) &= i(t-10) - d(t)\\
+	D(t) &= d(t)
+\end{align}
+
+\par
+Where $N$ represents the total number of individuals living in a specific region of Hesse at the beginning of the pandemic, $i(t)$
+represents the cumulative number of infected individuals at time $t$ and $d(t)$ represents the cumulative number of deceased
+individuals at time $t$. These calculations were done for each region, time point and group.
+
+\par
+Data chosen

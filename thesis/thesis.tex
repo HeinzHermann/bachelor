@@ -24,7 +24,14 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage{mathpazo} % Use the Palatino font by default
 
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+%\usepackage[backend=bibtex,style=authoryear]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex,style=numeric,natbib=true]{biblatex} % Use the bibtex backend with numberic syle
+
+% fixes issues with long url in citations
+\usepackage{url}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
 
 \addbibresource{thesis.bib} % The filename of the bibliography
 
@@ -263,7 +270,7 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 
 \printbibliography[heading=bibintoc]
-
+%\printbibliography
 %----------------------------------------------------------------------------------------
 
 %----------------------------------------------------------------------------------------
