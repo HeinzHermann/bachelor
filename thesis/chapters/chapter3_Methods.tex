@@ -1,38 +1,112 @@
 % Chapter Template
 
-\chapter{Methods} % Main chapter title
+\chapter{Methodology} % Main chapter title
+The following chapter will describe the problem that investigated in this work, the model adjustments and definitions,
+the methods and the tools used to do so.
 
-\label{chap:methods} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+\label{chap:methodology} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-\section{The Model}
-The following chapter will describe the problem that investigated in this work, the model adjustments and definitions,
-the methods and the tools used to do so.
+\section{Problem definition}
+\label{sec:problemDef}
+%The goal of modeling is always to invent a model that is capable of correctly reproducing past and reliably predicting 
+%future events. The latter is often very difficult, since it is necessary to correctly understand the dynamics of a
+%complex system and then implement these dynamics in the form of a program, algorithm or method.\newline
+
+%\par
+The previous work of \cite{Rastogi} investigated the SEIRD model on a 2D-grid of Germany. In his work he simulated
+all five groups of the SEIRD model for seven cities in Germany. This proved that the model itself is functional and
+in principle capable of reproducing and predicting \textcolor{red}{(?)} the dynamic of the COVID-19 epidemic. This % note
+is where this work continued.\newline
+
+\par
+The goal of this work was to better understand the performance of the model in a smaller scale environment and to improve
+the quality of the results. Hesse (Germany) and its regions where chosen as a template for a new 2D-grid. To minimize the
+propagation of error throughout the SEIRD groups, we decided to focus on optimizing the equation variables
+\textcolor{red}{(add reference to equations)} % note
+of each group successively. In this work we focused on the Susceptible (S) group and tried to reproduce/predict real world
+data and upcoming trends. Additionally we focused on evaluating the sensitivity of the S group to the two variables
+$\alpha$ and $q$.
+
+%-----------------------------------
+%	SECTION 2
+%-----------------------------------
+\section{Model adjustment and data acquisition}
+
+
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
-\subsection{Problem definition}
-The goal of modeling is always to invent a model that is capable of correctly reproducing past and reliably predicting 
-future events. The latter is often very difficult, since it is necessary to correctly understand the dynamics of a
-complex system and then implement these dynamics in the form of a program, algorithm or method.\newline
+\subsection{Data acquisition}
+\label{sec:datacoll}
+In order to run the SEIRD model, it was necessary to gather real world data for as many of the five groups as possible.
+The source for this data was the Github project \cite{Gehrcke}, which provided both the number of COVID-19 infections,
+as well as the number of COVID-19 related deaths per region in Germany. The repository provides data based on the case/death
+numbers published by the RKI (Robert Koch Institute) and the Risklayer GmbH. In this work the data based on the RKI publications
+was used.\newline
 
 \par
-The previous work of \cite{Rastogi} investigated the SEIRD model
+The hospitalization rate of confirmed COVID-19 infected individuals, the average time till symptom onset, the average time till
+hospitalization and the lethality rate case of an infection was taken from \cite{RKIcov}. At the time of acquisition, these
+numbers were only estimations based on the literature of the current date.\newline
+
+\par
+The population of each region in Hesse was taken from the website ``statistic.hessen.de''. The data was sourced from \cite{HessePop}
+in the category ``Bef\"olkerung in Hessen 2017 bis 2020 nach Verwaltungsbezirk in Monaten''. The size of each region in Hesse
+was taken from \cite{HesseSize}.
+
+
+\textcolor{red}{add covid19 variant}
 
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
 \subsection{SEIRD model adjustments}
 \label{sec:SEIRDredef}
+In order to reach the goals described in \hyperref[sec:problemDef]{section \ref*{sec:problemDef}}, we decided to alter
+the group definitions. We redefined the Exposed (E) and Infected (I) group as such:
+
+\begin{enumerate}[label=$\bullet$]
+	\item \B{Exposed (E)}: Group of individuals that are infected with the virus and will develop symptoms in the upcoming
+		days. Individuals are infectious during this time and contribute to infections of susceptibles.
+	\item \B{Infected (I)}: Group of individuals that has experienced symptoms. Individuals are mostly not infectious anymore
+		and isolate themself/are isolated until recovery or death.
+\end{enumerate}
+
+Furthermore we decided to set the variable $\kappa$ to 1, effectively removing the option of exposed individuals to recover without
+developing symptoms. These changes were done for two major reasons:\newline
+
+\par
+The first issue was data availability. The problem is, that the number of infected in the
+collected data set only includes individuals that were tested positive with a polymerase chain reaction (PCR) test\cite{??}. However,
+these tests are usually conducted, if an individual is experiencing symptoms of sickness\cite{??}. This means, that individuals, that do
+not experience symptoms are (for the most part) not represented in the collected data. In addition, it is difficult to estimate
+the ratio between infected individuals that experience symptoms and individuals that do not experience symptoms. This makes it
+even harder establish realistic assumptions, on which bases the original data could be modified to account for this phenomenon.\newline
+
+\par
+The second reason for these changes is a better representation of the actual disease history of COVID-19. Generally individuals that
+are infected with COVID-19 and are going to develop symptoms later, are infectious to others before they develop symptoms and only
+remain infectious for a short time after symptom onset\cite{??}. In the meta-analysis \cite{casey2021presymptomatic}, Casey Bryards et al.
+show that most of COVID-19 transitions are pre-symptomatic (the infection event occurs before symptom onset). Based on this idea, we
+redefined the E and I groups in hopes of better modeling the real world dynamics of the transmission process.
+\textcolor{red}{(needs better reasoning, since paper shows only about half of infections are pre-symptomatic)} %note
+
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
-\section{Assumptions and pre-processing}
+\section{Assumptions and data pre-processing}
+The following section will describe the assumptions made based on the previous explanations, the generation of a suitable data set and
+the pre-processing of the newly created data.
 
 
+%-----------------------------------
+%	SUBSECTION 1
+%-----------------------------------
+\subsection{Assumptions}
 

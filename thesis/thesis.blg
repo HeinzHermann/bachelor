@@ -9,6 +9,11 @@ White space in argument---line 37 of file thesis.aux
 I'm skipping whatever remains of this command
 A level-1 auxiliary file: chapters/chapter2_Theory.aux
 A level-1 auxiliary file: chapters/chapter3_Methods.aux
+Case mismatch error between cite keys Rastogi and rastogi
+---line 87 of file thesis.aux
+ : \citation{Rastogi
+ :                  }
+I'm skipping whatever remains of this command
 A level-1 auxiliary file: chapters/chapter4_Results.aux
 A level-1 auxiliary file: chapters/chapter5_Discussion.aux
 A level-1 auxiliary file: appendices/AppendixA.aux
@@ -39,45 +44,45 @@ Warning--I didn't find a database entry for "PSO??"
 Biblatex version: 3.11
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 3 entries,
+You've used 7 entries,
             6304 wiz_defined-function locations,
-            1215 strings with 9454 characters,
-and the built_in function-call counts, 20752 in all, are:
-= -- 1661
-> -- 332
-< -- 99
-+ -- 515
-- -- 116
-* -- 1519
-:= -- 2436
+            1236 strings with 10021 characters,
+and the built_in function-call counts, 36658 in all, are:
+= -- 2206
+> -- 1478
+< -- 229
++ -- 1539
+- -- 1082
+* -- 2281
+:= -- 4096
 add.period$ -- 0
-call.type$ -- 3
-change.case$ -- 69
-chr.to.int$ -- 34
-cite$ -- 4
-duplicate$ -- 1865
-empty$ -- 1828
-format.name$ -- 170
-if$ -- 4259
+call.type$ -- 7
+change.case$ -- 93
+chr.to.int$ -- 130
+cite$ -- 12
+duplicate$ -- 3288
+empty$ -- 3366
+format.name$ -- 217
+if$ -- 6956
 int.to.chr$ -- 0
-int.to.str$ -- 5
+int.to.str$ -- 10
 missing$ -- 0
-newline$ -- 109
-num.names$ -- 131
-pop$ -- 792
+newline$ -- 175
+num.names$ -- 172
+pop$ -- 2089
 preamble$ -- 1
-purify$ -- 86
+purify$ -- 109
 quote$ -- 0
-skip$ -- 533
+skip$ -- 960
 stack$ -- 0
-substring$ -- 3174
-swap$ -- 425
-text.length$ -- 74
-text.prefix$ -- 2
+substring$ -- 4249
+swap$ -- 892
+text.length$ -- 181
+text.prefix$ -- 6
 top$ -- 1
-type$ -- 90
+type$ -- 226
 warning$ -- 0
-while$ -- 312
+while$ -- 438
 width$ -- 0
-write$ -- 107
-(There was 1 error message)
+write$ -- 169
+(There were 2 error messages)

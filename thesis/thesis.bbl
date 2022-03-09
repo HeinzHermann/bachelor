@@ -17,6 +17,31 @@
 \endgroup
 
 \datalist[entry]{nyt/global//global/global}
+  \entry{Gehrcke}{online}{}
+    \name{author}{1}{}{%
+      {{hash=GDJP}{%
+         family={Gehrcke},
+         familyi={G\bibinitperiod},
+         given={Dr. Jan-Philip},
+         giveni={D\bibinitperiod\bibinitdelim J\bibinithyphendelim
+  P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GDJP1}
+    \strng{fullhash}{GDJP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{covid-19-germany-gae}
+    \verb{url}
+    \verb https://github.com/jgehrcke/covid-19-germany-gae
+    \endverb
+    \field{urlday}{05}
+    \field{urlmonth}{05}
+    \field{urlyear}{2021}
+  \endentry
+
   \entry{kermack1991contributions}{article}{}
     \name{author}{2}{}{%
       {{hash=KWO}{%
@@ -106,6 +131,48 @@
     \field{volume}{9}
     \field{journaltitle}{Viruses}
     \field{year}{2017}
+  \endentry
+
+  \entry{RKIcov}{online}{}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{title}{natural history of the COVID-19 disease}
+    \verb{url}
+    \verb https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Steckbri
+    \verb ef.html
+    \endverb
+    \field{urlday}{07}
+    \field{urlmonth}{07}
+    \field{urlyear}{2021}
+  \endentry
+
+  \entry{HessePop}{online}{}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{title}{Population data Hesse}
+    \verb{url}
+    \verb https://statistik.hessen.de/zahlen-fakten/bevoelkerung-gebiet-haushal
+    \verb te-familien/bevoelkerung/tabellen/#Bevoelkerungsveraenderung
+    \endverb
+    \field{urlday}{06}
+    \field{urlmonth}{05}
+    \field{urlyear}{2021}
+  \endentry
+
+  \entry{HesseSize}{online}{}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{title}{size of regions in Hesse}
+    \verb{url}
+    \verb https://de.wikipedia.org/wiki/Liste_der_Landkreise_und_kreisfreien_St
+    \verb %C3%A4dte_in_Hessen
+    \endverb
+    \field{urlday}{04}
+    \field{urlmonth}{08}
+    \field{urlyear}{2021}
   \endentry
 \enddatalist
 \endinput
