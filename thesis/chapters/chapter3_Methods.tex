@@ -58,9 +58,6 @@ The population of each region in Hesse was taken from the website ``statistic.he
 in the category ``Bef\"olkerung in Hessen 2017 bis 2020 nach Verwaltungsbezirk in Monaten''. The size of each region in Hesse
 was taken from \cite{HesseSize}.
 
-
-\textcolor{red}{add covid19 variant}
-
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
@@ -100,7 +97,7 @@ Based on this findings, we did not allow for direct recovery from the model and 
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
-\section{Assumptions and data pre-processing}
+\section{Experimental setup and pre-simulation work}
 The following section will describe the assumptions made based on the previous explanations, the generation of a suitable data set and
 the pre-processing of the newly created data.
 
@@ -141,7 +138,56 @@ Since the raw data was cumulative, the number of individuals in each group at ti
 \par
 Where $N$ represents the total number of individuals living in a specific region of Hesse at the beginning of the pandemic, $i(t)$
 represents the cumulative number of infected individuals at time $t$ and $d(t)$ represents the cumulative number of deceased
-individuals at time $t$. These calculations were done for each region, time point and group.
+individuals at time $t$. These calculations were done for each region, time point and group.\newline
 
 \par
-Data chosen
+We chose to simulate the time frame between 01\I{st} September 2020 and the 15{th} of November 2020 (a time frame of 76 days). These
+data points were chosen, since no
+\textcolor{red}{(check to be sure)} %note
+significant policy changes regarding protective measures against COVID-19 infections (mask mandates, isolation periods, store closures) 
+were made during this time in Germany. Additionally this time frame was before other COVID-19 variants were first observed in
+Germany\cite{??}. It can therefore be assumed, that only the original CODIV-19 strain from Wuhan was contributing to infections.
+This minimizes the risk of phenomena influencing the simulation reluslts, that are not accounted for in the model.\textcolor{red}{(rewrite sentence? kinda shit...)}\newline
+
+\par
+Each group was calculated for each day in each region. For the first day of simulation (day 0), the percentage of each group at that
+point in time was calculated. These values were used as the starting point for our simulations.
+
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+\subsection{Generation of Hesse 2D-grid}
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 3
+%----------------------------------------------------------------------------------------
+
+\section{SEIRD simulation}
+-simulation itself without optimization
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 3
+%----------------------------------------------------------------------------------------
+
+\section{Data post-processing and variable optimization}
+
+%-----------------------------------
+%	SUBSECTION 1
+%-----------------------------------
+\subsection{Output-grid association}
+- results associated to grid vertices via new program
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+\subsection{Loss function}
+- loss function\\
+
+%-----------------------------------
+%	SUBSECTION 3
+%-----------------------------------
+\subsection{Variable optimization via ConstrainedOptimization}
+- simulation methods Gauss/PSO
