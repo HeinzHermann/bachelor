@@ -17,14 +17,14 @@ the methods and the tools used to do so.
 %complex system and then implement these dynamics in the form of a program, algorithm or method.\newline
 
 %\par
-The previous work of \cite{Rastogi} investigated the SEIRD model on a 2D-grid of Germany. In his work he simulated
+The previous work of \cite{Rastogi} investigated the SEIRD model on a 2d-grid of Germany. In his work he simulated
 all five groups of the SEIRD model for seven cities in Germany. This proved that the model itself is functional and
 in principle capable of reproducing and predicting \textcolor{red}{(?)} the dynamic of the COVID-19 epidemic. This % note
 is where this work continued.\newline
 
 \par
 The goal of this work was to better understand the performance of the model in a smaller scale environment and to improve
-the quality of the results. Hesse (Germany) and its regions where chosen as a template for a new 2D-grid. To minimize the
+the quality of the results. Hesse (Germany) and its regions where chosen as a template for a new 2d-grid. To minimize the
 propagation of error throughout the SEIRD groups, we decided to focus on optimizing the equation variables
 \textcolor{red}{(add reference to equations)} % note
 of each group successively. In this work we focused on the Susceptible (S) group and tried to reproduce/predict real world
@@ -157,16 +157,52 @@ point in time was calculated. These values were used as the starting point for o
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
-\subsection{Generation of Hesse 2D-grid}
+\subsection{Generation of Hesse 2d-grid}
+For the simulation, a 2d-grid of Hesse was created using the program ProMesh4. The grid was manually drawn and consisted
+of 1075 vertices and 3049 edges, from which 1975 faces (triangular volumes) were constructed. The grid can be refined
+to 4136 vertices (accompanied also by an increasing number of edges and faces), however during this work only the grid
+with 1075 vertices was used for simulations. The grid itself was divided into 26 regions, representing the 26 autonomous
+regions of Hesse. A visual representation of the grid with and without wire frame and an exemplary image of the original geogrphay
+of Hesse are shown in \hyperref[fig:2d-grid]{Figure \ref*{fig:2d-grid}}.
 
+\begin{figure}
+	\begin{center}
+		\begin{subfigure}[b]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{./figures/2d_grid_test.png}
+		\end{subfigure}
+		% ---------------------
+		\begin{subfigure}[b]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{./figures/2d_grid_test.png}
+		\end{subfigure}
+		% ---------------------
+		\begin{subfigure}[b]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{./figures/2d_grid_test.png}
+		\end{subfigure}
+	\end{center}
+	\caption{caption of the 2d-grid}
+	\label{fig:2d-grid}
+\end{figure}
+
+The geometry and properties of the grid (also called mesh in the context of computational simulation) make it unstructured.
+That means, that vertices can be positioned and connected arbitrarily. This method provides more flexibility then 
+
+\textcolor{red}{add finite volume explanation}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
 
 \section{SEIRD simulation}
+
 -simulation itself without optimization
 
+\subsection{ODE}
+
+
+\subsection{LIMEX scheme}
+
+
+\subsection{Solvers}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
