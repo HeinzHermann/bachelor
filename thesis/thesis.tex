@@ -64,11 +64,15 @@ headsepline, % Uncomment to get a line under the header
 \usepackage[all]{hypcap}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{array}
 
 % new commands
 \newcommand{\B}[1]{\textbf{#1}}
 \newcommand{\I}[1]{\textit{#1}}
 \newcommand{\U}[1]{\underline{#1}}
+
+% new columns
+\newcolumntype{x}[1]{>{\centering\arraybackslash}p{#1}}
 
 
 %----------------------------------------------------------------------------------------
