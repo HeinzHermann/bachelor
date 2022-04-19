@@ -214,6 +214,13 @@ That means, that vertices can be positioned and connected arbitrarily. This meth
 %	SUBSECTION 1
 %-----------------------------------
 \subsection{Output-grid association}
+The simulation results were output in the form of values, associated to two coordinate positions (x and y on the
+original grid). In order for the results to be processed properly, it was necessary to associate each of these
+values with the correct region of the Hesse grid. To do so, a program was written, that parses and saves the positional
+information of each vertex in the grid and to which region it belongs. The program then compares the simulation results
+with the parsed data and correctly associates each result value with a region. The program tolerates a positional difference
+
+
 - results associated to grid vertices via new program
 
 %-----------------------------------
