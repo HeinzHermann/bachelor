@@ -147,8 +147,8 @@ if plot == 'scatter':
 elif plot == 'plot':
 	ax = fig.add_subplot(111)
 
-	set_start = 26
-	set_end = 27
+	set_start = 10
+	set_end = 1
 	#set_end = len(sorted_tab)
 	set_end = set_start+1 # only show one graph
 

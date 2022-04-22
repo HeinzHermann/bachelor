@@ -205,7 +205,7 @@ That means, that vertices can be positioned and connected arbitrarily. This meth
 \subsection{Solvers}
 
 %----------------------------------------------------------------------------------------
-%	SECTION 3
+%	SECTION 4
 %----------------------------------------------------------------------------------------
 
 \section{Data post-processing and variable optimization}
@@ -218,19 +218,45 @@ The simulation results were output in the form of values, associated to two coor
 original grid). In order for the results to be processed properly, it was necessary to associate each of these
 values with the correct region of the Hesse grid. To do so, a program was written, that parses and saves the positional
 information of each vertex in the grid and to which region it belongs. The program then compares the simulation results
-with the parsed data and correctly associates each result value with a region. The program tolerates a positional difference
+with the parsed data and associates each result value with a region. The result values for each region and time point
+are then averaged, converted from densities to number of individuals per group and then saved in separate files.
+One file per SEIRD group is created. During simulations, were variables were optimized, the results were then used to
+execute the program ConstrainedOptimization.
 
-
-- results associated to grid vertices via new program
 
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
 \subsection{Loss function}
-- loss function\\
+In order to quantify the precision with which the simulation was able to reproduce the original data and optimize variables, the loss function $L$
+was applied. Parameters of this function were the regions of Hesse $r$, a point in time $t$, the original data depending on
+region and point in time $o(r_i,t_i)$ and the simulated data depending on region and point in time $s(r_i, t_i)$. Figure \ref*{eq:loss_newton}
+shows the equation.
+
+\textcolor{red}{do more mathematically correct}
+
+\begin{align}
+	L &= \sum_{r_0=0}^{25} \sum_{t_{0}=0}^{t} (o(r_i,t_i) - s(r_i,t_i))^{2}
+	\label{eq:loss_newton}
+\end{align}
+
 
 %-----------------------------------
 %	SUBSECTION 3
 %-----------------------------------
 \subsection{Variable optimization via ConstrainedOptimization}
-- simulation methods Gauss/PSO
+The variables $\alpha$ and $q$ of the SEIRD system were optimized using the ConstrainedOptimization plugin for UG4\cite{???}. %note add constrainedopt citation
+The plugin was used to optimize these variables using both the Newton-Gauss algorithm and Particle Swarm Optimization (PSO). Step sizes for
+individual time points were adjusted when using the Newton-Gauss method. The algorithm used to adapt the step size was the Frank-Wolf
+algorithm\cite{devansh}\cite{frank-wolf}. %note add citaions
+
+
+%-----------------------------------
+%	SUBSECTION 4
+%-----------------------------------
+\subsection{Geometry sampling}
+In order to better understand the sensitivity of the model for different variables, geometry sampling was done. This means that a set range for
+investigated variables was chosen and simulations were performed with randomly chosen combinations of these variables. After each run the total
+loss of the simulation attempt was calculated and recorded. This data was then used to create a topographic map of the relation between variables
+and the total loss of the simulation. The program used for this task was the \I{geometry\_sampler} provided in \I{ConstrainedOptimization}.
+

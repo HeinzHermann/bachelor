@@ -34,24 +34,24 @@ sum of all exposed individuals at any given time point. These results are much e
 	\centering
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/24_Darmstadt-Dieburg.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/24_Darmstadt-Dieburg.png}	
 		\caption{}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/13_Main-Kinzig-Kreis.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/13_Main-Kinzig-Kreis.png}	
 		\caption{}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/10_Limburg-Weilburg.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/10_Limburg-Weilburg.png}	
 		\caption{}
 	\end{subfigure}
 	\caption{Three exemplary results of a simulation of the exposed individuals.
-		The original (``orig'') data is drawn in a blue, the simulated (``sim'') data is drawn in an orange line.
-		The number of simulated individuals can be greater (image (A), region ``Darmstadt Dieburg''), smaller 
+		The original (``orig'') data is drawn in blue and the simulated (``sim'') data is drawn in orange.
+		The number of simulated exposed individuals can be greater (image (A), region ``Darmstadt Dieburg''), smaller 
 		(image (B), region ``Mein Kinzig Kreis'') or about the same (image (C), region ``Limburg Weilburg''), as 
 		the originally observed number of exposed.
 		}
@@ -68,26 +68,28 @@ more readable.
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/deviation_box_alt1.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_alt1.png}	
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/deviation_box_alt2.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_alt2.png}	
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/deviation_box_alt3.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_alt3.png}	
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/deviation_box_alt4.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_alt4.png}	
 	\end{subfigure}
 	\caption{Shown are box plots of the percentage deviation, of every simulated region relative to the original data.}
 	\label{fig:76_sim_box}
 \end{figure}
 
-Figure \fred*{fig:76_sim_box} shows that most of the simulated regions show a wide range of median values, ranging between
--100 and +100 percent deviation.
+Figure \ref*{fig:76_sim_box} shows that the simulated regions have a wide range of median values regarding the deviation.
+The numbers are ranging between -100 and +100 percent deviation. 10 of the 26 regions have an absolute median deviation of less then 25 percent,
+20 of the 26 regions show an absolute median below 50 percent and 23 of the 26 regions have a median of less then
+75 percent. The final three regions show a median higher than 75, but not more then 86.78 percent.
 
 
 
@@ -95,14 +97,93 @@ Figure \fred*{fig:76_sim_box} shows that most of the simulated regions show a wi
 %	SUBSECTION 2
 %-----------------------------------
 \subsection{Simulating susceptibles in a 60 day time frame}
+Similarly to the previous section, simulations were done done in a 60 day time frame. For this purpose only the first
+60 days of the previously chosen time frame were simulated. \hyperref[fig:60_sim_expl]{Figure \ref*{fig:60_sim_expl}}
+shows three exemplary graphs of the simulations. For better comparability the same regions were chosen as previously
+in \hyperref[fig:76_sim_expl]{Figure \ref*{fig:76_sim_expl}}. The results were extrapolated in order to better visualize
+the trend of the simulation result.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/60d/24_Darmstadt-Dieburg.png}	
+		\caption{}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/60d/13_Main-Kinzig-Kreis.png}	
+		\caption{}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/60d/10_Limburg-Weilburg.png}	
+		\caption{}
+	\end{subfigure}
+	\caption{Three exemplary results of a simulation of the exposed individuals. The original (``orig'') data is drawn in blue,
+		the simulated (``sim'') data is drawn in orange and the extrapolation of the simulated data (``extrapolation'') is
+		drawn in green. The vertical red dotted line marks the transition from simulated to extrapolated data.
+		}
+	\label{fig:60_sim_expl}
+\end{figure}
 
 
+
+\textcolor{red}{more text for box plots}
+
+
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_alt1.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_alt2.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_alt3.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_alt4.png}	
+	\end{subfigure}
+	\caption{Shown are box plots of the percentage deviation, of every simulated region relative to the original data.}
+	\label{fig:60_sim_box}
+\end{figure}
 %-----------------------------------
-%	SUBSECTION 2
+%	SUBSECTION 3
 %-----------------------------------
 \subsection{Simulating susceptibles in a 50 day time frame}
 
+\textcolor{red}{still needs graphs and text for graphs and boxes}
 
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_alt1.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_alt2.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_alt3.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_alt4.png}	
+	\end{subfigure}
+	\caption{Shown are box plots of the percentage deviation, of every simulated region relative to the original data.}
+	\label{fig:50_sim_box}
+\end{figure}
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
