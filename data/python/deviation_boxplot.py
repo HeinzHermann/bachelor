@@ -139,10 +139,10 @@ elif plot == 'box':
 
 	data_reverse = sorted_tab[set_start:set_end]
 
-	data_reverse = []
-	data_reverse.append(sorted_tab[1])
-	data_reverse.append(sorted_tab[8])
-	data_reverse.append(sorted_tab[10])
+	#data_reverse = []
+	#data_reverse.append(sorted_tab[1])
+	#data_reverse.append(sorted_tab[8])
+	#data_reverse.append(sorted_tab[10])
 	
 	# delete outliners
 	#del data_reverse[9]
@@ -159,21 +159,33 @@ elif plot == 'box':
 	#del names_reverse[7]
 	#del names_reverse[0]
 	
-	names_reverse = []
-	names_reverse.append(results[0][1])
-	names_reverse.append(results[0][8])
-	names_reverse.append(results[0][10])
+	#names_reverse = []
+	#names_reverse.append(results[0][1])
+	#names_reverse.append(results[0][8])
+	#names_reverse.append(results[0][10])
 
 	
 	#names_reverse = names_reverse[16:24]
 	
 	hnames = names_reverse.reverse()
+	#ax.boxplot(data_reverse,showmeans=True, vert=0)
 	ax.boxplot(data_reverse, vert=0)
 	ax.set_yticklabels(names_reverse)
 	plt.subplots_adjust(left=0.3)
 	#for set_i in range(set_start, set_end):
 	#	ax.boxplot(sorted_tab[0], sorted_tab[set_i], label=results[0][set_i])
-
+	
+	# print statistics 
+	boxres = mpl.cbook.boxplot_stats(data_reverse)
+	print("boxstats:")
+	print("------------------------------")
+	for regions in range(len(boxres)):
+		print(names_reverse[regions])
+		for keys, values in boxres[regions].items():
+			print(keys, ":", values)
+		print("------------------------------")
+	
+	
 	#plt.legend(loc='upper right')
 	plt.show()
 

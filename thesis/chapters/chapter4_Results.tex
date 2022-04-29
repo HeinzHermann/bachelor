@@ -17,6 +17,8 @@ During this work we simulated the susceptible population of Hesse. 26 regions we
 76, 60 and 50 days respectively. We will present both the absolute and percentage difference between the simulated
 and the original data for each time frame.
 
+\textcolor{red}{redo box plots with x-axis description}
+
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
@@ -86,10 +88,13 @@ more readable.
 	\label{fig:76_sim_box}
 \end{figure}
 
+\textcolor{red}{rephrase for deviation factor and meaning}
 Figure \ref*{fig:76_sim_box} shows that the simulated regions have a wide range of median values regarding the deviation.
-The numbers are ranging between -100 and +100 percent deviation. 10 of the 26 regions have an absolute median deviation of less then 25 percent,
-20 of the 26 regions show an absolute median below 50 percent and 23 of the 26 regions have a median of less then
-75 percent. The final three regions show a median higher than 75, but not more then 86.78 percent.
+The numbers are ranging between a median deviation factor of about -0.8 and +0.75. This means, that the model calculated
+between 80 percent less or 75 percent more infection events, compared to the original data. Apart from these extreme cases, 12 out of
+26 regions have an absolute, median deviation of less then 25 percent, 21 of the 26 regions show an absolute median below 50 percent
+and 25 of the 26 regions have a median of less then 75 percent. Only the region ``Berstrasse'' had a higher deviation with
+about -79.16 percent. Many of the plots are skewed right (\textcolor{red}{explain and describe better, also add data to Appendix!!!}).
 
 
 
@@ -129,6 +134,12 @@ the trend of the simulation result.
 	\label{fig:60_sim_expl}
 \end{figure}
 
+Figure \ref*{fig:60_sim_expl} shows that the general trend of the simulations remains similar to the simulations with 76 days.
+In all three regions shown the extrapolated data points show a slightly slower increase in infections compared to the simulations
+with 76 days in figure \ref*{fig:76_sim_expl}, but in all three cases the results are comparable.
+
+Similar to the previous section, we calculated the deviation of each data point for each region and expressed the results in a
+set of box plots. The results are shown in figure \ref*{fig:60_sim_box}.
 
 
 \textcolor{red}{more text for box plots}
@@ -186,6 +197,16 @@ the trend of the simulation result.
 \end{figure}
 %----------------------------------------------------------------------------------------
 %	SECTION 2
+%----------------------------------------------------------------------------------------
+
+\section{Simulation deviation in relation to region population}
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 3
 %----------------------------------------------------------------------------------------
 
 \section{Sensitivity analysis of $\alpha$ and $q$}
