@@ -13,6 +13,9 @@ $q$ will be shown. Specifically the sensitivity analysis will later be used in \
 %----------------------------------------------------------------------------------------
 
 \section{Simulating the susceptible population of Hesse}
+\textcolor{red}{check your tenses and make sure they make sense!}
+\textcolor{red}{remove data point/day inconsistencies}
+
 During this work we simulated the susceptible population of Hesse. 26 regions were simulated over a time period of
 76, 60 and 50 days respectively. We will present both the absolute and percentage difference between the simulated
 and the original data for each time frame.
@@ -102,10 +105,10 @@ about -79.16 percent. Many of the plots are skewed right (\textcolor{red}{explai
 %	SUBSECTION 2
 %-----------------------------------
 \subsection{Simulating susceptibles in a 60 day time frame}
-Similarly to the previous section, simulations were done done in a 60 day time frame. For this purpose only the first
-60 days of the previously chosen time frame were simulated. \hyperref[fig:60_sim_expl]{Figure \ref*{fig:60_sim_expl}}
-shows three exemplary graphs of the simulations. For better comparability the same regions were chosen as previously
-in \hyperref[fig:76_sim_expl]{Figure \ref*{fig:76_sim_expl}}. The results were extrapolated in order to better visualize
+In order to explore how well the model is working with a smaller data set, the same optimization process as in the previous section was
+applied to a 60 day data set. Only the first 60 days of the previously chosen time frame were simulated, the other 16 days were
+simply removed. \hyperref[fig:60_sim_expl]{Figure \ref*{fig:60_sim_expl}} shows three exemplary graphs of the simulation results.
+For better comparability, the same regions were chosen as in previous section. The results were extrapolated in order to better visualize
 the trend of the simulation result.
 
 \begin{figure}
@@ -134,13 +137,13 @@ the trend of the simulation result.
 	\label{fig:60_sim_expl}
 \end{figure}
 
-Figure \ref*{fig:60_sim_expl} shows that the general trend of the simulations remains similar to the simulations with 76 days.
-In all three regions shown the extrapolated data points show a slightly slower increase in infections compared to the simulations
-with 76 days in figure \ref*{fig:76_sim_expl}, but in all three cases the results are comparable.
+Figure \ref*{fig:60_sim_expl} shows that the general trend of the simulations remains similar to the simulations with 76 data points.
+In all three regions, the extrapolated data points show a slightly slower increase in infections compared to the simulations
+with 76 days in figure \ref*{fig:76_sim_expl}.
 
-Similar to the previous section, we calculated the deviation of each data point for each region and expressed the results in a
-set of box plots. The results are shown in figure \ref*{fig:60_sim_box}.
-
+Similar to the previous section, we calculated the deviation of each data point for
+each region and expressed the results in a set of box plots. The results are shown in figure \ref*{fig:60_sim_box}. Only data points
+that were actually simulated were included into this analysis. Extrapolated data points were not used.
 
 \textcolor{red}{more text for box plots}
 
@@ -167,12 +170,58 @@ set of box plots. The results are shown in figure \ref*{fig:60_sim_box}.
 	\caption{Shown are box plots of the percentage deviation, of every simulated region relative to the original data.}
 	\label{fig:60_sim_box}
 \end{figure}
+
+As with the graphs described before, the deviation results of the 60 data point simulation are largely comparable to the 76
+data point deviation results. The maximum and minimum median deviation of all regions is higher compared to previous results,
+lying between about -76 percent and 138 percent. However, 14 of the 26 regions displayed an absolute, median deviation of less than
+25 percent, two more than in the previous experiment. 21 of 26 regions had an absolute, median deviation of less than 50 percent
+and 24 or 26 regions had an absolute, median deviation of less then 75 percent deviation. The two regions with a deviation higher
+than 75 percent were ``Bergstrasse'' with -75.52 percent and ``Darmstadt-Dieburg'' with 137.31 percent median deviation. As in
+the previous section many box plots are skewed to the right, however this effect seems to be less prominent then in the 76 data
+point simulation.
+
+
 %-----------------------------------
 %	SUBSECTION 3
 %-----------------------------------
 \subsection{Simulating susceptibles in a 50 day time frame}
+The last simulation that was performed, was a simulation with 50 data points. As described in the previous section with
+60 data points, simulations and optimization steps were performed on a truncated data set, where the last 26 of the total
+76 data points were removed. \hyperref[fig:50_sim_expl]{Figure \ref*{fig:50_sim_expl}} shows three exemplary graphs of this
+experiment. As previously, the same regions were chosen as for the 76 data point experiment. 
+\textcolor{red}{add more explanation and description once graphs are there}
 
-\textcolor{red}{still needs graphs and text for graphs and boxes}
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/50d/24_Darmstadt-Dieburg.png}	
+		\caption{}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/50d/13_Main-Kinzig-Kreis.png}	
+		\caption{}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/50d/10_Limburg-Weilburg.png}	
+		\caption{}
+	\end{subfigure}
+	\caption{Add caption
+		}
+	\label{fig:50_sim_expl}
+\end{figure}
+In this experiment, all three
+regions show a stronger trend towards a negative deviation, compared to the previous two experiments. While the regions of
+the graphs, that were simulated based on the provided data points, looks somewhat similar, the overall trend visualized by
+the extrapolation shows a strong deviation.
+
+As with the 60 data point analysis, we also performed the deviation analysis on the 50 data point data set. As previously described
+only actually simulated data points were included into the analysis. Extrapolated data points were not used. The results of this
+analysis are shown in \hyperref[fig:50_sim_box]{Figure \ref*{fig:50_sim_box}}.
 
 \begin{figure}
 	\centering
@@ -195,6 +244,8 @@ set of box plots. The results are shown in figure \ref*{fig:60_sim_box}.
 	\caption{Shown are box plots of the percentage deviation, of every simulated region relative to the original data.}
 	\label{fig:50_sim_box}
 \end{figure}
+
+
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
