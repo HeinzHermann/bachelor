@@ -1,6 +1,8 @@
 % Chapter Template
 
 \chapter{Results} % Main chapter title
+\textcolor{red}{add short explanations when first mentioning $\alpha$ and $q$ as reminder}
+
 \label{chap:results} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 This chapter will summarize the results of this work. First, the results of simulating the susceptible population
 in the region of Hesse will be presented. Then the results of a sensitivity analysis for the variables $\alpha$ and
@@ -94,10 +96,11 @@ more readable.
 \textcolor{red}{rephrase for deviation factor and meaning}
 Figure \ref*{fig:76_sim_box} shows that the simulated regions have a wide range of median values regarding the deviation.
 The numbers are ranging between a median deviation factor of about -0.8 and +0.75. This means, that the model calculated
-between 80 percent less or 75 percent more infection events, compared to the original data. Apart from these extreme cases, 12 out of
-26 regions have an absolute, median deviation of less then 25 percent, 21 of the 26 regions show an absolute median below 50 percent
-and 25 of the 26 regions have a median of less then 75 percent. Only the region ``Berstrasse'' had a higher deviation with
-about -79.16 percent. Many of the plots are skewed right (\textcolor{red}{explain and describe better, also add data to Appendix!!!}).
+between 80 percent less or 75 percent more infection events, compared to the original data. 12, 21 and 25 of the 26 regions have
+an absolute median deviation of less than 25, 50 and 75 percent respectively. Only the region ``Berstrasse'' had a higher deviation with
+about -79.16 percent. 19 regions have a negative and 6 regions have a positive median deviation. The region ``Darmstadt'' had a
+median deviation of exactly 0. Many of the plots are skewed right.
+(\textcolor{red}{explain and describe better, also add data to Appendix!!!})
 
 
 
@@ -167,18 +170,23 @@ that were actually simulated were included into this analysis. Extrapolated data
 		\centering
 		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_alt4.png}	
 	\end{subfigure}
-	\caption{Shown are box plots of the percentage deviation, of every simulated region relative to the original data.}
+	\caption{Shown are box plots of the percentage deviation, of every simulated region relative to the original data.
+		In this experiment only 60 of 76 data points were used to simulate the original data. The median of all
+		simulated regions ranges between -0.76 and 1.38 and the median interquartile range is 0.41. 19 regions
+		have a negative and 6 regions have a positive median deviation. The three regions ``Werra-Meissner-Kreis'',
+		``Marburg-Biedenkopf'' and ``Limburg-Weilburg'' are shown separately for better scaling.
+		}
 	\label{fig:60_sim_box}
 \end{figure}
 
 As with the graphs described before, the deviation results of the 60 data point simulation are largely comparable to the 76
 data point deviation results. The maximum and minimum median deviation of all regions is higher compared to previous results,
-lying between about -76 percent and 138 percent. However, 14 of the 26 regions displayed an absolute, median deviation of less than
-25 percent, two more than in the previous experiment. 21 of 26 regions had an absolute, median deviation of less than 50 percent
-and 24 or 26 regions had an absolute, median deviation of less then 75 percent deviation. The two regions with a deviation higher
-than 75 percent were ``Bergstrasse'' with -75.52 percent and ``Darmstadt-Dieburg'' with 137.31 percent median deviation. As in
-the previous section many box plots are skewed to the right, however this effect seems to be less prominent then in the 76 data
-point simulation.
+lying between about -76 percent and 138 percent. 14, 21 and 24 regions had an absolute, median deviation of less than
+25, 50 and 75 percent respectively. The two regions with a deviation higher than 75 percent were ``Bergstrasse'' and
+``Darmstadt-Dieburg'' with median deviations of -75.52 and 137.31 percent respectively.
+19 of the 26 regions had a negative and 6 of the 26 regions had a positive median deviation.
+As in the previous section many box plots are skewed to the right, however this effect seems to be less prominent then in
+the 76 data point simulation.
 
 
 %-----------------------------------
@@ -214,10 +222,10 @@ experiment. As previously, the same regions were chosen as for the 76 data point
 		}
 	\label{fig:50_sim_expl}
 \end{figure}
-In this experiment, all three
-regions show a stronger trend towards a negative deviation, compared to the previous two experiments. While the regions of
-the graphs, that were simulated based on the provided data points, looks somewhat similar, the overall trend visualized by
-the extrapolation shows a strong deviation.
+In this experiment all three
+regions show a stronger trend towards a negative deviation compared to the previous two experiments. While the regions of
+the graphs, that were simulated based on the provided data points, looks similar, the overall trend visualized by
+the extrapolation shows a strong deviation towards to little infections.
 
 As with the 60 data point analysis, we also performed the deviation analysis on the 50 data point data set. As previously described
 only actually simulated data points were included into the analysis. Extrapolated data points were not used. The results of this
@@ -241,9 +249,23 @@ analysis are shown in \hyperref[fig:50_sim_box]{Figure \ref*{fig:50_sim_box}}.
 		\centering
 		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_alt4.png}	
 	\end{subfigure}
-	\caption{Shown are box plots of the percentage deviation, of every simulated region relative to the original data.}
+	\caption{Shown are box plots of the percentage deviation for a simulated time frame of 50 days. Each box plot includes
+		all percentage deviations of all simulated data points compared to the original data. The median of all regions
+		ranges between -0.76 and 1.19 and the median interquartile range is 0.38. 19 regions had a positive and
+		6 regions had a negative median deviation. One region had a median deviation of exactly 0.
+		The three regions ``Werra-Meissner-Kreis'', ``Marburg-Biedenkopf'' and ``Limburg-Weilburg'' are shown
+		separately for better scaling.
+		}
 	\label{fig:50_sim_box}
 \end{figure}
+
+The 50 data point simulations show similar results to the previous two experiments. The median deviation of all regions
+ranges between -76 and +119 percent and the median interquartile range is 0.38. 12, 22 and 24 regions out of 26 have an
+absolute median deviation of less then 25, 50 and 75 percent respectively. The two region with a higher median
+deviations are ``Bergstrasse'' and ``Darmstadt-Dieburg'', with -75.56 and 118.36 percent deviation respectively.
+The skew of the box plots however is not as uniform. Many plots are skewed right like in the previous experiments, but
+there is also an increased number of blots with a skew to the left. 19 of the 26 regions had a negative median deviation,
+6 had a positive median deviation and one region had a median deviation of exactly 0.
 
 
 %----------------------------------------------------------------------------------------
@@ -261,4 +283,69 @@ analysis are shown in \hyperref[fig:50_sim_box]{Figure \ref*{fig:50_sim_box}}.
 %----------------------------------------------------------------------------------------
 
 \section{Sensitivity analysis of $\alpha$ and $q$}
+In order to further investigate the features of the model, we analyzed the sensitivity of the loss function relative to
+the variables $\alpha$ and $q$. We only chose those two variables, since the loss function was only calculated based
+on the difference between the simulated and the original susceptible population. Since this group only depends on those
+two variables in our model, changes in the other variables could not influence the loss and were therefore not investigated.
+For this experiment, the 4000 simulations of the model with all 76 original data points were performed and the variables
+$\alpha$ and $q$ were chosen randomly, within a set constraint. The upper and lower bounds were set to 0.05 and 0.35 for 
+$\alpha$ and 5.5 and 8.0 for $q$ respectively. The results of these simulations were gathered and used to plot a map
+of the variable landscape of the loss of the susceptible group.
+\hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows the total result of all simulations over the
+chosen bounds.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_0.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_0.png}	
+	\end{subfigure}
+	\caption{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were plotted
+		against the loss of the susceptible group. Images (A) and (B) show the plot from different angles in order
+		to increase readability. In the model the susceptible group shows sensitivity to changes of both $\alpha$ and
+		$q$. However, the sensitivity to $q$ seems to be dependent on $\alpha$.
+		}
+	\label{fig:sensitivity_zoom0}
+\end{figure}
+
+\textcolor{red}{add result values to figure explanation}
+Figure \ref*{fig:sensitivity_zoom0} shows that low values for $\alpha$ lead to a decreased sensitivity of the loss function
+for $q$. Only after an $\alpha$ value of about 0.25 is reached, does the loss start to react to changes in $q$. After this point
+however, the loss function quickly increases. This phenomenon can be seen both, if $q$ is increased and if $q$ is not increased
+in the simulation. But a bigger $q$ value causes the loss to increase more quickly compared to a simulation with a small loss.
+
+
+
+The simulations were further investigated by plotting only part of the experimental data.
+\hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows all data points with $\alpha$ values between 0.15
+and 0.25, $q$ values between 5.5 and 8.0 and a maximum loss of $10^{9}$. The loss on this image was capped in order to reduce
+the scale of the loss and thereby increase readability. This lead 957 of 4000 data points being plotted.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom1_0.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom1_0.png}	
+	\end{subfigure}
+	\caption{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were
+		capped to 0.15 and 0.25 and 5.5 and 8.0 respectively and then plotted against the result of the loss function.
+		The loss was capped at $10^{9}$ in order to reduce the scale of the loss and make the image more readable.
+		Images (A) and (B) show the same plot from different angles. The image shows that there seems to be a set of
+		optimal value combinations of $\alpha$ and $q$, where the loss is minimized. Given the diagonal nature of this
+		``optimal cavity'' there seem to be an equilibrium between the two values.
+		\textcolor{red}{check for better wording} %note
+		}
+	\label{fig:sensitivity_zoom1}
+\end{figure}
+
+Figure \ref*{fig:sensitivity_zoom1} shows the existence of a ``valley'' with minimized loss. It can be seen that there are 
+sets of values between $\alpha$ and $q$, where 
 
