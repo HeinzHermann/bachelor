@@ -23,7 +23,7 @@ During this work we simulated the susceptible population of Hesse. 26 regions we
 and the original data for each time frame.
 
 \textcolor{red}{redo box plots with x-axis description}
-
+\textcolor{red}{ADD OPTIMAL VALUES FOR $\alpha$ AND $q$!!}
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
@@ -272,9 +272,49 @@ there is also an increased number of blots with a skew to the left. 19 of the 26
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
-\section{Simulation deviation in relation to region population}
+\section{Influence of individual regions on the loss function}
+In order to better understand the influence of individual regions on the model itself, we manually calculated the total
+loss, the individual loss for each region and the percentage loss of each region relative to the total loss.
+\hyperref[tab:perc_region_loss]{Table \ref*{tab:perc_region_loss}} shows the results of these calculations. The table
+is sorted descending from highest to lowest percentage loss contribution.
+\textcolor{red}{add table with total information to Appendix}
 
+\begin{table}
+	\caption{the caption}
+	\begin{tabular}{|l|x{2cm}|x{2cm}|x{2cm}|}
+	%\begin{tabular}{|l|c|c|c|}
+		\hline
+		\B{region} & \B{percentage loss} & \B{percentage population} & \B{median deviation} \\ \hline \hline
+		Offenbach & 27.70 & 5.67 & -0.54 \\ \hline
+		Bergstrasse & 14.41 & 4.31 & -0.79 \\ \hline
+		Frankfurt-am-Main & 13.10 & 12.14 & 0.21 \\ \hline
+		Lahn-Dill-Kreis & 6.29 & 4.03 & -0.25 \\ \hline
+		Main-Kinzig-Kreis & 5.17 & 6.70 & -0.07 \\ \hline
+		Marburg-Biedenkopf & 4.70 & 3.91 & -0.06 \\ \hline
+		Kassel-City & 3.90 & 3.19 & -0.49 \\ \hline
+		Wetteraukreis & 3.35 & 4.93 & -0.27 \\ \hline
+		Gross-Gerau & 2.90 & 4.38 & -0.23 \\ \hline
+		Rheingau-Taunus-Kreis & 2.89 & 2.98 & -0.36 \\ \hline
+		Kassel & 2.58 & 3.77 & -0.55 \\ \hline
+		Hochtaunuskreis & 2.33 & 3.77 & -0.32 \\ \hline
+		Darmstadt-Dieburg & 2.00 & 4.73 & 0.74 \\ \hline
+		Odenwaldkreis & 1.93 & 1.54 & -0.75 \\ \hline
+		Offenbach-am-Main & 1.23 & 2.08 & -0.09 \\ \hline
+		Schwalm-Eder-Kreis & 1.03 & 2.86 & -0.34 \\ \hline
+		Waldeck-Frankenberg & 0.99 & 2.49 & -0.17 \\ \hline
+		Giessen & 0.84 & 4.32 & 0.10 \\ \hline
+		Wiesbaden & 0.80 & 4.43 & 0.17 \\ \hline
+		Fulda & 0.74 & 3.54 & -0.28 \\ \hline
+		Hersfeld-Rotenburg & 0.41 & 1.91 & -0.48 \\ \hline
+		Main-Taunus-Kreis & 0.25 & 3.80 & 0.07 \\ \hline
+		Darmstadt & 0.18 & 2.53 & 0.00 \\ \hline
+		Vogelsbergkreis & 0.17 & 1.68 & -0.37 \\ \hline
+		Limburg-Weilburg & 0.08 & 2.74 & 0.11 \\ \hline
+		Werra-Meissner-Kreis & 0.03 & 1.59 & -0.11 \\ \hline
 
+	\end{tabular}
+	\label{tab:perc_region_loss}
+\end{table}
 
 
 
@@ -283,6 +323,7 @@ there is also an increased number of blots with a skew to the left. 19 of the 26
 %----------------------------------------------------------------------------------------
 
 \section{Sensitivity analysis of $\alpha$ and $q$}
+\textcolor{red}{add more angles to the images}
 In order to further investigate the features of the model, we analyzed the sensitivity of the loss function relative to
 the variables $\alpha$ and $q$. We only chose those two variables, since the loss function was only calculated based
 on the difference between the simulated and the original susceptible population. Since this group only depends on those
@@ -298,11 +339,11 @@ chosen bounds.
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_0.png}	
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_0_2.png}	
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_0.png}	
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_0_2.png}	
 	\end{subfigure}
 	\caption{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were plotted
 		against the loss of the susceptible group. Images (A) and (B) show the plot from different angles in order
@@ -321,24 +362,34 @@ in the simulation. But a bigger $q$ value causes the loss to increase more quick
 
 
 The simulations were further investigated by plotting only part of the experimental data.
-\hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows all data points with $\alpha$ values between 0.15
-and 0.25, $q$ values between 5.5 and 8.0 and a maximum loss of $10^{9}$. The loss on this image was capped in order to reduce
-the scale of the loss and thereby increase readability. This lead 957 of 4000 data points being plotted.
+The first row of \hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows all data points with $\alpha$ values between 0.15
+and 0.25, $q$ values between 5.5 and 8.0 and a maximum loss of $10^{10}$. The loss on this image was capped in order to reduce
+the scale of the loss and thereby increase readability. This lead 957 of 4000 data points being plotted. The images in the
+second row show the same graph (\textcolor{red}{?}), with the same bonds for $\alpha$ and $q$, but with a maximum loss capped
+at $2.7*10^{9}$. This gives an even closer look at the range of optimal/close-to-optimal values for $\alpha$ and $q$.
 
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom1_0.png}	
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom1_0_2.png}	
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom1_0.png}	
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom1_0_2.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom2_0_2.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom2_0_2.png}	
 	\end{subfigure}
 	\caption{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were
 		capped to 0.15 and 0.25 and 5.5 and 8.0 respectively and then plotted against the result of the loss function.
-		The loss was capped at $10^{9}$ in order to reduce the scale of the loss and make the image more readable.
-		Images (A) and (B) show the same plot from different angles. The image shows that there seems to be a set of
+		The loss was capped at $10^{10}$ and $2.7*10^{9}$ for the first and the second row respectively, in order to
+		reduce the scale of the loss and make the image more readable. The image shows that there seems to be a set of
 		optimal value combinations of $\alpha$ and $q$, where the loss is minimized. Given the diagonal nature of this
 		``optimal cavity'' there seem to be an equilibrium between the two values.
 		\textcolor{red}{check for better wording} %note
@@ -347,5 +398,7 @@ the scale of the loss and thereby increase readability. This lead 957 of 4000 da
 \end{figure}
 
 Figure \ref*{fig:sensitivity_zoom1} shows the existence of a ``valley'' with minimized loss. It can be seen that there are 
-sets of values between $\alpha$ and $q$, where 
+sets of values of $\alpha$ and $q$, where the loss appears to be minimized. The optimal values found by the model for $\alpha$
+and $q$ are also withing this region (\textcolor{red}{more info}). The optimized area seems to have a diagonal structure,
+indicating an optimal relation between $\alpha$ and $q$.
 
