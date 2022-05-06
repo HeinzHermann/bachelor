@@ -1,14 +1,37 @@
 % Chapter Template
 
 \chapter{Discussion} % Main chapter title
-
 \label{chap:discussion} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
+This chapter will summarize, discuss and interpret the results of the \hyperref[chap:results]{previous section
+\ref*{chap:results}}. We will start by discussing and evaluating the accuracy of the model regarding the reproduction
+of real world data, as the ability to predict future outcomes with fewer data points. After that, we will use the
+analyze the results of the loss function analysis and the sensitivity analysis in order to better understand the results
+and identify potential issues and areas of improvement. Lastly an outlook will be given for possible strategies and
+ideas to improve both the implementation of the model and the model itself.
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-\section{Section 1}
+\section{Simulation results compared to real life data}
+\hyperref[sec:sim_res]{Section \ref*{sec:sim_sec}} has presented the simulation results produced by the current implementation
+of the SEIRD model. It can be seen, that the accuracy of the simulation somewhat depends on the amount of data points supplied.
+While the median susceptible deviation of all regions ranged between -80 and +140 percent, most the regions showed reasonable
+amounts of deviation from the original data. In case of the 76 data point simulation, 21 of 26 regions showed an
+absolute median deviation of 50 percent or less. Similar behavior was observed for the 60 and 50 data point simulations, in which
+21 and 22 regions respectively showed an absolute median deviation of 50 percent or less. While the simulation accuracy of single regions
+might differ between experiments (\textcolor{red}{double check this!}), results are overall comparable.
+
+Predicting the original data proved more difficult. While the calculated trend for the 60 data point experiment was comparable
+to the simulation with 76 data points, the 50 data point simulation showed strong differences and proved to be mostly inaccurate.\\
+\textcolor{red}{needs hard data to support these claims, check python code on how to extract data points and add to results.
+Then come back and redo this}\\ %note
+
+A consistent observation throughout all experiments was a strong trend of the simulated regions to negatively deviate from the
+original data. This means that the simulations generally predicted lower amounts of exposed individuals than seen in the original
+data.
+
+
 
 %-----------------------------------
 %	SUBSECTION 1
