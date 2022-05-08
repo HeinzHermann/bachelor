@@ -2,6 +2,7 @@
 
 \chapter{Discussion} % Main chapter title
 \label{chap:discussion} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+\textcolor{red}{weave in story, why only susceptibles were examined in experiments!}
 
 This chapter will summarize, discuss and interpret the results of the \hyperref[chap:results]{previous section
 \ref*{chap:results}}. We will start by discussing and evaluating the accuracy of the model regarding the reproduction
@@ -13,7 +14,16 @@ ideas to improve both the implementation of the model and the model itself.
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 
-\section{Simulation results compared to real life data}
+\section{Simulation results and sensitivity analysis}
+The following section will discuss the results of the simulations, the optimization process as well as the sensitivity
+analysis performed in this context.
+\textcolor{red}{add more text?}
+
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+\subsection{Simulation accuracy and optimization issues}
 \hyperref[sec:sim_res]{Section \ref*{sec:sim_res}} has presented the simulation results produced by the current implementation
 of the SEIRD model. It can be seen, that the accuracy of the simulation somewhat depends on the amount of data points supplied.
 While the median susceptible deviation of all regions ranged between -80 and +140 percent, most the regions showed reasonable
@@ -64,16 +74,50 @@ The third major factor is the overall population of each respective region, sinc
 produce higher differences between simulated and original data compared to regions with smaller populations. This remains true, even
 if the percentage deviation between simulated and original data is relatively small compared to other regions. A good example for this
 is the region ``Frankfurt-am-Main'', which was the third strongest loss contributor in the optimized version of the model, despite
-only showing a median deviation of about 21 percent between simulated and original data.
+only showing a median deviation of about 21 percent between simulated and original data. This is caused by the high population of
+this region, which makes up about 12.14 percent, of the total population of Hesse.\newline
 
-\textcolor{red}{add more info about farnkfurt and population; note that loss during optimization process was not reproduced.
+All these effects combined mean, that both outliers and high population areas can and likely will disproportionately effect the
+optimization process of the model. The question is, whether this effect if desired or not. Arguably the model optimization was
+working in terms of minimizing the optimal loss. A smaller overall loss was achieved by reducing the accuracy of many smaller
+regions in favor of outlier regions and regions with higher populations. We will discuss alternatives to this method in the
+following sections.
+
+\textcolor{red}{add more info about Frankfurt and population; note that loss during optimization process was not reproduced.
 Optimal variable state can only give hints to internal workings}
 
 %-----------------------------------
-%	SUBSECTION 1
+%	SUBSECTION 2
 %-----------------------------------
-\subsection{Subsection 1}
+\subsection{Variable influence on the susceptible population}
+In order to quantify (\textcolor{red}{rephrase, not quantified}) the influence of model variables on the simulation of the
+susceptible population, 4000 simulations were performed with randomly chosen $\alpha$ and $q$ values bound between 0.05 and 0.35
+and 5.5 and 8.0 respectively. The reason, why only those two variables were observed can be explained by looking at equations
+\ref{eq:SEIRD1_S} and \ref{eq:SEIRD1_E} from chapter \ref*{chap:theory},
+section \ref*{sec:SEIRD}. The only group observed in these experiments was the susceptible group, hence equation \ref*{eq:SEIRD1_S}
+can be used to deduce all relevant variables that influence this group. Influencing variables are the number of susceptibles \S,
+the number of exposed \E and the rate at which individuals transition from \S to \E. While group \S only changes based on this
+equation, \E also changes based on equation \ref*{eq:SERD1_E}. Looking at this equation we can see, that the changes of \E depend
+again on \S, \E and $\alpha$, but also on $q$. Other variables or groups do not influence the change of \S, and are therefor not
+relevant for this simulation. \newline
 
+The simulations were then used to create a topographic map of the influence of the variables on the loss of the model. The results
+showed, that both $\alpha$ and $q$ influence the loss. \hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0} shows,
+that the overall loss of the simulation remains fairly identical, until $\alpha$ reaches a value off about 2.3. Before this,
+changes in $q$ seem to have very little impact on the loss of the simulation. This makes sense, when looking at the relation of
+\ref*{eq:SEIRD1_S} and \ref*{eq:SEIRD1_E}. The variable $\alpha$ controls the "outflow" of population from \S to \E, while $q$
+controls the "outflow" of population from \E to either \I or \D. However, an outflow from \E is only relevant, when there are
+individuals present in this group in the first place. Therefor, an $\alpha$ value below a certain threshold seems to either permit
+no transition from \S to \E or keep the population of \E so small, that the influence of the outflow $q$ are minimal.\newline
+
+Once this threshold is overcome though, $q$ seems to have a more substantial impact. While the model seems to experience
+an increase in loss regardless of the value $q$, the increase is much stronger with a higher $q$, than with a smaller one.
+This effect is likely caused by an $\alpha$ value that starts out to small and thereby fails to transition enough susceptibles
+to the group of exposed. The steady loss observed throughout most of the map likely means that the number of simulated susceptibles
+remains mostly stable, while the number of transitions from \S to \E in the original data steadily increases. However, since 
+there is a maximum difference between the initial number of susceptibles (at which the simulated likely remains
+\textcolor{red}{maybe check this for truth}) and the original data, the total loss cannot supersede a certain maximum loss.
+But, if $\alpha$ is too high, 
 
 %-----------------------------------
 %	SUBSECTION 2
@@ -85,5 +129,18 @@ Optimal variable state can only give hints to internal workings}
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
-\section{Section 2}
+\section{Model adjustments and solutions}
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 3
+%----------------------------------------------------------------------------------------
+
+\section{Outlook}
+
+
 
