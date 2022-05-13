@@ -3,6 +3,8 @@
 \chapter{Discussion} % Main chapter title
 \label{chap:discussion} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 \textcolor{red}{weave in story, why only susceptibles were examined in experiments!}
+\textcolor{red}{add images to discussion?}
+
 
 This chapter will summarize, discuss and interpret the results of the \hyperref[chap:results]{previous section
 \ref*{chap:results}}. We will start by discussing and evaluating the accuracy of the model regarding the reproduction
@@ -90,51 +92,75 @@ Optimal variable state can only give hints to internal workings}
 %	SUBSECTION 2
 %-----------------------------------
 \subsection{Variable influence on the susceptible population}
+\textcolor{red}{what else to discuss?}\newline %note
 In order to quantify (\textcolor{red}{rephrase, not quantified}) the influence of model variables on the simulation of the
 susceptible population, 4000 simulations were performed with randomly chosen $\alpha$ and $q$ values bound between 0.05 and 0.35
 and 5.5 and 8.0 respectively. The reason, why only those two variables were observed can be explained by looking at equations
 \ref{eq:SEIRD1_S} and \ref{eq:SEIRD1_E} from chapter \ref*{chap:theory},
 section \ref*{sec:SEIRD}. The only group observed in these experiments was the susceptible group, hence equation \ref*{eq:SEIRD1_S}
 can be used to deduce all relevant variables that influence this group. Influencing variables are the number of susceptibles \S,
-the number of exposed \E and the rate at which individuals transition from \S to \E. While group \S only changes based on this
-equation, \E also changes based on equation \ref*{eq:SERD1_E}. Looking at this equation we can see, that the changes of \E depend
-again on \S, \E and $\alpha$, but also on $q$. Other variables or groups do not influence the change of \S, and are therefor not
+the number of exposed \B{E} and the rate at which individuals transition from \B{S} to \B{E}. While group \B{S} only changes based on this
+equation, \B{E} also changes based on equation \ref*{eq:SERD1_E}. Looking at this equation we can see, that the changes of \B{E} depend
+again on \B{S}, \B{E} and $\alpha$, but also on $q$. Other variables or groups do not influence the change of \B{S}, and are therefor not
 relevant for this simulation. \newline
 
 The simulations were then used to create a topographic map of the influence of the variables on the loss of the model. The results
-showed, that both $\alpha$ and $q$ influence the loss. \hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0} shows,
+showed, that both $\alpha$ and $q$ influence the loss. \hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows,
 that the overall loss of the simulation remains fairly identical, until $\alpha$ reaches a value off about 2.3. Before this,
 changes in $q$ seem to have very little impact on the loss of the simulation. This makes sense, when looking at the relation of
-\ref*{eq:SEIRD1_S} and \ref*{eq:SEIRD1_E}. The variable $\alpha$ controls the "outflow" of population from \S to \E, while $q$
-controls the "outflow" of population from \E to either \I or \D. However, an outflow from \E is only relevant, when there are
+\ref*{eq:SEIRD1_S} and \ref*{eq:SEIRD1_E}. The variable $\alpha$ controls the "outflow" of population from \B{S} to \B{E}, while $q$
+controls the "outflow" of population from \B{E} to either \B{I} or \B{D}. However, an outflow from \B{E} is only relevant, when there are
 individuals present in this group in the first place. Therefor, an $\alpha$ value below a certain threshold seems to either permit
-no transition from \S to \E or keep the population of \E so small, that the influence of the outflow $q$ are minimal.\newline
+no transition from \B{S} to \B{E} or keep the population of \B{E} so small, that the influence of the outflow $q$ are minimal.\newline
 
-Once this threshold is overcome though, $q$ seems to have a more substantial impact. While the model seems to experience
-an increase in loss regardless of the value $q$, the increase is much stronger with a higher $q$, than with a smaller one.
+Once this threshold is overcome though, $q$ seems to have a more substantial impact. While the simulations show
+an increase in loss regardless of $q$, the increase is much stronger with a higher $q$, than with a smaller one.
+As a reminder, in equation~\ref*{eq:SEIRD1_E} the outflow of individuals from the exposed group is defined as $\text{\B{E}}/q$.
+This means, that a higher numeric value for $q$ means a lower rate of outflow of the exposed class. Inversely a lower $q$ results
+in a higher outflow rate. Therefor the loss is higher at a lower outflow rate out of \B{E} and smaller at a higher outflow rate.
 This effect is likely caused by an $\alpha$ value that starts out to small and thereby fails to transition enough susceptibles
 to the group of exposed. The steady loss observed throughout most of the map likely means that the number of simulated susceptibles
-remains mostly stable, while the number of transitions from \S to \E in the original data steadily increases. However, since 
+remains mostly stable, while the number of transitions from \B{S} to \B{E} in the original data steadily increases. However, since 
 there is a maximum difference between the initial number of susceptibles (at which the simulated likely remains
-\textcolor{red}{maybe check this for truth}) and the original data, the total loss cannot supersede a certain maximum loss.
-But, if $\alpha$ is too high, 
+\textcolor{red}{maybe check this for truth}) and the original data, the total loss cannot supersede a set maximum loss.
+But, once $\alpha$ exceeds the threshold of about 2.3, the situation begins to change and the amount of transition events from
+\B{S} to \B{E} begins to increase. If the number of members in the exposed group is not decreased by transition events to either
+\B{I} or \B{D}, which is governed by the variable $q$, a feedback loop is the result. In this case, more transition to \B{E} at a time
+step will cause an increased transition to \B{E} in the following time step and so on. This process will continue, as long as there is
+either no or very little outflow out of \B{E}. Since the difference between simulated and original data can be much larger in this case,
+an strong increase in loss is the result. $q$ therefor serves as a counterbalance the effects of $\alpha$. All of these results show
+that the model itself is working as intended.
+\textcolor{red}{talk more about the other images in this section and explain that results are in optimum}
 
-%-----------------------------------
-%	SUBSECTION 2
-%-----------------------------------
-
-\subsection{Subsection 2}
+ It is also interesting, that the there appears to be a set of possible values where $\alpha$ and $q$ are in an equilibrium and 
+ minimize the overall loss of the simulation. The images in \hyperref[fig:sensitivity_zoom1]{Figure \ref*{fig:sensitivity_zoom1}}
+ show this very clearly. Between the $\alpha$ and $q$ values of 1.7 and 8.0 and 2.3 and 5.5 exists an optimal region, where the
+ loss appears to be either minimal or at least close to minimal. The optimal region has a diagonal shape and suggests a linear
+ relationship between $\alpha$ and $q$, where loss remains close to optimal, if an increase in $\alpha$ (increase in infection events)
+ is compensated by a decrease in $q$ (a decrease in infection events) and vice versa. The optimal values $\alpha = 0.198$ and
+ $q = 6.675$ is also within this optimal region. This further supports the idea that the model and the optimization is working as
+ intended.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
 \section{Model adjustments and solutions}
+In the previous section we discussed the results, different effect observed in the experiments and pointed out potential areas of
+improvement. This section will focus on discussing possible adjustments to the model in order to increase the overall performance.
 
 
+%-----------------------------------
+%	SUBSECTION 1
+%-----------------------------------
+\subsection{General approach of optimizing different regions}
+- weight of different regions
+	- normalization of difference (maybe percentage deviation in loss)
+	- optimize for maximum amount of regions optimal
+- Diffusion
+- density/population dependent variables
 
-
-
+\subsection{}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
