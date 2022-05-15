@@ -131,6 +131,7 @@ either no or very little outflow out of \B{E}. Since the difference between simu
 an strong increase in loss is the result. $q$ therefor serves as a counterbalance the effects of $\alpha$. All of these results show
 that the model itself is working as intended.
 \textcolor{red}{talk more about the other images in this section and explain that results are in optimum}
+\newline 
 
  It is also interesting, that the there appears to be a set of possible values where $\alpha$ and $q$ are in an equilibrium and 
  minimize the overall loss of the simulation. The images in \hyperref[fig:sensitivity_zoom1]{Figure \ref*{fig:sensitivity_zoom1}}
@@ -153,20 +154,85 @@ improvement. This section will focus on discussing possible adjustments to the m
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
-\subsection{General approach of optimizing different regions}
-- weight of different regions
-	- normalization of difference (maybe percentage deviation in loss)
-	- optimize for maximum amount of regions optimal
-- Diffusion
-- density/population dependent variables
+\subsection{Optimizing different regions}
+A prominent issue in this work was the weighting of different regions based on how the loss is calculated. Currently the loss
+favors regions that either strongly differ from their original data, have a high population relative to the other regions or
+both. This can cause few regions to dominate the optimization process, while many regions influence the optimization only marginally.
+All in all this can lead to cases were many regions kind of fit the trend, but few or none fit very well. \newline
 
-\subsection{}
+% normalization options for loss function
+%weight of different regions
+%	- normalization of difference (maybe percentage deviation in loss)
+%	- optimize for maximum amount of regions optimal
+\textcolor{red}{rework, think of better normalization methods}
+A possible solution could be to normalize the input values of the loss function. Instead of calculating the loss based on the actual
+number of individuals in an observed group, the loss could be calculated based on the percentage deviation from the simulated
+to the original value. This would not eliminate the problem of highly deviant regions being favored during the optimization phase,
+but priorities based on population size would be removed. 
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+\subsection{Additional features for modeling improvements}
+% density/population variables
+An alternative to changing the loss function, would be to introduce population or population density dependent variables
+to the model. This idea seems especially desirable, since it also tackles a more conceptual issue with the current model. Right
+now the model mostly tries to reproduce past events based on previously acquired data points. While this is good to get a general
+idea of epidemiological dynamics, the prediction power of such a system is relatively limited. Adding variables to the model,
+that specifically try to account for the epidemiological differences between high density and low density population areas, could
+be a good solution in this case. This should not only improve the overall performance of the simulation, but also increase its 
+predictive power by bringing the model closer to what epidemiological spreading actually looks like in a real world setting.
+While this option is very tempting in the benefits it provides, it could prove major challenges. Finding a suitable and quantifiable
+dependency between, for instance, population density and infection dynamics is difficult and may no be uniform between different
+regions. While population-infection dependencies between different regions in Germany might be comparable, population-infection
+dependencies in other regions of the world like the USA, India, China, Russia or Egypt might be different. In order to compensate
+for cultural and other differences like this as well, it would also likely be necessary to apply optimization protocols to these
+variables. This in turn requires additional modifications to the current implementation of the model. Nonetheless, while a lot of
+additional work, this option is likely one of the most promising improvements to the model in its current state.\newline 
+
+%diffusion
+Another promising improvement that could be made to the model would be to run additional simulations with varying degrees of
+diffusion. A system like this would further help to bring the modeling system closer to real world conditions. The current
+implementation of the model included a system like this and could help to further improve results. However, it was not included
+in this work, since it was both out of the scope of this work and would likely provide much better improvements, if the
+previously discussed issues with region weighting and population/population density dependencies are resolved.
+\textcolor{red}{maybe add more to diffusion discussion? What features need to be added here?}
+
+
+%note weighting/region weighting sounds like shit. Think of better wording.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
 
-\section{Outlook}
+\section{Conclusion and Outlook}
+\textcolor{red}{check for scope description of the work and adjust as necessary}
+\textcolor{red}{Add predictive power of model?}
+\textcolor{red}{Generally talk more about PDE?}
+The main scope of this work was to use the previously established SEIRD model in the broader context of an interconnected region.
+A previous work by Devansh et al.\cite{devansh} established the implementation of the model and tested the results in the
+context of seven big cities in Germany. This work improved the 2D-map, the overall implementation of the SERID model, expanded
+the scope from 7 similar regions to 26 regions with diverse populations and living conditions in these regions and focused on the
+details of the inner working of the model by analyzing the first transition step of the model.
+The results of the work are in line with our expectations. The current implementation
+of the model optimizes towards the correct number of infection events, but deviations of the real world data are common. Reason for
+this is both the weighting of different regions against one another and a lack of additional variables that help to account for
+intrinsic differences between the regions. Urban regions, like big cities for instance, will have a different infection dynamic
+compared more rural  regions with small villages and generally lower population density.\newline
+
+Nevertheless the results presented in this work help to evaluate the current implementation of the SERID model and identify
+key features that need to be added in order to improve the overall modeling quality. Once this is done, both the precision, with
+which previously acquired data is modeled, as well as the predictive capabilities of the model should improve. This could make
+the model a valuable tool to predict the development of future endemic or pandemic events and help both scientists and official
+institutions to better understand and act in such situations. Since the SEIRD model is based on.  \newline 
+
+
+
+
+
+
+
+
 
 
 
