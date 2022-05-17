@@ -3,6 +3,7 @@ from mpl_toolkits import mplot3d
 import matplotlib as mpl
 import numpy as np
 import matplotlib.pyplot as plt
+import statistics
 from mpl_toolkits.mplot3d import Axes3D
 #%matplotlib inline
 
@@ -10,7 +11,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # part one, parse sample data
 
 # open and read sample file
-impFile = open("./perc_diff_50d.txt", "r")
+impFile = open("./perc_diff_76d.txt", "r")
 data = impFile.read()
 
 # set up for data parsing
@@ -60,10 +61,11 @@ for set_i in range(1, len(results)):
 impFile.close()
 
 testprint = False
+testprint = True
 if testprint:
 	print(results[0])
 	for table in range(len(sorted_tab)):
-		print(sorted_tab[table])
+		print(sorted_tab[table], 'mean =', statistics.median(sorted_tab[table]))
 
 # ========================================================================
 # part two, plot results

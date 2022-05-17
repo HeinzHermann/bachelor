@@ -229,9 +229,11 @@ algorithm.
 %----------------------------------------------------------------------------------------
 %	SECTION 4
 %----------------------------------------------------------------------------------------
-
 \section{Data post-processing and variable optimization}
 \label{sec:post_proc}
+In order to optimize simulation results, the variables of the model equations had to be automatically adjusted based on
+the loss value of the previous simulation. This section explains the different steps necessary to achieve this goal.
+
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
@@ -282,4 +284,41 @@ In order to better understand the sensitivity of the model for different variabl
 investigated variables was chosen and simulations were performed with randomly chosen combinations of these variables. After each run the total
 loss of the simulation attempt was calculated and recorded. This data was then used to create a topographic map of the relation between variables
 and the total loss of the simulation. The program used for this task was the \I{geometry\_sampler} provided in \I{ConstrainedOptimization}.
+
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 4
+%----------------------------------------------------------------------------------------
+\section{Data evaluation}
+Data analysis of the simulation results was a big part of this work. This section will highlight techniques and tools used during this process.
+
+%-----------------------------------
+%	SUBSECTION 1
+%-----------------------------------
+\subsection{Box plots}
+Presenting the amount of data that was acquired in a compact and presentable way proved to be challenging. We decided to use box plots
+as one of the main methods of presenting our data, as they convey a lot of key information to the reader without beeing to overwelming.
+Each box plot is made up of multiple elements. A Minimum, a Maximum, a first Quartile (Q1), a third Quartile (Q3), the Median and
+the Outliers of the measurement. The Median is the middle value of the entire data set and lies between Q1 and Q3. Q1  is the middle
+value between the lowest value of the data set and the Median. Similarly Q3 is the middle value between the Median and the
+highest value of the data set. The difference between Q1 and Q3 is called the interquartile range (IQR). The Minimum and Maximum are
+defined as $\text{Minimum} = Q1 - x*\text{IQR}$ and $\text{Maximum} = Q3 + x*\text{IQR}$, where $x$ was set to 1.5.
+All values in the data set, that are located outside of the Minimum or Maximum are called Outliners and are represented as circles.
+\hyperref[fig:boxplot]{Figure \ref*{fig:boxplot}} summarizes these definitions in an image.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=0.75\textwidth]{./figures/SEIRD.png}
+		\caption{Exemplary illustration of a box plot.
+			}
+		\label{fig:boxplot}
+	\end{center}
+\end{figure}
+
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+\subsection{Custom programs}
 
