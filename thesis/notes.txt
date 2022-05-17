@@ -1,2 +1,10 @@
 :setlocal spelllang=en_us
 :help spell
+
+
+
+
+notes for thesis:
+
+found new source for limex
+https://opus4.kobv.de/opus4-zib/frontdoor/index/index/docId/540

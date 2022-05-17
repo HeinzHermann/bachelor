@@ -34,8 +34,9 @@ $\alpha$ and $q$.
 %-----------------------------------
 %	SECTION 2
 %-----------------------------------
-\section{Model adjustment and data acquisition}
-
+\section{Data acquisition and model adjustment}
+The following section will explain the processes of data acquisition, issues and modifications of the SEIRD model,
+in order to improve the quality of the results. \textcolor{red}{needs better wording}
 
 %-----------------------------------
 %	SUBSECTION 1
@@ -147,7 +148,8 @@ data points were chosen, since no
 significant policy changes regarding protective measures against COVID-19 infections (mask mandates, isolation periods, store closures) 
 were made during this time in Germany. Additionally this time frame was before other COVID-19 variants were first observed in
 Germany\cite{??}. It can therefore be assumed, that only the original CODIV-19 strain from Wuhan was contributing to infections.
-This minimizes the risk of phenomena influencing the simulation reluslts, that are not accounted for in the model.\textcolor{red}{(rewrite sentence? kinda shit...)}\newline
+This minimizes the risk of phenomena influencing the simulation reluslts, that are not accounted for in the model.
+\textcolor{red}{(rewrite sentence? kinda shit...)}\newline
 
 \par
 Each group was calculated for each day in each region. For the first day of simulation (day 0), the percentage of each group at that
@@ -157,12 +159,12 @@ point in time was calculated. These values were used as the starting point for o
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
-\subsection{Generation of Hesse 2d-grid}
+\subsection{Generation of 2d-grid of Hesse}
 For the simulation, a 2d-grid of Hesse was created using the program ProMesh4. The grid was manually drawn and consisted
 of 1075 vertices and 3049 edges, from which 1975 faces (triangular volumes) were constructed. The grid can be refined
 to 4136 vertices (accompanied also by an increasing number of edges and faces), however during this work only the grid
 with 1075 vertices was used for simulations. The grid itself was divided into 26 regions, representing the 26 autonomous
-regions of Hesse. A visual representation of the grid with and without wire frame and an exemplary image of the original geogrphay
+regions of Hesse. A visual representation of the grid with and without wire frame and an exemplary image of the original geography
 of Hesse are shown in \hyperref[fig:2d-grid]{Figure \ref*{fig:2d-grid}}.
 
 \begin{figure}
@@ -185,8 +187,7 @@ of Hesse are shown in \hyperref[fig:2d-grid]{Figure \ref*{fig:2d-grid}}.
 
 The geometry and properties of the grid (also called mesh in the context of computational simulation) make it unstructured.
 That means, that vertices can be positioned and connected arbitrarily. This method provides more flexibility then 
-
-\textcolor{red}{add finite volume explanation}
+\textcolor{red}{ADD FINITE VOLUME EXPLANATION!!!}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
@@ -194,22 +195,43 @@ That means, that vertices can be positioned and connected arbitrarily. This meth
 
 \section{SEIRD simulation}
 
--simulation itself without optimization
+\subsection{Inherited SEIRD model implementation}
+The experiments of this work were  performed using the model implementation previously established in and kindly provided by
+Devansh et al.\cite{devansh}. The code provided included a functional implementation of the UG4 'EpidemicsRunner', as well as
+the epidemics\_app folder used for  the previously mentioned project. The code was manly lua based and served as a base
+for modifications and additional features added during this work in order to both streamline the simulation process, as
+well as perform the simulation experiments used to generate the results. The base file used to run the SEIRD simulation was epidemics.lua,
+which was originally written by Prof. Gabriel Wittum and Dr. Arne N\"agel, and later modified by Devansh Rastogi and Tristan Scheidemann
+\textcolor{red}{check name}. 
+The previously mentioned lua files are serving as a platform for the underlying UG4 framework. Commands issued in the lua files
+are read and execute associated commands defined in UG4. 
 
-\subsection{ODE}
+\subsection{Process sequence of SEIRD simulations}
+The implemented SEIRD simulation is based on an ugx file, that describes the geometry of the simulated regions. The file is provided
+by the user and contains a number of vectors and edges. Vectors are grouped together to form regions, while edges describe possible
+interactions between vectors that can be used to simulate migration between vectors. When the SEIRD model is started, specific starting
+conditions, that are defined in the lua code, are applied to specific regions of the grid. From there the simulation is run for each
+vector and the results are saved in an output file. If parameter optimization is performed, these results are then modified and processed
+using the ConstrainedOptimization plugin (see \hyperref[sec:post_proc]{section \ref*{sec:post_proc}} for details).
 
 
 \subsection{LIMEX scheme}
-
+% found new source, see notes.txt in /bachelor/thesis/
 
 \subsection{Solvers}
+\textcolor{red}{double check that this is what solvers do!}
+For the process of optimizing the partial differential equation (PDE) problem, given by the model, two different sovlving mehtods
+were used. The first option was a Gauss-Newton algorithm and the second one was a particle swarm optimization (PSO) algorithm.
+During the experimental phase of the project both methods were used to solve the problem as best as possible. While both
+methods provided similar results in the end, all data presented in the result section were created using the Gauss-Newton
+algorithm. 
 
 %----------------------------------------------------------------------------------------
 %	SECTION 4
 %----------------------------------------------------------------------------------------
 
 \section{Data post-processing and variable optimization}
-
+\label{sec:post_proc}
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
@@ -245,7 +267,8 @@ shows the equation.
 %	SUBSECTION 3
 %-----------------------------------
 \subsection{Variable optimization via ConstrainedOptimization}
-The variables $\alpha$ and $q$ of the SEIRD system were optimized using the ConstrainedOptimization plugin for UG4\cite{???}. %note add constrainedopt citation
+The variables $\alpha$ and $q$ of the SEIRD system were optimized using the ConstrainedOptimization plugin for UG4\cite{???}.
+%note add constrainedopt citation
 The plugin was used to optimize these variables using both the Newton-Gauss algorithm and Particle Swarm Optimization (PSO). Step sizes for
 individual time points were adjusted when using the Newton-Gauss method. The algorithm used to adapt the step size was the Frank-Wolf
 algorithm\cite{devansh}\cite{frank-wolf}. %note add citaions
