@@ -190,7 +190,68 @@ The following sections will explain two methods used in this work. The Gauss-New
 %-----------------------------------
 
 \subsection{Gauss-Newton algorithm}
+\textcolor{red}{add citations}
 \label{sec:Gauss}
+The Gauss-Newton algorithm is an iterative method, that is used to solve non-linear least square problems. Given a set of $m$ functions, $n$
+variables that are used to calculate the function results  and a number of target values, the algorithm is used to optimize the variables in
+such a way, that difference between function results and target values are minimized.\newline
+
+The relevant parameters in this algorithm are the vector function $F(\theta)$, the Jacobian matrix $J$, the target values $X$ and the
+estimated parameters $\theta^{i}$, the estimation change $\Delta^{i}$ and the error value $\epsilon^{i}$ of iterations $i$. Given $m$
+functions and $n$ variables, with the condition that $m \geq n$, the definitions for $F(\theta)$, $\theta^{i}$, $\Delta^{i}$ and
+$\epsilon^{i}$ are as follows.
+
+\begin{align}
+	F(\theta) =& (f_0(\theta), f_1(\theta),...,f_m(\theta))^T \\
+	\theta^{i} =& (\theta^{i}_0, \theta^{i}_1, \theta^{i}_2,...,\theta^{i}_n)^T \\
+	\Delta^{i} =& (\theta^{i}_0 - \theta^{i-1}_0, \theta^{i}_1 - \theta^{i-1}_1, ..., \theta^{i}_m - \theta^{i-1}_m)^T \\ %questionable?
+	\epsilon^{i} =& F(\theta^{i}) - X
+\end{align}
+
+$F(\theta)$ is calculated iterative thought the algorithm and can be expressed in the form of a Taylor Series (eq. \ref*{eq:taylor1}) and
+then rewritten as the Jacobian matrix $J$.
+
+%note maybe add colors later
+\begin{align}
+	F(\theta^{i+1}) = F(\theta^{i} + \Delta^{i}) =&
+		\begin{pmatrix} f_0(\theta^{i}) &+& \frac{\delta f_0(\theta)}{\delta \theta_0} \Delta^{i}_0 &+& ... &+&  \frac{\delta f_0(\theta)}{\delta \theta_n} \Delta^{i}_n  \\
+				. && && && . \\
+				. && && && . \\
+				f_m(\theta^{i}) &+& \frac{\delta f_0(\theta)}{\delta \theta_0} \Delta^{i}_0 &+& ... &+&  \frac{\delta f_m(\theta)}{\delta \theta_n} \Delta^{i}_n 
+		\end{pmatrix} \label{eq:taylor1} \\
+	=& \begin{pmatrix} f_0(\theta^{i}) \\ . \\ . \\ f_m(\theta^{i})  \end{pmatrix} +
+		\begin{pmatrix} \frac{\delta f_0(\theta)}{\delta \theta_0} & . & . & \frac{\delta f_0(\theta)}{\delta \theta_n}  \\
+					   . &&& . \\
+					   . &&& . \\
+					   \frac{\delta f_m(\theta)}{\delta \theta_0} & . & . & \frac{\delta f_m(\theta)}{\delta \theta_n}
+		\end{pmatrix} \begin{pmatrix} \Delta^{i}_0 \\ . \\ . \\ \Delta^{i}_n \end{pmatrix}  \label{eq:taylor2} \\
+	=& F(\theta^{i}) + J \Delta^{i} \label{eq:taylor3}
+\end{align}
+
+This means the Jacobian Matrix $J$ is defined as such
+
+\begin{align}
+	J_{pq} = \frac{\delta f_p(\theta)}{\delta \theta_q} \quad \text{where } \quad p \in \{0,1,..,m\},\text{ } q \in \{0,1,...,n\}
+\end{align}
+
+The general steps for this method are listed below. Each steps will be explained later.
+
+\begin{enumerate}
+	\item Start with an initial estimate $\theta^{(0)}$ for the optimal variables
+		\item Calculate the error $\epsilon$ between the target data and the function results with the estimated values. If $\epsilon$
+			is not zero or fulfills a breaking condition, continue. Otherwise return the current estimate 
+		\item Calculate the Jacobian-Matrix $J$ using the functions and the current estimate
+		\item Use $J$ and $\epsilon$ to calculate the difference $\Delta$ by which the estimate of the current iteration is
+			modified. Update the current estimate and continue from step 2
+\end{enumerate}
+
+In detail this means, that a set of $m$ functions and $n$ variables are given, with the condition that $m \geq n$. An initial estimate $\theta^{(0)}$ is
+made, which is expressed in vector form. $\theta^{(0)}$ is then inserted into $F(\theta^{i})$, where $F(\theta^{i})$ are all $m$ functions in vector
+form and $\theta^{i}$ is the estimate of the $i$th iteration. Together with the target values $X$, these results are used to calculate the error
+$\epsilon^{i}$ of the $i$th iteration. The mathematical definitions of the described equations are shown below.
+
+
+
 
 %-----------------------------------
 %	SUBSECTION 2
