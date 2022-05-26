@@ -190,7 +190,8 @@ The following sections will explain two methods used in this work. The Gauss-New
 %-----------------------------------
 
 \subsection{Gauss-Newton algorithm}
-\textcolor{red}{add citations}
+\textcolor{red}{add citations, explain least squared better/at all}
+\textcolor{red}{describe efficiency and why it is cool}
 \label{sec:Gauss}
 The Gauss-Newton algorithm is an iterative method, that is used to solve non-linear least square problems. Given a set of $m$ functions, $n$
 variables that are used to calculate the function results  and a number of target values, the algorithm is used to optimize the variables in
@@ -256,15 +257,31 @@ linear. The non-linear least square method is then used to calculate $\Delta$ of
 
 Therefor equation \ref*{eq:taylor5} can be used to calculate a suitible $\Delta$ in order to decrease the error in each iteration. \newline
 
-The central steps of the Gauss-Newton method are listed below.
-\begin{enumerate}
-	\item Start with an initial estimate $\theta^{(0)}$ for the optimal variables
-	\item Calculate the error $\epsilon$ between the target data and the function results with the estimated values. If $\epsilon$
-		is not zero or fulfills a breaking condition, continue. Otherwise return the current estimate 
-	\item Calculate the Jacobian-Matrix $J$ using the functions and the current estimate
-	\item Use $J$ and $\epsilon$ to calculate the difference $\Delta$ by which the estimate of the current iteration is
-		modified. Update the current estimate and continue from step 2
-\end{enumerate}
+The core steps of the Gauss-Newton method are listed below as pseudo-code.
+
+%\begin{enumerate}
+%	\item Start with an initial estimate $\theta^{(0)}$ for the optimal variables
+%	\item Calculate the error $\epsilon$ between the target data and the function results with the estimated values. If $\epsilon$
+%		is not zero or fulfills a breaking condition, continue. Otherwise return the current estimate 
+%	\item Calculate the Jacobian-Matrix $J$ using the functions and the current estimate
+%	\item Use $J$ and $\epsilon$ to calculate the difference $\Delta$ by which the estimate of the current iteration is
+%		modified. Update the current estimate and continue from step 2
+%\end{enumerate}
+
+
+\begin{algorithm}
+	\caption{Gauss-Newton algorithm pseudocode}
+	Initialize estimate $\theta^{(0)}$ for the optimal variables;
+	Calculate initial error $\epsilon^0$;
+	Set i=0;
+	\While {$\epsilon^i$ != 0 \Or (breaking conditions not fulfilled)}
+		\State Calculate the Jacobian-Matrix $J$ using $\theta^i$;
+		\State Use $J$ and $\epsilon^i$ to calculate estimate adjustment $\Delta^i$;
+		\State Set i=i+1;
+		\State Calculate $\epsilon^i$
+	\EndWhile
+	Return $\theta^i$;
+\end{algorithm}
 
 
 %-----------------------------------
@@ -273,6 +290,27 @@ The central steps of the Gauss-Newton method are listed below.
 
 \subsection{Particle Swarm Optimization}
 \label{sec:PSO}
+Like the Gauss-Newton algorithm, $Particle Swarm Optimization$ (PSO) is a method used to iteratively optimize a problem. The general
+concept of PSO is to generate a number of candidate solutions (particles) per iteration, quantify the quality of each solution, take the best
+candidate of the sum of all particles (swarm) as the current best solution and try to improve this solution in following iterations.
+Improvements are made by (randomly) altering the candidate solutions in hopes of finding a new solution, that improves on the previous best.
+If suitable breaking conditions are met or the maximum number of iterations has passed, the algorithm stops and returns the current best solution.
+In order to find the best solution in the defined search space as quickly and efficiently as possible, additional conditions are applied
+to each particle. Particles are grouped together and a current best group solution is recorded, in addition to the current global optimal solution.
+Modifications of the solution of each particle per iteration are still random, but in some way biased towards both the group and global optimum.
+This is meant to direct a greater number of particles to the area of the most optimal solutions, that are currently known.
+However, these solution may not be the global optimum for the defined search space and there is no guarantee, that improvements will be made in any
+given iteration. As a trade off, the problem function does not need to be differentiable like it is the case for the Gauss-Newton algorithm. \newline
+
+There are many different types of PSO algorithms. The following is a general setup:\newline
+A problem space is defined, as well as a cost function $L$, which takes a number of $n$ input values in the from of a vector $\theta$ and projects them
+to a real number $\epsilon$. The goal is to minimize this function. Each particle $p_i$ is defined by a number of variables. These variables are its candidate
+solution (also called position) $position_i$, the positional change of the particle $velocity_i$, the current best group solution $best_group_i$, the
+current best global solution $best_swarm_i$ as well as its group index $group_i$.
+
+\begin{align}
+	
+\end{align}
 
 
 
