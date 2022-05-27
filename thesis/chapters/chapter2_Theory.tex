@@ -271,16 +271,18 @@ The core steps of the Gauss-Newton method are listed below as pseudo-code.
 
 \begin{algorithm}
 	\caption{Gauss-Newton algorithm pseudocode}
-	Initialize estimate $\theta^{(0)}$ for the optimal variables;
-	Calculate initial error $\epsilon^0$;
-	Set i=0;
-	\While {$\epsilon^i$ != 0 \Or (breaking conditions not fulfilled)}
-		\State Calculate the Jacobian-Matrix $J$ using $\theta^i$;
-		\State Use $J$ and $\epsilon^i$ to calculate estimate adjustment $\Delta^i$;
-		\State Set i=i+1;
-		\State Calculate $\epsilon^i$
-	\EndWhile
-	Return $\theta^i$;
+	\begin{algorithmic}
+		\State Initialize estimate $\theta^{(0)}$ for the optimal variables;
+		\State Calculate initial error $\epsilon^0$;
+		\State Set i=0;
+		\While {\{$\epsilon^i$ != 0 \B{or} (breaking conditions not fulfilled)\}}
+			\State Calculate the Jacobian-Matrix $J$ using $\theta^i$;
+			\State Use $J$ and $\epsilon^i$ to calculate estimate adjustment $\Delta^i$;
+			\State Set i = i+1;
+			\State Calculate $\epsilon^i$
+		\EndWhile
+		Return $\theta^i$;
+	\end{algorithmic}
 \end{algorithm}
 
 
@@ -302,14 +304,14 @@ This is meant to direct a greater number of particles to the area of the most op
 However, these solution may not be the global optimum for the defined search space and there is no guarantee, that improvements will be made in any
 given iteration. As a trade off, the problem function does not need to be differentiable like it is the case for the Gauss-Newton algorithm. \newline
 
-There are many different types of PSO algorithms. The following is a general setup:\newline
+There are many types of PSO algorithms. The following is a general setup:\newline
 A problem space is defined, as well as a cost function $L$, which takes a number of $n$ input values in the from of a vector $\theta$ and projects them
-to a real number $\epsilon$. The goal is to minimize this function. Each particle $p_i$ is defined by a number of variables. These variables are its candidate
-solution (also called position) $position_i$, the positional change of the particle $velocity_i$, the current best group solution $best_group_i$, the
-current best global solution $best_swarm_i$ as well as its group index $group_i$.
+to a real number $\epsilon$. The goal is to minimize this function. Each particle $x_i$ is defined by a number of variables. These variables are
+its candidate solution (position) $p_i$, the positional change of the particle (velocity) $v_i$, the current best group solution $g_i$, the
+current best global (swarm) solution $s_i$ as well as its group index $i_i$.
 
 \begin{align}
-	
+	x_i =& (p_i, v_i, g_i s_i, i_i)
 \end{align}
 
 
