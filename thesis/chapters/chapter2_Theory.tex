@@ -197,7 +197,7 @@ The Gauss-Newton algorithm is an iterative method, that is used to solve non-lin
 variables that are used to calculate the function results  and a number of target values, the algorithm is used to optimize the variables in
 such a way, that difference between function results and target values are minimized.\newline
 
-The relevant parameters in this algorithm are the vector function $F(\theta)$, the Jacobian matrix $J$, the target values $X$ and the
+The relevant parameters in this algorithm are the vector function $F(\theta)$, the Jacobian matrix $J$, the target values $T$ and the
 estimated parameters $\theta^{i}$, the estimation change $\Delta^{i}$ and the error value $\epsilon^{i}$ of iterations $i$. Given $m$
 functions and $n$ variables, with the condition that $m \geq n$, the definitions for $F(\theta)$, $\theta^{i}$, $\Delta^{i}$ and
 $\epsilon^{i}$ are as follows.
@@ -206,7 +206,7 @@ $\epsilon^{i}$ are as follows.
 	F(\theta) =& (f_0(\theta), f_1(\theta),...,f_m(\theta))^T \\
 	\theta^{i} =& (\theta^{i}_0, \theta^{i}_1, \theta^{i}_2,...,\theta^{i}_n)^T \\
 	\Delta^{i} =& (\theta^{i}_0 - \theta^{i-1}_0, \theta^{i}_1 - \theta^{i-1}_1, ..., \theta^{i}_m - \theta^{i-1}_m)^T \\ %questionable?
-	\epsilon^{i} =& F(\theta^{i}) - X
+	\epsilon^{i} =& F(\theta^{i}) - T
 \end{align}
 
 $F(\theta)$ is calculated iterative thought the algorithm and can be expressed in the form of a Taylor Series (eq. \ref*{eq:taylor1}) and
@@ -239,8 +239,8 @@ To minimize the error $\epsilon$ in each following iteration, a connection is es
 error of the following iteration, such that the non-linear least squared method can be used. This process is shown below.
 
 \begin{align}
-	& \epsilon^{i+1} = F(\theta^{i} + \Delta^{i}) - X \quad \text{since} \quad F(\theta^{i} + \Delta^{i}) = F(\theta^{i}) + J \Delta^{i} \\
-	\Leftrightarrow & \epsilon^{i+1} = F(\theta^{i}) + J \Delta^{i}) - X \quad \text{since} \quad \epsilon^{i} = F(\theta^{i}) - X \\
+	& \epsilon^{i+1} = F(\theta^{i} + \Delta^{i}) - T \quad \text{since} \quad F(\theta^{i} + \Delta^{i}) = F(\theta^{i}) + J \Delta^{i} \\
+	\Leftrightarrow & \epsilon^{i+1} = F(\theta^{i}) + J \Delta^{i}) - T \quad \text{since} \quad \epsilon^{i} = F(\theta^{i}) - T \\
 	\Leftrightarrow & \epsilon^{i+1} = \epsilon^{i} + J \Delta^{i} \label{eq:taylor4}
 \end{align}
 
@@ -272,16 +272,18 @@ The core steps of the Gauss-Newton method are listed below as pseudo-code.
 \begin{algorithm}
 	\caption{Gauss-Newton algorithm pseudocode}
 	\begin{algorithmic}
-		\State Initialize estimate $\theta^{(0)}$ for the optimal variables;
-		\State Calculate initial error $\epsilon^0$;
+		\State Set $T$ = target values;
+		\State Set $\theta^{0}$ = initial estimate for optimal varialbes;
+		\State Calculate initial error $\epsilon^0$ = $F(\theta^0) - T$;
 		\State Set i=0;
-		\While {\{$\epsilon^i$ != 0 \B{or} (breaking conditions not fulfilled)\}}
+		\While {\{$\epsilon^i$ != 0 \B{or} (breaking conditions \B{not} fulfilled)\}}
 			\State Calculate the Jacobian-Matrix $J$ using $\theta^i$;
 			\State Use $J$ and $\epsilon^i$ to calculate estimate adjustment $\Delta^i$;
+			\State Set $\theta^{i}$ = $\theta^{i} + \Delta^i$;
 			\State Set i = i+1;
 			\State Calculate $\epsilon^i$
-		\EndWhile
-		Return $\theta^i$;
+		\EndWhile;
+		\State \B{return} $\theta^i$;
 	\end{algorithmic}
 \end{algorithm}
 
@@ -297,9 +299,11 @@ concept of PSO is to generate a number of candidate solutions (particles) per it
 candidate of the sum of all particles (swarm) as the current best solution and try to improve this solution in following iterations.
 Improvements are made by (randomly) altering the candidate solutions in hopes of finding a new solution, that improves on the previous best.
 If suitable breaking conditions are met or the maximum number of iterations has passed, the algorithm stops and returns the current best solution.
+\newline
+
 In order to find the best solution in the defined search space as quickly and efficiently as possible, additional conditions are applied
 to each particle. Particles are grouped together and a current best group solution is recorded, in addition to the current global optimal solution.
-Modifications of the solution of each particle per iteration are still random, but in some way biased towards both the group and global optimum.
+Modifications of the solution of each particle per iteration are random, but in some way biased towards both the group and global optimum.
 This is meant to direct a greater number of particles to the area of the most optimal solutions, that are currently known.
 However, these solution may not be the global optimum for the defined search space and there is no guarantee, that improvements will be made in any
 given iteration. As a trade off, the problem function does not need to be differentiable like it is the case for the Gauss-Newton algorithm. \newline
@@ -307,12 +311,59 @@ given iteration. As a trade off, the problem function does not need to be differ
 There are many types of PSO algorithms. The following is a general setup:\newline
 A problem space is defined, as well as a cost function $L$, which takes a number of $n$ input values in the from of a vector $\theta$ and projects them
 to a real number $\epsilon$. The goal is to minimize this function. Each particle $x_i$ is defined by a number of variables. These variables are
-its candidate solution (position) $p_i$, the positional change of the particle (velocity) $v_i$, the current best group solution $g_i$, the
-current best global (swarm) solution $s_i$ as well as its group index $i_i$.
+its candidate solution (position) $p_i$, the positional change of the particle (velocity) $v_i$ and its group index $i_i$. Each group is defined by
+three different variables. Its group index $i_j$ and the current best group solution $g_j$. Finally there is a global variable, the global best
+(swarm) solution $S$.
 
 \begin{align}
-	x_i =& (p_i, v_i, g_i s_i, i_i)
+	x_i =& (p_i, v_i, i_i)
+	g_i =& (v_i, g_i)
 \end{align}
 
+Shown below is a PSO algorithm, pseudocode example.
+
+\begin{algorithm}
+	\caption{Particle Swarm Optimization pseudocode}
+	\begin{algorithmic}
+		\State Set $T, S$ = target values, uniformly chosen random solution;
+		\State Set $g, p$ = number of groups, number of particles;
+		%\State Set $s$ = random solution in the defined search space;
+		%\State Set G = number of goups;
+		\For {each group $x_j$, where $j \in G = \{0,1,...,g\}$}
+			\State Set $i_j$ = group index;
+			\State Set $g_j$ = random solution in defined search space;
+			\If {$f(S) > f(g_j)$}
+				\State Set $S = g_j$;
+			\EndIf
+		\EndFor
+		%\State Set P = number of paricles;
+		\For {each paricle $x_i$, where $i \in P = \{0,1,...,p\}$}
+			\State Set $p_i$ = uniformly chosen random starting position;
+			\State Set $v_i$ = no initial change;
+			\State Set $i_i$ = index of a group;
+			\If {$f(S) > f(p_i)$}
+				\State Set $S = p_i$;
+				\State Set $g_i.g = p_i$;
+			\ElsIf {$f(g_i.g) > f(p_i)$}
+				\State Set $g_i.g = p_i$;
+			\EndIf
+		\EndFor
+		\While {$f(s) != 0$ \B{or} (breaking conditions are \B{not} met)}
+			\For {each particle $x_i$}
+				\State Set velocity $v_i$ to random new value, biased by $g_i.g$ and $s$;
+				\State Update particle position $p_i$ based on velocity $v_i$;
+				\If {$f(S) > f(p_i)$}
+					\State Set $S = p_i$;
+					\State Set $g_i.g = p_i$;
+				\ElsIf {$f(g_i.g) > f(p_i)$}
+					\State Set $g_i.g = p_i$;
+				\EndIf
+			\EndFor
+		\EndWhile
+		\State \B{return} $S$;
+	\end{algorithmic}
+\end{algorithm}
+
+\textcolor{red}{make pseudoalgo look nicer and easier to understand}
 
 
