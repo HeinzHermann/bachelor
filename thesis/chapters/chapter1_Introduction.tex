@@ -9,69 +9,51 @@
 %----------------------------------------------------------------------------------------
 
 \section{Motivation}
-Bacteria, viruses, parasites and all other kinds of causes for diseases are omnipresent on our planet\cite{??}. Some are
+Bacteria, viruses, parasites and all other kinds of other causes for diseases are omnipresent on our planet\cite{??}. Some are
 relatively easy to overcome for most individuals, like the common cold\cite{??}. Others, such as HIV (human immunodeficiency virus),
 can have severe long term impact on the quality of live of individuals\cite{??}. In addition to the impact sickness has
-on the live of an individual member of society, diseases, and how they spread, have a huge impact on our societies. Hospitals must
+on the live of an individual, diseases and how they spread, have a huge impact on our societies. Hospitals need to be 
 be build and staffed with doctors, nurses and other facility members. Supply chains need to be established and maintained in order
 to manufacture drugs and materials that can be used to cure patients. Research has to be conducted and new treatments need to be
 established, in order to increase the chances for a positive outcome of health complications. This entire network of services is
-costly in terms of time, effort  and money used to both establish and maintain it. In 2019, the United States of America spend
-16.77\% of their GDP (gross domestic product) on healthcare expenditures\cite{WHO site}. This shows that managing public health
-is important for every society in order to both stay competitive economically and provide citizens with a high quality of live.\newline
+costly in terms of time, effort  and money used to both establish and maintain it.
+%In 2019, the United States of America spend
+%16.77\% of their GDP (gross domestic product) on healthcare expenditures\cite{WHO site}. This shows that managing public health
+%is important for every society in order to both stay competitive economically and provide citizens with a high quality of live.\newline
 \par
-Even though huge successes have been made in the fight against infectious diseases (a notable example being the eradication of
-small pox\cite{??}), sickness due to infectious diseases remain a wide spread phenomenon in modern civilizations. Viruses are
+Even though huge progress has been made in the fight against infectious diseases (a notable example being the eradication of
+small pox\cite{??}), sickness due to infectious diseases remain a common phenomenon in modern civilizations. Viruses are
 among the most successful organisms in spreading between populations of both humans and animals\cite{??}. The most notable example
-for this must be the currently ongoing ``severe acute respiratory syndrome coronavirus 2'' (SARS-CoV-2) pandemic. The SARS-CoV-2 or
+for this is the currently ongoing ``severe acute respiratory syndrome coronavirus 2'' (SARS-CoV-2) pandemic. The SARS-CoV-2 or
 coronavirus disease 2019 (short COVID-19) was first observed in an outbreak in the Chinese city of Wuhan in December 2019\cite{??}.
 From there it started to spread around the globe and on March, 11 2020, the world health organization declared a world wide pandemic\cite{??}.\newline
 \par
 Managing this pandemic has been a huge challenge in the past two years and much debate has revolved around managing the spread of this
-infectious disease. To this end many scientists from many different fields have researched the properties of this virus in order to better
+infectious disease. To this end, scientists from many different fields have researched the properties of this virus in order to better
 understand and predict how COVID-19 spreads in our societies. One of these fields is a branch of computer science and math, that aims to
-model the spread of CODID-19 (or any infectious disease), using differential equations. This work aims to contribute to this field and
-provide insight in the process of modeling the spread of infectious diseases on a two-dimensional grid using the SEIRD method.
+model the spread of infectious diseases, such as  COVID-19, using differential equations. This work aims to contribute to this field and
+%provide insight in the process of modeling the spread of infectious diseases on a two-dimensional grid using the SEIRD method. 
+provide insight in the process of modeling the spread of infectious diseases, by building on the work of Rastogi et al.\cite{rastogi}.
+In this work the ``SEIRD'' model\cite{wittum} was applied to seven major cities of Germany on a 2-dimensional (2D) grid. This work
+follows up on this, by simulating COVID-19 spreading on 26 interconnected regions in the federal state of Hesse, Germany.
 
-
-
-%----------------------------------------------------------------------------------------
-%	SECTION 2
-%----------------------------------------------------------------------------------------
-
-\section{Computational disease modeling}
-A common goal for disease modeling is to predict the spreading of a disease in a given population. Different approaches can be made to
-achieve this goal. In 2019 Akhtar et al. presented a model, based on a neural network, that tries to predict the spread of the Zika virus\cite{note}.
-Models like this are promising, but have the disadvantage of requiring big sets of data in order to train the neural network in the first place.
-(\textcolor{red}{check article if this is actually the case!}) % note
-Other models are probabilistic in nature and try predict the spreading of a disease by simulating an individuals chance of contracting a
-disease at a given point in time\cite{??}. These models rely on big population counts to compensate errors that are caused by the random nature.
-In addition modeling the infection chances of each individual in a given population often requires considerable computational resources\cite{??}.
-A third method of computational disease modeling is based on differential equations. This model tries to establish and express relations between different
-properties of a system. In disease modeling this could mean an increase in infection rate based on the population density of a modeled region or a
-change in population mobility based on the average number of cars owned per household\cite{??}. The challenging aspect of this method is the design
-of the model itself, since real life phenomena (i.e. an increase in population mobility) tend to influenced by many different other factors (i.e.
-a high density of personal transportation, holiday seasons, cultural backgrounds). This means that the relation of many different ``moving parts'' in a
-system need to be identified, related to one another and then modeled and tuned correctly, in order to make accurate predictions of future events. However,
-if this modeling attempt is successful, it not only serves as a solid base for predictions of future events, it also provides insight into the interconnected
-nature of a system.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
 
-\section{Aims and goals}
-\textcolor{red}{Maybe move this more to the beginning? Difficult to formulate without previous explanations...}\newline % note
-\textcolor{red}{difficult to explain without model introduction}\newline % note
-This work aims to provide insight into the nature of the spreading of the COVID-19 virus. In a previous work Rastogi et al.\cite{rastogi}
-\textcolor{red}{(check for correct BA citation style)} % note
-explored the capability of the ``SEIRD'' model\cite{wittum} (detailed explanation in the \hyperref[sec:SEIRD]{following sections}).
-In his work he simulated the features of the COVID-19 pandemic in seven major cities of Germany on a 2-dimensional (2D) grid. While the
-results are interesting it remained unclear, how the model performs when simulating interconnected areas in a larger landscape.\newline
-
-\par
-In order to better understand the SEIRD model, a 2D grid of the German region of Hesse was created and used to simulate the spreading of
-the COVID-19 virus in the uninfected portion of the population. In addition, two parameters, that are regulating the spreading behavior
-in the model, were investigated closer. This analysis aimed to better understand the influence of the individual parameters on the modeling
-process itself.
+%\section{Aims and goals}
+%\textcolor{red}{Maybe move this more to the beginning? Difficult to formulate without previous explanations...}\newline % note
+%\textcolor{red}{difficult to explain without model introduction}\newline % note
+%This work aims to provide insight into the nature of the spreading of the COVID-19 virus. In a previous work Rastogi et al.\cite{rastogi}
+%\textcolor{red}{(check for correct BA citation style)} % note
+%explored the capability of the ``SEIRD'' model\cite{wittum} (detailed explanation in the \hyperref[sec:SEIRD]{following sections}).
+%In his work he simulated the features of the COVID-19 pandemic in seven major cities of Germany on a 2-dimensional (2D) grid. While the
+%results are interesting it remained unclear, how the model performs when simulating interconnected areas in a larger landscape.\newline
+%
+%\par
+%In order to better understand the SEIRD model, a 2D grid of the German region of Hesse was created and used to simulate the spreading of
+%the COVID-19 virus in the uninfected portion of the population. In addition, two parameters, that are regulating the spreading behavior
+%in the model, were investigated closer. This analysis aimed to better understand the influence of the individual parameters on the modeling
+%process itself.
 

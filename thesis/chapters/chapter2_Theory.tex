@@ -1,61 +1,98 @@
 % Chapter Template
 
 \chapter{Theory} % Main chapter title
-This chapter focuses on explaining the general theory behind the model and the methods used in this work.
+This chapter focuses on explaining the theory behind the model and the methods used in this work.
 Details regarding the exact problem definition, model adjustments, programs used and so on are given in
-\hyperref[chap:methods]{Chapter \ref*{chap:methods}}.
-
+\hyperref[chap:methodology]{Chapter \ref*{chap:methodology} - Methodology}.
 
 \label{chap:theory} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
+\section{Background of computational disease modeling}
+A common goal for disease modeling is to predict the spreading of a disease in a given population. Different approaches can be made to
+achieve this goal. In 2019 Akhtar et al. presented a model, based on a neural network, that tries to predict the spread of the Zika virus\cite{note}.
+Models like this are promising, but have the disadvantage of requiring big sets of data in order to train the neural network in the first place.
+(\textcolor{red}{check article if this is actually the case!}) % note
+Other models are probabilistic in nature and try predict the spreading of a disease by simulating an individuals chance of contracting a
+disease at a given point in time\cite{??}. These models rely on big population counts to compensate errors that are caused by the random nature.
+In addition modeling the infection chances of each individual in a given population often requires considerable computational resources\cite{??}.
+A third method of computational disease modeling is based on differential equations. This type of model tries to establish and express relations between different
+properties of a system. In disease modeling this could mean an increase in infection rate based on the population density of a modeled region or a
+change in population mobility based on the average number of cars owned per household\cite{??}. The challenging aspect of this method is the design and
+optimization of the model itself and its equations, since real life phenomena (i.e. an increase in population mobility) tend to be influenced by many
+different other factors (i.e. a high density of personal transportation, holiday seasons, cultural backgrounds). This means that the relations between many
+different ``moving parts'' in a system need to be identified, related to one another and then modeled and tuned correctly, in order to make accurate predictions
+of future events. However, if this modeling attempt is successful, it not only serves as a solid base for predictions of future events, it also provides insight
+into the interconnected nature of a system.
 
+
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
 \section{Compartmental modeling techniques}
-Compartmental modeling revere to a modeling technique often used to systematically describe real world phenomena
-like disease spreading\cite{compartementMod}. In these models the population is divided into different groups. 
-Members of one group can move to another group. This movement is based on equations that are used to model the real
-world behavior of each group. The following two sections introduce both the ``SIR'' and the ``SEIRD'' model. The
-latter model was the focus on this work.
+Compartmental modelings revere to a modeling technique often used to systematically describe real world phenomena
+like disease spreading via differential equations\cite{compartementMod}. In these models the population is divided into different groups. 
+Members of one group can move to another group. This movement is based on said differential equations, that are used to model the real
+world behavior of each group. Notable examples for these types of techniques are the ``SIR'' and the ``SEIRD'' model, which are discussed in
+the following sections. The latter of the two models was used in this work.
+
 
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
-\subsection{Ordinary differential equations}
+\subsection{Differential equations}
+\textcolor{red}{add citations}\\ %note
+\textcolor{red}{kinda shit, add more information, starting condition, etc.}\\ %note
+In order to understand the previously mentioned models, we will first introduce the concept of differential equations.
+Differential equations are functions which contain derivatives of unknown functions, which in turn depend
+on either one or more independent variables. Depending on the number of independent variables the differential
+equations are either considered \I{Ordinary Differential Equations} (ODE) (in case of a single variable, often time) or
+\I{Partial Differential Equations} (PDE) (in case of multiple variables). An example for each type of equation
+is given below, where equation \ref*{eq:ODE_ex} shows a simple \I{ODE} and equation \ref*{eq:PDE_ex} shows a
+simple \I{PDE}.\newline
+
+\begin{align}
+	\frac{\delta u}{\delta x} + b = c \label{eq:ODE_ex}\\
+	\frac{\delta u}{\delta x} + \frac{\delta u}{\delta y} \cdot \frac{\delta^2 u}{\delta z^2} = c \label{eq:PDE_ex}
+\end{align}
+
+Differential equations are often used to describe the rate of change in a given quantity in relation to another
+changing quantity. This makes them very useful for describing complex biological, physical, mechanical, economical
+or other scientific systems, where multiple system parameters interact with one another. However, while differential
+equations are a powerful tool in describing dynamic systems, it is often difficult to find their solution (if such
+a solution even exists).
+
 
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
-\subsection{Partial differential equations}
-
-
-%-----------------------------------
-%	SUBSECTION 3
-%-----------------------------------
 \subsection{The SIR model}
 \label{sec:SIR}
-In 1927 \cite{kermack1991contributions} first introduced their method to mathematically describe  
-the course  of an infectious disease. The model divides a population into three distinct groups.
+In 1927 \cite{kermack1991contributions} first introduced their method of mathematically describing  
+the epidemiological behavior of an infectious disease. The model divides a population into three distinct groups.
 
 \begin{enumerate}[label=$\bullet$]
-	\item \B{Susceptibles (S)}: Individuals that are naive to the infection and hence not immune. If in contact with
-		the virus these individuals can migrate to the\linebreak ``Infected'' group
-	\item \B{Infected (I)}: Individuals that are infected with the disease. Infected individuals contribute to the 
-		infection of members of the susceptible group. At some point during their infection, these members
-		transition to the ``Removed'' group.
-	\item \B{Removed (R)}: Individuals that  have either overcome their infection and are now immune to the disease
-		or have succumb to the disease and are diseased. They do not spread the virus and cannot be infected again.
+	\item \B{Susceptibles (S)}: Individuals that are not immune to the infection.
+		%If in contact with the virus these individuals can migrate to the\linebreak ``Infected'' group
+	\item \B{Infected (I)}: Individuals that are currently infected with the disease.
+		%Infected individuals contribute to the infection of members of the susceptible group.
+		%At some point during their infection, these members transition to the ``Removed'' group.
+	\item \B{Removed (R)}: Individuals that  have either overcome their infection and are now immune or have succumb to the disease.
+		%and are diseased. They do not spread the virus and cannot be infected again.
 \end{enumerate}
 
-\par
-The population changes of all three groups are described by mathematical equations\cite{mathSIR}. Notable variables
-are the number of susceptible members (S), number of infected members (I), number of recovered members (R), $\alpha$
-which is a positive constant that describes the transmission rate of the disease and $\beta$, which is a positive
-constant between 0 and 1 that describes the transition rate (either recovery or death) between \B{I} and \B{R}.
-$\beta$ can be rewritten as $\frac{1}{b}$, where $b$ is the average duration an infected individual remains contagious,
-before it either recovers or dies. The model is illustrated in \hyperref[fig:SIR]{Figure \ref*{fig:SIR}}, the equations
-are expressed as follows:
+
+The population changes of all three groups is described in the form of ordinary differential equations\cite{mathSIR}.
+Members of the Susceptible group (\B{S}) can transition to the Infected group (\B{I}). This transition rate is expressed in the
+form of variable $\alpha$, which is a positive, real number. This parameter includes many different epidemcal factors like
+population density, infectiousness of the disease and many more, and tries to condense them into one single value.
+Transition also occurs from the \B{I} group to the removed group (\B{R}). This change is expressed by the variable 
+$\beta$, which is a positive constant between 0 and 1. $\beta$ can be rewritten as $\frac{1}{b}$, where $b$ is the average
+duration an infected individual remains contagious, before it either recovers or dies. The concept of the SIR model is
+illustrated in \hyperref[fig:SIR]{Figure \ref*{fig:SIR}}, the mathematical expression of the equations are shown below. 
 
 \begin{figure}
 	\begin{center}
@@ -75,61 +112,62 @@ are expressed as follows:
 	\frac{dR}{dt} &= \beta I
 \end{align}
 
-\par
-The model also assumes the total number of individuals in the system $N$ remains constant and that the sum of all transitions
-between all three groups during every time step remains zero. This is expressed in the equations below.
+
+Additionally model assumes that the total number of individuals in the system $N$ remains constant in every time step and
+that the sum of all transitions between all three groups during every time step remains zero. This is expressed in the equations below.
 $S(t)$, $I(t)$ and $R(t)$ express the number of individuals in each of the groups, at time $t$, respectively.
 
 \begin{align}
 	\label{eq:SIR2}
 	I(t) + S(t) + R(t) &= N \\
-	\frac{dS}{dt} + \frac{dI}{dt} + \frac{dR}{dt} = 0
+	\frac{dS}{dt} + \frac{dI}{dt} + \frac{dR}{dt} &= 0
 \end{align}
 
-\par
+
 Since the model assumes, that the total population remains stable, phenomena like immigration or child birth are not accounted
 for. This does not correctly represent the real world. However it is often assumed, that population fluctuations
 due to these occurrences are minor enough compared to the entirety of a regions population, that they do not alter the results of the
 simulation in a major way\cite{??}.\newline
 
-\par
+
 In order to correctly model the dynamics of an epidemic, the variables of these differential
-equations (like $\alpha$ and $\beta$ in this case) must be determined correctly. This process is referred to as solving the equations.
-Different techniques exist to do so. Two of these techniques are the \hyperref[sec:Gauss]{Gauss-Newton algorithm}\cite{Gauss??} and
-\hyperref[sec:PSO]{Particle Swarm Optimization (PSO)}\cite{PSO??}. Both of these techniques will are explained in a later section.
+equations (like $\alpha$ and $\beta$ in this case) must be determined. This process is referred to as solving the equations.
+Different methods can be applied to achieve this goal. Two of these techniques are the \hyperref[sec:Gauss]{Gauss-Newton algorithm}\cite{Gauss??}
+and \hyperref[sec:PSO]{Particle Swarm Optimization (PSO)}\cite{PSO??}. Both of these techniques were used in this work and will are explained
+later in this chapter.
 
 
 %-----------------------------------
-%	SUBSECTION 4
+%	SUBSECTION 3
 %-----------------------------------
-
 \subsection{The SEIRD model}
 \label{sec:SEIRD}
-The SEIRD model is a variant of the simpler SIR model\cite{knodel20173d}
+The SEIRD model is a variant of the simpler SIR model\cite{knodel20173d} and aims to improve upon its predecessor, by
+introducing two new groups of individuals. These groups are used to differentiate the mechanics of an epidemic much
+more precise.
 \textcolor{red}{(double check citation)}. % note
-It introduces two new groups and describes the status for the infected population much more precise. The groups of the SEIRD
-model are as follows:
+The groups of the SEIRD model are shown below.
 
 \begin{enumerate}[label=$\bullet$]
-	\item \B{Susceptibles (S)}: Individuals that are naive to the infection and hence not immune (identical to SIR).
+	\item \B{Susceptibles (S)}: Individuals that are not immune to the infection.
 	\item \B{Exposed (E)}: Individuals that are infected, but show no or very little symptoms. These individuals
-		do not quarantine (yet) and are therefor contributing to the spread of the virus.
-	\item \B{Infected (I)}: Individuals that have developed such a sever illness, that they need to be hospitalized.
+		do not quarantine (yet) and are therefor contributing to the spread of the disease.
+	\item \B{Infected (I)}: Individuals that are severely sick and therefor hospitalized.
 	\item \B{Recovered (R)}: Individuals that  have overcome the infection and are now immune to the disease.
 	\item \B{Diseased (D)}: Individuals that have succumb to the infection.
 \end{enumerate}
 
-\par
-As described in the previous section, transition between the Individuals of different groups is a core
+
+As described in the previous section, the transition between the individuals of different groups is the core
 part of the model. The transition between the \B{S} and \B{E} population in SEIRD is equivalent to the transition
 between \B{S} and \B{I} in SIR. However, the population outflow from the \B{E} group is split and can either move
 to the \B{I} or to the \B{R} group. This allows the modeling of infections that result in quick recovery or an infection
 with complications (defined by the hospitalization of the patient). The ratio between the two scenarios is governed by the variable
 $\kappa$. In addition, the variable $q$ was introduced and now represents the average duration until recovery/hospitalization of an
 infected individual. Similarly, the outflow of \B{I} is split between the populations of \B{R} and \B{D}. The ratio is governed
-by the variable $\tau$. The equations for \B{R} and \B{D} were also adjusted to represent these changes. Lastly $D$ was redefined
-as $p$, which now represents the average of a hospitalized individual to either recover or succumb to the infection.
-\hyperref[fig:SEIRD]{Figure \ref*{fig:SEIRD}} illustrates all these changes. The modified equations are as follows:
+by the variable $\tau$. The equations for \B{R} and \B{D} were also adjusted to represent this change. Lastly the variable $p$ was
+introduced, which now represents the average stay of a hospitalized individual until they either recover or succumb to the infection.
+\hyperref[fig:SEIRD]{Figure \ref*{fig:SEIRD}} illustrates all these changes. The modified equations are shown below.
 
 \begin{align}
 	%\label{eq:SEIRD1}
@@ -152,7 +190,7 @@ as $p$, which now represents the average of a hospitalized individual to either 
 \end{figure}
 
 
-\par
+
 Like SIR, the SEIRD model assumes that the total number of individuals $N$ in the population remains constant during every step
 of the modeling process. This leads to the equations expressed below. Again, $S(t)$, $E(t)$, $I(t)$, $R(t)$ and $D(t)$ are
 expressing the number of individuals for each group at time $t$, respectively. $N$ remains the total number of individuals in the model.
@@ -163,44 +201,47 @@ expressing the number of individuals for each group at time $t$, respectively. $
 	\frac{dS}{dt} + \frac{dE}{dt}  + \frac{dI}{dt} + \frac{dR}{dt} + \frac{dD}{dt} = 0
 \end{align}
 
-\par
-A model like this expresses the dynamics of an epidemic in much more detail. A weakness of the SIR model is that it does distinct between important
-groups such as sick, but not infected and hospitalized individuals. The SEIRD model is capable of doing so and also allows for predicting
-figures like the number of hospitalized individuals at time $t$.\newline
 
-\par
-This work focused mostly on the modeling capability of SIR in the transition stage between susceptibles and exposed. To better fulfill this
-task, the model was redefined to accommodate for a lack of clear source data and to further refine the modeling of real wold phenomena. The changes
-are described in detail in \hyperref[sec:SEIRDredef]{chapter~\ref*{chap:methods}, section~\ref*{sec:SEIRDredef}}.
+A model like this expresses the dynamics of an epidemic in much more detail. While the SIR model does distinct between important
+groups like Susceptible and Infected, it does not differentiate between groups like Infected and Hospitalized. This simplification
+does make the modeling process easier, but also creates a dissonance between what is simulated and what is happening in the real world.
+The SEIRD model has introduced groups and therefor simulates a scenario that is much closer to the real world. And since these values
+are simulated, it is also capable of providing additional figures, like the number of hospitalized individuals at time, which is not
+possible with SIR.\newline
 
+This work focused on the modeling capability of SEIRD in the transition stage between susceptibles and exposed. To fulfill this
+task, the model was modified to better express phenomena specific to the COVID-19 pandemic. These changes are described in detail
+in \hyperref[sec:SEIRDredef]{chapter~\ref*{chap:methodology}, section~\ref*{sec:SEIRDredef}}.
 
 
 %----------------------------------------------------------------------------------------
-%	SECTION 2
+%	SECTION 3
 %----------------------------------------------------------------------------------------
-
 \section{Variable optimization algorithms}
-In order for the presented models to work properly, it is important to determine the correct value for each unknown variable. There are many
-methods to determine these variables. In the context of differential equations this process is often referred to as ``solving'' the equations.
-Algorithms and methods that try to achieve this are generally referred to as ``solvers''.
-The following sections will explain two methods used in this work. The Gauss-Newton algorithm and the Particle Swarm Optimization algorithm (PSO).
+In order for the presented model equations to work properly, it is important to determine the correct value for each unknown variable.
+In the context of differential equations this process is referred to as ``solving'' the equations and algorithms and methods that try
+to achieve this are referred to as ``solvers''. There are different methods to solve differential equations, but in the context of
+this work the Gauss-Newton and the Particle Swarm Optimization (PSO) algorithm were used. The following sections will explain the theory
+behind the two methods.
+
 
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
-
 \subsection{Gauss-Newton algorithm}
 \textcolor{red}{add citations, explain least squared better/at all}
 \textcolor{red}{describe efficiency and why it is cool}
 \label{sec:Gauss}
-The Gauss-Newton algorithm is an iterative method, that is used to solve non-linear least square problems. Given a set of $m$ functions, $n$
-variables that are used to calculate the function results  and a number of target values, the algorithm is used to optimize the variables in
-such a way, that difference between function results and target values are minimized.\newline
+The Gauss-Newton algorithm is an iterative method, that is used to solve non-linear least square problems. Iterative means, that the algorithm 
+starts with an initial solution and tries to improve this solution successively over a number of consecutive steps.
+Given a set of $m$ functions, $n$ variables that need to be optimized a number of target values and a number of starting values, the algorithm tries
+optimize the variables in such a way, that the difference between function results and target values is minimized.\newline
 
-The relevant parameters in this algorithm are the vector function $F(\theta)$, the Jacobian matrix $J$, the target values $X$ and the
-estimated parameters $\theta^{i}$, the estimation change $\Delta^{i}$ and the error value $\epsilon^{i}$ of iterations $i$. Given $m$
-functions and $n$ variables, with the condition that $m \geq n$, the definitions for $F(\theta)$, $\theta^{i}$, $\Delta^{i}$ and
-$\epsilon^{i}$ are as follows.
+The relevant parameters of this algorithms are shown below. $F(\theta)$ is the vector function, which contains $m$ functions and is
+used to estimate the target values. $\theta^i$ is a vector of $n$ estimated input variables in iteration $i$, given to $F(\theta)$.
+$\epsilon^i$ expresses the error between the estimation results and the vector of target values $X$ in iteration $i$.
+$\Delta^i$ is the vector of adjustment values, that are applied after iteration $i-1$ in order to improve the results of iteration $i$.
+In order for the Gauss-Newton algorithm to be applicable, the condition $m > n$ must hold.
 
 \begin{align}
 	F(\theta) =& (f_0(\theta), f_1(\theta),...,f_m(\theta))^T \\
@@ -209,8 +250,8 @@ $\epsilon^{i}$ are as follows.
 	\epsilon^{i} =& F(\theta^{i}) - X
 \end{align}
 
-$F(\theta)$ is calculated iterative thought the algorithm and can be expressed in the form of a Taylor Series (eq. \ref*{eq:taylor1}) and
-then rewritten as the Jacobian matrix $J$.
+$F(\theta)$ is calculated iterative thought the algorithm and can be expressed in the form of a Taylor Series (eq. \ref*{eq:taylor1}). It can
+then be rewritten as the Jacobian matrix $J$.
 
 %note maybe add colors later
 \begin{align}
@@ -229,7 +270,7 @@ then rewritten as the Jacobian matrix $J$.
 	=& F(\theta^{i}) + J \Delta^{i} \label{eq:taylor3}
 \end{align}
 
-This means the Jacobian Matrix $J$ is defined as such
+This means the Jacobian Matrix $J$ is defined as such.
 
 \begin{align}
 	J_{pq} = \frac{\delta f_p(\theta)}{\delta \theta_q} \quad \text{where } \quad p \in \{0,1,..,m\},\text{ } q \in \{0,1,...,n\}
@@ -239,13 +280,14 @@ To minimize the error $\epsilon$ in each following iteration, a connection is es
 error of the following iteration, such that the non-linear least squared method can be used. This process is shown below.
 
 \begin{align}
-	& \epsilon^{i+1} = F(\theta^{i} + \Delta^{i}) - X \quad \text{since} \quad F(\theta^{i} + \Delta^{i}) = F(\theta^{i}) + J \Delta^{i} \\
-	\Leftrightarrow & \epsilon^{i+1} = F(\theta^{i}) + J \Delta^{i}) - X \quad \text{since} \quad \epsilon^{i} = F(\theta^{i}) - X \\
+	& \epsilon^{i+1} = F(\theta^{i} + \Delta^{i}) - X, \quad \text{since} \quad F(\theta^{i} + \Delta^{i}) = F(\theta^{i}) + J \Delta^{i} \\
+	\Leftrightarrow & \epsilon^{i+1} = F(\theta^{i}) + J \Delta^{i}) - X, \quad \text{since} \quad \epsilon^{i} = F(\theta^{i}) - X \\
 	\Leftrightarrow & \epsilon^{i+1} = \epsilon^{i} + J \Delta^{i} \label{eq:taylor4}
 \end{align}
 
+\textcolor{red}{put equation in table format?}\\
 Since the goal is to minimize the epsilon of the following iteration, equation \ref*{eq:taylor4} can be set equal to zero and reorganized to
-take the form of a linear equation $Ax = b$. Since $\Delta$ steps usually are sufficiently small, it is assumed that the function is locally
+take the form of a linear equation $Ax~=~b$. Since $\Delta$ steps usually are sufficiently small, it is assumed that the function is locally
 linear. The non-linear least square method is then used to calculate $\Delta$ of the following equation.
 
 \begin{align}
