@@ -230,10 +230,10 @@ algorithm were used. The following sections will explain the theory behind the t
 %	SUBSECTION 1
 %-----------------------------------
 \subsection{Gauss-Newton algorithm}
-\textcolor{red}{add citations, explain least squared better/at all}
+\textcolor{red}{add citations, explain least squares better/at all}
 \textcolor{red}{describe efficiency and why it is cool}
 \label{sec:Gauss}
-The \I{Gauss-Newton algorithm} is an iterative method, that is used to solve non-linear least square problems. Iterative means, that the algorithm 
+The \I{Gauss-Newton algorithm} is an iterative method, that is used to solve non-linear least squares problems. Iterative means, that the algorithm 
 starts with an initial solution and tries to improve this solution successively over a number of consecutive steps.
 Given a set of $m$ functions, $n$ variables that need to be optimized, a number of target values and a number of starting values, the algorithm tries
 optimize the variables in such a way, that the difference between function results and target values is minimized.
@@ -279,7 +279,7 @@ This means the Jacobian Matrix $J$ is defined as such.
 \end{align}
 
 To minimize the error $\epsilon$ in each following iteration, a connection is established between the current error and the
-error of the following iteration, such that the non-linear least squared method can be used. This process is shown below.
+error of the following iteration. This process is shown below.
 
 \begin{align}
 	& \epsilon^{i+1} = F(\theta^{i} + \Delta^{i}) - T, \quad \text{since} \quad F(\theta^{i} + \Delta^{i}) = F(\theta^{i}) + J \Delta^{i} \\
@@ -290,12 +290,12 @@ error of the following iteration, such that the non-linear least squared method 
 \textcolor{red}{put equation in table format?}\\
 $\epsilon^{i+1}$ is set to zero, since the goal of the algorithm is to minimize the error of the following iteration. Equation \ref*{eq:taylor4}
 is then reorganized to take the form of a linear equation $Ax~=~b$. Since $\Delta$ steps usually are sufficiently small, it is assumed that the function is locally
-linear. This means that least square analysis can be applied and used to calculate $\Delta$ of the following equation.
+linear. This means that least squares analysis can be applied and used to calculate $\Delta$ of the following equation.
 
 \begin{align}
 	&\text{min} \| \epsilon^{i} + J \Delta^{i} \|\text{ over $\Delta^{i}$} \\
 	\Rightarrow & \epsilon^{i} + J \Delta^{i} = 0 \qquad \text{rewrite to form $Ax = b$} \\
-	\Leftrightarrow & J \Delta^{i} = -\epsilon^{i} \qquad \text{least squared: } x = (A^T A)^{-1} A^T b \\
+	\Leftrightarrow & J \Delta^{i} = -\epsilon^{i} \qquad \text{least squares: } x = (A^T A)^{-1} A^T b \\
 	\Leftrightarrow & \Delta^{i} = - (J^T J)^{-1} J^T \epsilon^{i} \label{eq:taylor5}
 \end{align}
 
