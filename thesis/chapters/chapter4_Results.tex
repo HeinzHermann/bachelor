@@ -251,17 +251,15 @@ two regions, even though it has a higher share of the total population than the 
 %----------------------------------------------------------------------------------------
 
 \section{Sensitivity analysis of $\alpha$ and $q$}
-\textcolor{red}{add more angles to the images}
 In order to further investigate the features of the model, we analyzed the sensitivity of the loss function relative to
-the variables $\alpha$ and $q$. We only chose those two variables, since the loss function was only calculated based
-on the difference between the simulated and the original susceptible population. Since this group only depends on those
-two variables in our model, changes in the other variables could not influence the loss and were therefore not investigated.
-For this experiment, the 4000 simulations of the model with all 76 original data points were performed and the variables
-$\alpha$ and $q$ were chosen randomly, within a set constraint. The upper and lower bounds were set to 0.05 and 0.35 for 
-$\alpha$ and 5.5 and 8.0 for $q$ respectively. The results of these simulations were gathered and used to plot a map
-of the variable landscape of the loss of the susceptible group.
-\hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows the total result of all simulations over the
-chosen bounds.
+the variables $\alpha$ and $q$. 4000 simulations of the model with all 76 original data points were performed and the variables
+$\alpha$ and $q$ were chosen randomly, within a set constraint. The upper and lower bounds were set from 0.05 to 0.35 for 
+$\alpha$ and 5.5 to 8.0 for $q$ respectively. These ranges were chosen based on the optimized values of the previous
+experiments. The results of these simulations were gathered and $\alpha$, $q$ and the loss were  plotted against one another.
+The result is a topographic map of the variable landscape of the loss of the susceptible group.
+\hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows the total result of all simulations over the chosen bounds.
+Each point plotted is color coded, relative to the maximum loss of all values displayed. Points with a higher loss are colored red,
+while plots with lower loss are colored green.
 
 \begin{figure}[h]
 	\centering
@@ -272,7 +270,7 @@ chosen bounds.
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_0_2.png}	
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_1_2.png}	
 		\caption{}
 	\end{subfigure}
 	\caption{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were plotted
@@ -283,20 +281,16 @@ chosen bounds.
 	\label{fig:sensitivity_zoom0}
 \end{figure}
 
-\textcolor{red}{add result values to figure explanation}
-Figure \ref*{fig:sensitivity_zoom0} shows that low values for $\alpha$ lead to a decreased sensitivity of the loss function
-for $q$. Only after an $\alpha$ value of about 0.25 is reached, does the loss start to react to changes in $q$. After this point
-however, the loss function quickly increases. This phenomenon can be seen both, if $q$ is increased and if $q$ is not increased
-in the simulation. But a bigger $q$ value causes the loss to increase more quickly compared to a simulation with a small loss.
-
-
+Figure \ref*{fig:sensitivity_zoom0} shows that low values for $\alpha$ cause a low sensitivity of the model
+for $q$. After an $\alpha$ value of about 0.25 is reached, the loss value starts to react to changes in $q$. Further
+increases of $\alpha$ or $q$, cause the loss function increases quickly. Changes in $\alpha$ appear to have a bigger effect
+on the loss, but a bigger $q$ value causes the loss to increase more quickly compared to a simulation with a smaller $q$.\newline
 
 The simulations were further investigated by plotting only part of the experimental data.
-The first row of \hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows all data points with $\alpha$ values between 0.15
+The first row of \hyperref[fig:sensitivity_zoom1]{Figure \ref*{fig:sensitivity_zoom1}} shows all data points with $\alpha$ values between 0.15
 and 0.25, $q$ values between 5.5 and 8.0 and a maximum loss of $10^{10}$. The loss on this image was capped in order to reduce
-the scale of the loss and thereby increase readability. This lead 957 of 4000 data points being plotted. The images in the
-second row show the same graph (\textcolor{red}{?}), with the same bonds for $\alpha$ and $q$, but with a maximum loss capped
-at $2.7*10^{9}$. This gives an even closer look at the range of optimal/close-to-optimal values for $\alpha$ and $q$.
+the scale of the loss and thereby increase readability. This lead to 957 of 4000 data points being plotted. The images in the
+second row show the same graph, but with a maximum loss capped at $2.7*10^{9}$.
 
 \begin{figure}[h]
 	\centering
@@ -306,7 +300,7 @@ at $2.7*10^{9}$. This gives an even closer look at the range of optimal/close-to
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom1_0_2.png}	
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom1_1_2.png}	
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
@@ -314,7 +308,7 @@ at $2.7*10^{9}$. This gives an even closer look at the range of optimal/close-to
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom2_0_2.png}	
+		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom2_1_2.png}	
 	\end{subfigure}
 	\caption{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were
 		capped to 0.15 and 0.25 and 5.5 and 8.0 respectively and then plotted against the result of the loss function.
@@ -329,6 +323,6 @@ at $2.7*10^{9}$. This gives an even closer look at the range of optimal/close-to
 
 Figure \ref*{fig:sensitivity_zoom1} shows the existence of a ``valley'' with minimized loss. It can be seen that there are 
 sets of values of $\alpha$ and $q$, where the loss appears to be minimized. The optimal values found by the model for $\alpha$
-and $q$ are also withing this region (\textcolor{red}{more info}). The optimized area seems to have a diagonal structure,
+(0.1975) and $q$ (6.6753) are also within this region. The optimized area seems to have a diagonal structure,
 indicating an optimal relation between $\alpha$ and $q$.
 
