@@ -2,13 +2,11 @@
 
 \chapter{Discussion} % Main chapter title
 \label{chap:discussion} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
-\textcolor{red}{weave in story, why only susceptibles were examined in experiments!}
 \textcolor{red}{add images to discussion?}
 
-
-This chapter will summarize, interpret and discuss the results of the \hyperref[chap:results]{previous section
+This chapter will summarize, interpret and discuss the results of \hyperref[chap:results]{section
 \ref*{chap:results}}. We will start by discussing and evaluating the accuracy of the model regarding the reproduction
-of real world data, as the ability to predict future outcomes with fewer data points. Second, we will
+of real world data, as well as the ability of the model to predict future outcomes with fewer data points. Second, we will
 interpret the results of the loss function analysis and the sensitivity analysis in order to better understand the simulation
 results and identify potential issues and areas of improvement. Lastly an outlook will be given for possible strategies and
 ideas to improve both the implementation of the model and the model itself.
@@ -19,7 +17,6 @@ ideas to improve both the implementation of the model and the model itself.
 \section{Simulation results and sensitivity analysis}
 The following section will discuss the results of the simulations, the optimization process as well as the sensitivity
 analysis performed in this context.
-\textcolor{red}{add more text?}
 
 
 %-----------------------------------
@@ -27,32 +24,36 @@ analysis performed in this context.
 %-----------------------------------
 \subsection{Simulation accuracy and optimization issues}
 \hyperref[sec:sim_res]{Section \ref*{sec:sim_res}} has presented the simulation results produced by the current implementation
-of the SEIRD model. It can be seen, that the accuracy of the simulation somewhat depends on the amount of data points supplied.
-While the median susceptible deviation of all regions ranged between -80 and +140 percent, most the regions showed reasonable
-amounts of deviation from the original data. In case of the 76 data point simulation, 21 of 26 regions showed an
-absolute median deviation of 50 percent or less. Similar behavior was observed for the 60 and 50 data point simulations, in which
-21 and 22 regions respectively showed an absolute median deviation of 50 percent or less. While the simulation accuracy of single regions
-might differ between experiments (\textcolor{red}{double check this!}), results are overall comparable.\newline
+of the SEIRD model. It can be seen, that both the accuracy of the simulation as well as the ability to predict future trends
+depends on the amount of data points supplied. While the median susceptible deviation across all simulations ranged between
+-80 and +142 percent, most the regions showed a much lower deviation rates. In case of the 76 data point simulation, 20 of 26 regions showed an
+absolute median deviation of 50 percent or less. Similar behavior was observed for the 60 and 50 data point simulations, where
+21 regions respectively showed an absolute median deviation of 50 percent or less. \newline
+
+%While the simulation accuracy of single regions
+%might differ between experiments (\textcolor{red}{double check this!}), results are overall comparable.\newline
 
 Predicting the original data proved more difficult. While the calculated trend for the 60 data point experiment was comparable
-to the simulation with 76 data points, the 50 data point simulation showed strong differences and proved to be mostly inaccurate.\\
-\textcolor{red}{needs hard data to support these claims, check python code on how to extract data points and add to results.
-Then come back and redo this}\\ %note
+to the simulation with 76 data points, the 50 data point simulation showed strong differences and proved to be mostly inaccurate.
+The main observation in this case was a strong shift in the simulation results towards fewer infections.
+This is most likely due to the fact that the number of transition events (infections) tends to be roughly exponential.
+Since the growth of such a dynamic is stronger towards the end, removing these data points from the simulated data likely
+caused this issue. Overall, the model seems to be able to somewhat predict infection dynamics with fewer data points than
+initially used, as long as not to many of the data points are lost, that mark the beginning of the exponential growing phase.
 
 A consistent observation throughout all experiments was a strong trend of the simulated regions to negatively deviate from the
 original data. This means that the simulations generally predicted lower amounts of exposed individuals than seen in the original
-data. In all three experiments 19 of the 26 regions deviated in this way from the original data. This may seem odd at first,
-since it could be expected, that the optimal state of the model is reached, when a maximum amount of regions are close to matching
-their original data. However, if  closer attention if given to the way optimization was done in these experiments this phenomenon
-becomes much clearer. All adjustments were done based on minimizing the loss function. The loss function itself was defined in
+data. In all three experiments 17 or more of 26 regions deviated in this way from the original data. This phenomenon can be explained
+by remembering the way optimization was implemented in these experiments.
+All adjustments were done based on minimizing the loss function. The loss function itself was defined in
 \hyperref[eq:loss_newton]{equation \ref*{eq:loss_newton}} as the sum of the square difference between the simulated and the original
 data of all data points and each region. This means that a regions individual influence on the adjustment of model variables
-increases as the total difference between its simulated and original data grows. This effect is further increased, since the
+increases, as the total difference between its simulated and original data grows. This effect is further increased, since the
 difference between original and simulated data is squared before it is summed up. Thus leading to a quadratic increase in influence
 of highly deviating regions relative to the other regions. \newline
 
-Combining this knowledge with the observations of the model results, helped us to identify three factors that can be used to explain
-the optimization behavior of the current implementation of the model. \textcolor{red}{rephrase}.
+Combining this knowledge with the observations of the model results, we can identify three factors that influence
+the currently implemented optimization strategy of the model.\newline
 
 \begin{enumerate}[label=\arabic*.]
 	\item The percentage deviation of the simulated data from the original data.
@@ -60,178 +61,158 @@ the optimization behavior of the current implementation of the model. \textcolor
 	\item The total population of each individual region.
 \end{enumerate}
 
-The first factor is relatively obvious. The most influential region in our 76 data point experiment was ``Offenbach'' with
-a mean deviation of -54 percent after optimization. This means, that about half of the simulated data points of this region
-had less than half as many exposed individuals as the original data. Naturally this should cause adjustments of the model variables,
-but it also transitions well to the second factor. The point in time when the deviation occurs has great influence on the 
-overall influence of the region on the loss. In our experiments, many regions displayed strong deviations during the first
-days of the simulation going up to 467.37 percent in the case of ``Limburg-Weilburg''. However, these differences were observed
-during the first days of the simulation, where infection events in the real world were more sporadic, due to smaller numbers of
-already infected individuals. This also means that the total difference between simulated and original data is usually much
-smaller during the early days of the simulation, since the expected number of infection events at that point in time is much smaller.
-In the case mentioned before, 467.37 percent deviation translated to a number of 4.6737 additional infection events in the simulation,
-compared to only one infected person in the original data set. The influence on the overall loss was extremely low in this case.
-\textcolor{red}{add a bit more information here like total loss for better comparability} %note
-The third major factor is the overall population of each respective region, since regions with a high population will tend to
-produce higher differences between simulated and original data compared to regions with smaller populations. This remains true, even
-if the percentage deviation between simulated and original data is relatively small compared to other regions. A good example for this
+The first point is very intuitive. The loss analysis has shown, that the most influential region in our 76 data point experiment was ``Offenbach'' with
+a mean deviation of -54 percent after optimization took place. This means, that half of the simulated data points of this region
+had less than half as many transitions from the susceptible group (\B{S}) to the exposed group (\B{E}), when compared with 
+the original data.
+%This should and does cause adjustments of the model variables. but it also transitions well to the second factor.
+The point in time, when the deviation occurs also has great influence on the calculation of the loss. In our experiments, many regions
+displayed strong percentile deviations during the first days of the simulation, where changes in the real world data were very
+sporadic due to the small number of infected individuals. An example is a 467.4 percent deviation
+in the case of ``Limburg-Weilburg'', where the model predicted 4.674 additional infections, compared to only one real world infection.
+This also means that the absolute difference between simulated and original data is usually much
+smaller during the early days of the simulation, compared to the later stages of the simulation. So even though the
+calculated deviation was extremely high, the effect on the loss was very small.
+The third major factor is the overall population of each respective region. Regions with a high population will tend to
+produce higher total differences between simulated and original data compared to regions with smaller populations, even if the percentage
+deviation is comparable.  A good example for this
 is the region ``Frankfurt-am-Main'', which was the third strongest loss contributor in the optimized version of the model, despite
 only showing a median deviation of about 21 percent between simulated and original data. This is caused by the high population of
 this region, which makes up about 12.14 percent, of the total population of Hesse.\newline
 
 All these effects combined mean, that both outliers and high population areas can and likely will disproportionately effect the
 optimization process of the model. The question is, whether this effect if desired or not. Arguably the model optimization was
-working in terms of minimizing the optimal loss. A smaller overall loss was achieved by reducing the accuracy of many smaller
-regions in favor of outlier regions and regions with higher populations. We will discuss alternatives to this method in the
+working in terms of minimizing the total loss for the highest possible population. A smaller overall loss was achieved by
+reducing the accuracy of many smaller regions in favor of outlier regions and regions with higher populations. We will discuss alternatives to this method in the
 following sections.
-
-\textcolor{red}{add more info about Frankfurt and population; note that loss during optimization process was not reproduced.
-Optimal variable state can only give hints to internal workings}
 
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
 \subsection{Variable influence on the susceptible population}
-\textcolor{red}{what else to discuss?}\newline %note
-In order to quantify (\textcolor{red}{rephrase, not quantified}) the influence of model variables on the simulation of the
-susceptible population, 4000 simulations were performed with randomly chosen $\alpha$ and $q$ values bound between 0.05 and 0.35
-and 5.5 and 8.0 respectively. The reason, why only those two variables were observed can be explained by looking at equations
-\ref{eq:SEIRD1_S} and \ref{eq:SEIRD1_E} from chapter \ref*{chap:theory},
-section \ref*{sec:SEIRD}. The only group observed in these experiments was the susceptible group, hence equation \ref*{eq:SEIRD1_S}
-can be used to deduce all relevant variables that influence this group. Influencing variables are the number of susceptibles \S,
-the number of exposed \B{E} and the rate at which individuals transition from \B{S} to \B{E}. While group \B{S} only changes based on this
-equation, \B{E} also changes based on equation \ref*{eq:SERD1_E}. Looking at this equation we can see, that the changes of \B{E} depend
-again on \B{S}, \B{E} and $\alpha$, but also on $q$. Other variables or groups do not influence the change of \B{S}, and are therefor not
-relevant for this simulation. \newline
+In order to better understand the influence of model variables on the simulation of the
+susceptible population, we performed a sensitivity analysis on the $\alpha$ and $q$.
+The reason, why only those two variables were observed can be explained by looking at equations
+\ref{eq:SEIRD1_S} and \ref{eq:SEIRD1_E} from chapter \ref*{chap:theory} below.
 
-The simulations were then used to create a topographic map of the influence of the variables on the loss of the model. The results
-showed, that both $\alpha$ and $q$ influence the loss. \hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows,
-that the overall loss of the simulation remains fairly identical, until $\alpha$ reaches a value off about 2.3. Before this,
+\begin{align*}
+	\frac{dS}{dt} &= -\alpha S E \\
+	\frac{dE}{dt} &= \alpha S E -\frac{1}{q} E 
+\end{align*}
+
+
+Since the only group observed in these experiments was the susceptible group, equation \ref*{eq:SEIRD1_S}
+can be used to deduce all relevant variables that influence the rate of change in this group. Influencing variables are the number of susceptibles \B{S},
+the number of exposed \B{E} and the rate $\alpha$ at which individuals transition from \B{S} to \B{E}. The rate of change for \B{E}
+again depends on \B{S}, \B{E} and $\alpha$, but also on $q$. Other variables or groups do not influence the change of \B{S} directly
+or indirectly and are therefor not relevant for this analysis. \newline
+
+The results of the sensitivity analysis show,
+that both $\alpha$ and $q$ influence the loss. \hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} and
+\hyperref[fig:sensitivity_zoom1]{figure \ref*{fig:sensitivity_zoom1}} show,
+that the overall loss of the simulation remains fairly identical, until $\alpha$ reaches a value off about 0.17. Before this,
 changes in $q$ seem to have very little impact on the loss of the simulation. This makes sense, when looking at the relation of
-\ref*{eq:SEIRD1_S} and \ref*{eq:SEIRD1_E}. The variable $\alpha$ controls the "outflow" of population from \B{S} to \B{E}, while $q$
-controls the "outflow" of population from \B{E} to either \B{I} or \B{D}. However, an outflow from \B{E} is only relevant, when there are
-individuals present in this group in the first place. Therefor, an $\alpha$ value below a certain threshold seems to either permit
-no transition from \B{S} to \B{E} or keep the population of \B{E} so small, that the influence of the outflow $q$ are minimal.\newline
+\ref*{eq:SEIRD1_S} and \ref*{eq:SEIRD1_E}. A change in loss is caused by either an increase or a decrease in transition events
+between \B{S} and \B{E}. The number of these events depend on the population of \B{S}, \B{E} and the size of $\alpha$.
+A small $\alpha$ value will not only cause fewer transitions by itself but also decrease the number members of \B{E}, thereby 
+decreasing the number of subsequent transition events twofold. The reverse is true for high $\alpha$ values, where a high
+number of transitions leads to a big population in \B{E}, which in turn causes even more transitions.
+The variable $q$ plays a more indirect role in governing the transition events out of \B{E}. Changes in this variable
+can only impact the population of \B{E} and thereby influence \B{S} transitions, if a population of \B{E} is present in
+the first place. This may not be the case for low $\alpha$ values, explaining why $q$ only impacts the loss, once the
+previously mentioned threshold for $\alpha$ is overcome.\newline
 
-Once this threshold is overcome though, $q$ seems to have a more substantial impact. While the simulations show
-an increase in loss regardless of $q$, the increase is much stronger with a higher $q$, than with a smaller one.
-As a reminder, in equation~\ref*{eq:SEIRD1_E} the outflow of individuals from the exposed group is defined as $\text{\B{E}}/q$.
-This means, that a higher numeric value for $q$ means a lower rate of outflow of the exposed class. Inversely a lower $q$ results
-in a higher outflow rate. Therefor the loss is higher at a lower outflow rate out of \B{E} and smaller at a higher outflow rate.
-This effect is likely caused by an $\alpha$ value that starts out to small and thereby fails to transition enough susceptibles
-to the group of exposed. The steady loss observed throughout most of the map likely means that the number of simulated susceptibles
-remains mostly stable, while the number of transitions from \B{S} to \B{E} in the original data steadily increases. However, since 
-there is a maximum difference between the initial number of susceptibles (at which the simulated likely remains
-\textcolor{red}{maybe check this for truth}) and the original data, the total loss cannot supersede a set maximum loss.
-But, once $\alpha$ exceeds the threshold of about 2.3, the situation begins to change and the amount of transition events from
-\B{S} to \B{E} begins to increase. If the number of members in the exposed group is not decreased by transition events to either
-\B{I} or \B{D}, which is governed by the variable $q$, a feedback loop is the result. In this case, more transition to \B{E} at a time
-step will cause an increased transition to \B{E} in the following time step and so on. This process will continue, as long as there is
-either no or very little outflow out of \B{E}. Since the difference between simulated and original data can be much larger in this case,
-an strong increase in loss is the result. $q$ therefor serves as a counterbalance the effects of $\alpha$. All of these results show
-that the model itself is working as intended.
-\textcolor{red}{talk more about the other images in this section and explain that results are in optimum}
-\newline 
+The static loss observed in \hyperref[fig:sensitivity_zoom0]{figure \ref*{fig:sensitivity_zoom0}} at smaller $\alpha$ values likely means,
+that no or almost no transitions from \B{S} to \B{E} take place in any simulation performed within this range of values. This
+leads to a static difference between simulated and real world data and in turn to a static loss. The figure also shows the
+previously mentioned effect, that after a certain threshold $\alpha$ causes a great number of transitions from \B{S} to \B{E}, which
+in turn leads to even more transitions due to the high population of \B{E}. The rapid increase in loss after an $\alpha$ value of
+about 0.25 is likely caused by this effect. \newline 
 
- It is also interesting, that the there appears to be a set of possible values where $\alpha$ and $q$ are in an equilibrium and 
- minimize the overall loss of the simulation. The images in \hyperref[fig:sensitivity_zoom1]{Figure \ref*{fig:sensitivity_zoom1}}
- show this very clearly. Between the $\alpha$ and $q$ values of 1.7 and 8.0 and 2.3 and 5.5 exists an optimal region, where the
- loss appears to be either minimal or at least close to minimal. The optimal region has a diagonal shape and suggests a linear
- relationship between $\alpha$ and $q$, where loss remains close to optimal, if an increase in $\alpha$ (increase in infection events)
- is compensated by a decrease in $q$ (a decrease in infection events) and vice versa. The optimal values $\alpha = 0.198$ and
- $q = 6.675$ is also within this optimal region. This further supports the idea that the model and the optimization is working as
- intended.
+Once $\alpha$ is causing a number of transitions, $q$ is able to influence the loss by causing transition events out of \B{E}.
+This effect likely leads to the formation of the ``optimal valley'' between $\alpha$ values 0.17 to 0.23 and $q$ values
+5.5 to 8.0, observed in figure \ref*{fig:sensitivity_zoom1}. In this area of values multiple combinations of $\alpha$ and
+$q$ seems to lead to a nearly optimal loss value. All of the observed effects can be explained by the model, indicating that
+the model behaves as intended.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
 \section{Model adjustments and solutions}
-In the previous section we discussed the results, different effect observed in the experiments and pointed out potential areas of
-improvement. This section will focus on discussing possible adjustments to the model in order to increase the overall performance.
+In the previous section we discussed the results, different effects observed during the experiments and explained what
+likely causes these effects. The section will focus on discussing possible adjustments to the model and its implementation
+in order to increase the overall performance.
 
 
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
-\subsection{Optimizing different regions}
-A prominent issue in this work was the weighting of different regions based on how the loss is calculated. Currently the loss
+\subsection{Simultaneous variable optimization of multiple regions}
+A prominent issue in this work was how the loss of different regions was biasing the variable optimization process. Currently the loss
 favors regions that either strongly differ from their original data, have a high population relative to the other regions or
-both. This can cause few regions to dominate the optimization process, while many regions influence the optimization only marginally.
-All in all this can lead to cases were many regions kind of fit the trend, but few or none fit very well. \newline
+both. This can cause few regions to dominate the optimization process, while most regions influence the optimization only marginally.
+This can lead to cases were many regions only show similarities and few or no regions accurately represent their original data. \newline
 
-% normalization options for loss function
-%weight of different regions
-%	- normalization of difference (maybe percentage deviation in loss)
-%	- optimize for maximum amount of regions optimal
-\textcolor{red}{rework, think of better normalization methods}
-A possible solution could be to normalize the input values of the loss function. Instead of calculating the loss based on the actual
-number of individuals in an observed group, the loss could be calculated based on the percentage deviation from the simulated
-to the original value. This would not eliminate the problem of highly deviant regions being favored during the optimization phase,
-but priorities based on population size would be removed. 
+A simple adjustment to this problem could be not to compare the absolute values of the SEIRD groups, but instead to compare the
+densities of the respective groups to calculated densities of the original data. This would remove biases based on the population
+of a region and instead cause the optimization procedure to focus on all regions equally. This however, is mostly shifting the models
+bias from one area to another. It could be argued, that the model correctly tries to optimize the variables in such a way, that the greatest
+number of group members are as close to the real world data as possible. Since this change (or any other type of normalization) will likely
+not solve the base line issue that different regions require different transition rates at different times. It therefor stands to reason, that
+additional adjustments to the model are necessary.
 
 %-----------------------------------
 %	SUBSECTION 2
 %-----------------------------------
-\subsection{Additional features for modeling improvements}
-% density/population variables
+\subsection{Alternative options for modeling improvements}
 An alternative to changing the loss function, would be to introduce population or population density dependent variables
 to the model. This idea seems especially desirable, since it also tackles a more conceptual issue with the current model. Right
 now the model mostly tries to reproduce past events based on previously acquired data points. While this is good to get a general
-idea of epidemiological dynamics, the prediction power of such a system is relatively limited. Adding variables to the model,
+idea of epidemiological dynamics, the prediction power of such a system can be limited. Adding variables to the model,
 that specifically try to account for the epidemiological differences between high density and low density population areas, could
-be a good solution in this case. This should not only improve the overall performance of the simulation, but also increase its 
-predictive power by bringing the model closer to what epidemiological spreading actually looks like in a real world setting.
-While this option is very tempting in the benefits it provides, it could prove major challenges. Finding a suitable and quantifiable
-dependency between, for instance, population density and infection dynamics is difficult and may no be uniform between different
+be a good solution to this problem. This should not only improve the overall accuracy of the simulation, but also increase its 
+predictive power by bringing the underlying equations of the model closer to what epidemiological spreading actually looks like in a real world setting.
+\newline
+
+While the benefits this option proves could be very impactful, its implementation comes with major challenges. Finding a suitable and quantifiable
+dependency between population density and infection dynamics might be very difficult and may no be uniform between different
 regions. While population-infection dependencies between different regions in Germany might be comparable, population-infection
-dependencies in other regions of the world like the USA, India, China, Russia or Egypt might be different. In order to compensate
-for cultural and other differences like this as well, it would also likely be necessary to apply optimization protocols to these
+dependencies in other regions of the world like the USA, India, China, Russia or Africa might be very different. In order to compensate
+for cultural, climatic and other differences like this between regions, it would could likely be necessary to apply own optimization protocols to these
 variables. This in turn requires additional modifications to the current implementation of the model. Nonetheless, while a lot of
 additional work, this option is likely one of the most promising improvements to the model in its current state.\newline 
 
 %diffusion
-Another promising improvement that could be made to the model would be to run additional simulations with varying degrees of
-diffusion. A system like this would further help to bring the modeling system closer to real world conditions. The current
+Another promising improvement that could be implemented, is to try and optimize the model by adding varying degrees of
+diffusion between regions. A system like this would further help to bring the modeling system closer to real world conditions. The current
 implementation of the model included a system like this and could help to further improve results. However, it was not included
-in this work, since it was both out of the scope of this work and would likely provide much better improvements, if the
-previously discussed issues with region weighting and population/population density dependencies are resolved.
-\textcolor{red}{maybe add more to diffusion discussion? What features need to be added here?}
-
-
-%note weighting/region weighting sounds like shit. Think of better wording.
+in this work, since it would likely provide much better improvements, if the previously discussed issues with region weighting
+and population/population density dependencies are resolved.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
 %----------------------------------------------------------------------------------------
 
 \section{Conclusion and Outlook}
-\textcolor{red}{check for scope description of the work and adjust as necessary}
-\textcolor{red}{Add predictive power of model?}
-\textcolor{red}{Generally talk more about PDE?}
-The main scope of this work was to use the previously established SEIRD model in the broader context of an interconnected region.
-A previous work by Devansh et al.\cite{devansh} established the implementation of the model and tested the results in the
+The main scope of this work was to test the previously established SEIRD model with more and more similar, interconnected regions.
+During the previous work by Rastogi et al.\cite{Rastogi} the current implementation of the model was established and tested in the
 context of seven big cities in Germany. This work improved the 2D-map, the overall implementation of the SERID model, expanded
-the scope from 7 similar regions to 26 regions with diverse populations and living conditions in these regions and focused on the
-details of the inner working of the model by analyzing the first transition step of the model.
+the scope from 7 similar regions to 26 regions with diverse populations and living conditions and focused on the
+details of the inner working and the optimization process of the model by analyzing the first transition step from the susceptible
+to the exposed group.\newline
+
 The results of the work are in line with our expectations. The current implementation
-of the model optimizes towards the correct number of infection events, but deviations of the real world data are common. Reason for
-this is both the weighting of different regions against one another and a lack of additional variables that help to account for
-intrinsic differences between the regions. Urban regions, like big cities for instance, will have a different infection dynamic
+of the model optimizes towards the correct number of infection events, but deviations from the real world data are common. Reason for
+this are both the weighting of different regions against one another and a lack of additional variables that help to account for
+intrinsic differences between the regions. Urban regions, like big cities for instance, will likely have a different infection dynamic
 compared more rural  regions with small villages and generally lower population density.\newline
 
 Nevertheless the results presented in this work help to evaluate the current implementation of the SERID model and identify
-key features that need to be added in order to improve the overall modeling quality. Once this is done, both the precision, with
+key features that can be modified or added, in order to improve the overall modeling quality. Once this is done, both the precision, with
 which previously acquired data is modeled, as well as the predictive capabilities of the model should improve. This could make
 the model a valuable tool to predict the development of future endemic or pandemic events and help both scientists and official
-institutions to better understand and act in such situations. Since the SEIRD model is based on.  \newline 
-
-
-
-
-
-
-
+institutions to better understand the dynamic of such events.
 
 
 

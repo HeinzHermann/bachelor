@@ -282,7 +282,7 @@ while plots with lower loss are colored green.
 \end{figure}
 
 Figure \ref*{fig:sensitivity_zoom0} shows that low values for $\alpha$ cause a low sensitivity of the model
-for $q$. After an $\alpha$ value of about 0.25 is reached, the loss value starts to react to changes in $q$. Further
+for $q$. After an $\alpha$ value of about 0.25 is reached, the loss value seemingly starts to react to changes in $q$. Further
 increases of $\alpha$ or $q$, cause the loss function increases quickly. Changes in $\alpha$ appear to have a bigger effect
 on the loss, but a bigger $q$ value causes the loss to increase more quickly compared to a simulation with a smaller $q$.\newline
 
@@ -321,8 +321,10 @@ second row show the same graph, but with a maximum loss capped at $2.7*10^{9}$.
 	\label{fig:sensitivity_zoom1}
 \end{figure}
 
-Figure \ref*{fig:sensitivity_zoom1} shows the existence of a ``valley'' with minimized loss. It can be seen that there are 
-sets of values of $\alpha$ and $q$, where the loss appears to be minimized. The optimal values found by the model for $\alpha$
-(0.1975) and $q$ (6.6753) are also within this region. The optimized area seems to have a diagonal structure,
-indicating an optimal relation between $\alpha$ and $q$.
+Figure \ref*{fig:sensitivity_zoom1} shows highlights a couple important features of this data. For one, a ``valley'' with minimized loss
+seems to exist, where $\alpha$ and $q$ are in an equilibrium and the loss seems to be minimal. This region seems to
+appear between $\alpha$ values 0.17 to 0.23 and $q$ values 5.5 to 8. The optimal values found by the model for $\alpha$
+(0.1975) and $q$ (6.6753) are also within this region. Secondly it shows, that $q$ can influence the loss much earlier than assumed
+based on the previous figure, where the loss only appeared to change after $\alpha$ had passed a threshold of about 2.25.
+The optimized area seems to have a diagonal structure, indicating that there are multiple optimal relations between $\alpha$ and $q$.
 
