@@ -15,11 +15,9 @@ the Exposed (\B{E}) group ($\alpha$ variable) and transition form \B{E} to the I
 
 \section{Simulating the susceptible population of Hesse}
 \label{sec:sim_res}
-\textcolor{red}{Redo image positions :(}
-
 During this work we simulated the susceptible population of Hesse. 26 regions were simulated over a time period of
 76, 60 and 50 days respectively. We will show both the absolute and percentage difference between the simulated
-and the original data for each time frame.
+and the original data for each time frame.\newline
 
 One challenge of this project was the visualization of the obtained results. Since the number of susceptible
 individuals that resign in this group is much greater than the number individuals that transition to the exposed state,
@@ -28,16 +26,17 @@ changes in this group are difficult to observe. Because of this we decided again
 transitioned from \B{S} to \B{E}. This was done by subtracting the number of susceptible individuals at data point \I{t=x} from
 the starting point \I{t=0}. The result is the cumulative change of susceptibles at any given time point, which is equivalent to the 
 sum of all exposed individuals at any given time. These results are much easier to visualize, compare and understand.
-\textcolor{red}{ADD OPTIMAL VALUES FOR $\alpha$ AND $q$!!}
+\textcolor{red}{ADD OPTIMAL VALUES FOR $\alpha$ AND $q$!! Add set values for other variables to methods!}
+
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
-\subsection{Simulating susceptibles in a 76 day time frame}
-We first investigated the accuracy of the model in a time frame of 76 days.
-\hyperref[fig:76_sim_expl]{Figure \ref*{fig:76_sim_expl}} shows three graphs. Each of these graphs shows data from the same simulation
-process, but different regions. The goal is to show the range of different trends that were present in the data set. Graph A shows
-a region where too many infections took place, graph B shows a region where to few transitions took place and finally graph C shows
-a region where original and real world transitions are comparable.\newline
+\subsection{Simulation trends and trend changes with fewer data points}
+We first investigated the trends of the \B{S} group in order to get a general understanding for the accuracy of the simulated
+data. For this purpose each region was investigated by comparing simulation results and real world data in a graph.
+\hyperref[fig:76_sim_expl]{Figure \ref*{fig:76_sim_expl}} shows three exemplary regions with 76, 60 and 50 simulated data
+points respectively. The regions were chosen based on their general trends and are examples for regions with a positive deviation
+(to many transition events), a negative deviation (to few transition events) and a generally similar trend.\newline
 
 \begin{figure}[h]
 	\centering
@@ -58,78 +57,6 @@ a region where original and real world transitions are comparable.\newline
 		\includegraphics[width=\textwidth]{./figures/76d/10_Limburg-Weilburg.png}	
 		\caption{}
 	\end{subfigure}
-	\caption{Three exemplary results of a simulation of the exposed individuals.
-		The original (``orig'') data is drawn in blue and the simulated (``sim'') data is drawn in orange.
-		The number of simulated exposed individuals can be greater (image A), smaller 
-		(image B) or about the same (image C), as the originally observed number of exposed.
-		}
-	\label{fig:76_sim_expl}
-\end{figure}
-
-In addition, we analyzed the percentage deviation of original and simulated data for each time step in each region. The results
-are shown in a box plot in \hyperref[fig:76_sim_box]{figure \ref*{fig:76_sim_box}}. The three regions ``Werra-Meissner-Kreis'',
-``Marburg-Biedenkopf'' and ``Limburg-Weilburg'' are listed separately in figure \ref*{fig:76_sim_box}. This was done for scaling reasons,
-in order to increase plot readability.\newline
-
-\begin{figure}[h]
-	\centering
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_1.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_2.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_3.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_4.png}	
-	\end{subfigure}
-	\caption{Shown are box plots of the percentage deviation of every simulated region relative to the original data.
-		The median deviation ranges between -0.80 and +0.87.}
-	\label{fig:76_sim_box}
-\end{figure}
-
-Figure \ref*{fig:76_sim_box} shows box plots of the percentage deviation relative to the original data for each time point and region.
-For each region all time points were included, unless the real world data had no susceptible transitions at that time. These
-time points were ignored in order to avoid divisions by zero.
-The numbers are ranging between a median relative deviation of about -0.80 and +0.87. This means, that the model calculated
-between 80 percent less or 87 percent more infection events, compared to the original data. Many of the plots are skewed right.
-19 of the regions had a median deviation of less than 0 and 7 had a deviation above or at 0.
-\hyperref[tab:76d_regions]{Table \ref*{tab:76d_regions}} shows an overview of how many of the 26 regions had an absolute
-median deviation below 25, 50 and 75 percent.
-\textcolor{red}{add data to Appendix!!!}
-
-\begin{table}[h]
-	\centering
-	\caption{This table shows the how many of the analyzed regions have an absolute median deviation that is below a given threshold.}
-	\begin{tabular}{|l||c|c|c|}
-		\hline
-		Size of absolute median & $< 0.25$ & $< 0.50$ & $< 0.75$ \\ \hline
-		Number of regions & 10 & 20 & 23 \\ \hline
-	\end{tabular}
-	\label{tab:76d_regions}
-\end{table}
-
-
-
-
-%-----------------------------------
-%	SUBSECTION 2
-%-----------------------------------
-\subsection{Simulating susceptibles in a 60 day time frame}
-In order to explore how well the model is working with a smaller data set, the same optimization process as in the previous section was
-applied to a 60 day data set. Only the first 60 days of the previously chosen time frame were simulated, the other 16 days were
-removed. \hyperref[fig:60_sim_expl]{Figure \ref*{fig:60_sim_expl}} shows three exemplary graphs of the simulation results.
-For better comparability, the same regions were chosen as in previous section. The results were extrapolated as described previously,
-in order to better visualize the trend of the simulation result.\newline
-
-\begin{figure}[h]
-	\centering
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./figures/60d/24_Darmstadt-Dieburg.png}	
@@ -147,73 +74,6 @@ in order to better visualize the trend of the simulation result.\newline
 		\includegraphics[width=\textwidth]{./figures/60d/10_Limburg-Weilburg.png}	
 		\caption{}
 	\end{subfigure}
-	\caption{Three exemplary results of a simulation of the exposed individuals. The original (``orig'') data is drawn in blue,
-		the simulated (``sim'') data is drawn in orange and the extrapolation of the simulated data (``extrapolation'') is
-		drawn in green. The vertical red dotted line marks the transition from simulated to extrapolated data.
-		}
-	\label{fig:60_sim_expl}
-\end{figure}
-
-The general trend of the simulations remains similar to the simulations with 76 data points.
-In all three regions, the extrapolated data points show a slightly slower increase in number of transitions, compared to the simulations
-with 76 days.\newline
-
-Similar to the previous section, we calculated the deviation of each data point for
-each region and expressed the results in a set of box plots. The results are shown in \hyperref[fig:60_sim_box]{figure \ref*{fig:60_sim_box}}. Only data points
-that were actually simulated were included into this analysis. Extrapolated data points were excluded.\newline
-
-\begin{figure}[h]
-	\centering
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_1.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_2.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_3.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_4.png}	
-	\end{subfigure}
-	\caption{Shown are box plots of the percentage deviation relative to the real world data. 
-		Only 60 of 76 data points were. The median of all simulated regions ranges between -0.76 and 1.42.
-		}
-	\label{fig:60_sim_box}
-\end{figure}
-
-The deviation results of the 60 data point simulations are largely comparable to the 76 data point deviation results.
-The minimum median deviation is slightly lower compared to the previous simulation at -76, while the maximum deviation is higher at 142 percent. 
-Again many of the plots are skewed right, however a number of plots is also skewed left. 17 of the regions had a median deviation of less than
-0, while 9 regions had a deviation of 0 or higher. \hyperref[tab:60d_regions]{Table \ref*{tab:60d_regions}} shows how many of the 26 regions had
-absolute median deviation below 25, 50 and 75 percent.
-
-\begin{table}[h]
-	\centering
-	\caption{This table shows the how many of the analyzed regions have an absolute median deviation that is below a given threshold.}
-	\begin{tabular}{|l||c|c|c|}
-		\hline
-		Size of absolute median & $< 0.25$ & $< 0.50$ & $< 0.75$ \\ \hline
-		Number of regions & 9 & 21 & 24 \\ \hline
-	\end{tabular}
-	\label{tab:60d_regions}
-\end{table}
-
-%-----------------------------------
-%	SUBSECTION 3
-%-----------------------------------
-\subsection{Simulating susceptibles in a 50 day time frame}
-The last simulation was performed with 50 data points. As described in the previous section with 60 data points, simulations and
-optimization steps were done on a truncated data set, where the last 26 of the total 76 data points were removed.
-\hyperref[fig:50_sim_expl]{Figure \ref*{fig:50_sim_expl}} shows three exemplary graphs of this
-experiment. The same regions were chosen as for the 76 data point experiment. 
-
-\begin{figure}[h]
-	\centering
 	\begin{subfigure}[b]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./figures/50d/24_Darmstadt-Dieburg.png}	
@@ -231,55 +91,101 @@ experiment. The same regions were chosen as for the 76 data point experiment.
 		\includegraphics[width=\textwidth]{./figures/50d/10_Limburg-Weilburg.png}	
 		\caption{}
 	\end{subfigure}
-	\caption{Add caption
+	\caption{Three exemplary region results of the simulations of susceptible individuals. Graphs A-C, D-F and G-I
+		show the results of the 76, 60 and 50 data point simulations respectively.
+		The original data is drawn in blue and the simulated data is drawn in orange. In case
+		of the 60 and 50 data point simulations, a red doted line marks the end of the simulated data points
+		and a green line draws the extrapolated part (``extrapolation'') of the curve.
+		Extrapolation was done using a third degree polynomial curve fit.
 		}
-	\label{fig:50_sim_expl}
+	\label{fig:76_sim_expl}
 \end{figure}
-All three regions show a stronger trend towards a negative deviation compared to the results of the previous two experiments.
-While the simulated regions looks similar to the real world data, the extrapolation shows a strong deviation towards too little susceptible
-transitions.\newline
 
-Analogous to the 60 data point data set, we also performed the deviation analysis on the 50 data point data set. The results of this
-analysis are shown in \hyperref[fig:50_sim_box]{Figure \ref*{fig:50_sim_box}}.\newline
+The figure shows, that as the number of simulated data points decreases, the trends of the simulation results shift towards
+fewer transition events. This phenomenon is observable in all three regions.
 
-\begin{figure}[h]
+
+%-----------------------------------
+%	SUBSECTION 2
+%-----------------------------------
+
+\subsection{Deviation of the simulated data relative to the original data}
+Next we analyzed the percentage deviation of the simulated data relative to the original data. This was done
+for each time step in each region. The results are shown in \hyperref[fig:sim_box_sum]{figure \ref*{fig:sim_box_sum}}.
+``Werra-Meissner-Kreis'', ``Marburg-Biedenkopf'' and ``Limburg-Weilburg'' are listed separately in each data set.
+This was done in order to increase the plot readability, since those three regions show disproportional large deviations compared
+to the other regions.\newline
+
+\begin{figure}
 	\centering
-	\begin{subfigure}[b]{0.4\textwidth}
+	\begin{subfigure}[b]{0.32\textwidth}
 		\centering
+		\caption*{\B{76 data points}}
+		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_1.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_2.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_3.png}	
+		\includegraphics[width=\textwidth]{./figures/76d/deviation_box76_4.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\caption*{\B{60 data points}}
+		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_1.png}	
+		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_2.png}	
+		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_3.png}	
+		\includegraphics[width=\textwidth]{./figures/60d/deviation_box60_4.png}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.32\textwidth}
+		\centering
+		\caption*{\B{50 data points}}
 		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_1.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
 		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_2.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
 		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_3.png}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.4\textwidth}
-		\centering
 		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_4.png}	
 	\end{subfigure}
-	\caption{Shown are box plots of the percentage deviation relative to the real world data for every region. Only 50
-		of the 76 data points were simulated. The median deviation of all regions ranges between -0.77 and 1.27.		}
-	\label{fig:50_sim_box}
+	\caption{Shown are box plots of the percentage deviation of every simulated region relative to the original data.
+		The first column shows the box plots of the 76 data point simulations, the second and third column show
+		the plots for the 60 and 50 data point simulations respectively.}
+	\label{fig:sim_box_sum}
 \end{figure}
 
-The 50 data point simulations show similar results to the previous two experiments. The median deviation of all regions
-ranges between -77 and +127 percent. 19 of the simulated regions had a median deviation below 0 and 7 regions had a
-median deviation of 0 or higher. Many of the plots appear to be skewed either left or right.
-\hyperref[tab:50d_regions]{Table \ref*{tab:50d_regions}} shows how many regions had a deviation of less than 25, 50 and 75
-percent respectively.\newline
+All three figures show largely comparable results. Both median positions and interquartile ranges (\B{IQR}) of the regions
+are mostly similar across all three simulations. Differences can mostly be observed regarding the Minimum and Maximum of different regions
+and the skew of the individual regions. In the 76 data point data set most of the regions show the median in the left
+part of the \B{IQR}, meaning the plot is skewed right. This however changes in the other two simulations, with medians
+shifting more to the right in the 60 and even more so in the 50 data point simulations. \hyperref[tab:box_sum]{Table \ref*{tab:box_sum}}
+summarizes additional information about the different data sets. \hyperref[tab:optimized_var]{Table \ref*{tab:optimized_var}}
+shows the optimal values for $\alpha$ and $q$ that were determined by the optimization procedure of the model.
+\textcolor{red}{add data to Appendix!!!}
 
-\begin{table}[h]
+\begin{table}
 	\centering
-	\caption{This table shows the how many of the analyzed regions have an absolute median deviation that is below a given threshold.}
+	\caption{Summary of statistical data regarding the box plots shown in figure \ref*{fig:sim_box_sum}.
+		Abbreviations used include Number of regions (\B{\#Regions}), median deviation (\B{MD})}
 	\begin{tabular}{|l||c|c|c|}
 		\hline
-		Size of absolute median & $< 0.25$ & $< 0.50$ & $< 0.75$ \\ \hline
-		Number of regions & 8 & 21 & 24 \\ \hline
+		Simulated data set & 76 data points & 60 data points & 50 data points \\ \hline \hline
+		Minimum \B{MD} & -0.792 & -0.757 & -0.772 \\ \hline
+		Maximum \B{MD} & 0.868 & 1.418 & -1.275 \\ \hline
+		\B{\#Regions} with absolute \B{MD} $< 0.25$ & 10 & 9 & 8 \\ \hline
+		\B{\#Regions} with absolute \B{MD} $< 0.50$ & 20 & 21 & 21 \\ \hline
+		\B{\#Regions} with absolute \B{MD} $< 0.75$ & 23 & 24 & 24 \\ \hline
+		\B{\#Regions} with MD $<0$ & 19 & 17 & 19 \\ \hline
+		\B{\#Regions} with MD $\geq 0$ & 7 & 9 & 7 \\ \hline
 	\end{tabular}
-	\label{tab:50d_regions}
+	\label{tab:box_sum}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Best values obtained for $\alpha$ and $q$. The values were determined during the optimization process
+		using \I{ConstrainedOptimization}.}
+	\begin{tabular}{|l||c|c|c|}
+		\hline
+		Simulated data set & 76 data points & 60 data points & 50 data points \\ \hline \hline
+		optimal $\alpha$ & 0.1975 & 0.1974 & 0.1920\\ \hline
+		optimal $q$ & 6.6753 & 6.6749 & 6.6750 \\ \hline
+	\end{tabular}
+	\label{tab:optimized_var}
 \end{table}
 
 %----------------------------------------------------------------------------------------
@@ -287,54 +193,58 @@ percent respectively.\newline
 %----------------------------------------------------------------------------------------
 
 \section{Influence of individual regions on the loss function}
-In order to better understand the influence of individual regions on the model itself, we manually calculated the total
-loss, the individual loss for each region and the percentage loss of each region relative to the total loss.
-\hyperref[tab:perc_region_loss]{Table \ref*{tab:perc_region_loss}} shows the results of these calculations. The table
-is sorted descending from highest to lowest percentage loss contribution.
 \textcolor{red}{add table with total information to Appendix}
+In order to better understand the influence of individual regions on the model itself, we manually calculated the total
+loss, the loss for each individual region and the percentage loss of each region relative to the total loss. The
+calculation was done using the final output data of the 76 data point simulation.
+\hyperref[tab:perc_region_loss]{Table \ref*{tab:perc_region_loss}} shows the percentage of the total loss each region
+has and compares it to the percentage population the region has relative to the total population. The percentage
+of the total loss a region has is proportional to its influence on the variable optimization process.
+The table is sorted in descending order from highest percentage loss contribution to lowest.\newline
 
 \begin{table}[h]
-	\caption{the caption}
+	\caption{Influence of the }
+	\centering
 	\begin{tabular}{|l|x{2cm}|x{2cm}|x{2cm}|}
 	%\begin{tabular}{|l|c|c|c|}
 		\hline
 		\B{region} & \B{percentage loss} & \B{percentage population} & \B{median deviation} \\ \hline \hline
-		Offenbach & 27.70 & 5.67 & -0.54 \\ \hline
-		Bergstrasse & 14.41 & 4.31 & -0.79 \\ \hline
-		Frankfurt-am-Main & 13.10 & 12.14 & 0.21 \\ \hline
-		Lahn-Dill-Kreis & 6.29 & 4.03 & -0.25 \\ \hline
-		Main-Kinzig-Kreis & 5.17 & 6.70 & -0.07 \\ \hline
-		Marburg-Biedenkopf & 4.70 & 3.91 & -0.06 \\ \hline
-		Kassel-City & 3.90 & 3.19 & -0.49 \\ \hline
-		Wetteraukreis & 3.35 & 4.93 & -0.27 \\ \hline
-		Gross-Gerau & 2.90 & 4.38 & -0.23 \\ \hline
-		Rheingau-Taunus-Kreis & 2.89 & 2.98 & -0.36 \\ \hline
-		Kassel & 2.58 & 3.77 & -0.55 \\ \hline
-		Hochtaunuskreis & 2.33 & 3.77 & -0.32 \\ \hline
-		Darmstadt-Dieburg & 2.00 & 4.73 & 0.74 \\ \hline
-		Odenwaldkreis & 1.93 & 1.54 & -0.75 \\ \hline
-		Offenbach-am-Main & 1.23 & 2.08 & -0.09 \\ \hline
-		Schwalm-Eder-Kreis & 1.03 & 2.86 & -0.34 \\ \hline
-		Waldeck-Frankenberg & 0.99 & 2.49 & -0.17 \\ \hline
-		Giessen & 0.84 & 4.32 & 0.10 \\ \hline
-		Wiesbaden & 0.80 & 4.43 & 0.17 \\ \hline
-		Fulda & 0.74 & 3.54 & -0.28 \\ \hline
-		Hersfeld-Rotenburg & 0.41 & 1.91 & -0.48 \\ \hline
-		Main-Taunus-Kreis & 0.25 & 3.80 & 0.07 \\ \hline
-		Darmstadt & 0.18 & 2.53 & 0.00 \\ \hline
-		Vogelsbergkreis & 0.17 & 1.68 & -0.37 \\ \hline
-		Limburg-Weilburg & 0.08 & 2.74 & 0.11 \\ \hline
-		Werra-Meissner-Kreis & 0.03 & 1.59 & -0.11 \\ \hline
+		Offenbach & 27.70 & 5.67 & -0.545 \\ \hline
+		Bergstrasse & 14.41 & 4.31 & -0.792 \\ \hline
+		Frankfurt-am-Main & 13.10 & 12.14 & 0.270 \\ \hline
+		Lahn-Dill-Kreis & 6.29 & 4.03 & -0.448 \\ \hline
+		Main-Kinzig-Kreis & 5.17 & 6.70 & -0.093 \\ \hline
+		Marburg-Biedenkopf & 4.70 & 3.91 & -0.106 \\ \hline
+		Kassel-City & 3.90 & 3.19 & -0.494 \\ \hline
+		Wetteraukreis & 3.35 & 4.93 & -0.304 \\ \hline
+		Gross-Gerau & 2.90 & 4.38 & -0.244 \\ \hline
+		Rheingau-Taunus-Kreis & 2.89 & 2.98 & -0.402 \\ \hline
+		Kassel & 2.58 & 3.77 & -0.565 \\ \hline
+		Hochtaunuskreis & 2.33 & 3.77 & -0.320 \\ \hline
+		Darmstadt-Dieburg & 2.00 & 4.73 & 0.868 \\ \hline
+		Odenwaldkreis & 1.93 & 1.54 & -0.759 \\ \hline
+		Offenbach-am-Main & 1.23 & 2.08 & -0.108 \\ \hline
+		Schwalm-Eder-Kreis & 1.03 & 2.86 & -0.430 \\ \hline
+		Waldeck-Frankenberg & 0.99 & 2.49 & -0.283 \\ \hline
+		Giessen & 0.84 & 4.32 & 0.137 \\ \hline
+		Wiesbaden & 0.80 & 4.43 & 0.194 \\ \hline
+		Fulda & 0.74 & 3.54 & -0.281 \\ \hline
+		Hersfeld-Rotenburg & 0.41 & 1.91 & -0.545 \\ \hline
+		Main-Taunus-Kreis & 0.25 & 3.80 & 0.083 \\ \hline
+		Darmstadt & 0.18 & 2.53 & 0.002 \\ \hline
+		Vogelsbergkreis & 0.17 & 1.68 & -0.442 \\ \hline
+		Limburg-Weilburg & 0.08 & 2.74 & 0.211 \\ \hline
+		Werra-Meissner-Kreis & 0.03 & 1.59 & -0.123 \\ \hline
 	\end{tabular}
 	\label{tab:perc_region_loss}
 \end{table}
 
-The results show, that the main contribution of the loss function is done by a minority of regions. The top three contributors
+The results show, that a minority of regions contribute to the majority of the total loss in the model. The top three contributors
 account for 55.21 percent of the entire loss, while only making up about 22.12 percent of the total population. The top seven
 contributors make up about 75.27 percent, while making up about 39.95 percent of the population. A notable find is, that the
 top two regions, ``Offenbach'' and ``Bergstrasse'', both display a negative deviation, while the third most influential region
 ``Frankfurt-am-Main'' has a positive deviation. Frankfurt also has a lower overall contribution to the loss, than the other
-two regions, even though it has a higher share of the total population then the other two regions combined.
+two regions, even though it has a higher share of the total population than the other two regions combined.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 3
