@@ -154,31 +154,27 @@ point in time was calculated. These values were used as the starting point for a
 %-----------------------------------
 \subsection{Generation of 2d-grid of Hesse}
 For the simulation, a 2d-grid of Hesse was created using the program ProMesh4. The grid was manually drawn and consisted
-of 1075 vertices and 3049 edges, from which 1975 faces (triangular volumes) were constructed. The grid can be refined
-to 4136 vertices (accompanied also by an increasing number of edges and faces), however during this work only the grid
-with 1075 vertices was used for simulations. The grid itself was divided into 26 regions, representing the 26 autonomous
-regions of Hesse. The geometry and properties of the grid (also called mesh in the context of computational simulation)
-make it unstructured. A visual representation of the grid with and without wire frame and an exemplary
+of 1075 vertices and 3049 edges, from which 1975 faces (triangular volumes) were constructed and was divided into 26 regions,
+representing the 26 autonomous regions of Hesse. The geometry and properties of the grid (also called mesh in the context of computational simulation)
+make it unstructured. A visual representation of the grid and an exemplary
 image of the original geography of Hesse are shown in \hyperref[fig:2d-grid]{Figure \ref*{fig:2d-grid}}.
 
 %That means, that vertices can be positioned and connected arbitrarily. This method provides more flexibility then 
-\textcolor{red}{ADD FINITE VOLUME EXPLANATION?!?}
+%\textcolor{red}{ADD FINITE VOLUME EXPLANATION?!?}
 
 \begin{figure}
 	\begin{center}
-		\begin{subfigure}[b]{0.3\textwidth}
-			\includegraphics[width=\textwidth]{./figures/2d_grid_test.png}
+		\begin{subfigure}[b]{0.4\textwidth}
+			\includegraphics[width=\textwidth]{./figures/grid.png}
 		\end{subfigure}
 		% ---------------------
-		\begin{subfigure}[b]{0.3\textwidth}
-			\includegraphics[width=\textwidth]{./figures/2d_grid_test.png}
-		\end{subfigure}
-		% ---------------------
-		\begin{subfigure}[b]{0.3\textwidth}
-			\includegraphics[width=\textwidth]{./figures/2d_grid_test.png}
+		\begin{subfigure}[b]{0.4\textwidth}
+			\includegraphics[width=\textwidth]{./figures/Hessen.png}
 		\end{subfigure}
 	\end{center}
-	\caption{caption of the 2d-grid}
+	\caption{2d-grid of the region of Hesse. The grid consists of 1075 vertices, 3049 edges and 1975 faces.
+		Each color on the grid represents a different region within Hesse. An image of Hesse is shown
+		for better comparability\cite{website}.}
 	\label{fig:2d-grid}
 \end{figure}
 
