@@ -7,39 +7,60 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
+\section{Motivation}
+Throughout human history, humanity has struggled with overcoming the outbreak of diseases.
+Bacteria, viruses, parasites and other causes for sickness are omnipresent on our planet\cite{balloux2017q}. Some are
+relatively easy to overcome for most individuals, like Influenza\cite{cdc_influenza}. Others, like the human immunodeficiency viruses (HIV),
+can have a severe impact on an individual's life\cite{chaponda2018systematic,ji2007impact}. In addition to the impact sickness has
+on the live of individuals, diseases and how they spread, have a huge impact on our societies. Hospitals need to be 
+build and staffed with doctors, nurses and other facility members. Supply chains need to be established and maintained in order
+to manufacture drugs and materials that can be used to cure patients. Research must be conducted, and new treatments need to be
+established to increase the chances of a positive outcome. This entire network of services is costly in terms of time, effort
+and money used to both establish and maintain it. It is therefor incredibly important to control the spread of diseases early,
+in order to prevent damages on both an individual and an economical level.
+A good example for the impacts of a rapidly spreading disease is the ongoing ``severe acute respiratory syndrome coronavirus 2''
+(SARS-CoV-2 or COVID-19) pandemic. Much political and scientific debate in the past two years has revolved around options to better
+understand and predict the properties that cause the rapid spreading of this disease. 
 
-Bacteria, viruses, parasites and all other kinds of other causes for diseases are omnipresent on our planet\cite{??}. Some are
-relatively easy to overcome for most individuals, like the common cold\cite{??}. Others, such as HIV (human immunodeficiency virus),
-can have severe long term impact on the quality of live of individuals\cite{??}. In addition to the impact sickness has
-on the live of an individual, diseases and how they spread, have a huge impact on our societies. Hospitals need to be 
-be build and staffed with doctors, nurses and other facility members. Supply chains need to be established and maintained in order
-to manufacture drugs and materials that can be used to cure patients. Research has to be conducted and new treatments need to be
-established, in order to increase the chances for a positive outcome of health complications. This entire network of services is
-costly in terms of time, effort  and money used to both establish and maintain it.
 %In 2019, the United States of America spend
 %16.77\% of their GDP (gross domestic product) on healthcare expenditures\cite{WHO site}. This shows that managing public health
 %is important for every society in order to both stay competitive economically and provide citizens with a high quality of live.\newline
-\par
-Even though huge progress has been made in the fight against infectious diseases (a notable example being the eradication of
-small pox\cite{??}), sickness due to infectious diseases remain a common phenomenon in modern civilizations. Viruses are
-among the most successful organisms in spreading between populations of both humans and animals\cite{??}. The most notable example
-for this is the currently ongoing ``severe acute respiratory syndrome coronavirus 2'' (SARS-CoV-2) pandemic. The SARS-CoV-2 or
-coronavirus disease 2019 (short COVID-19) was first observed in an outbreak in the Chinese city of Wuhan in December 2019\cite{??}.
-From there it started to spread around the globe and on March, 11 2020, the world health organization declared a world wide pandemic\cite{??}.\newline
-\par
-Managing this pandemic has been a huge challenge in the past two years and much debate has revolved around managing the spread of this
-infectious disease. To this end, scientists from many different fields have researched the properties of this virus in order to better
-understand and predict how COVID-19 spreads in our societies. One of these fields is a branch of computer science and math, that aims to
-model the spread of infectious diseases, such as  COVID-19, using differential equations. This work aims to contribute to this field and
-%provide insight in the process of modeling the spread of infectious diseases on a two-dimensional grid using the SEIRD method. 
-provide insight in the process of modeling the spread of infectious diseases, by building on the work of Rastogi et al.\cite{rastogi}.
-In this work the ``SEIRD'' model\cite{wittum} was applied to seven major cities of Germany on a 2-dimensional (2D) grid. This work
-follows up on this, by simulating COVID-19 spreading on 26 interconnected regions in the federal state of Hesse, Germany.
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
+\section{Research goals}
+This work aims to contribute to the previously mentioned field
+and build on the work of Rastogi et al.\cite{Rastogi}. In his work the ``SEIRD'' model\cite{Wittum1,Wittum2} was used to
+model the spreading of COVID-19 in 7 major cities of Germany on a 2-dimensional grid. This work follows up on this, by
+modeling COVID-19 spreading in the 26 interconnected region of Hesse, Germany. In doing so we focus on the following questions.
+
+\begin{enumerate}
+	\item How well does the SEIRD model performs in a setting with more regions?
+	\item How well does the current optimization strategy work?
+	\item What are potential areas of improvement of the model?
+\end{enumerate}
+
+In order to achieve these goals the SEIRD model was modified in an effort to better represent the conditions of the real world.
+Additionally modifications to the model implementation were introduced to enable the model to clearly differentiate between different
+regions on the grid. Lastly the model was tested with different data conditions, and the results analyzed in multiple ways.
+%\par
+%Even though huge progress has been made in the fight against infectious diseases (a notable example being the eradication of
+%small pox\cite{??}), sickness due to infectious diseases remain a common phenomenon in modern civilizations. Viruses are
+%among the most successful organisms in spreading between populations of both humans and animals\cite{??}. The most notable example
+%for this is the currently ongoing ``severe acute respiratory syndrome coronavirus 2'' (SARS-CoV-2) pandemic. The SARS-CoV-2 or
+%coronavirus disease 2019 (short COVID-19) was first observed in an outbreak in the Chinese city of Wuhan in December 2019\cite{??}.
+%From there it started to spread around the globe and on March, 11 2020, the world health organization declared a world wide pandemic\cite{??}.\newline
+%\par
+%Managing this pandemic has been a huge challenge in the past two years and much debate has revolved around managing the spread of this
+%infectious disease. To this end, scientists from many different fields have researched the properties of this virus in order to better
+%understand and predict how COVID-19 spreads in our societies. One of these fields is a branch of computer science and math, that aims to
+%model the spread of infectious diseases, such as  COVID-19, using differential equations. This work aims to contribute to this field and
+%%provide insight in the process of modeling the spread of infectious diseases on a two-dimensional grid using the SEIRD method. 
+%provide insight in the process of modeling the spread of infectious diseases, by building on the work of Rastogi et al.\cite{rastogi}.
+%In this work the ``SEIRD'' model\cite{wittum} was applied to seven major cities of Germany on a 2-dimensional (2D) grid. This work
+%follows up on this, by simulating COVID-19 spreading on 26 interconnected regions in the federal state of Hesse, Germany.
 
 
-%----------------------------------------------------------------------------------------
-%	SECTION 3
-%----------------------------------------------------------------------------------------
 
 %\section{Aims and goals}
 %\textcolor{red}{Maybe move this more to the beginning? Difficult to formulate without previous explanations...}\newline % note

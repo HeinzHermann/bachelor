@@ -13,18 +13,19 @@ Details regarding model adjustments and how the methods were implemented are giv
 %----------------------------------------------------------------------------------------
 \section{Background of computational disease modeling}
 A common goal for disease modeling is to predict the spreading of a disease in a given population. Different approaches can be made to
-achieve this goal. In 2019 Akhtar et al. presented a model based on a neural network that tries to predict the spread of the Zika virus\cite{note}.
-Models like this are promising, but have the disadvantage of requiring big sets of data in order to train the neural network in the first place.
-(\textcolor{red}{check article if this is actually the case!}) % note
-Other models are probabilistic in nature and try predict the spreading of a disease by simulating an individuals chance of contracting a
-disease at a given point in time\cite{??}. These models rely on big population counts to compensate errors that are caused by the random nature.
-In addition modeling the infection chances of each individual in a given population often requires considerable computational resources\cite{??}.
-A third method of computational disease modeling is based on differential equations. This type of model tries to establish and express relations between different
-properties of a system. In disease modeling this could mean an increase in infection rate based on the population density of a modeled region or a
-change in population mobility based on the average number of cars owned per household\cite{??}. The challenging aspect of this method is the design and
-optimization of the model itself and its equations, since real life phenomena (i.e. an increase in population mobility) tend to be influenced by many
-different other factors (i.e. a high density of personal transportation, holiday seasons, cultural backgrounds). This means that the relations between many
-different ``moving parts'' in a system need to be identified, related to one another and then modeled and tuned correctly, in order to make accurate predictions
+achieve this goal. In 2019 Akhtar et al. presented a model based on a neural network that tries to predict the spread of the Zika virus\cite{akhatar2019dynamic}.
+Models like this are promising but usually have the disadvantage of requiring big sets of data in order to train the neural network in the first place.
+%(\textcolor{red}{check article if this is actually the case!}) % note
+Other models are probabilistic in nature and try to predict the spreading of disease by simulating an individuals chance of contracting a
+disease at any given point in time\cite{nakamura2017efficient,nakamura2020improved}. These models rely on high population numbers to compensate for errors that are caused by the random nature.
+In addition, simulating the infection chances and events of each individual in such a population often requires considerable computational resources\cite{nakamura2017efficient}.
+A third method of computational disease modeling is based on differential equations. This type of modeling tries to establish and express relations between different
+properties of a system. In a model this could be expressed as an increase in infection rate based on the population density of a modeled region or a
+change in population mobility based on the average number of cars owned per household. The challenging aspect of this method is the design and
+optimization of the model itself and its equations since real life phenomena tend to be influenced by many
+different factors. An increase in population mobility could be influenced by a high density of personal transportation, holiday seasons, cultural backgrounds and so on. 
+his means that the relations between many
+different ``moving parts'' in a system need to be identified, related to one another and then modeled and tuned correctly to make accurate predictions
 of future events. However, if this modeling attempt is successful, it not only serves as a solid base for predictions of future events, it also provides insight
 into the interconnected nature of a system.
 
@@ -33,10 +34,10 @@ into the interconnected nature of a system.
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 \section{Compartmental modeling techniques}
-Compartmental modelings revere to a modeling technique often used to systematically describe real world phenomena
-like disease spreading via differential equations\cite{compartementMod}. In these models the population is divided into different groups. 
-Members of one group can move to another group. This movement is based on said differential equations, that are used to model the real
-world behavior of each group. Notable examples for these types of techniques are the ``SIR'' and the ``SEIRD'' model, which are discussed in
+Compartmental modeling techniques are often used to systematically describe real-world phenomena,
+like disease spreading, via differential equations\cite{kermack1991contribution,skendall1956deterministic}. In these models, the population is divided into different groups. 
+Members the system can transition from one group to another. This movement is defined by the previously mentioned differential equations, that are used to model the real
+world dynamics of each group. Notable examples fro compartmental modeling techniques are the ``SIR'' and the ``SEIRD'' models, which will be discussed in
 the following sections. The latter of the two models was used in this work.
 
 
@@ -46,26 +47,25 @@ the following sections. The latter of the two models was used in this work.
 \subsection{Differential equations}
 \textcolor{red}{add citations}\\ %note
 %\textcolor{red}{kinda shit, add more information, starting condition, etc.}\\ %note
-In order to understand the previously mentioned models, we will first introduce the concept of differential equations.
+To understand the previously mentioned models, we will first introduce the concept of differential equations.
 Differential equations are functions which contain derivatives of unknown functions, which in turn depend
-on either one or more independent variables. Depending on the number of independent variables the differential
-equations are either considered \I{Ordinary Differential Equations} (ODE) (in case of a single variable, often time) or
-\I{Partial Differential Equations} (PDE) (in case of multiple variables). An example for each type of equation
-is given below, where equation \ref*{eq:ODE_ex} shows a simple \I{ODE} and equation \ref*{eq:PDE_ex} shows a
-simple \I{PDE}.\newline
+on either one or more independent variables. Depending on the number of independent variables, the differential
+equations are either considered \I{Ordinary Differential Equations} (ODE) or
+\I{Partial Differential Equations} (PDE). The former having only a independent variable, the latter having multiple variables.
+An example for each type of equation is given below, where equation \ref*{eq:ODE_ex} shows a simple ODE, and equation \ref*{eq:PDE_ex} shows a
+simple PDE.\newline
 
 \begin{align}
 	\frac{\delta u}{\delta x} + b = c \label{eq:ODE_ex}\\
 	\frac{\delta u}{\delta x} + \frac{\delta u}{\delta y} \cdot \frac{\delta^2 u}{\delta z^2} = c \label{eq:PDE_ex}
 \end{align}
 
-Differential equations are often used to describe the rate of change in a given quantity in relation to another
-changing quantity. This makes them very useful for describing complex biological, physical, mechanical, economical
-or other scientific systems, where multiple system parameters interact with one another. However, while differential
+Differential equations are often used to describe the rate of change in a varying quantity in relation to another
+varying quantity. This makes them very useful for describing complex biological, physical, mechanical, economic
+or other scientific systems, where multiple system parameters interact with each other. However, while differential
 equations are a powerful tool in describing dynamic systems, it is often difficult to find their solution (if such
 a solution even exists). Solving a differential equation describes the act of finding a definition of the
-unknown functions, which satisfies both the differential equation and possible other conditions, such as starting
-conditions.
+unknown functions, which satisfies both the differential equation and possible other starting conditions.
 
 
 %-----------------------------------
@@ -87,13 +87,13 @@ the epidemiological behavior of an infectious disease. The model divides a popul
 \end{enumerate}
 
 
-Population changes in all three groups are described in the form of ordinary differential equations\cite{mathSIR}.
+Population changes in all three groups are described as ordinary differential equations.
 Members of \B{S} can transition to \B{I}. This transition rate is expressed in the
-form of variable $\alpha$, which is a positive, real number. This parameter includes many different epidemcal factors like
-population density, infectiousness and many more and tries to condense them into one single value.
-Transition also occurs from \B{I} to \B{R}. This change is expressed by the variable 
+form of variable $\alpha$, which is a positive, real number. This parameter includes various epidemiologically relevant factors like
+population density, infectiousness, hygiene measures and many more and tries to condense them into one single value.
+Transition events also occurs from \B{I} to \B{R}. This change is expressed by the variable 
 $\beta$, which is a positive constant between 0 and 1. $\beta$ can be rewritten as $\frac{1}{b}$, where $b$ is the average
-duration an infected individual remains contagious, before it either recovers or dies. The concept of the SIR model is
+duration an infected individual remains contagious before it either recovers or dies. The concept of the SIR model is
 illustrated in \hyperref[fig:SIR]{Figure \ref*{fig:SIR}}. The mathematical expression of the equations are shown below, where
 $t$ represents a point in time.
 
@@ -101,8 +101,8 @@ $t$ represents a point in time.
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figures/SIR.png}
 		\caption{Illustration of the population flow in the SIR model. S represents the ``Susceptible'', I
-			the ``Infected'' and R the ``Removed'' population. The variable $\beta$ can also redefined
-			as $\frac{1}{b}$, where $D$ is the average duration of contagiousness}
+			the ``Infected'' and R the ``Removed'' population. The variable $\beta$ can also be redefined
+			as $\frac{1}{b}$, where $b$ is the average duration of contagiousness}
 		\label{fig:SIR}
 	\end{center}
 \end{figure}
@@ -116,9 +116,9 @@ $t$ represents a point in time.
 \end{align}
 
 
-The model also assumes, that the total number of individuals in the system $N$ remains constant in every time step and
-that the sum of all transitions between all three groups during every time step remains zero. This is expressed in the equations below.
-$S(t)$, $I(t)$ and $R(t)$ express the number of individuals in each of the groups, at time $t$, respectively.
+The model also assumes that the total number of individuals in the system $N$ remains constant in every time step and
+that the sum of all transitions between all three groups during every time step remains zero\cite{kermack1991contributions}. This is expressed in the equations below.
+$S(t)$, $I(t)$ and $R(t)$ express the number of individuals in each of the groups at time $t$, respectively.
 
 \begin{align}
 	\label{eq:SIR2}
@@ -127,16 +127,15 @@ $S(t)$, $I(t)$ and $R(t)$ express the number of individuals in each of the group
 \end{align}
 
 
-Since the model assumes, that the total population remains stable, phenomena like immigration emigration or child birth are not accounted
-for. This does not correctly represent the real world. However, in this model it is assumed, that population fluctuations
-due to these occurrences are minor enough compared to the entirety of a regions population, that they do not alter the results of the
-simulation in a major way\cite{??}.\newline
+Since the model assumes that the total population remains stable, phenomena like immigration, emigration or child birth are not accounted
+for. While this does not correctly represent the real-world, it is assumed, that population fluctuations
+due to these occurrences are minor enough compared to the entirety of a region's population that the assumption holds.\newline
 
 
-In order to correctly model the dynamics of an epidemic, the variables of these differential
+In order to model the dynamics of an epidemic correctly, the variables of these differential
 equations (like $\alpha$ and $\beta$ in this case) must be determined. This is part of solving the differential equations.
-Different methods can be applied to achieve this goal. Two of these techniques are the \hyperref[sec:Gauss]{Gauss-Newton algorithm}\cite{Gauss??}
-and \hyperref[sec:PSO]{Particle Swarm Optimization (PSO)}\cite{PSO??}. Both of these techniques were used in this work and will are explained
+Different methods can be applied to achieve this goal. Two of these techniques are the \hyperref[sec:Gauss]{Gauss-Newton algorithm}
+and \hyperref[sec:PSO]{Particle Swarm Optimization (PSO)}. Both of these techniques were used in this work and are explained
 later in this chapter.
 
 
@@ -145,9 +144,9 @@ later in this chapter.
 %-----------------------------------
 \subsection{The SEIRD model}
 \label{sec:SEIRD}
-The SEIRD model is a variant of the simpler SIR model\cite{knodel20173d} and aims to improve upon its predecessor, by
+The SEIRD model is a variant of the simpler SIR model\cite{knodel20173d} and aims to improve upon its predecessor by
 introducing two new groups of individuals. These groups are used to differentiate the mechanics of an epidemic much
-more precise.
+more precisely.
 \textcolor{red}{(double check citation)}. % note
 The five groups of the SEIRD model are shown below.
 
@@ -176,10 +175,10 @@ part of the model. The modified equations are shown below.
 The transition between the \B{S} and \B{E} population in SEIRD is equivalent to the transition
 between \B{S} and \B{I} in SIR. However, the population outflow from \B{E} is split and can either move
 to \B{I} or \B{R}. This allows the modeling of infections that end in a quick recovery or an infection
-with complications (defined by the hospitalization of the patient). The ratio between the two scenarios is governed by the variable
+with complications (defined as patient hospitalization). The ratio between the two scenarios is governed by the variable
 $\kappa$. In addition, the variable $q$ was introduced and now represents the average duration until recovery/hospitalization of an
 infected individual occurs. Similarly, the outflow of \B{I} is split between the populations of \B{R} and \B{D}. The ratio is governed
-by the variable $\tau$. The equations for \B{R} and \B{D} were also adjusted to represent this change. Lastly the variable $p$ was
+by the variable $\tau$. The equations for \B{R} and \B{D} were also adjusted to represent this change. Lastly, the variable $p$ was
 introduced, which now represents the average stay of a hospitalized individual until they either recover or succumb to the infection.
 \hyperref[fig:SEIRD]{Figure \ref*{fig:SEIRD}} illustrates all these changes.\\
 
@@ -187,8 +186,7 @@ introduced, which now represents the average stay of a hospitalized individual u
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figures/SEIRD.png}
 		\caption{Illustration of the population flow in the SEIRD model. S represents the ``Susceptible'', E the ``Exposed'',
-			I the ``Infected'', R the ``Recovered'' and D the ``Diseased'' population. $\beta$ can also be expressed as
-			$\frac{1}{\phi}$, where $\phi$ is the average time to recovery/hospitalization.}
+			I the ``Infected'', R the ``Recovered'' and D the ``Diseased'' population.}
 		\label{fig:SEIRD}
 	\end{center}
 \end{figure}
@@ -196,8 +194,8 @@ introduced, which now represents the average stay of a hospitalized individual u
 
 
 Like SIR, the SEIRD model assumes that the total number of individuals $N$ in the population remains constant during every step
-of the modeling process. This leads to the equations expressed below. Again, $S(t)$, $E(t)$, $I(t)$, $R(t)$ and $D(t)$ are
-expressing the number of individuals for each group at time $t$, respectively. $N$ remains the total number of individuals in the model.
+of the modeling process. This leads to the equations expressed below. Again, $S(t)$, $E(t)$, $I(t)$, $R(t)$ and $D(t)$ express
+the number of individuals for each group at time $t$, respectively. $N$ remains the total number of individuals in the model.
 
 \begin{align}
 	\label{eq:SEIRD2}
@@ -206,10 +204,10 @@ expressing the number of individuals for each group at time $t$, respectively. $
 \end{align}
 
 
-A model like this expresses the dynamics of an epidemic in greater detail. While the SIR model does distinct between
+A model like this expresses the dynamics of an epidemic in greater detail. While the SIR model distinguishes between
 groups like Susceptible and Infected, it does not differentiate between infected and hospitalized populations. This simplification
-makes the modeling process easier, but also ignores real world influences that could influence the simulation outcome.
-The SEIRD introduces these groups and aims to simulate a scenario that is much closer to the real world.\newline
+makes the modeling process easier but ignores real-world influences that could change the outcome of the simulation.
+The SEIRD introduces these groups and aims to simulate a scenario that is much closer to the real-world.\newline
 
 \textcolor{red}{move to methods?}\\
 This work focused on the modeling capability of SEIRD in the transition stage between susceptibles and exposed. To fulfill this
@@ -222,8 +220,8 @@ in \hyperref[sec:SEIRDredef]{chapter~\ref*{chap:methodology}, section~\ref*{sec:
 %----------------------------------------------------------------------------------------
 \section{Variable optimization algorithms}
 In order for the presented model equations to work properly, it is important to determine the correct value for each unknown variable.
-Different methods to solve differential equations, but in the context of this work the Gauss-Newton and the Particle Swarm Optimization (PSO)
-algorithm were used. The following sections will explain the theory behind the two methods.
+Different methods to solve differential equations, but in the context of this work, the Gauss-Newton and the Particle Swarm Optimization (PSO)
+algorithms were used. The following sections will explain the theory behind the two methods.
 
 
 %-----------------------------------
@@ -233,11 +231,11 @@ algorithm were used. The following sections will explain the theory behind the t
 \textcolor{red}{add citations, explain least squares better/at all}
 \textcolor{red}{describe efficiency and why it is cool}
 \label{sec:Gauss}
-The \I{Gauss-Newton algorithm} is an iterative method, that is used to solve non-linear least squares problems. Iterative means, that the algorithm 
+The \I{Gauss-Newton algorithm} is an iterative method that is used to solve non-linear least squares problems. Iterative means that the algorithm 
 starts with an initial solution and tries to improve this solution successively over a number of consecutive steps.
 Given a set of $m$ functions, $n$ variables that need to be optimized, a number of target values and a number of starting values, the algorithm tries
-optimize the variables in such a way, that the difference between function results and target values is minimized.
-The relevant parameters of this algorithms are shown below. 
+to optimize the variables in such a way that the difference between function results and target values is minimized.
+The relevant parameters of this algorithm are shown below. 
 
 \begin{align}
 	F(\theta) =& (f_0(\theta), f_1(\theta),...,f_m(\theta))^T \\
@@ -249,11 +247,11 @@ The relevant parameters of this algorithms are shown below.
 $F(\theta)$ is the vector function, which contains $m$ functions and is
 used to estimate the target values. $\theta^i$ is a vector of $n$ estimated input variables in iteration $i$, given to $F(\theta)$.
 $\epsilon^i$ expresses the error between the estimation results and the vector of target values $T$ in iteration $i$.
-$\Delta^i$ is the vector of adjustment values, that are applied to the estimates of  iteration $i-1$, in order to improve the results of iteration $i$.
+$\Delta^i$ is the vector of adjustment values that are applied to the estimates of  iteration $i-1$, in order to improve the results of iteration $i$.
 For the \I{Gauss-Newton algorithm} to be applicable, the condition $m > n$ must be satisfied.\newline
 
-$F(\theta)$ is calculated iterative thought the algorithm and can be expressed in the form of a Taylor Series (eq. \ref*{eq:taylor1}). It can
-then be rewritten as the Jacobian matrix $J$.
+$F(\theta)$ is calculated iteratively thought the algorithm and can be expressed in the form of a Taylor Series, as shown in
+\hyperref[eq:taylor1]{equation \ref*{eq:taylor1}}. It can then be rewritten to contain the Jacobian matrix $J$.
 
 %note maybe add colors later
 \begin{align}
@@ -272,13 +270,13 @@ then be rewritten as the Jacobian matrix $J$.
 	=& F(\theta^{i}) + J \Delta^{i} \label{eq:taylor3}
 \end{align}
 
-This means the Jacobian Matrix $J$ is defined as such.
+	This means the Jacobian Matrix $J$ is defined as shown in \hyperref[eq:jacob]{equation \ref*{eq:jacob}}.
 
 \begin{align}
-	J_{pq} = \frac{\delta f_p(\theta)}{\delta \theta_q} \quad \text{where } \quad p \in \{0,1,..,m\},\text{ } q \in \{0,1,...,n\}
+	J_{pq} = \frac{\delta f_p(\theta)}{\delta \theta_q} \quad \text{where } \quad p \in \{0,1,..,m\},\text{ } q \in \{0,1,...,n\} \label{eq:jacob}
 \end{align}
 
-To minimize the error $\epsilon$ in each following iteration, a connection is established between the current error and the
+To minimize the error $\epsilon$ in each subsequent iteration, a connection is established between the current error and the
 error of the following iteration. This process is shown below.
 
 \begin{align}
@@ -290,18 +288,18 @@ error of the following iteration. This process is shown below.
 \textcolor{red}{put equation in table format?}\\
 $\epsilon^{i+1}$ is set to zero, since the goal of the algorithm is to minimize the error of the following iteration. Equation \ref*{eq:taylor4}
 is then reorganized to take the form of a linear equation $Ax~=~b$. Since $\Delta$ steps usually are sufficiently small, it is assumed that the function is locally
-linear. This means that least squares analysis can be applied and used to calculate $\Delta$ of the following equation.
+	linear. This means that least squares analysis can be applied and used to rewrite equation \ref*{eq:taylor5} as shown below.
 
 \begin{align}
 	&\text{min} \| \epsilon^{i} + J \Delta^{i} \|\text{ over $\Delta^{i}$} \\
 	\Rightarrow & \epsilon^{i} + J \Delta^{i} = 0 \qquad \text{rewrite to form $Ax = b$} \\
-	\Leftrightarrow & J \Delta^{i} = -\epsilon^{i} \qquad \text{least squares: } x = (A^T A)^{-1} A^T b \\
-	\Leftrightarrow & \Delta^{i} = - (J^T J)^{-1} J^T \epsilon^{i} \label{eq:taylor5}
+	\Leftrightarrow & J \Delta^{i} = -\epsilon^{i} \qquad \text{least squares: } x = (A^T A)^{-1} A^T b \label{eq:taylor5} \\
+	\Leftrightarrow & \Delta^{i} = - (J^T J)^{-1} J^T \epsilon^{i} \label{eq:taylor6}
 \end{align}
 
-Hence, equation \ref*{eq:taylor5} can be used to calculate a suitable $\Delta$, in order to decrease the error in each iteration.\newline
+Hence, equation \ref*{eq:taylor6} can be used to calculate a suitable $\Delta$ to decrease the error in each subsequent iteration.\newline
 
-A simplified version of the \I{Gauss-Newton algorithm} is listed below as pseudo-code.
+A simplified \I{Gauss-Newton algorithm} is listed below as pseudo-code.
 
 \begin{algorithm}
 	\caption{\I{Gauss-Newton algorithm} pseudocode}
@@ -329,7 +327,8 @@ A simplified version of the \I{Gauss-Newton algorithm} is listed below as pseudo
 
 \subsection{Particle Swarm Optimization}
 \label{sec:PSO}
-Like the Gauss-Newton algorithm, \I{Particle Swarm Optimization} (PSO) is a method used to iteratively optimize a problem.
+\textcolor{red}{double check PSO citation}
+Like the Gauss-Newton algorithm, \I{Particle Swarm Optimization} (PSO) is an algorithm used to optimize a problem iteratively\cite{akman2018parameter}.
 Generally, during PSO the following steps take place.
 
 \begin{enumerate}
@@ -348,15 +347,15 @@ Generally, during PSO the following steps take place.
 %\newline
 
 In order to find the best solution in a defined search space as quickly and efficiently as possible, additional conditions are usually applied
-to each particle. Particles are grouped together and a best group solution is set each iteration, in addition to the global optimal solution.
-Modifications of particle solutions in each iteration are random, but in some way biased towards both the group and global optimum.
-This is meant to direct a greater number of particles to the area of the most optimal solutions, that are currently known.
-However, these solution may not be the global optimum for the defined search space and there is no guarantee, that improvements will be made in any
-given iteration. As a trade off, the problem function does not need to be differentiable like it is the case for the \I{Gauss-Newton algorithm}. \newline
+to each particle. Particles are grouped together, and a best group solution is set in each iteration, in addition to the global optimal solution.
+Modifications of particle solutions in each iteration are random but in some way biased towards both the group and global optimum.
+This is meant to direct a greater number of particles to the areas with the most optimal solutions, that are currently known.
+However, these solutions may not be the global optimum for the defined search space, and there is no guarantee that any improvements are made during
+an iteration. As a trade off, the problem function does not need to be differentiable like it is the case for the \I{Gauss-Newton algorithm}. \newline
 
-During the initial steps of PSO a problem space is defined, as well as a cost function $L$. $L$ takes a number of $n$ input values in the from of a
+During the initial steps of PSO, a problem space is defined as well as a loss function $L$. $L$ takes a number of $n$ input values in the from of a
 vector $\theta$ and projects them to a real number $\epsilon$. The goal is to minimize the loss $L$ by optimizing $\theta$.
-Written below is an exemplary PSO algorithm, in  pseudocode.
+Written below is an exemplary PSO algorithm in  pseudocode.
 
 \begin{algorithm}
 	\caption{Particle Swarm Optimization pseudocode}
@@ -395,49 +394,4 @@ Written below is an exemplary PSO algorithm, in  pseudocode.
 		\State \B{return} $\theta_S$;
 	\end{algorithmic}
 \end{algorithm}
-
-%\begin{algorithm}
-%	\caption{Particle Swarm Optimization pseudocode}
-%	\begin{algorithmic}
-%		\State Set $T, S$ = target values, uniformly chosen random solution;
-%		\State Set $g, p$ = number of groups, number of particles;
-%		%\State Set $s$ = random solution in the defined search space;
-%		%\State Set G = number of goups;
-%		\For {each group $x_j$, where $j \in G = \{0,1,...,g\}$}
-%			\State Set $i_j$ = group index;
-%			\State Set $g_j$ = random solution in defined search space;
-%			\If {$f(S) > f(g_j)$}
-%				\State Set $S = g_j$;
-%			\EndIf
-%		\EndFor
-%		%\State Set P = number of paricles;
-%		\For {each paricle $x_i$, where $i \in P = \{0,1,...,p\}$}
-%			\State Set $p_i$ = uniformly chosen random starting position;
-%			\State Set $v_i$ = no initial change;
-%			\State Set $i_i$ = index of a group;
-%			\If {$f(S) > f(p_i)$}
-%				\State Set $S = p_i$;
-%				\State Set $g_i.g = p_i$;
-%			\ElsIf {$f(g_i.g) > f(p_i)$}
-%				\State Set $g_i.g = p_i$;
-%			\EndIf
-%		\EndFor
-%		\While {$f(s) != 0$ \B{or} (breaking conditions are \B{not} met)}
-%			\For {each particle $x_i$}
-%				\State Set velocity $v_i$ to random new value, biased by $g_i.g$ and $s$;
-%				\State Update particle position $p_i$ based on velocity $v_i$;
-%				\If {$f(S) > f(p_i)$}
-%					\State Set $S = p_i$;
-%					\State Set $g_i.g = p_i$;
-%				\ElsIf {$f(g_i.g) > f(p_i)$}
-%					\State Set $g_i.g = p_i$;
-%				\EndIf
-%			\EndFor
-%		\EndWhile
-%		\State \B{return} $S$;
-%	\end{algorithmic}
-%\end{algorithm}
-
-\textcolor{red}{how to make pseudocode better/easier to read?}
-
 

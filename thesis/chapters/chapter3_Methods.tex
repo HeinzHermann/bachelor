@@ -43,7 +43,7 @@ in order to improve the quality of the results.
 In order to perform SEIRD simulations, it was necessary to gather precise real world data for as many of the five groups as possible.
 The source for this data was the Github project \cite{Gehrcke}, which provided both the number of COVID-19 infections,
 as well as the number of COVID-19 related deaths per region in Germany. The repository provides data based on the case/death
-numbers published by the RKI (Robert Koch Institute)\cite{RKI} and the Risklayer GmbH. In this work the data based on the RKI publications
+numbers published by the RKI (Robert Koch Institute) and the Risklayer GmbH. In this work the data based on the RKI publications
 was used. The data format were cumulative case/death numbers per region per day.\newline
 
 \par
@@ -68,8 +68,9 @@ changes were done for two major reasons:\newline
 
 \par
 First, data availability proved to be an issue. The problem being, that the number of infected in the
-collected data set only includes individuals that were tested positive with a polymerase chain reaction (PCR) test\cite{??}. However,
-these tests are usually conducted, if an individual is experiencing symptoms of sickness\cite{??}. This means, that individuals, that do
+collected data set only includes individuals where the COVID-19 pathogen could be isolated or that were tested positive
+with a polymerase chain reaction (PCR) or antigen test\cite{RKIcase}. However,
+these tests are usually conducted, if an individual is experiencing symptoms of sickness. This means, that individuals, that do
 not experience symptoms were (for the most part) not represented in the collected data. In addition, it was difficult to estimate
 the ratio between infected individuals that experience symptoms and individuals that do not experience symptoms. This made it
 even harder make realistic assumptions, on which bases the original data could be modified to account for this phenomenon.\newline
@@ -143,7 +144,7 @@ We chose to simulate the time frame between 1\I{st} of September 2020 and the 15
 data points were chosen, since no significant policy changes regarding protective measures against COVID-19 infections
 (mask mandates, isolation periods, store closures)  were made during this time in Germany. Thus hopefully providing a more stable system
 with hard to predict variables. Additionally, this time frame was before other COVID-19 variants were first observed in
-Germany\cite{??}. It can therefore be assumed, that only the original CODIV-19 strain from Wuhan was contributing to infections.\newline
+Germany\cite{RKIvariants}. It can therefore be assumed, that only the original CODIV-19 strain from Wuhan was contributing to infections.\newline
 
 Each group was calculated for each day in each region. For the first day of simulation (day 0), the percentage of each group at that
 point in time was calculated. These values were used as the starting point for all simulations.
@@ -174,7 +175,7 @@ image of the original geography of Hesse are shown in \hyperref[fig:2d-grid]{Fig
 	\end{center}
 	\caption{2d-grid of the region of Hesse. The grid consists of 1075 vertices, 3049 edges and 1975 faces.
 		Each color on the grid represents a different region within Hesse. An image of Hesse is shown
-		for better comparability\cite{website}.}
+		for better comparability\cite{HesseImage}.}
 	\label{fig:2d-grid}
 \end{figure}
 
@@ -258,10 +259,10 @@ shows the equation.
 %	SUBSECTION 3
 %-----------------------------------
 \subsection{Variable optimization via \I{ConstrainedOptimization}}
-The variables $\alpha$ and $q$ of the SEIRD system were optimized using the \I{ConstrainedOptimization} plugin for UG4\cite{???}.
-%note add constrainedopt citation
-The plugin was used to optimize these variables using both the \I{Gauss-Newton} algorithm and PSO. Step sizes for
-individual time points were adjusted while using the \I{Gauss-Newton} algorithm. This was done via the Frank-Wolf algorithm\cite{Rastogi}\cite{frank-wolf}. %note add citaions
+The variables $\alpha$ and $q$ of the SEIRD system were optimized using the \I{ConstrainedOptimization} plugin for UG4\cite{Scheidemann}.
+The plugin was used to optimize these variables using both the \I{Gauss-Newton} algorithm and PSO.
+
+%Step sizes for individual time points were adjusted while using the \I{Gauss-Newton} algorithm. This was done via the Frank-Wolf algorithm\cite{Rastogi,frank-wolf}. %note add citaions
 
 
 %-----------------------------------
