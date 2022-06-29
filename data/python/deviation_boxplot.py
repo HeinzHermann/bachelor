@@ -11,7 +11,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # part one, parse sample data
 
 # open and read sample file
-impFile = open("./perc_diff_76d.txt", "r")
+impFile = open("./perc_diff_50d_corr.txt", "r")
 data = impFile.read()
 
 # set up for data parsing
@@ -52,9 +52,9 @@ for set_i in range(1, len(results)):
 	for item_i in range(len(results[set_i])):
 		# conversion
 		conversion = float(results[set_i][item_i])
-		results[set_i][item_i] = conversion
-
-		sorted_tab[counter % count_tab].append(conversion)
+		if (conversion != 0.0):
+			results[set_i][item_i] = conversion
+			sorted_tab[counter % count_tab].append(conversion)
 		counter += 1
 
 # close file
@@ -118,7 +118,7 @@ if plot == 'scatter':
 elif plot == 'plot':
 	ax = fig.add_subplot(111)
 
-	set_start = 25
+	set_start = 20
 	set_end = 27
 	#set_end = len(sorted_tab)
 
@@ -132,7 +132,7 @@ elif plot == 'box':
 	ax = fig.add_subplot(111)
 
 	set_start = 1
-	set_end = 27
+	set_end = 12
 	#set_end = len(sorted_tab)
 	
 	#ax.boxplot(sorted_tab[set_start:set_end])
@@ -141,10 +141,10 @@ elif plot == 'box':
 
 	data_reverse = sorted_tab[set_start:set_end]
 
-	#data_reverse = []
-	#data_reverse.append(sorted_tab[1])
-	#data_reverse.append(sorted_tab[8])
-	#data_reverse.append(sorted_tab[10])
+	data_reverse = []
+	data_reverse.append(sorted_tab[1])
+	data_reverse.append(sorted_tab[8])
+	data_reverse.append(sorted_tab[10])
 	
 	# delete outliners
 	#del data_reverse[9]
@@ -161,10 +161,10 @@ elif plot == 'box':
 	#del names_reverse[7]
 	#del names_reverse[0]
 	
-	#names_reverse = []
-	#names_reverse.append(results[0][1])
-	#names_reverse.append(results[0][8])
-	#names_reverse.append(results[0][10])
+	names_reverse = []
+	names_reverse.append(results[0][1])
+	names_reverse.append(results[0][8])
+	names_reverse.append(results[0][10])
 
 	
 	#names_reverse = names_reverse[16:24]
@@ -173,6 +173,7 @@ elif plot == 'box':
 	#ax.boxplot(data_reverse,showmeans=True, vert=0)
 	ax.boxplot(data_reverse, vert=0)
 	ax.set_yticklabels(names_reverse)
+	plt.xlabel("Relative deviation")
 	plt.subplots_adjust(left=0.3)
 	#for set_i in range(set_start, set_end):
 	#	ax.boxplot(sorted_tab[0], sorted_tab[set_i], label=results[0][set_i])

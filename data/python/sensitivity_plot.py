@@ -63,15 +63,15 @@ print("loss: min =", min(res_sorted[2]), ", max =", max(res_sorted[2]))
 
 # set ranges for data point removal
 alpha_high = 0.25
-alpha_high = max(res_sorted[0])
+#alpha_high = max(res_sorted[0])
 alpha_low = 0.15
-alpha_low = min(res_sorted[0])
+#alpha_low = min(res_sorted[0])
 qq_high = 8.00
-qq_high = max(res_sorted[1])
+#qq_high = max(res_sorted[1])
 qq_low = 5.5
 qq_low = min(res_sorted[1])
 loss_high = 2700000000.000
-#loss_high = 9999999999.000
+loss_high = 9999999999.000
 #loss_high = max(res_sorted[2])
 loss_low = 0
 
