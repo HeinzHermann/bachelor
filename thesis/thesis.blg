@@ -3,17 +3,11 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: thesis.aux
 The style file: biblatex.bst
 A level-1 auxiliary file: chapters/chapter1_Introduction.aux
-White space in argument---line 37 of file thesis.aux
- : \citation{WHO
- :               site}
-I'm skipping whatever remains of this command
 A level-1 auxiliary file: chapters/chapter2_Theory.aux
 A level-1 auxiliary file: chapters/chapter3_Methods.aux
-Case mismatch error between cite keys Rastogi and rastogi
----line 85 of file thesis.aux
- : \citation{Rastogi
- :                  }
-I'm skipping whatever remains of this command
+A level-1 auxiliary file: chapters/chapter4_Results.aux
+A level-1 auxiliary file: chapters/chapter5_Discussion.aux
+A level-1 auxiliary file: appendices/AppendixA.aux
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
@@ -30,56 +24,47 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: thesis-blx.bib
 Database file #2: thesis.bib
-Warning--I didn't find a database entry for "??"
-Warning--I didn't find a database entry for "note"
-Warning--I didn't find a database entry for "rastogi"
-Warning--I didn't find a database entry for "wittum"
-Warning--I didn't find a database entry for "compartementMod"
-Warning--I didn't find a database entry for "mathSIR"
-Warning--I didn't find a database entry for "Gauss??"
-Warning--I didn't find a database entry for "PSO??"
 Biblatex version: 3.11
 Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
-You've used 8 entries,
+You've used 24 entries,
             6304 wiz_defined-function locations,
-            1241 strings with 10310 characters,
-and the built_in function-call counts, 53169 in all, are:
-= -- 3702
-> -- 1670
-< -- 292
-+ -- 2082
-- -- 1165
-* -- 3426
-:= -- 6206
+            1329 strings with 13215 characters,
+and the built_in function-call counts, 146169 in all, are:
+= -- 10062
+> -- 3948
+< -- 913
++ -- 4717
+- -- 2360
+* -- 9701
+:= -- 15477
 add.period$ -- 0
-call.type$ -- 8
-change.case$ -- 138
-chr.to.int$ -- 130
-cite$ -- 14
-duplicate$ -- 5025
-empty$ -- 4664
-format.name$ -- 364
-if$ -- 10099
+call.type$ -- 24
+change.case$ -- 487
+chr.to.int$ -- 203
+cite$ -- 46
+duplicate$ -- 14532
+empty$ -- 13332
+format.name$ -- 1205
+if$ -- 29035
 int.to.chr$ -- 0
-int.to.str$ -- 13
+int.to.str$ -- 52
 missing$ -- 0
-newline$ -- 252
-num.names$ -- 256
-pop$ -- 2555
+newline$ -- 706
+num.names$ -- 990
+pop$ -- 8071
 preamble$ -- 1
-purify$ -- 174
+purify$ -- 586
 quote$ -- 0
-skip$ -- 1235
+skip$ -- 4086
 stack$ -- 0
-substring$ -- 7064
-swap$ -- 1172
-text.length$ -- 213
-text.prefix$ -- 7
+substring$ -- 18046
+swap$ -- 3582
+text.length$ -- 623
+text.prefix$ -- 23
 top$ -- 1
-type$ -- 260
+type$ -- 804
 warning$ -- 0
-while$ -- 736
+while$ -- 1873
 width$ -- 0
-write$ -- 245
-(There were 2 error messages)
+write$ -- 683
