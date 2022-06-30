@@ -16,46 +16,7 @@
   {}
 \endgroup
 
-\datalist[entry]{nty/global//global/global}
-  \entry{akhtar2019dynamic}{article}{}
-    \name{author}{3}{}{%
-      {{hash=AM}{%
-         family={Akhtar},
-         familyi={A\bibinitperiod},
-         given={Mahmood},
-         giveni={M\bibinitperiod},
-      }}%
-      {{hash=KMU}{%
-         family={Kraemer},
-         familyi={K\bibinitperiod},
-         given={Moritz\bibnamedelima UG},
-         giveni={M\bibinitperiod\bibinitdelim U\bibinitperiod},
-      }}%
-      {{hash=GLM}{%
-         family={Gardner},
-         familyi={G\bibinitperiod},
-         given={Lauren\bibnamedelima M},
-         giveni={L\bibinitperiod\bibinitdelim M\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {BioMed Central}%
-    }
-    \strng{namehash}{AMKMUGLM1}
-    \strng{fullhash}{AMKMUGLM1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{A}
-    \field{sortinithash}{A}
-    \field{number}{1}
-    \field{pages}{1\bibrangedash 16}
-    \field{title}{A dynamic neural network model for predicting risk of Zika in
-  real time}
-    \field{volume}{17}
-    \field{journaltitle}{BMC medicine}
-    \field{year}{2019}
-  \endentry
-
+\datalist[entry]{anyt/global//global/global}
   \entry{akman2018parameter}{article}{}
     \name{author}{3}{}{%
       {{hash=AD}{%
@@ -84,6 +45,7 @@
     \strng{fullhash}{ADAOSE1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{AAS18}
     \field{sortinit}{A}
     \field{sortinithash}{A}
     \field{title}{Parameter estimation in ordinary differential equations
@@ -91,6 +53,46 @@
     \field{volume}{2018}
     \field{journaltitle}{Journal of Applied Mathematics}
     \field{year}{2018}
+  \endentry
+
+  \entry{akhtar2019dynamic}{article}{}
+    \name{author}{3}{}{%
+      {{hash=AM}{%
+         family={Akhtar},
+         familyi={A\bibinitperiod},
+         given={Mahmood},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=KMU}{%
+         family={Kraemer},
+         familyi={K\bibinitperiod},
+         given={Moritz\bibnamedelima UG},
+         giveni={M\bibinitperiod\bibinitdelim U\bibinitperiod},
+      }}%
+      {{hash=GLM}{%
+         family={Gardner},
+         familyi={G\bibinitperiod},
+         given={Lauren\bibnamedelima M},
+         giveni={L\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {BioMed Central}%
+    }
+    \strng{namehash}{AMKMUGLM1}
+    \strng{fullhash}{AMKMUGLM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{AKG19}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{number}{1}
+    \field{pages}{1\bibrangedash 16}
+    \field{title}{A dynamic neural network model for predicting risk of Zika in
+  real time}
+    \field{volume}{17}
+    \field{journaltitle}{BMC medicine}
+    \field{year}{2019}
   \endentry
 
   \entry{balloux2017q}{article}{}
@@ -117,6 +119,7 @@
     \strng{fullhash}{BFDLv1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{BD17}
     \field{sortinit}{B}
     \field{sortinithash}{B}
     \field{number}{1}
@@ -199,6 +202,7 @@
     \strng{fullhash}{CBMGJMCBAMJMEDCAHKBABF+1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{CB+21}
     \field{sortinit}{C}
     \field{sortinithash}{C}
     \field{number}{6}
@@ -208,6 +212,24 @@
     \field{volume}{11}
     \field{journaltitle}{BMJ open}
     \field{year}{2021}
+  \endentry
+
+  \entry{cdc_influenza}{misc}{}
+    \list{publisher}{2}{%
+      {Centers for Disease Control}%
+      {Prevention}%
+    }
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Cdc}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{title}{FASTSTATS - Influenza}
+    \verb{url}
+    \verb https://www.cdc.gov/nchs/fastats/flu.htm
+    \endverb
+    \field{journaltitle}{Centers for Disease Control and Prevention}
+    \field{year}{2022}
+    \warn{\item Invalid format of field 'month'}
   \endentry
 
   \entry{chaponda2018systematic}{article}{}
@@ -256,6 +278,7 @@
     \strng{fullhash}{CMANKMWLRCSA1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Cha+18}
     \field{sortinit}{C}
     \field{sortinithash}{C}
     \field{number}{7}
@@ -265,51 +288,6 @@
     \field{volume}{29}
     \field{journaltitle}{International journal of STD \& AIDS}
     \field{year}{2018}
-  \endentry
-
-  \entry{RKIcase}{online}{}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{C}
-    \field{sortinithash}{C}
-    \field{title}{COVID-19, case definition RKI}
-    \verb{url}
-    \verb https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Falldefi
-    \verb nition.pdf?__blob=publicationFile
-    \endverb
-    \field{urlday}{28}
-    \field{urlmonth}{06}
-    \field{urlyear}{2022}
-  \endentry
-
-  \entry{RKIvariants}{online}{}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{C}
-    \field{sortinithash}{C}
-    \field{title}{COVID-19, variants of concern in Germany}
-    \verb{url}
-    \verb https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/DESH/Ber
-    \verb icht_VOC_2021-06-23.pdf?__blob=publicationFile
-    \endverb
-    \field{urlday}{28}
-    \field{urlmonth}{06}
-    \field{urlyear}{2022}
-  \endentry
-
-  \entry{cdc_influenza}{misc}{}
-    \list{publisher}{2}{%
-      {Centers for Disease Control}%
-      {Prevention}%
-    }
-    \field{labeltitlesource}{title}
-    \field{sortinit}{F}
-    \field{sortinithash}{F}
-    \field{title}{FASTSTATS - Influenza}
-    \verb{url}
-    \verb https://www.cdc.gov/nchs/fastats/flu.htm
-    \endverb
-    \field{journaltitle}{Centers for Disease Control and Prevention}
-    \field{year}{2022}
-    \warn{\item Invalid format of field 'month'}
   \endentry
 
   \entry{Gehrcke}{online}{}
@@ -326,6 +304,7 @@
     \strng{fullhash}{GDJP1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Geh}
     \field{sortinit}{G}
     \field{sortinithash}{G}
     \field{title}{covid-19-germany-gae}
@@ -339,8 +318,10 @@
 
   \entry{HesseImage}{online}{}
     \field{labeltitlesource}{title}
-    \field{sortinit}{I}
-    \field{sortinithash}{I}
+    \field{labelalpha}{Hes}
+    \field{extraalpha}{1}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
     \field{title}{Image: Federal state of Hesse, devided into regions}
     \verb{url}
     \verb https://statistik.hessen.de/sites/statistik.hessen.de/files/GIS0012_2
@@ -349,6 +330,38 @@
     \field{urlday}{07}
     \field{urlmonth}{06}
     \field{urlyear}{2022}
+  \endentry
+
+  \entry{HessePop}{online}{}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Hes}
+    \field{extraalpha}{2}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{Population data Hesse}
+    \verb{url}
+    \verb https://statistik.hessen.de/zahlen-fakten/bevoelkerung-gebiet-haushal
+    \verb te-familien/bevoelkerung/tabellen/#Bevoelkerungsveraenderung
+    \endverb
+    \field{urlday}{06}
+    \field{urlmonth}{05}
+    \field{urlyear}{2021}
+  \endentry
+
+  \entry{HesseSize}{online}{}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Hes}
+    \field{extraalpha}{3}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{Size of regions in Hesse}
+    \verb{url}
+    \verb https://de.wikipedia.org/wiki/Liste_der_Landkreise_und_kreisfreien_St
+    \verb %C3%A4dte_in_Hessen
+    \endverb
+    \field{urlday}{04}
+    \field{urlmonth}{08}
+    \field{urlyear}{2021}
   \endentry
 
   \entry{ji2007impact}{article}{}
@@ -385,6 +398,7 @@
     \strng{fullhash}{JGLLLCSS1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Ji+07}
     \field{sortinit}{J}
     \field{sortinithash}{J}
     \field{number}{Suppl 8}
@@ -412,6 +426,7 @@
     \strng{fullhash}{KDG1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Ken56}
     \field{sortinit}{K}
     \field{sortinithash}{K}
     \field{booktitle}{Proceedings of the third Berkeley symposium on
@@ -441,6 +456,7 @@
     \strng{fullhash}{KWOMAG1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{KM91}
     \field{sortinit}{K}
     \field{sortinithash}{K}
     \field{number}{1-2}
@@ -450,102 +466,6 @@
     \field{volume}{53}
     \field{journaltitle}{Bulletin of mathematical biology}
     \field{year}{1991}
-  \endentry
-
-  \entry{knodel20173d}{article}{}
-    \name{author}{6}{}{%
-      {{hash=KMM}{%
-         family={Knodel},
-         familyi={K\bibinitperiod},
-         given={Markus\bibnamedelima M},
-         giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod},
-      }}%
-      {{hash=RS}{%
-         family={Reiter},
-         familyi={R\bibinitperiod},
-         given={Sebastian},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=TAP}{%
-         family={Targett-Adams},
-         familyi={T\bibinithyphendelim A\bibinitperiod},
-         given={Paul},
-         giveni={P\bibinitperiod},
-      }}%
-      {{hash=GA}{%
-         family={Grillo},
-         familyi={G\bibinitperiod},
-         given={Alfio},
-         giveni={A\bibinitperiod},
-      }}%
-      {{hash=HE}{%
-         family={Herrmann},
-         familyi={H\bibinitperiod},
-         given={Eva},
-         giveni={E\bibinitperiod},
-      }}%
-      {{hash=WG}{%
-         family={Wittum},
-         familyi={W\bibinitperiod},
-         given={Gabriel},
-         giveni={G\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Multidisciplinary Digital Publishing Institute}%
-    }
-    \strng{namehash}{KMM+1}
-    \strng{fullhash}{KMMRSTAPGAHEWG1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{K}
-    \field{sortinithash}{K}
-    \field{number}{10}
-    \field{pages}{282}
-    \field{title}{3D spatially resolved models of the intracellular dynamics of
-  the hepatitis C genome replication cycle}
-    \field{volume}{9}
-    \field{journaltitle}{Viruses}
-    \field{year}{2017}
-  \endentry
-
-  \entry{nakamura2020improved}{article}{}
-    \name{author}{3}{}{%
-      {{hash=NGM}{%
-         family={Nakamura},
-         familyi={N\bibinitperiod},
-         given={Gilberto\bibnamedelima M},
-         giveni={G\bibinitperiod\bibinitdelim M\bibinitperiod},
-      }}%
-      {{hash=CGC}{%
-         family={Cardoso},
-         familyi={C\bibinitperiod},
-         given={George\bibnamedelima C},
-         giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod},
-      }}%
-      {{hash=MAS}{%
-         family={Martinez},
-         familyi={M\bibinitperiod},
-         given={Alexandre\bibnamedelima S},
-         giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {The Royal Society}%
-    }
-    \strng{namehash}{NGMCGCMAS1}
-    \strng{fullhash}{NGMCGCMAS1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{N}
-    \field{sortinithash}{N}
-    \field{number}{2}
-    \field{pages}{191504}
-    \field{title}{Improved susceptible--infectious--susceptible epidemic
-  equations based on uncertainties and autocorrelation functions}
-    \field{volume}{7}
-    \field{journaltitle}{Royal Society open science}
-    \field{year}{2020}
   \endentry
 
   \entry{nakamura2017efficient}{article}{}
@@ -583,6 +503,7 @@
     \strng{fullhash}{NGMMACPCGCMAS1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Nak+17}
     \field{sortinit}{N}
     \field{sortinithash}{N}
     \field{number}{1}
@@ -594,32 +515,44 @@
     \field{year}{2017}
   \endentry
 
-  \entry{RKIcov}{online}{}
+  \entry{nakamura2020improved}{article}{}
+    \name{author}{3}{}{%
+      {{hash=NGM}{%
+         family={Nakamura},
+         familyi={N\bibinitperiod},
+         given={Gilberto\bibnamedelima M},
+         giveni={G\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=CGC}{%
+         family={Cardoso},
+         familyi={C\bibinitperiod},
+         given={George\bibnamedelima C},
+         giveni={G\bibinitperiod\bibinitdelim C\bibinitperiod},
+      }}%
+      {{hash=MAS}{%
+         family={Martinez},
+         familyi={M\bibinitperiod},
+         given={Alexandre\bibnamedelima S},
+         giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {The Royal Society}%
+    }
+    \strng{namehash}{NGMCGCMAS1}
+    \strng{fullhash}{NGMCGCMAS1}
+    \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{NCM20}
     \field{sortinit}{N}
     \field{sortinithash}{N}
-    \field{title}{Natural history of the COVID-19 disease}
-    \verb{url}
-    \verb https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Steckbri
-    \verb ef.html
-    \endverb
-    \field{urlday}{07}
-    \field{urlmonth}{07}
-    \field{urlyear}{2021}
-  \endentry
-
-  \entry{HessePop}{online}{}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{P}
-    \field{sortinithash}{P}
-    \field{title}{Population data Hesse}
-    \verb{url}
-    \verb https://statistik.hessen.de/zahlen-fakten/bevoelkerung-gebiet-haushal
-    \verb te-familien/bevoelkerung/tabellen/#Bevoelkerungsveraenderung
-    \endverb
-    \field{urlday}{06}
-    \field{urlmonth}{05}
-    \field{urlyear}{2021}
+    \field{number}{2}
+    \field{pages}{191504}
+    \field{title}{Improved susceptible--infectious--susceptible epidemic
+  equations based on uncertainties and autocorrelation functions}
+    \field{volume}{7}
+    \field{journaltitle}{Royal Society open science}
+    \field{year}{2020}
   \endentry
 
   \entry{Rastogi}{misc}{}
@@ -635,11 +568,60 @@
     \strng{fullhash}{RD1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Ras21}
     \field{sortinit}{R}
     \field{sortinithash}{R}
     \field{note}{Bachelor's Thesis}
     \field{title}{Epidemics Modelling and Parameter Estimation}
     \field{year}{2021}
+  \endentry
+
+  \entry{RKIcase}{online}{}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Rki}
+    \field{extraalpha}{1}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{COVID-19, case definition RKI}
+    \verb{url}
+    \verb https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Falldefi
+    \verb nition.pdf?__blob=publicationFile
+    \endverb
+    \field{urlday}{28}
+    \field{urlmonth}{06}
+    \field{urlyear}{2022}
+  \endentry
+
+  \entry{RKIvariants}{online}{}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Rki}
+    \field{extraalpha}{2}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{COVID-19, variants of concern in Germany}
+    \verb{url}
+    \verb https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/DESH/Ber
+    \verb icht_VOC_2021-06-23.pdf?__blob=publicationFile
+    \endverb
+    \field{urlday}{28}
+    \field{urlmonth}{06}
+    \field{urlyear}{2022}
+  \endentry
+
+  \entry{RKIcov}{online}{}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Rki}
+    \field{extraalpha}{3}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{title}{Natural history of the COVID-19 disease}
+    \verb{url}
+    \verb https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Steckbri
+    \verb ef.html
+    \endverb
+    \field{urlday}{07}
+    \field{urlmonth}{07}
+    \field{urlyear}{2021}
   \endentry
 
   \entry{Scheidemann}{online}{}
@@ -655,26 +637,13 @@
     \strng{fullhash}{ST1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Sch}
     \field{sortinit}{S}
     \field{sortinithash}{S}
     \field{title}{Constrained Optimization}
     \verb{url}
     \verb https://github.com/CowFreedom/ConstrainedOptimization
     \endverb
-  \endentry
-
-  \entry{HesseSize}{online}{}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{S}
-    \field{sortinithash}{S}
-    \field{title}{Size of regions in Hesse}
-    \verb{url}
-    \verb https://de.wikipedia.org/wiki/Liste_der_Landkreise_und_kreisfreien_St
-    \verb %C3%A4dte_in_Hessen
-    \endverb
-    \field{urlday}{04}
-    \field{urlmonth}{08}
-    \field{urlyear}{2021}
   \endentry
 
   \entry{Wittum1}{misc}{}
@@ -690,6 +659,7 @@
     \strng{fullhash}{WG1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Wit}
     \field{sortinit}{W}
     \field{sortinithash}{W}
     \field{howpublished}{AMCS, KAUST and G-CSC, Universität Frankfurt}
@@ -710,6 +680,7 @@
     \strng{fullhash}{WG1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
+    \field{labelalpha}{Wit20}
     \field{sortinit}{W}
     \field{sortinithash}{W}
     \field{howpublished}{KAUST}

@@ -4,9 +4,9 @@
 
 \label{chap:results} 
 This chapter will summarize the results of this work. First, the results of simulating the susceptible population (\B{S})
-in the region of Hesse will be presented. Then the results of a sensitivity analysis for the variables $\alpha$ and
+in the region of Hesse will be presented. Then the results of the sensitivity analysis for the variables $\alpha$ and
 $q$ will be shown. These are the two variables that are governing the transition from \B{S} to
-the Exposed (\B{E}) group ($\alpha$ variable) and transition form \B{E} to the Infected (\B{I}) group ($q$ variable).
+the Exposed (\B{E}) group ($\alpha$~variable) and the transition form \B{E} to the Infected (\B{I}) group ($q$~variable).
 
 
 %----------------------------------------------------------------------------------------
@@ -15,28 +15,28 @@ the Exposed (\B{E}) group ($\alpha$ variable) and transition form \B{E} to the I
 
 \section{Simulating the susceptible population of Hesse}
 \label{sec:sim_res}
-During this work we simulated the susceptible population of Hesse. 26 regions were simulated over a time period of
-76, 60 and 50 days respectively. We will show both the absolute and percentage difference between the simulated
+During this work, we simulated the susceptible population of Hesse. 26 regions were simulated over a time period of
+76, 60 and 50 days, respectively. We will show the absolute and the percentage difference between the simulated
 and the original data for each time frame.\newline
 
 One challenge of this project was the visualization of the obtained results. Since the number of susceptible
-individuals that resign in this group is much greater than the number individuals that transition to the exposed state,
-changes in this group are difficult to observe. Because of this we decided against comparing simulated and real world
+individuals that resign in this group is much greater than the number of individuals who transition to the exposed state,
+changes in this group are difficult to observe. Because of this, we decided against comparing simulated and real-world
 \B{S} data directly. We instead  calculated and compared the number of individuals that
 transitioned from \B{S} to \B{E}. This was done by subtracting the number of susceptible individuals at data point \I{t=x} from
 the starting point \I{t=0}. The result is the cumulative change of susceptibles at any given time point, which is equivalent to the 
 sum of all exposed individuals at any given time. These results are much easier to visualize, compare and understand.
-\textcolor{red}{ADD OPTIMAL VALUES FOR $\alpha$ AND $q$!! Add set values for other variables to methods!}
+%\textcolor{red}{ADD OPTIMAL VALUES FOR $\alpha$ AND $q$!! Add set values for other variables to methods!}
 
 %-----------------------------------
 %	SUBSECTION 1
 %-----------------------------------
 \subsection{Simulation trends and trend changes with fewer data points}
 We first investigated the trends of the \B{S} group in order to get a general understanding for the accuracy of the simulated
-data. For this purpose each region was investigated by comparing simulation results and real world data in a graph.
+data. For this purpose, each region was investigated by comparing simulation results and real-world data in a graph.
 \hyperref[fig:76_sim_expl]{Figure \ref*{fig:76_sim_expl}} shows three exemplary regions with 76, 60 and 50 simulated data
-points respectively. The regions were chosen based on their general trends and are examples for regions with a positive deviation
-(to many transition events), a negative deviation (to few transition events) and a generally similar trend.\newline
+points, respectively. The regions were chosen based on their general trends and are examples of regions with a positive deviation
+(to many transition events relative to the real-world data), a negative deviation (to few transition events relative to the real-world data) and a generally similar trend.\newline
 
 \begin{figure}[h]
 	\centering
@@ -91,17 +91,17 @@ points respectively. The regions were chosen based on their general trends and a
 		\includegraphics[width=\textwidth]{./figures/50d/10_Limburg-Weilburg.png}	
 		\caption{}
 	\end{subfigure}
-	\caption{Three exemplary region results of the simulations of susceptible individuals. Graphs A-C, D-F and G-I
-		show the results of the 76, 60 and 50 data point simulations respectively.
-		The original data is drawn in blue and the simulated data is drawn in orange. In case
-		of the 60 and 50 data point simulations, a red doted line marks the end of the simulated data points
+	\caption[Simulation resutsl for susceptibles as graphs]{Three exemplary region results of the simulations of susceptible individuals. Graphs A-C, D-F and G-I
+		show the results of the 76, 60 and 50 data point simulations, respectively.
+		The original data is drawn in blue, and the simulated data is drawn in orange. In the case
+		of the 60 and 50 data point simulations, a red dotted line marks the end of the simulated data points,
 		and a green line draws the extrapolated part (``extrapolation'') of the curve.
-		Extrapolation was done using a third degree polynomial curve fit.
+		Extrapolation was done using a third-degree polynomial curve fit.
 		}
 	\label{fig:76_sim_expl}
 \end{figure}
 
-The figure shows, that as the number of simulated data points decreases, the trends of the simulation results shift towards
+The figure shows that as the number of simulated data points decreases, the trends of the simulation results shift towards
 fewer transition events. This phenomenon is observable in all three regions.
 
 
@@ -110,10 +110,10 @@ fewer transition events. This phenomenon is observable in all three regions.
 %-----------------------------------
 
 \subsection{Deviation of the simulated data relative to the original data}
-Next we analyzed the percentage deviation of the simulated data relative to the original data. This was done
+The next part of this work was an analysis of the percentage deviation of the simulated data relative to the original data. This was done
 for each time step in each region. The results are shown in \hyperref[fig:sim_box_sum]{figure \ref*{fig:sim_box_sum}}.
 ``Werra-Meissner-Kreis'', ``Marburg-Biedenkopf'' and ``Limburg-Weilburg'' are listed separately in each data set.
-This was done in order to increase the plot readability, since those three regions show disproportional large deviations compared
+This was done in order to increase the plot readability since those three regions show disproportional large deviations compared
 to the other regions.\newline
 
 \begin{figure}
@@ -142,68 +142,76 @@ to the other regions.\newline
 		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_3.png}	
 		\includegraphics[width=\textwidth]{./figures/50d/deviation_box50_4.png}	
 	\end{subfigure}
-	\caption{Shown are box plots of the percentage deviation of every simulated region relative to the original data.
+	\caption[Simulation results for susceptibles as box plots]{Shown are box plots of the percentage deviation of every simulated region relative to the original data.
 		The first column shows the box plots of the 76 data point simulations, the second and third column show
-		the plots for the 60 and 50 data point simulations respectively.}
+		the plots for the 60 and 50 data point simulations, respectively.}
 	\label{fig:sim_box_sum}
 \end{figure}
 
-All three figures show largely comparable results. Both median positions and interquartile ranges (\B{IQR}) of the regions
-are mostly similar across all three simulations. Differences can mostly be observed regarding the Minimum and Maximum of different regions
-and the skew of the individual regions. In the 76 data point data set most of the regions show the median in the left
-part of the \B{IQR}, meaning the plot is skewed right. This however changes in the other two simulations, with medians
+All three columns of figures show mostly comparable results. Both median positions and interquartile ranges (\B{IQR}) of the analyzed regions
+are mostly similar across all three simulations. Differences can mainly be observed regarding the Minimum and Maximum of different regions
+and the skew of the individual regions. In the 76 data point data set, most of the regions show the median in the left
+part of the \B{IQR}, meaning the plot is skewed right. However, this changes in the other two simulations, with the medians
 shifting more to the right in the 60 and even more so in the 50 data point simulations. \hyperref[tab:box_sum]{Table \ref*{tab:box_sum}}
-summarizes additional information about the different data sets. \hyperref[tab:optimized_var]{Table \ref*{tab:optimized_var}}
-shows the optimal values for $\alpha$ and $q$ that were determined by the optimization procedure of the model.
-\textcolor{red}{add data to Appendix!!!}
+summarizes additional information about the different data sets, including the optimal values for $\alpha$ and $q$, the minimum and
+maximum median deviation, as well as specific features across all regions.
+
+%\hyperref[tab:optimized_var]{Table \ref*{tab:optimized_var}}
+%shows the optimal values for $\alpha$ and $q$ that were determined by the optimization procedure of the model.
+%\textcolor{red}{add data to Appendix!!!}
 
 \begin{table}
 	\centering
-	\caption{Summary of statistical data regarding the box plots shown in figure \ref*{fig:sim_box_sum}.
-		Abbreviations used include Number of regions (\B{\#Regions}), median deviation (\B{MD})}
+	\caption[Statistical data of box plot analysis]{Summary of statistical data regarding the box plots shown in figure \ref*{fig:sim_box_sum}.
+		Abbreviations used are Number of regions (\B{\#R}), median deviation (\B{MD}) and absolute median deviation (\B{absMD})}
 	\begin{tabular}{|l||c|c|c|}
 		\hline
 		Simulated data set & 76 data points & 60 data points & 50 data points \\ \hline \hline
 		Minimum \B{MD} & -0.792 & -0.757 & -0.772 \\ \hline
-		Maximum \B{MD} & 0.868 & 1.418 & -1.275 \\ \hline
-		\B{\#Regions} with absolute \B{MD} $< 0.25$ & 10 & 9 & 8 \\ \hline
-		\B{\#Regions} with absolute \B{MD} $< 0.50$ & 20 & 21 & 21 \\ \hline
-		\B{\#Regions} with absolute \B{MD} $< 0.75$ & 23 & 24 & 24 \\ \hline
-		\B{\#Regions} with MD $<0$ & 19 & 17 & 19 \\ \hline
-		\B{\#Regions} with MD $\geq 0$ & 7 & 9 & 7 \\ \hline
+		Maximum \B{MD} & 0.868 & 1.418 & -1.275 \\ \hline \hline
+		Optimal $\alpha$ & 0.1975 & 0.1974 & 0.1920\\ \hline
+		Optimal $q$ & 6.6753 & 6.6749 & 6.6750 \\ \hline \hline
+		\B{\#R} with \B{MD} $<0$ & 19 & 17 & 19 \\ \hline
+		\B{\#R} with \B{MD} $\geq 0$ & 7 & 9 & 7 \\ \hline \hline
+		\B{\#R} with \B{absMD} $< 0.25$ & 10 & 9 & 8 \\ \hline
+		\B{\#R} with \B{absMD} $< 0.50$ & 20 & 21 & 21 \\ \hline
+		\B{\#R} with \B{absMD} $< 0.75$ & 23 & 24 & 24 \\ \hline
 	\end{tabular}
 	\label{tab:box_sum}
 \end{table}
 
-\begin{table}
-	\centering
-	\caption{Best values obtained for $\alpha$ and $q$. The values were determined during the optimization process
-		using \I{ConstrainedOptimization}.}
-	\begin{tabular}{|l||c|c|c|}
-		\hline
-		Simulated data set & 76 data points & 60 data points & 50 data points \\ \hline \hline
-		optimal $\alpha$ & 0.1975 & 0.1974 & 0.1920\\ \hline
-		optimal $q$ & 6.6753 & 6.6749 & 6.6750 \\ \hline
-	\end{tabular}
-	\label{tab:optimized_var}
-\end{table}
+%\begin{table}
+%	\centering
+%	\caption[Optimal $\alpha$ and $q$ values obatined during simulations]{Best values obtained for $\alpha$ and $q$. The values were determined during the optimization process
+%		using \I{ConstrainedOptimization}.}
+%	\begin{tabular}{|l||c|c|c|}
+%		\hline
+%		Simulated data set & 76 data points & 60 data points & 50 data points \\ \hline \hline
+%		optimal $\alpha$ & 0.1975 & 0.1974 & 0.1920\\ \hline
+%		optimal $q$ & 6.6753 & 6.6749 & 6.6750 \\ \hline
+%	\end{tabular}
+%	\label{tab:optimized_var}
+%\end{table}
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
 \section{Influence of individual regions on the loss function}
-\textcolor{red}{add table with total information to Appendix}
+%\textcolor{red}{add table with total information to Appendix}
 In order to better understand the influence of individual regions on the model itself, we manually calculated the total
-loss, the loss for each individual region and the percentage loss of each region relative to the total loss. The
+loss, the loss for each region and the percentage loss of each region relative to the total loss. The
 calculation was done using the final output data of the 76 data point simulation.
 \hyperref[tab:perc_region_loss]{Table \ref*{tab:perc_region_loss}} shows the percentage of the total loss each region
-has and compares it to the percentage population the region has relative to the total population. The percentage
-of the total loss a region has is proportional to its influence on the variable optimization process.
-The table is sorted in descending order from highest percentage loss contribution to lowest.\newline
+contributes, the percentage population each region has relative to the total population and the regions median deviation.
+The percentage each region contributes to the total loss is proportional to its influence on the variable optimization process.
+The table is sorted in descending order from highest loss contribution to lowest.\newline
 
 \begin{table}[h]
-	\caption{Influence of the }
+	\caption[Analysis of loss contribution per region in Hesse]{Influence of each region on the variable optimization process. A higher percentage loss contribution
+		to the total loss (\B{percentage loss}) is proportional to the regions influence on the optimization process.
+		The percentage population relative to the total population (\B{percentage population}), as
+		well as the median deviation is also listed for each region.}
 	\centering
 	\begin{tabular}{|l|x{2cm}|x{2cm}|x{2cm}|}
 	%\begin{tabular}{|l|c|c|c|}
@@ -239,11 +247,11 @@ The table is sorted in descending order from highest percentage loss contributio
 	\label{tab:perc_region_loss}
 \end{table}
 
-The results show, that a minority of regions contribute to the majority of the total loss in the model. The top three contributors
-account for 55.21 percent of the entire loss, while only making up about 22.12 percent of the total population. The top seven
-contributors make up about 75.27 percent, while making up about 39.95 percent of the population. A notable find is, that the
-top two regions, ``Offenbach'' and ``Bergstrasse'', both display a negative deviation, while the third most influential region
-``Frankfurt-am-Main'' has a positive deviation. Frankfurt also has a lower overall contribution to the loss, than the other
+The results show that a minority of regions make up the majority of the total loss in the model. The top three contributors
+account for 55.21 percent of the total loss while having approximately 22.12 percent of the total population. The top seven
+contributors account for 75.27 percent while having approximately 39.95 percent of the population. A notable find is that the
+top two regions, ``Offenbach'' and ``Bergstrasse'', both display a negative deviation, while the third most influential region,
+``Frankfurt-am-Main'', has a positive deviation. Frankfurt also has a lower overall contribution to the total loss than the other
 two regions, even though it has a higher share of the total population than the other two regions combined.
 
 %----------------------------------------------------------------------------------------
@@ -251,48 +259,50 @@ two regions, even though it has a higher share of the total population than the 
 %----------------------------------------------------------------------------------------
 
 \section{Sensitivity analysis of $\alpha$ and $q$}
-In order to further investigate the features of the model, we analyzed the sensitivity of the loss function relative to
-the variables $\alpha$ and $q$. 4000 simulations of the model with all 76 original data points were performed and the variables
+In order to further investigate the features of the model, the sensitivity of the loss function relative to $\alpha$ and $q$ was
+analyzed. 4000 simulations of the model with all 76 original data points were performed, and the variables
 $\alpha$ and $q$ were chosen randomly, within a set constraint. The upper and lower bounds were set from 0.05 to 0.35 for 
-$\alpha$ and 5.5 to 8.0 for $q$ respectively. These ranges were chosen based on the optimized values of the previous
-experiments. The results of these simulations were gathered and $\alpha$, $q$ and the loss were  plotted against one another.
+$\alpha$ and 5.5 to 8.0 for $q$, respectively. These ranges were chosen based on the optimized values of the previous
+experiments. The results of these simulations were gathered, and $\alpha$, $q$ and the loss were  plotted against one another.
 The result is a topographic map of the variable landscape of the loss of the susceptible group.
 \hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows the total result of all simulations over the chosen bounds.
-Each point plotted is color coded, relative to the maximum loss of all values displayed. Points with a higher loss are colored red,
-while plots with lower loss are colored green.
+Each point plotted is color-coded relative to the maximum loss of all values displayed. Points with a higher loss are colored red,
+while plots with lower loss are colored green.\newline
 
-\begin{figure}[h]
+\begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_0_2.png}	
-		\caption{}
+		%\caption{}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom0_1_2.png}	
-		\caption{}
+		%\caption{}
 	\end{subfigure}
-	\caption{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were plotted
-		against the loss of the susceptible group. Images (A) and (B) show the plot from different angles in order
-		to increase readability. In the model the susceptible group shows sensitivity to changes of both $\alpha$ and
+	\caption[Sensitivity analysis for $\alpha$ and $q$, full]{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were plotted
+		against the loss of the susceptible group.
+		The images show the plot from different angles to increase readability.
+		%Images (A) and (B) show the plot from different angles to increase readability.
+		In the model, the susceptible group shows sensitivity to changes of both $\alpha$ and
 		$q$. However, the sensitivity to $q$ seems to be dependent on $\alpha$.
 		}
 	\label{fig:sensitivity_zoom0}
 \end{figure}
 
-Figure \ref*{fig:sensitivity_zoom0} shows that low values for $\alpha$ cause a low sensitivity of the model
-for $q$. After an $\alpha$ value of about 0.25 is reached, the loss value seemingly starts to react to changes in $q$. Further
-increases of $\alpha$ or $q$, cause the loss function increases quickly. Changes in $\alpha$ appear to have a bigger effect
-on the loss, but a bigger $q$ value causes the loss to increase more quickly compared to a simulation with a smaller $q$.\newline
+\hyperref[fig:sensitivity_zoom0]{Figure \ref*{fig:sensitivity_zoom0}} shows that lower values for $\alpha$ cause a lower sensitivity of the model
+for $q$. After an $\alpha$ value of about 0.25 is reached, the loss value starts to react to changes in $q$. Further
+increases of $\alpha$ or $q$ cause the loss function increases quickly. Changes in $\alpha$ appear to have a bigger effect
+on the loss, but a higher $q$ value causes the loss to increase more quickly compared to a simulation with a smaller $q$.\newline
 
 The simulations were further investigated by plotting only part of the experimental data.
-The first row of \hyperref[fig:sensitivity_zoom1]{Figure \ref*{fig:sensitivity_zoom1}} shows all data points with $\alpha$ values between 0.15
+The first row in \hyperref[fig:sensitivity_zoom1]{Figure \ref*{fig:sensitivity_zoom1}} shows all data points with $\alpha$ values between 0.15
 and 0.25, $q$ values between 5.5 and 8.0 and a maximum loss of $10^{10}$. The loss on this image was capped in order to reduce
-the scale of the loss and thereby increase readability. This lead to 957 of 4000 data points being plotted. The images in the
-second row show the same graph, but with a maximum loss capped at $2.7*10^{9}$.
+the scale of the loss and thereby increase readability. This leads to 957 of 4000 data points being plotted. The images in the
+second row show the same graph but with a maximum loss capped at $2.7*10^{9}$.\newline
 
-\begin{figure}[h]
+\begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
 		\centering
@@ -310,21 +320,22 @@ second row show the same graph, but with a maximum loss capped at $2.7*10^{9}$.
 		\centering
 		\includegraphics[width=\textwidth]{./figures/sensitivity/sensitivity_zoom2_1_2.png}	
 	\end{subfigure}
-	\caption{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were
-		capped to 0.15 and 0.25 and 5.5 and 8.0 respectively and then plotted against the result of the loss function.
-		The loss was capped at $10^{10}$ and $2.7*10^{9}$ for the first and the second row respectively, in order to
+	\caption[Sensitivity analysis for $\alpha$ and $q$, capped]{Visualization of the variable sensitivity of the susceptible group. The variables $\alpha$ and $q$ were
+		capped to 0.15 and 0.25 and 5.5 and 8.0, respectively and then plotted against the result of the loss function.
+		The loss was capped at $10^{10}$ and $2.7*10^{9}$ for the first and the second row, respectively, to
 		reduce the scale of the loss and make the image more readable. The image shows that there seems to be a set of
-		optimal value combinations of $\alpha$ and $q$, where the loss is minimized. Given the diagonal nature of this
-		``optimal cavity'' there seem to be an equilibrium between the two values.
-		\textcolor{red}{check for better wording} %note
+		optimal value combinations for $\alpha$ and $q$, where the loss is minimized. Given the diagonal shape of this
+		``valley'', there seems to be an equilibrium between the two values.
+		%\textcolor{red}{check for better wording} %note
 		}
 	\label{fig:sensitivity_zoom1}
 \end{figure}
 
-Figure \ref*{fig:sensitivity_zoom1} shows highlights a couple important features of this data. For one, a ``valley'' with minimized loss
-seems to exist, where $\alpha$ and $q$ are in an equilibrium and the loss seems to be minimal. This region seems to
-appear between $\alpha$ values 0.17 to 0.23 and $q$ values 5.5 to 8. The optimal values found by the model for $\alpha$
-(0.1975) and $q$ (6.6753) are also within this region. Secondly it shows, that $q$ can influence the loss much earlier than assumed
-based on the previous figure, where the loss only appeared to change after $\alpha$ had passed a threshold of about 2.25.
-The optimized area seems to have a diagonal structure, indicating that there are multiple optimal relations between $\alpha$ and $q$.
+Figure \ref*{fig:sensitivity_zoom1} highlights important features of this data. Firstly, a ``valley'' with minimized loss
+seems to exist, where $\alpha$ and $q$ are in equilibrium, and the loss appears to be minimal. This region 
+appear between $\alpha$ values 0.17 to 0.23 and $q$ values 5.5 to 8.
+The optimal values found for $\alpha$ (0.1975) and $q$ (6.6753) during variable optimization are also within this region.
+Secondly, it shows that $q$ can influence the loss much earlier than seen \hyperref[fig:sensitivity_zoom0]{figure \ref*{fig:sensitivity_zoom0}},
+where the loss only appeared to change after $\alpha$ had passed a threshold of about 2.25. Lastly, the optimized area seems
+to have a diagonal structure, indicating multiple optimal or close to optimal combinations of $\alpha$ and $q$.
 

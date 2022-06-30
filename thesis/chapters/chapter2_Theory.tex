@@ -45,7 +45,7 @@ the following sections. The latter of the two models was used in this work.
 %	SUBSECTION 1
 %-----------------------------------
 \subsection{Differential equations}
-\textcolor{red}{add citations}\\ %note
+%\textcolor{red}{add citations}\\ %note
 %\textcolor{red}{kinda shit, add more information, starting condition, etc.}\\ %note
 To understand the previously mentioned models, we will first introduce the concept of differential equations.
 Differential equations are functions which contain derivatives of unknown functions, which in turn depend
@@ -100,7 +100,7 @@ $t$ represents a point in time.
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figures/SIR.png}
-		\caption{Illustration of the population flow in the SIR model. S represents the ``Susceptible'', I
+		\caption[Scheme of the SIR model]{Illustration of the population flow in the SIR model. S represents the ``Susceptible'', I
 			the ``Infected'' and R the ``Removed'' population. The variable $\beta$ can also be redefined
 			as $\frac{1}{b}$, where $b$ is the average duration of contagiousness}
 		\label{fig:SIR}
@@ -144,10 +144,11 @@ later in this chapter.
 %-----------------------------------
 \subsection{The SEIRD model}
 \label{sec:SEIRD}
-The SEIRD model is a variant of the simpler SIR model\cite{knodel20173d} and aims to improve upon its predecessor by
+The SEIRD model is a variant of the simpler SIR model%\cite{knodel20173d}
+and aims to improve upon its predecessor by
 introducing two new groups of individuals. These groups are used to differentiate the mechanics of an epidemic much
 more precisely.
-\textcolor{red}{(double check citation)}. % note
+%\textcolor{red}{(double check citation)}. % note
 The five groups of the SEIRD model are shown below.
 
 \begin{enumerate}[label=$\bullet$]
@@ -185,7 +186,7 @@ introduced, which now represents the average stay of a hospitalized individual u
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.75\textwidth]{./figures/SEIRD.png}
-		\caption{Illustration of the population flow in the SEIRD model. S represents the ``Susceptible'', E the ``Exposed'',
+		\caption[Scheme of the SEIRD model]{Illustration of the population flow in the SEIRD model. S represents the ``Susceptible'', E the ``Exposed'',
 			I the ``Infected'', R the ``Recovered'' and D the ``Diseased'' population.}
 		\label{fig:SEIRD}
 	\end{center}
@@ -209,7 +210,7 @@ groups like Susceptible and Infected, it does not differentiate between infected
 makes the modeling process easier but ignores real-world influences that could change the outcome of the simulation.
 The SEIRD introduces these groups and aims to simulate a scenario that is much closer to the real-world.\newline
 
-\textcolor{red}{move to methods?}\\
+%\textcolor{red}{move to methods?}\\
 This work focused on the modeling capability of SEIRD in the transition stage between susceptibles and exposed. To fulfill this
 task, the model was modified to better express phenomena specific to the COVID-19 pandemic. These changes are described in detail
 in \hyperref[sec:SEIRDredef]{chapter~\ref*{chap:methodology}, section~\ref*{sec:SEIRDredef}}.
@@ -228,8 +229,8 @@ algorithms were used. The following sections will explain the theory behind the 
 %	SUBSECTION 1
 %-----------------------------------
 \subsection{Gauss-Newton algorithm}
-\textcolor{red}{add citations, explain least squares better/at all}
-\textcolor{red}{describe efficiency and why it is cool}
+%\textcolor{red}{add citations, explain least squares better/at all}
+%\textcolor{red}{describe efficiency and why it is cool}
 \label{sec:Gauss}
 The \I{Gauss-Newton algorithm} is an iterative method that is used to solve non-linear least squares problems. Iterative means that the algorithm 
 starts with an initial solution and tries to improve this solution successively over a number of consecutive steps.
@@ -285,7 +286,7 @@ error of the following iteration. This process is shown below.
 	\Leftrightarrow & \epsilon^{i+1} = \epsilon^{i} + J \Delta^{i} \label{eq:taylor4}
 \end{align}
 
-\textcolor{red}{put equation in table format?}\\
+%\textcolor{red}{put equation in table format?}\\
 $\epsilon^{i+1}$ is set to zero, since the goal of the algorithm is to minimize the error of the following iteration. Equation \ref*{eq:taylor4}
 is then reorganized to take the form of a linear equation $Ax~=~b$. Since $\Delta$ steps usually are sufficiently small, it is assumed that the function is locally
 	linear. This means that least squares analysis can be applied and used to rewrite equation \ref*{eq:taylor5} as shown below.
@@ -327,7 +328,7 @@ A simplified \I{Gauss-Newton algorithm} is listed below as pseudo-code.
 
 \subsection{Particle Swarm Optimization}
 \label{sec:PSO}
-\textcolor{red}{double check PSO citation}
+%\textcolor{red}{double check PSO citation}
 Like the Gauss-Newton algorithm, \I{Particle Swarm Optimization} (PSO) is an algorithm used to optimize a problem iteratively\cite{akman2018parameter}.
 Generally, during PSO the following steps take place.
 
@@ -351,7 +352,7 @@ to each particle. Particles are grouped together, and a best group solution is s
 Modifications of particle solutions in each iteration are random but in some way biased towards both the group and global optimum.
 This is meant to direct a greater number of particles to the areas with the most optimal solutions, that are currently known.
 However, these solutions may not be the global optimum for the defined search space, and there is no guarantee that any improvements are made during
-an iteration. As a trade off, the problem function does not need to be differentiable like it is the case for the \I{Gauss-Newton algorithm}. \newline
+an iteration. As a trade off, the problem function does not need to be differentiable like it is the case for the \I{Gauss-Newton} algorithm. \newline
 
 During the initial steps of PSO, a problem space is defined as well as a loss function $L$. $L$ takes a number of $n$ input values in the from of a
 vector $\theta$ and projects them to a real number $\epsilon$. The goal is to minimize the loss $L$ by optimizing $\theta$.
