@@ -8,7 +8,7 @@ local MyDefaultDiffusion = 1e+0 -- km^2 /day
 -- define Home-Directories
 ----------------------------------------------------------------
 ug4_home        = ug_get_root_path().."/"
-app_home        = ug4_home.."apps/parameter_optimization/"
+app_home        = ug4_home.."apps/particle_swarm_optimization/"
 common_scripts  = app_home.."scripts/"
 geom_home       = app_home.."geometry/"
 

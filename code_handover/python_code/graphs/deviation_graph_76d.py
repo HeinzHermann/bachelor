@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # part one, parse sample data
 
 # set up for data parsing
-file_names = ["./t75_run_orig.txt","./t75_run_sim.txt"]
+file_names = ["./76d_run_orig.txt","./76d_run_sim.txt"]
 results = []
 sorted_tab = []
 string = ''

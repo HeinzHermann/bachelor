@@ -11,7 +11,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # part one, parse sample data
 
 # open and read sample file
-impFile = open("./perc_diff_76d_corr.txt", "r")
+impFile = open("./perc_diff_60d.txt", "r")
 data = impFile.read()
 
 # set up for data parsing

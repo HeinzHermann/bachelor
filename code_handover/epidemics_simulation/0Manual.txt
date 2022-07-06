@@ -1,0 +1,38 @@
+==========================================================================
+
+				Manual
+
+==========================================================================
+To do:
+
+Copy this folder in <your path>/ug4/apps/
+
+
+Mandatory Path adjustment:
+
+./config/geometry_parser.config		L.10	(adjust path to ug4)
+
+==========================================================================
+
+These should work without adjustment, bu can be checked in case of errors
+
+Path adjustment in case of error: 
+
+./0epidemics.lua			L.31
+./0epidemics.lua			L.38 
+
+./config/corona_HE.lua			L.11
+
+==========================================================================
+
+Execution: ugshell -ex ./0epidemics.lua
+
+==========================================================================
+
+Output:
+
+- reformated and averaged SEIRD data for each region
+- .vtu files
+
+==========================================================================
+

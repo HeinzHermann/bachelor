@@ -5,8 +5,7 @@
 
 int main(){
 	//Define evaluation type
-	//std::string dir ="/home/server1/Programs/ug4/ug4/plugins/ConstrainedOptimization/examples/logistic_1/";
-	std::string dir ="/home/marvin/Documents/ug4/apps/epidemics_app_HE/";
+	std::string dir ="<your path>/ug4/apps/epidemics_simulation/";
 	std::printf("BiogasEvaluation, creation starting\n");
 	co::BiogasEvaluation<co::EFloat64,co::ConfigComputation::Local,co::ConfigOutput::File> evaluator(dir, "subset_target.lua","subset_sim.lua");
 	std::printf("BiogasEvaluation, creation done\n");
@@ -19,7 +18,7 @@ int main(){
 	std::vector<double> bounds={0.175,0.225,6.25,7.5};
 	std::printf("setting bounds, done\n");
 	
-	int n=4; //number of samples
+	int n=30; //number of samples
 	
 	//Call sampler (which writes results to file in the evaluations folder)
 	co::sample_loss_geometry(evaluator,param_names,bounds, n);

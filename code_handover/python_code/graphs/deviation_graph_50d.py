@@ -10,7 +10,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # part one, parse sample data
 
 # set up for data parsing
-file_names = ["./t75_run_orig.txt","./t75_run_sim.txt"]
+file_names = ["./76d_run_orig.txt","./50d_run_sim.txt"]
 results = []
 sorted_tab = []
 string = ''
@@ -82,7 +82,7 @@ fit = []
 functions = []
 extrapolation = []
 
-extra_start = 75
+extra_start = 50
 extra_end = 75
 extrapolation.append(range(extra_start, extra_end+1))
 
@@ -136,7 +136,7 @@ if plot == 'scatter':
 			ax.scatter(sorted_tab[file_i][0], sorted_tab[file_i][set_i], label=results[file_i][0][set_i])
 
 	#for set_i in range(set_start, set_end):
-		#ax.scatter(extrapolation[0], extrapolation[set_i], label=results[1][0][set_i][:-3]+"extrapolation")
+	#	ax.scatter(extrapolation[0], extrapolation[set_i], label=results[1][0][set_i][:-3]+"extrapolation")
 
 	plt.axvline(x=50, color='r', linestyle=':')
 	plt.legend(loc='upper left')
@@ -156,10 +156,10 @@ elif plot == 'plot':
 		for set_i in range(set_start, set_end):
 			ax.plot(sorted_tab[file_i][0], sorted_tab[file_i][set_i], label=results[file_i][0][set_i])
 
-	#for set_i in range(set_start, set_end):
-	#	ax.plot(extrapolation[0], extrapolation[set_i], label=results[1][0][set_i][:-3]+"extrapolation")
+	for set_i in range(set_start, set_end):
+		ax.plot(extrapolation[0], extrapolation[set_i], label=results[1][0][set_i][:-3]+"extrapolation")
 
-	#plt.axvline(x=60, color='r', linestyle=':')
+	plt.axvline(x=50, color='r', linestyle=':')
 	plt.legend(loc='upper left')
 	plt.xlabel("Time t (days)")
 	plt.ylabel("Sum of Exposed")

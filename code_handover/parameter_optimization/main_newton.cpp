@@ -27,7 +27,7 @@ initial_vars.add("qq",qq);
 
 co::NewtonOptions options;
 options.set_stepsize_alpha(1); // vaiable
-std::string dir ="/home/marvin/Documents/ug4/apps/code/parameteroptimization/";
+std::string dir ="<your path>/ug4/apps/parameter_optimization/";
 co::BiogasEvaluation<co::EFloat64,co::ConfigComputation::Local,co::ConfigOutput::File> evaluator(dir, "subset_target.lua", "subset_sim.lua");
 co::EVarManager<co::EFloat64> estimated_vars;
 co::NewtonOptimizer<decltype(evaluator)> solver(options,evaluator);
@@ -35,6 +35,4 @@ co::NewtonOptimizer<decltype(evaluator)> solver(options,evaluator);
 solver.change_derivative_step_size(0.01); // variable
 solver.run(initial_vars,estimated_vars);
 
-// if the machine has a mail server configuered, then notification on completion of optimiztion can be sent per email 
-//system("echo \"Optimization Complete\" | mail -s Server1News rastogi@gcsc.uni-frankfurt.de");
 }

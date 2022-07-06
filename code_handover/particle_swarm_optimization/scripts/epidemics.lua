@@ -28,14 +28,14 @@
 -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 -- GNU Lesser General Public License for more details.
 
-local myPath = os.getenv("UG4_ROOT").."/apps/parameter_optimization"
+local myPath = os.getenv("UG4_ROOT").."/apps/particle_swarm_optimization"
 package.path = package.path..";".. myPath.."/config/?.lua;".. myPath.."/?.lua;"..myPath.."/geometry/?.lua"
 
 -----------------------------------------------------------------
 -- define Home-Directories
 ----------------------------------------------------------------
 ug4_home        = ug_get_root_path().."/"
-app_home        = ug4_home.."apps/parameter_optimization/"
+app_home        = ug4_home.."apps/particle_swarm_optimization/"
 common_scripts  = app_home.."scripts/"
 geom_home       = app_home.."geometry/"
 

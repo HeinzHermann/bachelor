@@ -10,19 +10,18 @@ Copy this folder in <your path>/ug4/apps/
 Mandatory Path adjustment:
 
 ./config/geometry_parser.config		L.10	(adjust path to ug4)
-./main_geometry_sampler.cpp		L. 8	(adjust path to ug4)
+./main_newton.cpp			L.30	(adjust path to ug4)
 
-Copy main_geometry_sampler.cpp to <your path>/ug4/plugins/ConstrainedOptimization/examples/logistic_1/
 
 ==========================================================================
 
-Adjust values in main_geometry_sampler.cpp as desired
+Adjust values in main_newton.cpp as desired
 
-L.18	bounds={min_alpha, max_alpha, min_q, max_q}
-L.21	n = number of sample points 
+L.12	alpha (start_value, lower_bound, upper_bound)
+L.15	beta (start_value, lower_bound, upper_bound)
 
 
-Complile via c++ -O3 -pthread main_geometry_sampler.cpp -o name.out
+Complile via c++ -O3 -pthread main_newton.cpp -o name.out
 
 Execute ./name.out
 
@@ -44,9 +43,10 @@ Path adjustment in case of error:
 
 Output:
 
-Given in ./evaluations/<date&time>/iteration_0/samples.txt
+Given in ./evaluations/<date&time>/
 
-Shows values for alpha, q and loss
+summary_of_estimation.txt shows result values.
+Manual search needed for result data
 
 ==========================================================================
 
